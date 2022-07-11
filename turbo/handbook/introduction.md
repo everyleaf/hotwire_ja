@@ -8,12 +8,20 @@ description: "Turbo bundles several techniques for creating fast, modern web app
 このサイトの全ての文責は、[株式会社万葉](https://everyleaf.com/)にあります。
 
 # Introduction
+# はじめに
 
 Turbo bundles several techniques for creating fast, modern, progressively enhanced web applications without using much JavaScript. It offers a simpler alternative to the prevailing client-side frameworks which put all the logic in the front-end and confine the server side of your app to being little more than a JSON API.
+
+Turboは 高速でモダンで、そして進歩的に改良されたWebアプリケーションを、Javascriptをあまり使わずに作るためのいくつかの技術をまとめたものです。
+Turboは流行のクライアントサイドフレームワークの代替手段を提供します。
+流行のクライアントサイドフレームワークとは、全てのロジックをフロントエンドに置いて、あなたのアプリのサーバーサイドをJSON APIに毛が生えたようなものに制限してしまうものです。
+
 
 With Turbo, you let the server deliver HTML directly, which means all the logic for checking permissions, interacting directly with your domain model, and everything else that goes into programming an application can happen more or less exclusively within your favorite programming language. You're no longer mirroring logic on both sides of a JSON divide. All the logic lives on the server, and the browser deals just with the final HTML.
 
 You can read more about the benefits of this HTML-over-the-wire approach on the <a href="https://hotwired.dev/">Hotwire site</a>. What follows are the techniques that Turbo brings to make this possible.
+
+
 
 ## Turbo Drive: Navigate within a persistent process
 
