@@ -17,25 +17,52 @@ Turboは流行のクライアントサイドフレームワークの代替手段
 流行のクライアントサイドフレームワークとは、全てのロジックをフロントエンドに置いて、あなたのアプリのサーバーサイドをJSON APIに毛が生えたようなものに制限してしまうものです。
 
 
-With Turbo, you let the server deliver HTML directly, which means all the logic for checking permissions, interacting directly with your domain model, and everything else that goes into programming an application can happen more or less exclusively within your favorite programming language. You're no longer mirroring logic on both sides of a JSON divide. All the logic lives on the server, and the browser deals just with the final HTML.
+With Turbo, you let the server deliver HTML directly,
+  which means
+    all the logic
+       for checking permissions, interacting directly with your domain model, and everything else that goes into programming an application
+     can happen more or less exclusively within your favorite programming language.
+
+  You're no longer mirroring logic on both sides of a JSON divide. All the logic lives on the server, and the browser deals just with the final HTML.
+
+Turbo を使えば、サーバーにHTMLを直接配布させることができます。それはつまり、すべてのロジック、例えばパーミッションをチェックしたり、ドメインモデルとやりとりしたり、その他アプリケーションのプログラミングに関わるあらゆることを、多かれ少なかれ、お好みのプログラミング言語に限定して書くことができるということです。
+もう、JSONに分たれた両側（クライアントサイドとサーバーサイド）に、同じロジックを複製して書かなくて良いのです。全てのロジックはサーバ上で動き、ブラウザは、最終的なHTMLを扱うだけになります。
+
 
 You can read more about the benefits of this HTML-over-the-wire approach on the <a href="https://hotwired.dev/">Hotwire site</a>. What follows are the techniques that Turbo brings to make this possible.
 
+WireでHTMLを扱うことの利点については、<a href="https://hotwired.dev/">Hotwireサイト</a>で詳しく知ることができます。以下は、Turboがこれを可能にするテクニックについて書いていきます。
 
 
 ## Turbo Drive: Navigate within a persistent process
+## Turbo ドライブ: Navigate within a persistent process
 
 A key attraction with traditional single-page applications, when compared with the old-school, separate-pages approach, is the speed of navigation. SPAs get a lot of that speed from not constantly tearing down the application process, only to reinitialize it on the very next page.
 
+今までのシングルページ・アプリケーションを、古臭くいちいちページ遷移するやり方と比べたときの主な魅力は、動作のスピードです。SPAがそのスピードを可能にできるのは、アプリケーションのプロセスをいちいち破棄することなく、本当にページが遷移する際にのみ初期化するからです。
+
 Turbo Drive gives you that same speed by using the same persistent-process model, but without requiring you to craft your entire application around the paradigm. There's no client-side router to maintain, there's no state to carefully manage. The persistent process is managed by Turbo, and you write your server-side code as though you were living back in the early aughts – blissfully isolated from the complexities of today's SPA monstrosities!
+
+Turboドライバは、それと同じスピードを、SPAと同じ永続的プロセスモデルによって可能にしています。ただしそのために、その枠組みにのっとったアプリケーションを職人芸で組み上げる必要はありません。メンテナンスの必要なクライアントサイドのルーターも、慎重に管理しなければならないステート（状態）もありません。永続的プロセスはTurboによって管理されるため、プログラマは自分のサーバーサイドのコードだけを書けばいいのです。まるで、ゼロ年代初頭ーーいまのSPAモンスターの複雑性と関わりなく穏やかだったころに、時が戻ったように！
 
 This happens by intercepting all clicks on `<a href>` links to the same domain. When you click an eligible link, Turbo Drive prevents the browser from following it, changes the browser’s URL using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/History">History API</a>, requests the new page using <a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch">`fetch`</a>, and then renders the HTML response.
 
+これは、同じドメインにリンクされた`<a href>`がクリックされるたびに、それを横から掠め取ることで実現されます。具体的には、対象範囲のリンクをクリックするたび、Turboドライブは、ブラウザがそのリンクに遷移するのを押しとどめ、ブラウザのURLを<a href="https://developer.mozilla.org/ja/docs/Web/API/History">History API</a>を使って更新し、<a href="https://developer.mozilla.org/ja/docs/Web/API/fetch">`fetch`</a>を使って新しいページをリクエストし、それからHTMLレスポンスを描画します。
+
 Same deal with forms. Their submissions are turned into `fetch` requests from which Turbo Drive will follow the redirect and render the HTML response.
+
+フォームでも同じ扱いをします。フォームがサブミットされると、それはTurboドライブの`fetch`リクエストに変換され、TurboドライブはそのリクエストからのリダイレクトとHTMLレスポンスの描画を行います。
 
 During rendering, Turbo Drive replaces the current `<body>` element outright and merges the contents of the `<head>` element. The JavaScript window and document objects, and the `<html>` element, persist from one rendering to the next.
 
-While it's possible to interact directly with Turbo Drive to control how visits happen or hook into the lifecycle of the request, the majority of the time this is a drop-in replacement where the speed is free just by adopting a few conventions.
+描画中、Turboドライブは現在の`<body>`要素を即座に置き換え、`<head>`要素の内容をマージします。JavaScriptの<a href="https://developer.mozilla.org/ja/docs/Web/API/Window">Window</a>と<a href="https://developer.mozilla.org/ja/docs/Web/API/Document">document objects</a>、そしてその`<html>` 要素は、前の描画から次の描画へと移る際も保持されます。
+
+While it's possible to interact directly with Turbo Drive to control how visits happen or hook into the lifecycle of the request,
+   the majority of the time
+
+     this is a drop-in replacement where the speed is free just by adopting a few conventions.
+Turboドライブと直接やり取りして、
+
 
 
 ## Turbo Frames: Decompose complex pages
