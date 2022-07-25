@@ -58,12 +58,9 @@ During rendering, Turbo Drive replaces the current `<body>` element outright and
 描画中、Turboドライブは現在の`<body>`要素を即座に置き換え、`<head>`要素の内容をマージします。JavaScriptの<a href="https://developer.mozilla.org/ja/docs/Web/API/Window">Window</a>と<a href="https://developer.mozilla.org/ja/docs/Web/API/Document">document objects</a>、そしてその`<html>` 要素は、前の描画から次の描画へと移る際も保持されます。
 
 While it's possible to interact directly with Turbo Drive to control how visits happen or hook into the lifecycle of the request,
-   the majority of the time
+   the majority of the time this is a drop-in replacement where the speed is free just by adopting a few conventions.
 
-     this is a drop-in replacement where the speed is free just by adopting a few conventions.
-Turboドライブと直接やり取りして、
-
-
+*Turboドライブと直接やり取りして、ユーザーのアクションがどのように画面遷移につながるか、リクエストのライフサイクルへフックするかを制御することもできますが、ほとんどの場合、いくつかの規約を採用することで、置き換え時のスピードを速くすることができます。
 
 ## Turbo Frames: Decompose complex pages
 
