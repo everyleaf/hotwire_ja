@@ -63,10 +63,16 @@ While it's possible to interact directly with Turbo Drive to control how visits 
 *Turboドライブと直接やり取りして、ユーザーのアクションがどのように画面遷移につながるか、リクエストのライフサイクルへフックするかを制御することもできますが、ほとんどの場合、いくつかの規約を採用することで、置き換え時のスピードを速くすることができます。
 
 ## Turbo Frames: Decompose complex pages
+## Turboフレーム: 複雑なページをパーツに分ける
 
 Most web applications present pages that contain several independent segments. For a discussion page, you might have a navigation bar on the top, a list of messages in the center, a form at the bottom to add a new message, and a sidebar with related topics. Generating this discussion page normally means generating each segment in a serialized manner, piecing them all together, then delivering the result as a single HTML response to the browser.
 
+多くのWebアプリケーションは、いくつかの独立したセグメントを含んだページを提供します。例えば意見を交わせるディスカッションのためのページであれば、トップにナビゲーションバー、中央にメッセージのリスト、下に新しいメッセージの投稿フォーム、そして関連トピックの並んだサイドバーといった具合です。このディスカッション・ページを生成しようとするなら、普通は、一連のやり方で各セグメントを生成し、それを一つにまとめて、その結果を単一のHTMLレスポンスとしてブラウザに送ることになるでしょう。
+
+
 With Turbo Frames, you can place those independent segments inside frame elements that can scope their navigation and be lazily loaded. Scoped navigation means all interaction within a frame, like clicking links or submitting forms, happens within that frame, keeping the rest of the page from changing or reloading.
+
+Turboフレームを使うと、これらの独立したセグメントを、それぞれ別のフレームに配置することができます。そのフレームは、自身のナビゲーションの範囲が限定されており、遅延して読み込まれることができます。範囲の限定されたスコープ
 
 To wrap an independent segment in its own navigation context, enclose it in a `<turbo-frame>` tag. For example:
 
