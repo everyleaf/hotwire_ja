@@ -69,12 +69,12 @@ Most web applications present pages that contain several independent segments. F
 
 多くのWebアプリケーションは、いくつかの独立したセグメントを含んだページを提供します。例えば意見を交わせるディスカッションのためのページであれば、トップにナビゲーションバー、中央にメッセージのリスト、下に新しいメッセージの投稿フォーム、そして関連トピックの並んだサイドバーといった具合です。このディスカッション・ページを生成しようとするなら、普通は、一連のやり方で各セグメントを生成し、それを一つにまとめて、その結果を単一のHTMLレスポンスとしてブラウザに送ることになるでしょう。
 
-
 With Turbo Frames, you can place those independent segments inside frame elements that can scope their navigation and be lazily loaded. Scoped navigation means all interaction within a frame, like clicking links or submitting forms, happens within that frame, keeping the rest of the page from changing or reloading.
 
-Turboフレームを使うと、これらの独立したセグメントを、それぞれ別のフレームに配置することができます。そのフレームは、自身のナビゲーションの範囲が限定されており、遅延して読み込まれることができます。範囲の限定されたスコープ
+Turboフレームを使うと、これらの独立したセグメントを、それぞれ別のフレームに配置することができます。そのフレームは、自身のナビゲーションの範囲が限定されており、遅延して読み込まれることができます。*[WIP]範囲の限定されたスコープとは、フレーム内の全てのやり取りを指します。例えば、フレーム内でリンクをクリックしたりフォームを送信した際は、ページの他の要素が、変わったりリロードされるのを防ぎます。
 
 To wrap an independent segment in its own navigation context, enclose it in a `<turbo-frame>` tag. For example:
+*[WIP]ナビゲーションの範囲内で、独立したセグメントを作るために、`<turbo-frame>`タグで囲います。例としては下記のようになります。
 
 ```html
 <turbo-frame id="new_message">
@@ -85,8 +85,10 @@ To wrap an independent segment in its own navigation context, enclose it in a `<
 ```
 
 When you submit the form above, Turbo extracts the matching `<turbo-frame id="new_message">` element from the redirected HTML response and swaps its content into the existing `new_message` frame element. The rest of the page stays just as it was.
+*[WIP]上記のフォームを送信した際、Turbo は、リダイレクトされた HTML レスポンスから`<turbo-frame id="new_message">`要素に合致する部分を抽出し、既存の`new_message`フレイム要素と、取得した要素の内容を入れ替えます。ページ内の残りの部分は、そのまま残ります。
 
 Frames can also defer loading their contents in addition to scoping navigation. To defer loading a frame, add a `src` attribute whose value is the URL to be automatically loaded. As with scoped navigation, Turbo finds and extracts the matching frame from the resulting response and swaps its content into place:
+*[WIP]他にもフレームは、ナビゲーションの範囲に加えて、要素を遅延で読み込むこともできます。遅延でフレームを読み込むために、
 
 ```html
 <turbo-frame id="messages" src="/messages">
