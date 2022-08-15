@@ -119,10 +119,9 @@ In addition to turning your segments into independent contexts, Turbo Frames aff
 Making partial page changes in response to asynchronous actions is how we make the application feel alive. While Turbo Frames give us such updates in response to direct interactions within a single frame, Turbo Streams let us change any part of the page in response to updates sent over a WebSocket connection, SSE or other transport. (Think an <a href="http://itsnotatypo.com">imbox</a> that automatically updates when a new email arrives.)
 非同期なアクションに応答してページの一部を変化させることで、アプリケーションをとても生き生きしたものできます。Turboフレームはそのような更新を、一つのフレーム内でのHTTPプロトコルでの直接のやりとりに応じて行います。一方で、Turboストリームは、ページのどの部分であってもその更新に、WebSocketコネクションやSSE（Sever-sent events）、その他のトランスポートを使います。(<a href="http://itsnotatypo.com">imbox</a>を見てください。ここでは、新しいemailの着信が、自動的に反映されます）。
 
-
 Turbo Streams introduces a `<turbo-stream>` element with seven basic actions: `append`, `prepend`, `replace`, `update`, `remove`, `before`, and `after`. With these actions, along with the `target` attribute specifying the ID of the element you want to operate on, you can encode all the mutations needed to refresh the page. You can even combine several stream elements in a single stream message. Simply include the HTML you're interested in inserting or replacing in a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">template tag</a> and Turbo does the rest:
 
-Turboストリームは、`<turbo-stream>` 要素を、7つの基本のアクション、`append`、 `prepend`、 `replace`、 `update`、 `remove`、 `before`、 `after`とともに導入します。これらのアクションは、`target`属性
+Turboストリームは、`<turbo-stream>` 要素を、7つの基本のアクション、`append`、 `prepend`、 `replace`、 `update`、 `remove`、 `before`、 `after`とともに導入します。これらのアクションは、あなたが操作したい要素の ID を指定する`target`属性と一緒に使われます。そのアクションと`target`属性によって、ページをリフレッシュするのに必要とされる全てのミューテーションをエンコードできます。いくつかのストリーム要素を一つのストリームメッセージにまとめることさえできます。簡単に、挿入や置き換えをしたい HTML を`<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/template">template tag</a>`で囲います。あとはTurboがやってくれます。
 
 ```html
 <turbo-stream action="append" target="messages">
@@ -134,6 +133,9 @@ Turboストリームは、`<turbo-stream>` 要素を、7つの基本のアクシ
 
 This stream element will take the `div` with the new message and append it to the container with the ID `messages`. It's just as simple to replace an existing element:
 
+このストリーム要素は、My new message! を含んだ`div`を取得し、ID`messages`のついたコンテナに追加します。
+次のコードは、既存の要素を置き換えるだけです。
+
 ```html
 <turbo-stream action="replace" target="message_1">
   <template>
@@ -144,9 +146,16 @@ This stream element will take the `div` with the new message and append it to th
 
 This is a conceptual continuation of what in the Rails world was first called <a href="https://weblog.rubyonrails.org/2006/3/28/rails-1-1-rjs-active-record-respond_to-integration-tests-and-500-other-things/">RJS</a> and then called <a href="https://signalvnoise.com/posts/3697-server-generated-javascript-responses">SJR</a>, but realized without any need for JavaScript. The benefits remain the same:
 
+Turboストリームは、かつてのRailsの世界、初めは<a href="https://weblog.rubyonrails.org/2006/3/28/rails-1-1-rjs-active-record-respond_to-integration-tests-and-500-other-things/">RJS</a>と呼ばれ、次に<a href="https://signalvnoise.com/posts/3697-server-generated-javascript-responses">SJR</a>と呼ばれたものと概念的に連続しています。けれど、それをJavaScriptを書く必要がなく実現しています。
+それらの利点は維持されています。
+
 1. **Reuse the server-side templates**: Live page changes are generated using the same server-side templates that were used to create the first-load page.
 1. **HTML over the wire**: Since all we're sending is HTML, you don't need any client-side JavaScript (beyond Turbo, of course) to process the update. Yes, the HTML payload might be a tad larger than a comparable JSON, but with gzip, the difference is usually negligible, and you save all the client-side effort it takes to fetch JSON and turn it into HTML.
 1. **Simpler control flow**: It's really clear to follow what happens when messages arrive on the WebSocket, SSE or in response to form submissions. There's no routing, event bubbling, or other indirection required. It's just the HTML to be changed, wrapped in a single tag that tells us how.
+
+1. **サーバーサイドテンプレートの再利用**: リアルタイムなページの変更は、最初にページがロードされた時に使われたのと同じサーバサイドテンプレートを使って生成されています。
+1. **Wire上のHTML**: 送っているものは全てHTMLなので、プロセスを更新するのにクライアントサイドのJavascriptは、必要ありません(もちろん、Turboの後ろでは動いてますが)。そう、HTMLのペイロードは、同等の内容のJSONよりも少し大きいかもしれません。gzip を使うことで、たいていは、その差異は無視できるものです。そして、JSONを取得して、HTMLに変換するのに必要な全てのクライアントサイドの労力を節約できます。
+1. **[WIP]**: WebSocket、SSEやフォーム時の送信に対してのメッセージが来たときに、次に何が起こるかは明らかです。そこには、ルーティングやイベントの連鎖、そのほかの必要な回り道はありません。どのように変化するかを教えてくれるシングルタグに囲まれたHTMLが変更されるだけです。
 
 Now, unlike RJS and SJR, it's not possible to call custom JavaScript functions as part of a Turbo Streams action. But this is a feature, not a bug. Those techniques can easily end up producing a tangled mess when way too much JavaScript is sent along with the response. Turbo focuses squarely on just updating the DOM, and then assumes you'll connect any additional behavior using <a href="https://stimulus.hotwired.dev">Stimulus</a> actions and lifecycle callbacks.
 
