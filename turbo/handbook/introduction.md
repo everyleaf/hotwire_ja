@@ -155,24 +155,41 @@ Turboストリームは、かつてのRailsの世界、初めは<a href="https:/
 
 1. **サーバーサイドテンプレートの再利用**: リアルタイムなページの変更は、最初にページがロードされた時に使われたのと同じサーバサイドテンプレートを使って生成されています。
 1. **Wire上のHTML**: 送っているものは全てHTMLなので、プロセスを更新するのにクライアントサイドのJavascriptは、必要ありません(もちろん、Turboの後ろでは動いてますが)。そう、HTMLのペイロードは、同等の内容のJSONよりも少し大きいかもしれません。gzip を使うことで、たいていは、その差異は無視できるものです。そして、JSONを取得して、HTMLに変換するのに必要な全てのクライアントサイドの労力を節約できます。
-1. **[WIP]**: WebSocket、SSEやフォーム時の送信に対してのメッセージが来たときに、次に何が起こるかは明らかです。そこには、ルーティングやイベントの連鎖、そのほかの必要な回り道はありません。どのように変化するかを教えてくれるシングルタグに囲まれたHTMLが変更されるだけです。
+1. **より単純な制御フロー**: WebSocket、SSEやフォーム時の送信に対してのメッセージが来たときに、次に何が起こるかは明らかです。そこには、ルーティングやイベントの連鎖、そのほかの必要な回り道はありません。どのように変化するかを教えてくれるシングルタグに囲まれたHTMLが変更されるだけです。
 
 Now, unlike RJS and SJR, it's not possible to call custom JavaScript functions as part of a Turbo Streams action. But this is a feature, not a bug. Those techniques can easily end up producing a tangled mess when way too much JavaScript is sent along with the response. Turbo focuses squarely on just updating the DOM, and then assumes you'll connect any additional behavior using <a href="https://stimulus.hotwired.dev">Stimulus</a> actions and lifecycle callbacks.
 
+今や、RJSとSJRと違って、Turboストリームの部品として、独自に定義したJavaScriptの関数を呼ぶことはできません。しかし、これは特色であって、バグではありません。独自に定義したJavaScript関数を呼ぶようなテクニックは、レスポンスにともなって、あまりに多くのJavaScriptが送られるようになる時、容易にこんがらかった混沌を生み出してしまいます。Turboは、DOMを更新することだけに、正面から取り組みます。そして、そのほかの振る舞いについては、 <a href="https://stimulus.hotwired.    dev">Stimulus</a>のアクションを使ってライフサイクル・コールバックと結びつけることを期待しています。
+
 
 ## Turbo Native: Hybrid apps for iOS & Android
+## Turboネイティブ: iOSとAndroid両用のハイブリッド・アプリケーション
 
-Turbo Native is ideal for building hybrid apps for iOS and Android. You can use your existing server-rendered HTML to get baseline coverage of your app's functionality in a native wrapper. Then you can spend all the time you saved on making the few screens that really benefit from high-fidelity native controls even better.
+Turbo Native is ideal for building hybrid apps for iOS and Android. You can use your existing server-rendered HTML to get baseline coverage of your app's functionality in a native wrapper. Then you can spend all the time you saved
+   on making the few screens
+                  that really benefit from high-fidelity native controls
+      even better.
+
+Turboネイティブは、iOSとAndroid両用のハイブリッド・アプリケーションを構築するための理想です。サーバーサイドでレンダリングされた既存のHTMLを使って、ネイティブ・ラッパーにアプリの機能性の基礎的な範囲を確保することができます。そして、節約したすべての時間を、非常に忠実度の高いネイティブ・コントローラーから利益を得られるいくつかの画面をよりよくすることに使うことができるのです。
 
 An application like Basecamp has hundreds of screens. Rewriting every single one of those screens would be an enormous task with very little benefit. Better to reserve the native firepower for high-touch interactions that really demand the highest fidelity. Something like the "New For You" inbox in Basecamp, for example, where we use swipe controls that need to feel just right. But most pages, like the one showing a single message, wouldn't really be any better if they were completely native.
+Basecampのようなアプリケーションは、何百もの画面を持っています。これらの画面の一つ一つを書き直すのは、骨折りばかりが膨大で、得られるものはほとんどありません。ネイティブならではの火力は、ハイ・ファイを必要とする高度なタッチ性能に取っておくほうがいいでしょう。Basecampのinbox内の”新着お知らせ"といった機能は、たとえば、使用感がしっくりくるスワイプコントロールの使い所です。しかしほとんどのページ、たとえば単独のメッセージを表示するようなページでは、完全なネイディブで作ったからといって、特に得られるものはありません。
 
 Going hybrid doesn't just speed up your development process, it also gives you more freedom to upgrade your app without going through the slow and onerous app store release processes. Anything that's done in HTML can be changed in your web application, and instantly be available to all users. No waiting for Big Tech to approve your changes, no waiting for users to upgrade.
+ハイブリッドでアプリを作ると、開発プロセスをスピードアップするだけでなく、より自由に、遅くて厄介なアプリストアのリリースプロセスを経ることなくアプリを更新できるようになります。HTMLで完結するものはなんでも、Webアプリケーション内で変更し、すぐに全てのユーザーに届けられます。ビッグ・テックが変更を受け入れるのも、ユーザーがアプリを更新するのも待つことはありません。
 
 Turbo Native assumes you're using the recommended development practices available for iOS and Android. This is not a framework that abstracts native APIs away or even tries to let your native code be shareable between platforms. The part that's shareable is the HTML that's rendered server-side. But the native controls are written in the recommended native APIs.
+TurboネイディブはiOSとAndoroidのために利用可能な推奨開発プラクティスを利用することを前提としています。Turboネイティブは、ネイティブのAPIを抽象化して遠ざけたフレームワークではありません。また、ネイティブコードを、プラットフォーム間で共用できるようにする試みでさえありません。共用部分は、HTMLです。このHTMLは、サーバーサイドでレンダリングされます。しかし、ネイティブの制御は推奨されるネイディブのAPIで書かれます。
+
 
 See the <a href="https://github.com/hotwired/turbo-ios">Turbo Native: iOS</a> and <a href="https://github.com/hotwired/turbo-android">Turbo Native: Android</a> repositories for more documentation. See the native apps for HEY on <a href="https://apps.apple.com/us/app/hey-email/id1506603805">iOS</a> and <a href="https://play.google.com/store/apps/details?id=com.basecamp.hey&hl=en_US&gl=US">Android</a> to get a feel for just how good you can make a hybrid app powered by Turbo.
 
+より詳しいドキュメントは<a href="https://github.com/hotwired/turbo-ios">Turboネイティブ: iOS</a>と<a href="https://github.com/hotwired/turbo-android">Turboネイティブ: Android</a> のリポジトリを見てください。Turboの力でどんなかっこいいアプリが作られるかを感じるには、HEYのネイティブアプリ<a href="https://apps.apple.com/us/app/hey-email/id1506603805">iOS版</a> と <a href="https://play.google.com/store/apps/details?id=com.basecamp.hey&hl=en_US&gl=US">Android版</a>を見てください。
 
+
+## Integrate with backend frameworks
 ## Integrate with backend frameworks
 
 You don't need any backend framework to use Turbo. All the features are built to be used directly, without further abstractions. But if you have the opportunity to use a backend framework that's integrated with Turbo, you'll find life a lot simpler. [We've created a reference implementation for such an integration for Ruby on Rails](https://github.com/hotwired/turbo-rails).
+
+Turboを使うのに、バックエンドのフレームワークは必要ありません。全ての機能は、さらなる抽象化なしに、直接に使われるように設計されています。しかし、もしTurboと統合されたバックエンドフレームワークを使う機会があるのなら、人生はより単純になるでしょう。[We've created a reference implementation for such an integration for Ruby on Rails](https://github.com/hotwired/turbo-rails).
