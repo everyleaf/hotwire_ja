@@ -10,7 +10,7 @@ description: "Turbo bundles several techniques for creating fast, modern web app
 # Introduction
 # はじめに
 
-Turboは 高速でモダンで、そして進歩的に改良されたWebアプリケーションを、Javascriptをあまり使わずに作るためのいくつかの技術をまとめたものです。
+Turboは 高速でモダンで、そして進歩的に改良されたWebアプリケーションを、JavaScriptをあまり使わずに作るためのいくつかの技術をまとめたものです。
 Turboは流行のクライアントサイドフレームワークの代替手段を提供します。
 流行のクライアントサイドフレームワークとは、全てのロジックをフロントエンドに置いて、あなたのアプリのサーバーサイドをJSON APIに毛が生えたようなものに制限してしまうものです。
 
