@@ -188,8 +188,8 @@ See the <a href="https://github.com/hotwired/turbo-ios">Turbo Native: iOS</a> an
 
 
 ## Integrate with backend frameworks
-## Integrate with backend frameworks
+## バックエンド・フレームワークとの統合
 
 You don't need any backend framework to use Turbo. All the features are built to be used directly, without further abstractions. But if you have the opportunity to use a backend framework that's integrated with Turbo, you'll find life a lot simpler. [We've created a reference implementation for such an integration for Ruby on Rails](https://github.com/hotwired/turbo-rails).
 
-Turboを使うのに、バックエンドのフレームワークは必要ありません。全ての機能は、さらなる抽象化なしに、直接に使われるように設計されています。しかし、もしTurboと統合されたバックエンドフレームワークを使う機会があるのなら、人生はより単純になるでしょう。[We've created a reference implementation for such an integration for Ruby on Rails](https://github.com/hotwired/turbo-rails).
+Turboを使うのに、バックエンド・フレームワークは必要ありません。全ての機能は、さらなる抽象化なしに、直接に使われるように設計されています。しかし、もしTurboと統合されたバックエンド・フレームワークを使う機会があるのなら、人生はより単純になるでしょう。[その中のRuby on Railsむけの統合のための実装例がこちらです。](https://github.com/hotwired/turbo-rails).
