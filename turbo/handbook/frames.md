@@ -10,8 +10,7 @@ description: "Turbo Frames decompose pages into independent contexts, which can 
 # Turboフレームを分解する
 
 Turbo Frames allow predefined parts of a page to be updated on request. Any links and forms inside a frame are captured, and the frame contents automatically updated after receiving a response. Regardless of whether the server provides a full document, or just a fragment containing an updated version of the requested frame, only that particular frame will be extracted from the response to replace the existing content.
-
-Turboフレームは予め決められたページの一部がリクエストに応じて更新されることを認めます。フレームの中のいくつかのリンクや
+Turboフレームは予め決められたページの一部がリクエストに応じて更新されることを認めます。フレームの中のいくつかのリンクやフォームは捕捉され、フレームのコンテンツはレスポンスを受け取ると自動的に更新されます。サーバーが完全なドキュメントを提供するか、リクエストされたフレームの更新版が入った断片を提供するかどうかに関わらず、個々のフレームはレスポンスから抜き取って既存のコンテンツを置き換えようとするだけです。
 
 Frames are created by wrapping a segment of the page in a `<turbo-frame>` element. Each element must have a unique ID, which is used to match the content being replaced when requesting new pages from the server. A single page can have multiple frames, each establishing their own context:
 
