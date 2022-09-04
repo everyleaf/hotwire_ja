@@ -11,8 +11,7 @@ description: "Turbo Native lets your majestic monolith form the center of your n
 
 Turbo Native for iOS provides the tooling to wrap your Turbo-enabled web app in a native iOS shell. It manages a single WKWebView instance across multiple view controllers, giving you native navigation UI with all the client-side performance benefits of Turbo. See <a href="https://github.com/hotwired/turbo-ios">Turbo Native: iOS</a> for more details.
 
-iOSのためのTurboネイティブは、Turbo対応のWebアプリケーションをネイティブなiOSのシェルでラップするためのツールを提供します。複数のビューコントローラーにまたがった単一のWKWebViewインスタンスを管理し、Turboの最適化されたクライアントサイドのパフォーマンスを備えたネイティブなナビゲーションUIを与えます。詳細は<a href="https://github.com/hotwired/turbo-ios">Turbo Native: iOS</a>をご覧ください。
-
+iOSのためのTurboネイティブは、ネイティブなiOSのシェルのTurbo対応Webアプリケーションをラップするためのツールを提供します。複数のビューコントローラーにまたがった単一のWKWebViewインスタンスを管理し、Turboによって最適化されたクライアントサイドのパフォーマンスを備えたネイティブなナビゲーションUIを与えます。詳細は<a href="https://github.com/hotwired/turbo-ios">Turbo Native: iOS</a>をご覧ください。
 
 
 Turbo Native for Android provides the same kind of tooling, managing a single WebView instance across multiple Fragment destinations. See <a href="https://github.com/hotwired/turbo-android">Turbo Native: Android</a> for more details.
