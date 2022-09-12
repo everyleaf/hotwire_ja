@@ -12,17 +12,21 @@ description: "Turbo Streams deliver page changes over WebSocket, SSE or in respo
 Turbo Streams deliver page changes as fragments of HTML wrapped in self-executing `<turbo-stream>` elements. Each stream element specifies an action together with a target ID to declare what should happen to the HTML inside it. These elements are delivered by the server over a WebSocket, SSE or other transport to bring the application alive with updates made by other users or processes. A new email arriving in your <a href="http://itsnotatypo.com">imbox</a> is a great example.
 
 Turboストリームは、ページの変更をTurboで実行可能な`<turbo-stream>`要素で囲んだHTMLの一部として配信します。
-それぞれのストリーム要素は、ターゲットIDと一緒にアクションを明記することで、ストリーム要素の中でHTMLに対してどのような変更が起こるべきかを宣言できます。これらの要素は、WebSocketやSSEや他の通信を介してサーバーから配信されます。そうすることで、他のユーザーやプロセスによる更新をアプリケーションに反映できます。<a href="http://itsnotatypo.com">imbox</a>で一通の新着メールが届いた時が、良い例の一つです。
+それぞれのストリーム要素は、ターゲットIDと一緒にアクションを明記することで、ストリーム要素の中でHTMLに対してどのような変更が起こるべきかを宣言できます。これらの要素は、WebSocketやSSEや他の通信を介してサーバーから配信されます。そうすることで、他のユーザーやプロセスによる更新をアプリケーションに即座に反映できます。<a href="http://itsnotatypo.com">imbox</a>に一通の新着メールが届いた時が、良い例の一つです。
 
 ## Stream Messages and Actions
+## メッセージとアクションの配信
 
 A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` elements. The stream message below demonstrates the seven possible stream actions:
+
+一つのTurboストリームメッセージは、`<turbo-stream>`要素から構成されるHTMLの一部です。そのストリームメッセージは、下記の7つの実行可能なストリームアクションを示します。
 
 ```html
 <turbo-stream action="append" target="messages">
   <template>
     <div id="message_1">
       This div will be appended to the element with the DOM ID "messages".
+      この div は、DOM IDが"messages"である要素内の最後に追加されます。
     </div>
   </template>
 </turbo-stream>
@@ -31,6 +35,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
   <template>
     <div id="message_1">
       This div will be prepended to the element with the DOM ID "messages".
+      この div は、DOM IDが"messages"である要素内の最初に追加されます。
     </div>
   </template>
 </turbo-stream>
@@ -39,6 +44,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
   <template>
     <div id="message_1">
       This div will replace the existing element with the DOM ID "message_1".
+      この div は、DOM IDが"message_1"である既存要素と取り変わります。
     </div>
   </template>
 </turbo-stream>
@@ -53,6 +59,12 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
     contrasted with the "replace" action above, where 
     that action would necessitate the rebuilding of  
     handlers. -->
+    <!-- このテンプレートの内容は、DOM IDが"unread_count"である要素の内容を
+    innerHTML を空に設定したうえで、テンプレート内の内容と取り変わります。
+    "unread_count"な要素に結び付けられているどのハンドラーも保持されます。
+    この挙動は、上記の"replace"アクションと対照的です。
+    なぜなら、"replace"アクションでは、ハンドラーを再構築する必要があるためです。
+    -->
     1
   </template>
 </turbo-stream>
@@ -60,12 +72,15 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
 <turbo-stream action="remove" target="message_1">
   <!-- The element with DOM ID "message_1" will be removed.
   The contents of this stream element are ignored. -->
+  <!-- DOM IDが"message_1の要素は取り除かれます。
+  このストリーム要素の内容は無視されます。-->
 </turbo-stream>
 
 <turbo-stream action="before" target="current_step">
   <template>
     <!-- The contents of this template will be added before the
     the element with ID "current_step". -->
+    <!-- このテンプレートの内容は、DOM IDが"current_step"である要素の直前に追加されます。-->
     <li>New item</li>
   </template>
 </turbo-stream>
@@ -74,14 +89,17 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
   <template>
     <!-- The contents of this template will be added after the
     the element with ID "current_step". -->
+    <!-- このテンプレートの内容は、DOM IDが"current_step"である要素の直後に追加されます。-->
     <li>New item</li>
   </template>
 </turbo-stream>
 ```
 
 Note that every `<turbo-stream>` element must wrap its included HTML inside a `<template>` element.
+全ての`<turbo-stream>`要素は、その中に含まれるHTMLを一つの`<template>`要素で包まなければならないことを注意してください。
 
 You can render any number of stream elements in a single stream message from a WebSocket, SSE or in response to a form submission.
+WebSocket、SSEやフォーム送信の応答としての1つのストリームメッセージの中で、任意の数のストリーム要素もレンダリングできます。
 
 ## Actions With Multiple Targets
 
