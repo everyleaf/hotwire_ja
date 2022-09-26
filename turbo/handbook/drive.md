@@ -26,7 +26,7 @@ Visits represent the entire navigation lifecycle from click to render. That incl
 アクセスは、ページの描画のために、クリックから始まるすべてのナビゲーション・ライフサイクルを要求します。そのサイクルには、ブラウザ履歴の更新や、ネットワーク・リクエストの発行、キャッシュからのページのコピーの再構築、最終的なレスポンスの描画、スクロール位置の更新も含まれます。
 
 There are two types of visit: an _application visit_, which has an action of _advance_ or _replace_, and a _restoration visit_, which has an action of _restore_.
-アクセスには二つの種類があります。_アプリケーション・アクセス_、_advance_ あるいは _replace_ のアクションを伴うものと、_復元アクセス_、_restore_ のアクションを伴うものです。
+アクセスには二つの種類があります。_アプリケーション・アクセス_、_advance_ あるいは _replace_ のアクションを伴うものと、_リストア・アクセス_、_restore_ のアクションを伴うものです。
 
 ## Application Visit
 ## アプリケーション・アクセス
@@ -54,7 +54,7 @@ The default visit action is _advance_. During an advance visit, Turbo Drives pus
 デフォルトのアクセスのアクションは _advance_です。advanceアクセスの間、 Turboドライブは[`history.pushState`](https://developer.mozilla.org/ja/docs/Web/API/History/pushState)を用いてブラウザ履歴に項目を積みます。
 
 Applications using the Turbo Drive [iOS adapter](https://github.com/hotwired/turbo-ios) typically handle advance visits by pushing a new view controller onto the navigation stack. Similarly, applications using the [Android adapter](https://github.com/hotwired/turbo-android) typically push a new activity onto the back stack.
-Turboドライブ [iOS adapter](https://github.com/hotwired/turbo-ios)を用いるアプリケーションは、普通はナビゲーション・スタックに新しいViewコントローラーを積むことでAcvanceアクセスを扱います。同様に、[Android adapter](https://github.com/hotwired/turbo-android) を用いたアプリケーションは、新しいアクティビティをバックスタックに積みます。
+Turboドライブ [iOS adapter](https://github.com/hotwired/turbo-ios)を用いるアプリケーションは、普通はナビゲーション・スタックに新しいviewコントローラーを積むことでAcvanceアクセスを扱います。同様に、[Android adapter](https://github.com/hotwired/turbo-android) を用いたアプリケーションは、新しいアクティビティをバックスタックに積みます。
 
 ![Replace visit action](https://s3.amazonaws.com/turbolinks-docs/images/replace.svg)
 ![replace アクセス・アクション](https://s3.amazonaws.com/turbolinks-docs/images/replace.svg)
@@ -85,35 +85,50 @@ Turbo.visit("/edit", { action: "replace" })
 ```
 
 Applications using the Turbo Drive [iOS adapter](https://github.com/hotwired/turbo-ios) typically handle replace visits by dismissing the topmost view controller and pushing a new view controller onto the navigation stack without animation.
-Turboドライブ [iOS adapter](https://github.com/hotwired/turbo-ios)を用いるアプリケーションは一般に、
+Turboドライブ [iOS adapter](https://github.com/hotwired/turbo-ios)を用いるアプリケーションは一般に、最上位のviewコントローラーを閉じ、新しいviewコントローラーをナビゲーション・スタック上にアニメーションなしでpushすることで更新を扱います。
 
 ## Restoration Visits
+## リストア・アクセス
 
 Turbo Drive automatically initiates a restoration visit when you navigate with the browser’s Back or Forward buttons. Applications using the [iOS](https://github.com/hotwired/turbo-ios) or [Android](https://github.com/hotwired/turbo-android) adapters initiate a restoration visit when moving backward in the navigation stack.
+
+Turboドライブは、ブラウザバックやブラウザで前に進むボタンでの移動があった場合に、自動的にリストア・アクセスを開始します。[iOS](https://github.com/hotwired/turbo-ios) あるいは [Android](https://github.com/hotwired/turbo-android)アダプタを使うアプリケーションは、ナビゲーション・スタック内で後ろに戻る動きがあった場合に、リストア・アクセスを開始します。
 
 ![Restore visit action](https://s3.amazonaws.com/turbolinks-docs/images/restore.svg)
 
 If possible, Turbo Drive will render a copy of the page from cache without making a request. Otherwise, it will retrieve a fresh copy of the page over the network. See [Understanding Caching](/handbook/building#understanding-caching) for more details.
+可能であれば、Turboドライブは、リクエストを発生させることなくキャッシュからページの複製を描画します。それが不可能な場合、ネットワークごしに、ページの新しい複製を作ろうとします。詳しくは、[Understanding Caching](/handbook/building#understanding-caching)を見てください。
 
 Turbo Drive saves the scroll position of each page before navigating away and automatically returns to this saved position on restoration visits.
+Turboドライブは各ページのスクロール位置を、ナビゲーション移動が起こる前に保存し、リストア・アクセスにおいて保存された位置まで自動的に戻ります。
 
 Restoration visits have an action of _restore_ and Turbo Drive reserves them for internal use. You should not attempt to annotate links or invoke `Turbo.visit` with an action of `restore`.
+リストア・アクセスは _restore_ アクションを伴い、Turboドライブはそれを内部的な利用のために取っておいてあります。わざわざリンクにアノテーションをしたり、`Turbo.visit`を`restore`アクションと共に発動したりするべきではありません。
 
 ## Canceling Visits Before They Start
+## アクセスを開始前にキャンセルする
 
 Application visits can be canceled before they start, regardless of whether they were initiated by a link click or a call to [`Turbo.visit`](/reference/drive#turbovisit).
+アプリケーション・アクセスは開始前にキャンセルすることができます。それが、リンクのクリックによって始まったものでも、[`Turbo.visit`](/reference/drive#turbovisit)によって始まったものでも。
 
 Listen for the `turbo:before-visit` event to be notified when a visit is about to start, and use `event.detail.url` (or `$event.originalEvent.detail.url`, when using jQuery) to check the visit’s location. Then cancel the visit by calling `event.preventDefault()`.
+アクセスが始まろうとする瞬間に気づくために、`turbo:before-visit`を待ち受け、`event.detail.url` (jQueryを使っている場合は`$event.originalEvent.detail.url`)を使いましょう。そして、`event.preventDefault()`でキャンセルするのです。
 
 Restoration visits cannot be canceled and do not fire `turbo:before-visit`. Turbo Drive issues restoration visits in response to history navigation that has *already taken place*, typically via the browser’s Back or Forward buttons.
+リストア・アクセスは、`turbo:before-visit`を発火しないのでキャンセルすることができません。Turboドライブは、リストア・アクセスを、*すでに存在する*アクセス履歴への応答の場合に発行します。よくあるのは、ブラウザバックやブラウザで前に進む場合です。
 
 ## Pausing Rendering
+## 描画の一時停止
 
 Application can pause rendering and make additional preparation before it will be executed.
+アプリケーションは描画を一時停止して、実行前に追加で下準備をすることができます。
 
 Listen for the `turbo:before-render` event to be notified when rendering is about to start, and pause it using `event.preventDefault()`. Once the preparation is done continue rendering by calling `event.detail.resume()`.
+`turbo:before-render`イベントを待ち受けることで、描画が始まろうとする瞬間に気づくことができます。そこで、`event.preventDefault()`で描画を停止させましょう。下準備が終わったら、`event.detail.resume()`を呼ぶことで描画を再開します。
 
 An example use case is adding exit animation for visits:
+アクセスにexitのアニメーションを追加する例です。
+
 ```javascript
 document.addEventListener('turbo:before-render', async (event) => {
   event.preventDefault()
@@ -125,12 +140,17 @@ document.addEventListener('turbo:before-render', async (event) => {
 ```
 
 ## Pausing Requests
+## リクエストの一時停止
 
 Application can pause request and make additional preparation before it will be executed.
+アプリケーションはリクエストを一時停止して、実行前に追加で下準備をすることができます。
 
 Listen for the `turbo:before-fetch-request` event to be notified when a request is about to start, and pause it using `event.preventDefault()`. Once the preparation is done continue request by calling `event.detail.resume()`.
+`turbo:before-fetch-request`イベントを待ち受けることで、リクエストが始まろうとする瞬間に気づくことができます。そこで、`event.preventDefault()`でリクエストを停止させましょう。下準備が終わったら、`event.detail.resume()`を呼ぶことでリクエストを再開します。
 
 An example use case is setting `Authorization` header for the request:
+リクエストにに`Authorization`ヘッダを設定する例です。
+
 ```javascript
 document.addEventListener('turbo:before-fetch-request', async (event) => {
   event.preventDefault()
@@ -143,21 +163,28 @@ document.addEventListener('turbo:before-fetch-request', async (event) => {
 ```
 
 ## Performing Visits With a Different Method
+## 異なるメソッドでアクセスを行う
 
 By default, link clicks send a `GET` request to your server. But you can change this with `data-turbo-method`:
+デフォルトでは、リンクのクリックはサーバへ`GET`リクエストを送ります。しかし、これを`data-turbo-method`で変更することができます。
 
 ```html
 <a href="/articles/54" data-turbo-method="delete">Delete the article</a>
 ```
 
 The link will get converted into a hidden form next to the `a` element in the DOM. This means that the link can't appear inside another form, as you can't have nested forms.
+リンクは隠されたformに変換され、DOM内の`a`要素の次の位置に配置されます。これは、リンクは別のフォームの中には配置できないということです。フォームをネストすることはできないからです。
 
 You should also consider that for accessibility reasons, it's better to use actual forms and buttons for anything that's not a GET.
+アクセシビリティの観点からも、GET以外のリクエストには実際のフォームとボタンを使うのが望ましいでしょう。
 
 
 ## Disabling Turbo Drive on Specific Links or Forms
+## 特定のリンク/フォームでのTurboドライブの無効化
 
 Turbo Drive can be disabled on a per-element basis by annotating the element or any of its ancestors with `data-turbo="false"`.
+Turboドライブは、対象となる要素かその親要素で`data-turbo="false"`を宣言することで、要素単位で無効化することができます。
+
 
 ```html
 <a href="/" data-turbo="false">Disabled</a>
@@ -175,6 +202,8 @@ Turbo Drive can be disabled on a per-element basis by annotating the element or 
 ```
 
 To reenable when an ancestor has opted out, use `data-turbo="true"`:
+親要素でTurboドライブが無効化されている際に、再度Turboドライブを有効化するには、`data-turbo="true"`を使います。
+
 
 ```html
 <div data-turbo="false">
@@ -183,8 +212,13 @@ To reenable when an ancestor has opted out, use `data-turbo="true"`:
 ```
 
 Links or forms with Turbo Drive disabled will be handled normally by the browser.
+Turboドライブが無効化されたリンク/フォームは、ブラウザから通常通りに扱われます。
 
 If you want Drive to be opt-in rather than opt-out, then you can set `Turbo.session.drive = false`; then, `data-turbo="true"` is used to enable Drive on a per-element basis. If you're importing Turbo in a JavaScript pack, you can do this globally:
+ドライブを都度無効化するのではなく、必要なときにだけ有効化するには、`Turbo.session.drive = false`を設定することができます。
+その上で、`data-turbo="true"`を使って要素ごとにドライブを有効化します。
+JavaScriptパック内でTurboをインポートしている場合、このようにして設定をグローバルにできます。
+
 
 ```js
 import { Turbo } from "@hotwired/turbo-rails"
@@ -192,14 +226,19 @@ Turbo.session.drive = false
 ```
 
 ## Displaying Progress
+## 進行状況を表示する
 
 During Turbo Drive navigation, the browser will not display its native progress indicator. Turbo Drive installs a CSS-based progress bar to provide feedback while issuing a request.
+Turboドライブのナビゲーション中、ブラウザはその進行状況インジケータを表示しません。Turboドライブは、リクエスト発行中のフィードバックを示すため、CSSベースのプログレスバーを導入しています。
 
 The progress bar is enabled by default. It appears automatically for any page that takes longer than 500ms to load. (You can change this delay with the [`Turbo.setProgressBarDelay`](/reference/drive#turbodrivesetprogressbardelay) method.)
+このプログレスバーはデフォルトで利用可能です。読み込みに500ms以上を要するページ全てに自動的に表示されます（この表示設定は[`Turbo.setProgressBarDelay`](/reference/drive#turbodrivesetprogressbardelay)で変更できます）。
 
 The progress bar is a `<div>` element with the class name `turbo-progress-bar`. Its default styles appear first in the document and can be overridden by rules that come later.
+このプログレスバーは`turbo-progress-bar`クラス名を持つ`<div>`要素です。デフォルトのスタイルはドキュメントの先頭で指定されるため、後で設定されるルールによって上書き可能です。
 
 For example, the following CSS will result in a thick green progress bar:
+例えば、次のCSSを当てると太い緑のプログレスバーが表示されます。
 
 ```css
 .turbo-progress-bar {
@@ -209,6 +248,7 @@ For example, the following CSS will result in a thick green progress bar:
 ```
 
 To disable the progress bar entirely, set its `visibility` style to `hidden`:
+プログレスバーを完全に無効化するには、その要素の`visibility`スタイルを`hidden`に設定します。
 
 ```css
 .turbo-progress-bar {
@@ -217,6 +257,7 @@ To disable the progress bar entirely, set its `visibility` style to `hidden`:
 ```
 
 In tandem with the progress bar, Turbo Drive will also toggle the [`[aria-busy]` attribute][aria-busy] on the page's `<html>` element during page navigations started from Visits or Form Submissions. Turbo Drive will set `[aria-busy="true"]` when the navigation begins, and will remove the `[aria-busy]` attribute when the navigation completes.
+プログレスバーと歩調を合わせるために、Turboドライブは、アクセスあるいはフォームの送信から始まるページのナビゲーションの間、そのページの`<html>`要素の[`[aria-busy]` 属性][aria-busy]を切り替えます。Turboドライブは
 
 [aria-busy]: https://www.w3.org/TR/wai-aria/#aria-busy
 
