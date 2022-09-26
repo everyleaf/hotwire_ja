@@ -7,7 +7,7 @@ description: "Turbo Native lets your majestic monolith form the center of your n
 このサイトの全ての文責は、[株式会社万葉](https://everyleaf.com/)にあります。
 
 # Go Native on iOS & Android
-# iOSとAndroidのネイティブ 
+# iOSとAndroidをネイティブにやる 
 
 Turbo Native for iOS provides the tooling to wrap your Turbo-enabled web app in a native iOS shell. It manages a single WKWebView instance across multiple view controllers, giving you native navigation UI with all the client-side performance benefits of Turbo. See <a href="https://github.com/hotwired/turbo-ios">Turbo Native: iOS</a> for more details.
 
