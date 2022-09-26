@@ -128,10 +128,17 @@ Actions can be applied against multiple targets using the `targets` attribute wi
 ```
 
 ## Streaming From HTTP Responses
+## HTTPレスポンスからのストリーミング
 
 Turbo knows to automatically attach `<turbo-stream>` elements when they arrive in response to `<form>` submissions that declare a [MIME type][] of `text/vnd.turbo-stream.html`. When submitting a `<form>` element whose [method][] attribute is set to `POST`, `PUT`, `PATCH`, or `DELETE`, Turbo injects `text/vnd.turbo-stream.html` into the set of response formats in the request's [Accept][] header. When responding to requests containing that value in its [Accept][] header, servers can tailor their responses to deal with Turbo Streams, HTTP redirects, or other types of clients that don't support streams (such as native applications).
+Turboは、[MIME type][]が`text/vnd.turbo-stream.html`である`<form>`送信に対する応答に自動的に`<turbo-stream>` 要素を付与します。
+[method][]属性に`POST`,`PUT`,`PATCH`や`DELETE`が設定されている`<form>`要素の送信時に、
+Turboは、[Accept][]リクエストヘッダー内のレスポンスフォーマットのセットに`text/vnd.turbo-stream.html`を差し込みます。
+[Accept][]リクエストヘッダー内にそのフォーマットを含むリクエストに応答するとき、
+サーバーは、Turboストリーム、HTTPリダイレクトやストリームをサポートしない他のクライアントタイプ（ネイティブアプリケーションのような）に対応するために、レスポンスを調整できます。
 
 In a Rails controller, this would look like:
+Railsのコントローラー内では、このようになります。
 
 ```ruby
 def destroy
@@ -145,9 +152,9 @@ def destroy
 end
 ```
 
-[MIME type]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-[method]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attr-method
-[Accept]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
+[MIME type]: https://developer.mozilla.org/ja/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+[method]: https://developer.mozilla.org/ja/docs/Web/HTML/Element/form#attr-method
+[Accept]: https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Accept
 
 ## Reusing Server-Side Templates
 
