@@ -102,19 +102,26 @@ You can render any number of stream elements in a single stream message from a W
 WebSocket、SSEやフォーム送信の応答としての1つのストリームメッセージの中で、任意の数のストリーム要素もレンダリングできます。
 
 ## Actions With Multiple Targets
+## 複数のターゲットを利用したアクション
 
 Actions can be applied against multiple targets using the `targets` attribute with a CSS query selector, instead of the regular `target` attribute that uses a dom ID reference. Examples:
+アクションは、DOM IDの参照を利用した普通の`target`属性を利用する代わりに、CSS のクエリセレクターの `targets` 属性を利用することで、複数のターゲットに対して適用されます。
+例は、下記になります。
 
 ```html
 <turbo-stream action="remove" targets=".old_records">
   <!-- The element with the class "old_records" will be removed.
   The contents of this stream element are ignored. -->
+  <!-- class "old_records" を持つ要素は、取り除かれます。
+  このストリーム要素の内容は、無視されます。 -->
 </turbo-stream>
 
 <turbo-stream action="after" targets="input.invalid_field">
   <template>
     <!-- The contents of this template will be added after the
     all elements that match "inputs.invalid_field". -->
+    <!-- このテンプレートの内容は、"inputs.invalid_field"に合致する全ての要素の後に
+    追加されます。　-->
     <span>Incorrect</span>
   </template>
 </turbo-stream>
