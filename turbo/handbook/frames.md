@@ -13,7 +13,7 @@ Turbo Frames allow predefined parts of a page to be updated on request. Any link
 Turboフレームは予め決められたページの一部がリクエストに応じて更新されることを可能にします。フレームの中のすべてのリンクやフォームは捕捉され、フレームのコンテンツはレスポンスを受け取ると自動的に更新されます。サーバーが完全なドキュメントを提供するか、リクエストされたフレームの更新版が入った断片を提供するかどうかに関わらず、個々のフレームはレスポンスから抜き取って既存のコンテンツを置き換えようとするだけです。
 
 Frames are created by wrapping a segment of the page in a `<turbo-frame>` element. Each element must have a unique ID, which is used to match the content being replaced when requesting new pages from the server. A single page can have multiple frames, each establishing their own context:
-フレームは`<turbo-frame>`要素に囲われたページの一部によって作られます。各要素には一意のIDが必要です。これは、サーバーから新しいページを要求するときに、置き換えられる内容と一致させるために使われます。単一のページは多数のフレームを持つことができ、それぞれが独自のコンテキストを確立しています：
+フレームは`<turbo-frame>`要素に囲われたページの一部によって作られます。各要素には一意のIDが必要です。このIDは、サーバーから新しいページを要求するときに、置き換えられる内容と一致させるために使われます。単一のページは多数のフレームを持つことができ、それぞれが独自のコンテキストを確立しています：
 
 ```html
 <body>
