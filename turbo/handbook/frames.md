@@ -39,6 +39,8 @@ This page has two frames: One to display the message itself, with a link to edit
 
 When the link to edit the message is clicked, the response provided by `/messages/1/edit` has its `<turbo-frame id="message_1">` segment extracted, and the content replaces the frame from where the click originated. The edit response might look like this:
 
+メッセージ編集へのリンクをクリックすると、`/messages/1/edit` から返されるレスポンスのTurboフレーム部分 `<turbo-frame id="message_1">` が抽出され、クリックされた元のフレームが抽出された内容に置き換えられます。メッセージ編集のレスポンスは次のようなものです:
+
 ```html
 <body>
   <h1>Editing message</h1>
@@ -54,6 +56,8 @@ When the link to edit the message is clicked, the response provided by `/message
 ```
 
 Notice how the `<h1>` isn't inside the `<turbo-frame>`. This means it'll be ignored when the form replaces the display of the message upon editing. Only content inside a matching `<turbo-frame>` is used when the frame is updated.
+
+`<h1>` が `<turbo-frame>` の内にないことに注目してください。これはメッセージの表示とフォームを置き換えて編集する時に `<h1>` は不要であるという意味です。
 
 Thus your page can easily play dual purposes: Make edits in place within a frame or edits outside of a frame where the entire page is dedicated to the action.
 
