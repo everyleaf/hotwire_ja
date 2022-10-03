@@ -161,7 +161,12 @@ end
 
 The key to Turbo Streams is the ability to reuse your existing server-side templates to perform live, partial page changes. The HTML template used to render each message in a list of such on the first page load is the same template that'll be used to add one new message to the list dynamically later. This is at the essence of the HTML-over-the-wire approach: You don't need to serialize the new message as JSON, receive it in JavaScript, render a client-side template. It's just the standard server-side templates reused.
 
+Turboストリームの秘訣は、ライブ的な部分的なページの変更を実現するのに既存のサーバーサイドテンプレートを再利用できることです。
+最初にページがロードされた時にリスト表示されるメッセージそれぞれを描画するために使われるHTMLテンプレートは、後でリストに新しく1つのメッセージを動的に追加する際に使われるテンプレートと同じです。
+これが、HTMLオーバーザワイヤーアプローチの本質です。JSON 形式で新しいメッセージをシリアライズし、JavaScript でそれを受け取り、1つのクライアントサイドのテンプレートとして描画する必要はないのです。ただ、標準的なサーバーサイドのテンプレートとして再利用するだけです。
+
 Another example from how this would look in Rails:
+Railsでどのように動くか他の例を見てみましょう。
 
 ```erb
 <!-- app/views/messages/_message.html.erb -->
@@ -197,6 +202,8 @@ end
 ```
 
 When the form to create a new message submits to the `MessagesController#create` action, the very same partial template that was used to render the list of messages in `MessagesController#index` is used to render the turbo-stream action. This will come across as a response that looks like this:
+新しくメッセージを作成するためのフィームが、`MessagesController#create`アクションに送信する時、`MessagesController#index`内でメッセージ一覧を描画する際に利用したのと全く同じ
+部分テンプレートが、Turboストリームアクションを描画するのに利用されます。下記のようなレスポンスとして伝わります。
 
 ```html
 Content-Type: text/vnd.turbo-stream.html; charset=utf-8
@@ -205,12 +212,16 @@ Content-Type: text/vnd.turbo-stream.html; charset=utf-8
   <template>
     <div id="message_1">
       The content of the message.
+      メッセージの内容
     </div>
   </template>
 </turbo-stream>
 ```
 
 This `messages/message` template partial can then also be used to re-render the message following an edit/update operation. Or to supply new messages created by other users over a WebSocket or a SSE connection. Being able to reuse the same templates across the whole spectrum of use is incredibly powerful, and key to reducing the amount of work it takes to create these modern, fast applications.
+そして、この`messages/message`部分テンプレートは、他にも続く編集や更新操作でメッセージを再描画するためにも利用されます。さらに、WebSocketやSSEコネクション上で他のユーザーに
+新しく作成されたメッセージを伝えるのにも利用されます。全ての領域で同じテンプレートを再利用できるのは、非常に強力です。さらにモダンで速いアプリケーションを作るためにかかる時間の削減する
+秘訣にもなります。
 
 ## Progressively Enhance When Necessary
 
