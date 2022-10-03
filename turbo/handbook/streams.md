@@ -224,10 +224,15 @@ This `messages/message` template partial can then also be used to re-render the 
 秘訣にもなります。
 
 ## Progressively Enhance When Necessary
+## 必要になった時に、段階的に利用していく
 
 It's good practice to start your interaction design without Turbo Streams. Make the entire application work as it would if Turbo Streams were not available, then layer them on as a level-up. This means you won't come to rely on the updates for flows that need to work in native applications or elsewhere without them.
+Turboストリームを利用しないで、相互作用的なデザインを始めるのもおすすめします。たとえ、Turboストリームを利用しなくても、かつてのようにアプリケーション全体を動作させられます。
+そして、レベルアップとしてTurboストリームの層を追加していけます。つまり、Turboストリームを利用しないで、ネイティブアプリケーションなどを動作させる必要がある場合でも、アップデートをする必要はありません。
 
 The same is especially true for WebSocket updates. On poor connections, or if there are server issues, your WebSocket may well get disconnected. If the application is designed to work without it, it'll be more resilient.
+特に同様のことが、WebSocketの更新にも言えます。コネクションが弱く、サーバー側に問題があるならば、WebSocketは、利用しない方が良いでしょう。
+もし、アプリケーションがWebSocketが無くても動くようにデザインされているならば、より弾力性を持つでしょう。
 
 ## But What About Running JavaScript?
 
