@@ -247,8 +247,11 @@ Embracing these constraints will keep you from turning individual responses in a
 Turboストリームの重要な利点は、続けて起こる全ての更新を通して、最初にページをレンダーするために利用したテンプレートを再利用できる点にあります。
 
 ## Integration with Server-Side Frameworks
+## サーバーサイドフレームワークとの連携
 
 Of all the techniques that are included with Turbo, it's with Turbo Streams you'll see the biggest advantage from close integration with your backend framework. As part of the official Hotwire suite, we've created a reference implementation for what such an integration can look like in the <a href="https://github.com/hotwired/turbo-rails">turbo-rails gem</a>. This gem relies on the built-in support for both WebSockets and asynchronous rendering present in Rails through the Action Cable and Active Job frameworks, respectively.
+Turboに付随した全ての技術の中で、バックエンドフレームワークとの密な連携に関して最も大きな優位性があります。
+
 
 Using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/concerns/turbo/broadcastable.rb">Broadcastable</a> concern mixed into Active Record, you can trigger WebSocket updates directly from your domain model. And using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb">Turbo::Streams::TagBuilder</a>, you can render `<turbo-stream>` elements in inline controller responses or dedicated templates, invoking the five actions with associated rendering through a simple DSL.
 
