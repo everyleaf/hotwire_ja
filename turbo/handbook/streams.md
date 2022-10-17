@@ -235,11 +235,16 @@ The same is especially true for WebSocket updates. On poor connections, or if th
 もし、アプリケーションがWebSocketが無くても動くようにデザインされているならば、より弾力性を持つでしょう。
 
 ## But What About Running JavaScript?
+## JavaScript の実行に関してはどうでしょう？
 
 Turbo Streams consciously restricts you to seven actions: append, prepend, (insert) before, (insert) after, replace, update, and remove. If you want to trigger additional behavior when these actions are carried out, you should attach behavior using <a href="https://stimulus.hotwired.dev">Stimulus</a> controllers. This restriction allows Turbo Streams to focus on the essential task of delivering HTML over the wire, leaving additional logic to live in dedicated JavaScript files.
+Turboストリームは、意図的に7つのアクションを利用するように制限します。それは、append, prepend, (insert) before, (insert) after, replace, update と remove です。
+もしアクションが実行されたときに、追加の挙動をトリガーしたいならば、[Stimulus](https://stimulus.hotwired.dev)コントローラーを利用することで、その挙動を実現すべきです。
+この制限は、Turboストリームがワイヤー上でのHTML配信という必要不可欠なタスクに専念することができ、追加のロジックはJavaScript専用のファイル内に留めます。
 
 Embracing these constraints will keep you from turning individual responses in a jumble of behaviors that cannot be reused and which make the app hard to follow. The key benefit from Turbo Streams is the ability to reuse templates for initial rendering of a page through all subsequent updates.
-
+これらの制約を守ることで、再利用できないず、アプリを複雑にするような理解し難い複雑な挙動に個々に応答するような状態を防げるでしょう。
+Turboストリームの重要な利点は、続けて起こる全ての更新を通して、最初にページをレンダーするために利用したテンプレートを再利用できる点にあります。
 
 ## Integration with Server-Side Frameworks
 
