@@ -54,7 +54,7 @@ The default visit action is _advance_. During an advance visit, Turbo Drives pus
 デフォルトのアクセスのアクションは _advance_です。advanceアクセスの間、 Turboドライブは[`history.pushState`](https://developer.mozilla.org/ja/docs/Web/API/History/pushState)を用いてブラウザ履歴に項目を積みます。
 
 Applications using the Turbo Drive [iOS adapter](https://github.com/hotwired/turbo-ios) typically handle advance visits by pushing a new view controller onto the navigation stack. Similarly, applications using the [Android adapter](https://github.com/hotwired/turbo-android) typically push a new activity onto the back stack.
-Turboドライブ [iOS adapter](https://github.com/hotwired/turbo-ios)を用いるアプリケーションは、普通はナビゲーション・スタックに新しいviewコントローラーを積むことでAcvanceアクセスを扱います。同様に、[Android adapter](https://github.com/hotwired/turbo-android) を用いたアプリケーションは、新しいアクティビティをバックスタックに積みます。
+Turboドライブ [iOS adapter](https://github.com/hotwired/turbo-ios)を用いるアプリケーションは、普通はナビゲーション・スタックに新しいviewコントローラーを積むことでAdvanceアクセスを扱います。同様に、[Android adapter](https://github.com/hotwired/turbo-android) を用いたアプリケーションは、新しいアクティビティをバックスタックに積みます。
 
 ![Replace visit action](https://s3.amazonaws.com/turbolinks-docs/images/replace.svg)
 ![replace アクセス・アクション](https://s3.amazonaws.com/turbolinks-docs/images/replace.svg)
@@ -257,15 +257,20 @@ To disable the progress bar entirely, set its `visibility` style to `hidden`:
 ```
 
 In tandem with the progress bar, Turbo Drive will also toggle the [`[aria-busy]` attribute][aria-busy] on the page's `<html>` element during page navigations started from Visits or Form Submissions. Turbo Drive will set `[aria-busy="true"]` when the navigation begins, and will remove the `[aria-busy]` attribute when the navigation completes.
-プログレスバーと歩調を合わせるために、Turboドライブは、アクセスあるいはフォームの送信から始まるページのナビゲーションの間、そのページの`<html>`要素の[`[aria-busy]` 属性][aria-busy]を切り替えます。Turboドライブは
+プログレスバーと歩調を合わせるために、Turboドライブは、アクセスあるいはフォームの送信から始まるページのナビゲーションの間、そのページの`<html>`要素の[`[aria-busy]` 属性][aria-busy]を切り替えます。Turboドライブはナビゲーション開始時に`[aria-busy="true"]`をセットし、ナビゲーション完了時に`[aria-busy]`属性を取り除きます。
 
 [aria-busy]: https://www.w3.org/TR/wai-aria/#aria-busy
 
 ## Reloading When Assets Change
+## アセット変更時のリロード
 
 Turbo Drive can track the URLs of asset elements in `<head>` from one page to the next and automatically issue a full reload if they change. This ensures that users always have the latest versions of your application’s scripts and styles.
 
+Turboドライブは、あるページから別のページへの遷移時に`<head>`内のアセット要素のURLを追跡し、URLが変更されていればフル・リロードを発行します。これによってユーザーは、最新のアプリケーションのスクリプトやスタイルを入手できます。
+
 Annotate asset elements with `data-turbo-track="reload"` and include a version identifier in your asset URLs. The identifier could be a number, a last-modified timestamp, or better, a digest of the asset’s contents, as in the following example.
+
+アセット要素を`data-turbo-track="reload"`をつけてアノテーションし、アセットのURLにバージョン識別番号をつけます。識別子は番号でも、最終更新日時でもよいですし、アセットの内容のダイジェストならもっといいでしょう。次の例のようにします。
 
 ```html
 <head>
@@ -276,8 +281,11 @@ Annotate asset elements with `data-turbo-track="reload"` and include a version i
 ```
 
 ## Ensuring Specific Pages Trigger a Full Reload
+## 特定のトリガーで確実にフル・リロードを行う
 
 You can ensure visits to a certain page will always trigger a full reload by including a `<meta name="turbo-visit-control">` element in the page’s `<head>`.
+
+`<meta name="turbo-visit-control">`要素をあるページの`<head>`に含めることで、そのページにアクセスしたとき確実にフル・リロードするようにできます。
 
 ```html
 <head>
@@ -288,9 +296,14 @@ You can ensure visits to a certain page will always trigger a full reload by inc
 
 This setting may be useful as a workaround for third-party JavaScript libraries that don’t interact well with Turbo Drive page changes.
 
+この設定は、Truboドライブのページ変更とうまく協調できないサードパーティJavaScriptライブラリの回避方法として有用です。
+
 ## Setting a Root Location
+## ルートロケーションの設定
 
 By default, Turbo Drive only loads URLs with the same origin—i.e. the same protocol, domain name, and port—as the current document. A visit to any other URL falls back to a full page load.
+
+デフォルトでは、Turoboドライブは同じオリジンのURLでしか
 
 In some cases, you may want to further scope Turbo Drive to a path on the same origin. For example, if your Turbo Drive application lives at `/app`, and the non-Turbo Drive help site lives at `/help`, links from the app to the help site shouldn’t use Turbo Drive.
 
