@@ -251,10 +251,16 @@ Turboストリームの重要な利点は、続けて起こる全ての更新を
 
 Of all the techniques that are included with Turbo, it's with Turbo Streams you'll see the biggest advantage from close integration with your backend framework. As part of the official Hotwire suite, we've created a reference implementation for what such an integration can look like in the <a href="https://github.com/hotwired/turbo-rails">turbo-rails gem</a>. This gem relies on the built-in support for both WebSockets and asynchronous rendering present in Rails through the Action Cable and Active Job frameworks, respectively.
 Turboに付随した全ての技術の中で、バックエンドフレームワークとの密な連携に関して最も大きな優位性があります。
-
+公式のHotwireスイートな部分として、[turbo-rails gem](https://github.com/hotwired/turbo-rails)内で、どのように統合できるかの参考実装を作成しています。
+このgemは、Rails 内のWebScoketと非同期なレンダリングに対する組み込み済みのサポートを、それぞれAction CableやActive Jobフレームワーク利用して実現しています。
 
 Using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/concerns/turbo/broadcastable.rb">Broadcastable</a> concern mixed into Active Record, you can trigger WebSocket updates directly from your domain model. And using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb">Turbo::Streams::TagBuilder</a>, you can render `<turbo-stream>` elements in inline controller responses or dedicated templates, invoking the five actions with associated rendering through a simple DSL.
+Active Recordにミックスインされた[Broadcastable](https://github.com/hotwired/turbo-rails/blob/main/app/models/concerns/turbo/broadcastable.rb)を利用することで、
+Webscoketの更新を直接ドメインモデルからトリガーできます。さらに[Turbo::Streams::TagBuilder](https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb)を利用することで、インラインなコントローラーのレスポンスまたは専用テンプレート内で`<turbo-stream>`要素をレンダリングできます。同時に、シンプルなDSLを通して、レンダリングに関する5つのアクションを実行できます。
 
 Turbo itself is completely backend-agnostic, though. So we encourage other frameworks in other ecosystems to look at the reference implementation provided for Rails to create their own tight integration.
+Trubo自体は、バックエンドとは全く繋がりがない。他のエコシステム内の異なるフレームワークで密な統合を作成するためにもRailsに対する参考実装をみることを推奨します。
 
 Alternatively, a straightforward way to integrate any backend application with Turbo Streams is to rely on [the Mercure protocol](https://mercure.rocks). Mercure defines a convenient way for server applications to broadcast page changes to every connected clients through [Server-Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events). [Learn how to use Mercure with Turbo Streams](https://mercure.rocks/docs/ecosystem/hotwire).
+代替案としてのバックエンドアプリケーションとTruboストリームを統合する簡単な方法は、[Mercure protocol](https://mercure.rocks)を利用することです。
+Mercure は、サーバーアプリケーションに対して便利な方法を定義します。それは、ページの変更を[Server-Sent Events (SSE)](https://developer.mozilla.org/ja/docs/Web/API/Server-sent_events)を通して、全ての接続されたクライアントに送信できる方法です。[Learn how to use Mercure with Turbo Streams](https://mercure.rocks/docs/ecosystem/hotwire)
