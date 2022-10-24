@@ -60,13 +60,18 @@ When the link to edit the message is clicked, the response provided by `/message
 
 Notice how the `<h1>` isn't inside the `<turbo-frame>`. This means it'll be ignored when the form replaces the display of the message upon editing. Only content inside a matching `<turbo-frame>` is used when the frame is updated.
 
-`<h1>` が `<turbo-frame>` の内にないことに注目してください。これはメッセージの表示とフォームを置き換えて編集する時に `<h1>` は不要であるという意味です。
+`<h1>` が `<turbo-frame>` の中にないことに注目してください。これは編集を行うためにメッセージの表示とフォームを置き換えるとき `<h1>` は無視されるという意味です。フレームが更新されるとき、一致した `<turbo-frame>` の中の内容だけが使用されます。
 
 Thus your page can easily play dual purposes: Make edits in place within a frame or edits outside of a frame where the entire page is dedicated to the action.
 
+つまりこのページはかんたんに2つの目的を果たせます: フレームの内側をその場で編集するか、もしくはページ全体がそのアクションに専念しているフレームの外側で編集を行うか。
+
 ## Eager-Loading Frames
+## フレームの先読み
 
 Frames don't have to be populated when the page that contains them is loaded. If a `src` attribute is present on the `turbo-frame` tag, the referenced URL will automatically be loaded as soon as the tag appears on the page:
+
+フレームを含んだページが読み込まれた時点でフレームが表示されている必要はありません。もし `turbo-frame` タグに `src` 属性が存在する場合は `turbo-frame` タグがページに現れるとすぐに、 `src` が参照しているURLが自動的に読み込まれます:
 
 ```html
 <body>
@@ -86,7 +91,11 @@ Frames don't have to be populated when the page that contains them is loaded. If
 
 This page lists all the emails available in your <a href="http://itsnotatypo.com">imbox</a> immediately upon loading the page, but then makes two subsequent requests to present small trays at the bottom of the page for emails that have been set aside or are waiting for a later reply. These trays are created out of separate HTTP requests made to the URLs referenced in the `src`.
 
+このページは、ページが読み込まれるとすぐに`<a href="http://itsnotatypo.com">imbox</a>` から取得できるすべてのメールの一覧を表示しますが、その後、下書きのメールや返信を待っているメールのための小さなトレイをページ下部に作成する2つの後続リクエストを行います。それらのトレイは `src` が参照しているURLから作られた個別のHTTPリクエストから生み出されます。
+
 In the example above, the trays start empty, but it's also possible to populate the eager-loading frames with initial content, which is then overwritten when the content is fetched from the `src`:
+
+上記の例では、トレイは空で始まりますが、初期表示するコンテンツと一緒にフレームを先読みして表示しておくこともできます。`src` から取得された内容でフレームが上書きされるまで: 
 
 ```html
 <turbo-frame id="set_aside_tray" src="/emails/set_aside">
@@ -115,6 +124,8 @@ Upon loading the imbox page, the set-aside tray is loaded from `/emails/set_asid
 This page now works in both its minimized form, where only the `div` with the individual emails are loaded into the tray frame on the imbox page, but also as a direct destination where a header and a description is provided. Just like in the example with the edit message form.
 
 Note that the `<turbo-frame>` on `/emails/set_aside` does not contain a `src` attribute. That attribute is only added to the frame that needs to lazily load the content, not to the rendered frame that provides the content.
+
+
 
 During navigation, a Frame will set `[aria-busy="true"]` on the `<turbo-frame>` element when fetching the new contents. When the navigation completes, the Frame will remove the `[aria-busy]` attribute. When navigating the `<turbo-frame>` through a `<form>` submission, Turbo will toggle the `[aria-busy="true"]` attribute in tandem with the Frame's.
 
