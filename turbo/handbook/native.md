@@ -16,6 +16,8 @@ iOSのためのTurboネイティブは、Turbo対応のWebアプリケーショ�
 
 Turbo Native for Android provides the same kind of tooling, managing a single WebView instance across multiple Fragment destinations. See <a href="https://github.com/hotwired/turbo-android">Turbo Native: Android</a> for more details.
 
+AndroidのためのTurboネイティブも同様のツールや、複数のデスティネーションにまたがった単一のWebViewのインスタンスを管理します。詳細は<a href="https://github.com/hotwired/turbo-android">Turbo Native: Android</a>をご覧ください。
+
 The best way to see what's possible with the native adapters is to setup the demo native application. We have one [for iOS](https://github.com/hotwired/turbo-ios/blob/main/Demo/README.md) and [for Android](https://github.com/hotwired/turbo-android/blob/main/demo/README.md). You can open the code in your native environments and follow along to explore all the features.
 
 
