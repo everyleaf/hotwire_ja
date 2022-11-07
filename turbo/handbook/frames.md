@@ -64,7 +64,7 @@ Notice how the `<h1>` isn't inside the `<turbo-frame>`. This means it'll be igno
 
 Thus your page can easily play dual purposes: Make edits in place within a frame or edits outside of a frame where the entire page is dedicated to the action.
 
-つまりこのページはかんたんに2つの目的を果たせます: フレームの内側をその場で編集するか、もしくはページ全体がそのアクションに専念しているフレームの外側で編集を行うか。
+つまりこのページはかんたんに2つの目的を果たせます: フレームの内側で即時に編集を行うか、もしくはページ全体が編集処理専用である、フレームの外側で編集を行うか。
 
 ## Eager-Loading Frames
 ## フレームの先読み
