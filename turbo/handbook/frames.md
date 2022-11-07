@@ -91,7 +91,7 @@ Frames don't have to be populated when the page that contains them is loaded. If
 
 This page lists all the emails available in your <a href="http://itsnotatypo.com">imbox</a> immediately upon loading the page, but then makes two subsequent requests to present small trays at the bottom of the page for emails that have been set aside or are waiting for a later reply. These trays are created out of separate HTTP requests made to the URLs referenced in the `src`.
 
-このページは、ページが読み込まれるとすぐに`<a href="http://itsnotatypo.com">imbox</a>` から取得できるすべてのメールの一覧を表示しますが、その後、下書きのメールや返信を待っているメールのための小さなトレイをページ下部に作成する2つの後続リクエストを行います。それらのトレイは `src` が参照しているURLから作られた個別のHTTPリクエストから生み出されます。
+このページは、ページが読み込まれるとすぐに`<a href="http://itsnotatypo.com">imbox</a>` から取得できるすべてのメールの一覧を表示しますが、その後、取り置きメールや返信待ちのメールのための小さなトレイをページ下部に作成する2つの後続リクエストを行います。それらのトレイは `src` が参照しているURLから作られた個別のHTTPリクエストから生み出されます。
 
 In the example above, the trays start empty, but it's also possible to populate the eager-loading frames with initial content, which is then overwritten when the content is fetched from the `src`:
 
@@ -104,6 +104,7 @@ In the example above, the trays start empty, but it's also possible to populate 
 ```
 
 Upon loading the imbox page, the set-aside tray is loaded from `/emails/set_aside`, and the response must contain a corresponding `<turbo-frame id="set_aside_tray">` element as in the original example:
+imboxページを読み込んだとき、取り置きメールのトレイは `/emails/set_aside` から読み込まれ、そして元の例のように、レスポンスは対応する `<turbo-frame id="set_aside_tray">` 要素を必ず含みます。
 
 ```html
 <body>
