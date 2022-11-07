@@ -303,12 +303,14 @@ This setting may be useful as a workaround for third-party JavaScript libraries 
 
 By default, Turbo Drive only loads URLs with the same origin—i.e. the same protocol, domain name, and port—as the current document. A visit to any other URL falls back to a full page load.
 
-デフォルトでは、Turoboドライブは同じオリジンのURLでしか
+デフォルトでは、Turoboドライブは同じオリジンでのURLのみをロード対象とします。つまり、同じプロトコル、ドメイン名、ポートが現在のドキュメントと同一のURLのみということです。他のすべてのURLはフォールバックされて、ページのフル・リロードが走ります。
 
 In some cases, you may want to further scope Turbo Drive to a path on the same origin. For example, if your Turbo Drive application lives at `/app`, and the non-Turbo Drive help site lives at `/help`, links from the app to the help site shouldn’t use Turbo Drive.
+場合によっては、同一オリジン上のパスで、Turboドライブの範囲を限定したいこともあるでしょう。Turboドライブのあるアプリケーションが`/app`のpathにあり、Turboドライブでないヘルプページが`/help`にある場合、アプリからヘルプページへのリンクにはTurboドライブを使うべきではありません。
 
 Include a `<meta name="turbo-root">` element in your pages’ `<head>` to scope Turbo Drive to a particular root location. Turbo Drive will only load same-origin URLs that are prefixed with this path.
 
+ページの`<head>`内に`<meta name="turbo-root">`要素を加えることで、Turboドライブの範囲を特定のルートロケーションに定めることができます。Turboドライブは、このパスがプリフィックスでついた、同一URLのみをロードの対象とします。
 ```html
 <head>
   ...
@@ -317,11 +319,14 @@ Include a `<meta name="turbo-root">` element in your pages’ `<head>` to scope 
 ```
 
 ## Form Submissions
+## フォームの送信
 
 Turbo Drive handles form submissions in a manner similar to link clicks. The key difference is that form submissions can issue stateful requests using the HTTP POST method, while link clicks only ever issue stateless HTTP GET requests.
+Turboドライブは、リンクのクリックと似たやり方でフォームの送信を扱います。主な違いは、フォームの送信はHTTPのPOSTメソッドを使って成功リクエストを発行できますが、リンクのクリックはHTTPの状態を持たないGETリクエストしか発行できません。
 
 Throughout a submission, Turbo Drive will dispatch a series of [events][] that
 target the `<form>` element and [bubble up][] through the document:
+フォームの送信を通じて、Turboドライブは`<form>` 要素を対象とした一連の[events][]をディスパッチし、documentへと[バブリング][]していきます。
 
 1. `turbo:submit-start`
 2. `turbo:before-fetch-request`
@@ -330,9 +335,13 @@ target the `<form>` element and [bubble up][] through the document:
 
 During a submission, Turbo Drive will set the "submitter" element's [disabled][] attribute when the submission begins, then remove the attribute after the submission ends. When submitting a `<form>` element, browser's will treat the `<input type="submit">` or `<button>` element that initiated the submission as the [submitter][]. To submit a `<form>` element programmatically, invoke the [HTMLFormElement.requestSubmit()][] method and pass an `<input type="submit">` or `<button>` element as an optional parameter.
 
+フォームを送信する間、まず送信開始時にTurboドライブは"submitter"要素の[disabled][]属性をセットし、送信終了時に[disabled][]属性を取り除きます。`<form>`要素の送信時、ブラウザは送信の口火を切る`<input type="submit">` か `<button>`要素を[submitter][]として扱います。`<form>`要素をプログラム的に送信するためには、[HTMLFormElement.requestSubmit()][]メソッドを呼び出して`<input type="submit">` か `<button>`要素をオプショナルなパラメーターとして渡します。
+
 If there are other changes you'd like to make during a `<form>` submission (for
 example, disabling _all_ [fields within a submitted `<form>`][elements]), you
 can declare your own event listeners:
+
+もし`<form>`送信中に行いたい他の変更があるなら（例えば、_すべての_ [送信される `<form>`内のフィールド][要素]をdisableにしたいなど）、独自にイベント・リスナーを宣言することができます。
 
 ```js
 addEventListener("turbo:submit-start", ({ target }) => {
@@ -347,19 +356,38 @@ addEventListener("turbo:submit-start", ({ target }) => {
 [elements]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements
 [disabled]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled
 [submitter]: https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter
+[HTMLFormElement.requestSubmit()]: https://developer.mozilla.org/ja/docs/Web/API/HTMLFormElement/requestSubmit
+
+
+[events]: /reference/events
+[バブリング]: https://developer.mozilla.org/ja/docs/Learn/JavaScript/Building_blocks/Events#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E3%83%90%E3%83%96%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3%E3%83%AA%E3%83%B3%E3%82%B0
+[要素]: https://developer.mozilla.org/ja/docs/Web/API/HTMLFormElement/elements
+[disabled]: https://developer.mozilla.org/ja/docs/Web/HTML/Attributes/disabled
+[submitter]: https://developer.mozilla.org/ja/docs/Web/API/SubmitEvent/submitter
 [HTMLFormElement.requestSubmit()]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit
 
+
 ## Redirecting After a Form Submission
+## フォーム送信後のリダイレクト
 
 After a stateful request from a form submission, Turbo Drive expects the server to return an [HTTP 303 redirect response](https://en.wikipedia.org/wiki/HTTP_303), which it will then follow and use to navigate and update the page without reloading.
+フォームの送信によるステートフルなリクエストの後、Turboドライブはサーバーに[HTTP 303 リダイレクト・レスポンス](https://en.wikipedia.org/wiki/HTTP_303)を期待します。このレスポンスに続いて、ドライブは、レスポンスを利用してページのリロードなしのナビゲートと更新を行います。
 
 The exception to this rule is when the response is rendered with either a 4xx or 5xx status code. This allows form validation errors to be rendered by having the server respond with `422 Unprocessable Entity` and a broken server to display a "Something Went Wrong" screen on a `500 Internal Server Error`.
 
+このルールの例外は、レスポンスが4xxあるいは5xxのステータスコードで描画された場合です。この場合、`422 Unprocessable Entity`の応答がサーバーから帰ってきた時はフォームバリデーションエラーが描画され、`500 Internal Server Error`nの時は"Something Went Wrong"の壊れたサーバー状態が描画されます。
+
+
 The reason Turbo doesn't allow regular rendering on 200's from POST requests is that browsers have built-in behavior for dealing with reloads on POST visits where they present a "Are you sure you want to submit this form again?" dialogue that Turbo can't replicate. Instead, Turbo will stay on the current URL upon a form submission that tries to render, rather than change it to the form action, since a reload would then issue a GET against that action URL, which may not even exist.
 
+TurboがPOSTリクエストに通常の200ステータスの応答を許さないのは、POSTリクエストは、ブラウザがPOSTアクセスにリロードが走った際に、"フォームを再送信しますか?"のダイアログを出す振る舞いを、組み込みで持っているからです。Turboはこれを再現できません。代わりにTuroboは、フォームのアクションを変えることはせず、描画しようとするフォーム送信の現在のURLに止まります。なぜなら、リロードは存在しないアクションURLへもGETリクエストを発行してしまうからです。
+
 If the form submission is a GET request, you may render the directly rendered response by giving the form a `data-turbo-frame` target. If you'd like the URL to update as part of the rendering also pass a `data-turbo-action` attribute.
+フォーム送信がGETリクエストの場合は、フォームに`data-turbo-frame`ターゲットを与えられることで直接レスポンスを描画します。描画の一部としてURLを更新したい場合は、`data-turbo-action`属性を渡します。
 
 ## Streaming After a Form Submission
+## フォーム送信後のストリーミング
 
 Servers may also respond to form submissions with a [Turbo Streams](streams) message by sending the header `Content-Type: text/vnd.turbo-stream.html` followed by one or more `<turbo-stream>` elements in the response body. This lets you update multiple parts of the page without navigating.
+サーバーはフォームの送信に対して、レスポンス・ボディ内の一つ以上の`<turbo-stream>`要素を伴う`Content-Type: text/vnd.turbo-stream.html`[Turboストリーム](streams)メッセージで応答することもあります。この応答によって、ナビゲーションなしに、ページの複数箇所を更新することができます。
 <br><br>
