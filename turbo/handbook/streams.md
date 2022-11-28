@@ -62,7 +62,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
     that action would necessitate the rebuilding of  
     handlers. -->
     <!-- このテンプレートの内容は、DOM IDが"unread_count"である要素の内容を
-    innerHTML を空に設定したうえで、テンプレート内の内容と取り変わります。
+    innerHTML を空に設定したうえで、テンプレート内の内容と置き換えます。
     "unread_count"な要素に結び付けられているどのハンドラーも保持されます。
     この挙動は、上記の"replace"アクションと対照的です。
     なぜなら、"replace"アクションでは、ハンドラーを再構築する必要があるためです。
