@@ -103,7 +103,7 @@ Note that every `<turbo-stream>` element must wrap its included HTML inside a `<
 
 You can render any number of stream elements in a single stream message from a WebSocket, SSE or in response to a form submission.
 
-WebSocket、SSE やフォーム送信の応答としての 1 つのストリームメッセージの中で、任意の数のストリーム要素もレンダリングできます。
+WebSocket、SSE やフォーム送信の応答としての 1 つのストリームメッセージの中で、任意の数のストリーム要素をレンダリングできます。
 
 ## Actions With Multiple Targets
 
