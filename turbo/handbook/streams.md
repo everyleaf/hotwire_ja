@@ -166,7 +166,7 @@ end
 
 The key to Turbo Streams is the ability to reuse your existing server-side templates to perform live, partial page changes. The HTML template used to render each message in a list of such on the first page load is the same template that'll be used to add one new message to the list dynamically later. This is at the essence of the HTML-over-the-wire approach: You don't need to serialize the new message as JSON, receive it in JavaScript, render a client-side template. It's just the standard server-side templates reused.
 
-Turbo ストリームの秘訣は、ライブ的に部分的なページの変更を実現するのに既存のサーバーサイドテンプレートを再利用できることです。
+Turbo ストリームの秘訣は、ページの一部の動的な変更を実現するのに既存のサーバーサイドテンプレートを再利用できることです。
 最初にページがロードされた時にリスト表示されるメッセージそれぞれを描画するために使われる HTML テンプレートは、後でリストに新しく 1 つのメッセージを動的に追加する際に使われるテンプレートと同じです。
 これが、HTML オーバーザワイヤーアプローチの本質です。JSON 形式で新しいメッセージをシリアライズし、JavaScript でそれを受け取り、1 つのクライアントサイドのテンプレートとして描画する必要はないのです。ただ、標準的なサーバーサイドのテンプレートとして再利用するだけです。
 
