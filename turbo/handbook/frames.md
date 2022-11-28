@@ -137,9 +137,11 @@ During navigation, a Frame will set `[aria-busy="true"]` on the `<turbo-frame>` 
 [aria-busy]: https://www.w3.org/TR/wai-aria/#aria-busy
 
 ## Lazy-Loading Frames
+## フレームの遅延読み込み
 
 Frames that aren't visible when the page is first loaded can be marked with `loading="lazy"` such that they don't start loading until they become visible. This works exactly like the `lazy=true` attribute on `img`. It's a great way to delay loading of frames that sit inside `summary`/`detail` pairs or modals or anything else that starts out hidden and is then revealed.
 
+ページが最初に読み込まれたときに見えていないフレームは、フレームが見えるまでは読み込みを開始しないように `loading="lazy"` でマークできます。`loading="lazy"` は `img`タグの `lazy=true` 属性のように動作します。`loading="lazy"` は `summary`/`detail` ペアやモーダル、または最初は非表示でその後表示されるものの中にあるフレームに対し、読み込みを遅延させる最適な方法です。
 
 ## Cache Benefits to Loading Frames
 
