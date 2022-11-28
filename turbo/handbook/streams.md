@@ -111,7 +111,7 @@ WebSocket、SSE やフォーム送信の応答としての 1 つのストリー�
 
 Actions can be applied against multiple targets using the `targets` attribute with a CSS query selector, instead of the regular `target` attribute that uses a dom ID reference. Examples:
 
-アクションは、DOM ID の参照を利用した普通の`target`属性を利用する代わりに、CSS のクエリセレクターの `targets` 属性を利用することで、複数のターゲットに対して適用されます。
+アクションは、DOM ID の参照を利用した普通の `target` 属性の代わりに、CSS のクエリセレクターの `targets` 属性を利用することで、複数のターゲットに対して適用されます。
 例は、下記になります。
 
 ```html
