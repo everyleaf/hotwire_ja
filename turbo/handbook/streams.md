@@ -46,7 +46,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
   <template>
     <div id="message_1">
       This div will replace the existing element with the DOM ID "message_1".
-      この div は、DOM IDが"message_1"である既存要素と取り変わります。
+      この div は、DOM IDが"message_1"である既存要素と置き換えられます。
     </div>
   </template>
 </turbo-stream>
