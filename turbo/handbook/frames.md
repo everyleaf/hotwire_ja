@@ -144,12 +144,15 @@ Frames that aren't visible when the page is first loaded can be marked with `loa
 ページが最初に読み込まれたときに見えていないフレームは、フレームが見えるまでは読み込みを開始しないように `loading="lazy"` でマークできます。`loading="lazy"` は `img`タグの `lazy=true` 属性のように動作します。`loading="lazy"` は `summary`/`detail` ペアやモーダル、または最初は非表示でその後表示されるものの中にあるフレームに対し、読み込みを遅延させる最適な方法です。
 
 ## Cache Benefits to Loading Frames
+## フレームの読み込みにおけるキャッシュの利点
 
 Turning page segments into frames can help make the page simpler to implement, but an equally important reason for doing this is to improve cache dynamics. Complex pages with many segments are hard to cache efficiently, especially if they mix content shared by many with content specialized for an individual user. The more segments, the more dependent keys required for the cache look-up, the more frequently the cache will churn.
 
+ページ区分をフレームに変えるとページの実装が簡単になりますが、キャッシュダイナミクスの改善とは同じくらい重要なことです。多数の区分を持つ複雑なページは、効率的にキャッシュすることが難しくなります。特に、多くの人と共有する内容と、個々のユーザーに特化した内容が混在している場合です。区分の数が多くなると、キャッシュの検索に必要な依存キーが増え、キャッシュの更新頻度が上がっていきます。
+
 Frames are ideal for separating segments that change on different timescales and for different audiences. Sometimes it makes sense to turn the per-user element of a page into a frame, if the bulk of the rest of the page is then easily shared across all users. Other times, it makes sense to do the opposite, where a heavily personalized page turns the one shared segment into a frame to serve it from a shared cache.
 
-While the overhead of fetching loading frames is generally very low, you should still be judicious in just how many you load, especially if these frames would create load-in jitter on the page. Frames are, however, essentially free if the content isn't immediately visible upon loading the page. Either because they're hidden behind modals or below the fold.
+フレームは、異なる所要時間で変化する区分や、異なる閲覧者に向けた区分を分離するのに適しています。 ページの大部分がすべてのユーザーに共有しやすいときなどは、ページ内にあるユーザー毎の要素をフレームに置きかえることは理にかなっています。 またその逆に、ほとんどが個別化されたページでひとつの共有要素をフレームに置き換えて共有キャッシュから提供することも理にかなっています。
 
 
 ## Targeting Navigation Into or Out of a Frame
