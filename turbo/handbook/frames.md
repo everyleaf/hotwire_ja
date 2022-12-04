@@ -124,11 +124,11 @@ imbox ページを読み込んだとき、取り置きメールのトレイは `
 
 This page now works in both its minimized form, where only the `div` with the individual emails are loaded into the tray frame on the imbox page, but also as a direct destination where a header and a description is provided. Just like in the example with the edit message form.
 
-このページでは、見出しと説明文を直接表示するという目的だけでなく、 imbox ページにあるトレイフレームの中に `div` タグと個々のメールだけを読み出すという、両方の最小化されたフォームが動作しています。メッセージを編集するフォームの例と同様に。
+メッセージを編集するフォームの例と同様に、このページは直接の目的である見出しと説明文の表示をするだけでなく、 imbox ページにあるトレイフレームの中に `div` タグと個々のメールを読み出すだけの最小化されたフォームも動作しています。
 
 Note that the `<turbo-frame>` on `/emails/set_aside` does not contain a `src` attribute. That attribute is only added to the frame that needs to lazily load the content, not to the rendered frame that provides the content.
 
-`/emails/set_aside` にある `<turbo-frame>` タグは `src` 属性を含んでいないことに注目してください。 `src` 属性はフレームがレンダリングされたときに内容を表示するのではなく、内容を遅延読み込みしてほしい場合だけに追加されます。
+`/emails/set_aside` にある `<turbo-frame>` タグは `src` 属性を含んでいないことに注目してください。 `src` 属性はフレームがレンダリングされたときに内容を表示するのではなく、内容を遅延読み込みしてほしい場合にのみ追加します。
 
 During navigation, a Frame will set `[aria-busy="true"]` on the `<turbo-frame>` element when fetching the new contents. When the navigation completes, the Frame will remove the `[aria-busy]` attribute. When navigating the `<turbo-frame>` through a `<form>` submission, Turbo will toggle the `[aria-busy="true"]` attribute in tandem with the Frame's.
 
