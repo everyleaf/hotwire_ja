@@ -83,7 +83,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
     <!-- The contents of this template will be added before the
     the element with ID "current_step". -->
     <!-- このテンプレートの内容は、DOM IDが"current_step"である要素の直前に追加されます。-->
-    <li>New item</li>
+    <li>New item: 新しいアイテム</li>
   </template>
 </turbo-stream>
 
@@ -92,7 +92,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
     <!-- The contents of this template will be added after the
     the element with ID "current_step". -->
     <!-- このテンプレートの内容は、DOM IDが"current_step"である要素の直後に追加されます。-->
-    <li>New item</li>
+    <li>New item: 新しいアイテム</li>
   </template>
 </turbo-stream>
 ```
@@ -128,7 +128,7 @@ Actions can be applied against multiple targets using the `targets` attribute wi
     all elements that match "inputs.invalid_field". -->
     <!-- このテンプレートの内容は、"inputs.invalid_field"に合致する全ての要素の後に
     追加されます。　-->
-    <span>Incorrect</span>
+    <span>Incorrect: 間違っています</span>
   </template>
 </turbo-stream>
 ```
@@ -181,7 +181,7 @@ Rails でどのように動くか他の例を見てみましょう。
 </div>
 
 <!-- app/views/messages/index.html.erb -->
-<h1>All the messages</h1>
+<h1>All the messages: 全てのメッセージ</h1>
 <%= render partial: "messages/message", collection: @messages %>
 ```
 
