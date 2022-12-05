@@ -224,7 +224,7 @@ Content-Type: text/vnd.turbo-stream.html; charset=utf-8
 
 This `messages/message` template partial can then also be used to re-render the message following an edit/update operation. Or to supply new messages created by other users over a WebSocket or a SSE connection. Being able to reuse the same templates across the whole spectrum of use is incredibly powerful, and key to reducing the amount of work it takes to create these modern, fast applications.
 
-そして、この`messages/message`部分テンプレートは、他にも続く編集や更新操作でメッセージを再描画するためにも利用されます。さらに、WebSocket や SSE コネクション上で他のユーザーに
+そして、この`messages/message`部分テンプレートは他にも、続く編集や更新操作でメッセージを再描画するためにも利用されます。さらに、WebSocket や SSE コネクション上で他のユーザーに
 新しく作成されたメッセージを伝えるのにも利用されます。全ての領域で同じテンプレートを再利用できるのは、非常に強力です。さらにモダンで速いアプリケーションを作るためにかかる時間を削減する
 秘訣にもなります。
 
