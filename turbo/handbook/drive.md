@@ -109,7 +109,7 @@ Restoration visits have an action of _restore_ and Turbo Drive reserves them for
 ## アクセスを開始前にキャンセルする
 
 Application visits can be canceled before they start, regardless of whether they were initiated by a link click or a call to [`Turbo.visit`](/reference/drive#turbovisit).
-アプリケーション・アクセスは開始前にキャンセルすることができます。それが、リンクのクリックによって始まったものでも、[`Turbo.visit`](/reference/drive#turbovisit)によって始まったものでも。
+アプリケーション・アクセスは開始前にキャンセルできます。それが、リンクのクリックによって始まったものでも、[`Turbo.visit`](/reference/drive#turbovisit)によって始まったものでも。
 
 Listen for the `turbo:before-visit` event to be notified when a visit is about to start, and use `event.detail.url` (or `$event.originalEvent.detail.url`, when using jQuery) to check the visit’s location. Then cancel the visit by calling `event.preventDefault()`.
 アクセスが始まろうとする瞬間に気づくために、`turbo:before-visit`を待ち受け、`event.detail.url` (jQueryを使っている場合は`$event.originalEvent.detail.url`)を使いましょう。そして、`event.preventDefault()`でキャンセルするのです。
