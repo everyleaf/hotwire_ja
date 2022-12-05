@@ -375,7 +375,7 @@ After a stateful request from a form submission, Turbo Drive expects the server 
 
 The exception to this rule is when the response is rendered with either a 4xx or 5xx status code. This allows form validation errors to be rendered by having the server respond with `422 Unprocessable Entity` and a broken server to display a "Something Went Wrong" screen on a `500 Internal Server Error`.
 
-このルールの例外は、レスポンスが4xxあるいは5xxのステータスコードで描画された場合です。この場合、`422 Unprocessable Entity`の応答がサーバーから帰ってきた時はフォームバリデーションエラーが描画され、`500 Internal Server Error`nの時は"Something Went Wrong"の壊れたサーバー状態が描画されます。
+このルールの例外は、レスポンスが4xxあるいは5xxのステータスコードで描画された場合です。この場合、`422 Unprocessable Entity`の応答がサーバーから帰ってきた時はフォームバリデーションエラーが描画され、`500 Internal Server Error`の時は"Something Went Wrong"の壊れたサーバー状態が描画されます。
 
 
 The reason Turbo doesn't allow regular rendering on 200's from POST requests is that browsers have built-in behavior for dealing with reloads on POST visits where they present a "Are you sure you want to submit this form again?" dialogue that Turbo can't replicate. Instead, Turbo will stay on the current URL upon a form submission that tries to render, rather than change it to the form action, since a reload would then issue a GET against that action URL, which may not even exist.
