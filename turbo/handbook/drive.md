@@ -322,7 +322,7 @@ Include a `<meta name="turbo-root">` element in your pages’ `<head>` to scope 
 ## フォームの送信
 
 Turbo Drive handles form submissions in a manner similar to link clicks. The key difference is that form submissions can issue stateful requests using the HTTP POST method, while link clicks only ever issue stateless HTTP GET requests.
-Turboドライブは、リンクのクリックと似たやり方でフォームの送信を扱います。主な違いは、フォームの送信はHTTPのPOSTメソッドを使って成功リクエストを発行できますが、リンクのクリックはHTTPの状態を持たないGETリクエストしか発行できません。
+Turboドライブは、リンクのクリックと似たやり方でフォームの送信を扱います。主な違いは、フォームの送信はHTTPのPOSTメソッドを使って状態をもつリクエストを発行できますが、リンクのクリックはHTTPの状態を持たないGETリクエストしか発行できません。
 
 Throughout a submission, Turbo Drive will dispatch a series of [events][] that
 target the `<form>` element and [bubble up][] through the document:
