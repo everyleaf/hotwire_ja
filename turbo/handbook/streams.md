@@ -239,7 +239,7 @@ Turbo ストリームを利用せずに、相互作用的なデザインを始�
 
 The same is especially true for WebSocket updates. On poor connections, or if there are server issues, your WebSocket may well get disconnected. If the application is designed to work without it, it'll be more resilient.
 
-同様のことが特に、WebSocket の更新にも言えます。コネクションが弱く、サーバー側に問題があるならば、WebSocket は、利用しない方が良いでしょう。
+同様のことが特に、WebSocket の更新にも言えます。コネクションが貧弱な場合や、サーバーに問題がある場合、WebSocket は接続が切れてしまいます。
 もし、アプリケーションが WebSocket が無くても動くようにデザインされているならば、より弾力性を持つでしょう。
 
 ## But What About Running JavaScript?
