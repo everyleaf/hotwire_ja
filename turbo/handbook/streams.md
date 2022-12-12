@@ -234,8 +234,8 @@ This `messages/message` template partial can then also be used to re-render the 
 
 It's good practice to start your interaction design without Turbo Streams. Make the entire application work as it would if Turbo Streams were not available, then layer them on as a level-up. This means you won't come to rely on the updates for flows that need to work in native applications or elsewhere without them.
 
-Turbo ストリームを利用しないで、相互作用的なデザインを始めるのもおすすめします。たとえ、Turbo ストリームを利用しなくても、かつてのようにアプリケーション全体を動作させられます。
-そして、レベルアップとして Turbo ストリームの層を追加していけます。つまり、Turbo ストリームを利用しないで、ネイティブアプリケーションなどを動作させる必要がある場合でも、アップデートをする必要はありません。
+Turbo ストリームを利用しないで、相互作用的なデザインを始めるのもおすすめします。たとえ Turbo ストリームが使えなくとも、アプリケーション全体が動作するように作りましょう。それから、レベルアップとして、Turbo ストリームの層を追加していくのです。
+そうすれば、Turbo ストリームを利用しないで、ネイティブアプリケーションなどを動作させる必要がある場合でも、アップデートをする必要はありません。
 
 The same is especially true for WebSocket updates. On poor connections, or if there are server issues, your WebSocket may well get disconnected. If the application is designed to work without it, it'll be more resilient.
 
