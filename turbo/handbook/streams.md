@@ -265,7 +265,7 @@ Of all the techniques that are included with Turbo, it's with Turbo Streams you'
 
 Turbo に付随した全ての技術の中で、バックエンドフレームワークとの密な連携に関して最も大きな優位性があります。
 公式の Hotwire スイートな部分として、[turbo-rails gem](https://github.com/hotwired/turbo-rails)内で、どのように統合できるかの参考実装を作成しています。
-この gem は、Rails 内の WebScoket と非同期なレンダリングに対する組み込み済みのサポートを、それぞれ Action Cable や Active Job フレームワーク利用して実現しています。
+この gem は、Rails 内の WebScoket と非同期なレンダリングに対する組み込み済みのサポートを、それぞれ Action Cable や Active Job フレームワークを利用して実現しています。
 
 Using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/concerns/turbo/broadcastable.rb">Broadcastable</a> concern mixed into Active Record, you can trigger WebSocket updates directly from your domain model. And using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb">Turbo::Streams::TagBuilder</a>, you can render `<turbo-stream>` elements in inline controller responses or dedicated templates, invoking the five actions with associated rendering through a simple DSL.
 
