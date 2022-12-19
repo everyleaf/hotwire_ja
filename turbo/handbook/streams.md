@@ -274,7 +274,7 @@ Webscoket の更新を直接ドメインモデルからトリガーできます�
 
 Turbo itself is completely backend-agnostic, though. So we encourage other frameworks in other ecosystems to look at the reference implementation provided for Rails to create their own tight integration.
 
-Trubo 自体は、バックエンドとは全く繋がりがない。他のエコシステム内の異なるフレームワークで密な統合を作成するためにも Rails に対する参考実装をみることを推奨します。
+しかしながら、Trubo 自体は、バックエンドに対して一切関知しません。他のエコシステム内の異なるフレームワークで密な統合を作成するためにも Rails に対する参考実装をみることを推奨します。
 
 Alternatively, a straightforward way to integrate any backend application with Turbo Streams is to rely on [the Mercure protocol](https://mercure.rocks). Mercure defines a convenient way for server applications to broadcast page changes to every connected clients through [Server-Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events). [Learn how to use Mercure with Turbo Streams](https://mercure.rocks/docs/ecosystem/hotwire).
 
