@@ -278,5 +278,5 @@ Turbo itself is completely backend-agnostic, though. So we encourage other frame
 
 Alternatively, a straightforward way to integrate any backend application with Turbo Streams is to rely on [the Mercure protocol](https://mercure.rocks). Mercure defines a convenient way for server applications to broadcast page changes to every connected clients through [Server-Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events). [Learn how to use Mercure with Turbo Streams](https://mercure.rocks/docs/ecosystem/hotwire).
 
-代替案としてのバックエンドアプリケーションと Trubo ストリームを統合する簡単な方法は、[Mercure protocol](https://mercure.rocks)を利用することです。
+バックエンドアプリケーションと Trubo ストリームを統合する、もう一つの簡単な方法は、[Mercure protocol](https://mercure.rocks)を利用することです。
 Mercure は、サーバーアプリケーションに対して便利な方法を定義します。それは、ページの変更を[Server-Sent Events (SSE)](https://developer.mozilla.org/ja/docs/Web/API/Server-sent_events)を通して、全ての接続されたクライアントに送信できる方法です。[Learn how to use Mercure with Turbo Streams](https://mercure.rocks/docs/ecosystem/hotwire)
