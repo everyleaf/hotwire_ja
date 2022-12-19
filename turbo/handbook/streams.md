@@ -28,7 +28,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
   <template>
     <div id="message_1">
       This div will be appended to the element with the DOM ID "messages". この
-      div は、DOM IDが"messages"である要素内の最後に追加されます。
+      div は、DOM ID が"messages"である要素内の最後に追加されます。
     </div>
   </template>
 </turbo-stream>
@@ -37,7 +37,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
   <template>
     <div id="message_1">
       This div will be prepended to the element with the DOM ID "messages". この
-      div は、DOM IDが"messages"である要素内の最初に追加されます。
+      div は、DOM ID が"messages"である要素内の最初に追加されます。
     </div>
   </template>
 </turbo-stream>
@@ -46,7 +46,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
   <template>
     <div id="message_1">
       This div will replace the existing element with the DOM ID "message_1".
-      この div は、DOM IDが"message_1"である既存要素と置き換えられます。
+      この div は、DOM ID が"message_1"である既存要素と置き換えられます。
     </div>
   </template>
 </turbo-stream>
@@ -61,7 +61,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
     contrasted with the "replace" action above, where 
     that action would necessitate the rebuilding of  
     handlers. -->
-    <!-- このテンプレートの内容は、DOM IDが"unread_count"である要素の内容を
+    <!-- このテンプレートの内容は、DOM ID が"unread_count"である要素の内容を
     innerHTML を空に設定したうえで、テンプレート内の内容と置き換えます。
     "unread_count"な要素に結び付けられているどのハンドラーも保持されます。
     この挙動は、上記の"replace"アクションと対照的です。
@@ -74,7 +74,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
 <turbo-stream action="remove" target="message_1">
   <!-- The element with DOM ID "message_1" will be removed.
   The contents of this stream element are ignored. -->
-  <!-- DOM IDが"message_1の要素は取り除かれます。
+  <!-- DOM ID が"message_1"の要素は取り除かれます。
   このストリーム要素の内容は無視されます。-->
 </turbo-stream>
 
@@ -82,7 +82,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
   <template>
     <!-- The contents of this template will be added before the
     the element with ID "current_step". -->
-    <!-- このテンプレートの内容は、DOM IDが"current_step"である要素の直前に追加されます。-->
+    <!-- このテンプレートの内容は、DOM ID が"current_step"である要素の直前に追加されます。-->
     <li>New item: 新しいアイテム</li>
   </template>
 </turbo-stream>
@@ -91,7 +91,7 @@ A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` ele
   <template>
     <!-- The contents of this template will be added after the
     the element with ID "current_step". -->
-    <!-- このテンプレートの内容は、DOM IDが"current_step"である要素の直後に追加されます。-->
+    <!-- このテンプレートの内容は、DOM ID が"current_step"である要素の直後に追加されます。-->
     <li>New item: 新しいアイテム</li>
   </template>
 </turbo-stream>
@@ -167,7 +167,7 @@ end
 The key to Turbo Streams is the ability to reuse your existing server-side templates to perform live, partial page changes. The HTML template used to render each message in a list of such on the first page load is the same template that'll be used to add one new message to the list dynamically later. This is at the essence of the HTML-over-the-wire approach: You don't need to serialize the new message as JSON, receive it in JavaScript, render a client-side template. It's just the standard server-side templates reused.
 
 Turbo ストリームの秘訣は、ページの一部の動的な変更を実現するのに既存のサーバーサイドテンプレートを再利用できることです。
-最初にページがロードされた時にリスト表示されるメッセージそれぞれを描画するために使われる HTML テンプレートは、後でリストに新しく 1 つのメッセージを動的に追加する際に使われるテンプレートと同じです。
+最初にページがロードされた時に、リストの各メッセージを描画するために利用する HTML テンプレートは、後でリストに新しく 1 つのメッセージを動的に追加する際に利用されるのと同じテンプレートです。
 これが、HTML オーバーザワイヤーアプローチの本質です。JSON 形式で新しいメッセージをシリアライズし、JavaScript でそれを受け取り、1 つのクライアントサイドのテンプレートとして描画する必要はないのです。ただ、標準的なサーバーサイドのテンプレートとして再利用するだけです。
 
 Another example from how this would look in Rails:
