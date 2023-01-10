@@ -15,7 +15,7 @@ Turbo フレームは、ページ内のあらかじめ決められた一部が�
 
 Frames are created by wrapping a segment of the page in a `<turbo-frame>` element. Each element must have a unique ID, which is used to match the content being replaced when requesting new pages from the server. A single page can have multiple frames, each establishing their own context:
 
-フレームは `<turbo-frame>` 要素に囲われたページの一部によって作られます。各要素には一意のIDが必要です。このIDは、サーバーから新しいページを要求するときに、置き換えられる内容と一致させるために使われます。単一のページは多数のフレームを持つことができ、それぞれが独自のコンテキストを確立しています：
+フレームは `<turbo-frame>` 要素に囲われたページの一部によって作られます。各要素には一意のIDが必要です。このIDは、サーバーから新しいページを要求するときに、置き換えられる内容と一致させるために使われます。単一のページは多数のフレームを持つことができ、それぞれが独自のコンテキストを確立しています。
 
 ```html
 <body>
@@ -38,11 +38,11 @@ Frames are created by wrapping a segment of the page in a `<turbo-frame>` elemen
 
 This page has two frames: One to display the message itself, with a link to edit it. One to list all the comments, with a form to add another. Each create their own context for navigation, capturing both links and submitting forms.
 
-このページは2つのフレームを持っています：ひとつはメッセージの表示と、メッセージ編集へのリンクです。もうひとつはすべてのコメントのリストと、コメントを追加するフォームです。それぞれがナビゲーション用の独自のコンテキストを作成し、リンクとフォーム送信の両方を捕捉します。
+このページは2つのフレームを持っています。ひとつはメッセージの表示と、メッセージ編集へのリンクです。もうひとつはすべてのコメントのリストと、コメントを追加するフォームです。それぞれがナビゲーション用の独自のコンテキストを作成し、リンクとフォーム送信の両方を捕捉します。
 
 When the link to edit the message is clicked, the response provided by `/messages/1/edit` has its `<turbo-frame id="message_1">` segment extracted, and the content replaces the frame from where the click originated. The edit response might look like this:
 
-メッセージ編集へのリンクをクリックすると、`/messages/1/edit` から返されるレスポンスの Turbo フレーム部分 `<turbo-frame id="message_1">` が抽出され、クリックされた元のフレームが抽出された内容に置き換えられます。メッセージ編集のレスポンスは次のようなものです:
+メッセージ編集へのリンクをクリックすると、`/messages/1/edit` から返されるレスポンスの Turbo フレーム部分 `<turbo-frame id="message_1">` が抽出され、クリックされた元のフレームが抽出された内容に置き換えられます。メッセージ編集のレスポンスは次のように書くことができます。
 
 ```html
 <body>
@@ -64,14 +64,14 @@ Notice how the `<h1>` isn't inside the `<turbo-frame>`. This means it'll be igno
 
 Thus your page can easily play dual purposes: Make edits in place within a frame or edits outside of a frame where the entire page is dedicated to the action.
 
-つまりこのページはかんたんに2つの目的を果たせます: フレームの内側で即時に編集を行うか、もしくはページ全体が編集処理専用である、フレームの外側で編集を行うか。
+つまりこのページでは、かんたんに2つの目的を果たせます。それはフレームの内側で即時に編集を行うか、もしくはページ全体が編集処理専用である、フレームの外側で編集を行うかということです。
 
 ## Eager-Loading Frames
 ## フレームの先読み
 
 Frames don't have to be populated when the page that contains them is loaded. If a `src` attribute is present on the `turbo-frame` tag, the referenced URL will automatically be loaded as soon as the tag appears on the page:
 
-フレームを含んだページが読み込まれた時点でフレームが表示されている必要はありません。もし `turbo-frame` タグに `src` 属性が存在する場合は `turbo-frame` タグがページに現れるとすぐに、 `src` が参照している URL が自動的に読み込まれます:
+フレームを含んだページが読み込まれた時点でフレームが表示されている必要はありません。もし `turbo-frame` タグに `src` 属性が存在する場合は `turbo-frame` タグがページに現れるとすぐに、 `src` が参照している URL が自動的に読み込まれます。
 
 ```html
 <body>
@@ -95,7 +95,7 @@ This page lists all the emails available in your <a href="http://itsnotatypo.com
 
 In the example above, the trays start empty, but it's also possible to populate the eager-loading frames with initial content, which is then overwritten when the content is fetched from the `src`:
 
-上記の例では、トレイは空で始まりますが、初期表示するコンテンツと一緒にフレームを先読みして表示しておくこともできます。`src` から取得された内容でフレームが上書きされるまで: 
+また、上記の例ですと表示開始時のトレイは空っぽですが、フレームを先読みして初期コンテンツをいれておくこともできます。`src` からコンテンツを取得したタイミングでフレームの内容は上書きされます。
 
 ```html
 <turbo-frame id="set_aside_tray" src="/emails/set_aside">
@@ -170,7 +170,7 @@ By default, navigation within a frame will target just that frame. This is true 
 In the example with the set-aside tray, the links within the tray point to individual emails. You don't want those links to look for frame tags that match the `set_aside_tray` ID. You want to navigate directly to that email. This is done by marking the tray frames with the `target` attribute:
 
 例文の中で、取り置きメールのトレイの中のリンクは個別のメールを指しています。
-それらのリンクに `set_aside_tray` という ID と一致するフレームタグを探させるのではなく、個々のメールへ直接ナビゲートさせるほうがよいです。取り置きメールトレイのフレームに `target` 属性を付与することで実現できます: 
+それらのリンクに `set_aside_tray` という ID と一致するフレームタグを探させるのではなく、個々のメールへ直接ナビゲートさせるほうがよいです。取り置きメールトレイのフレームに `target` 属性を付与することで実現できます。
 
 ```html
 <body>
@@ -193,7 +193,7 @@ Sometimes you want most links to operate within the frame context, but not other
 
 多くのリンクはフレームの内容の中を操作し、その他の箇所を操作させないことが多いでしょう。
 それはフォームにも当てはまります。
-フレームではない要素を操作するために、その要素に `data-turbo-frame` 属性を付与することができます:
+フレームではない要素を操作するために、その要素に `data-turbo-frame` 属性を付与することができます。
 
 ```html
 <body>
