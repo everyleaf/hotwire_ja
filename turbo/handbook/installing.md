@@ -8,7 +8,10 @@ description: "Learn how to install Turbo in your application."
 
 # Installing Turbo in Your Application
 
+# アプリケーションに Turbo をインストール
+
 Turbo can either be installed in compiled form by referencing the Turbo distributable script directly in the `<head>` of your application or through npm via a bundler like Webpack.
+Turbo は、アプリケーションの`<head>`内で直接 Turbo 配布スクリプトを参照してコンパイルされた形でインストールするか、Webpack などのバンドル経由で npm を使用してインストールすることができます。
 
 ## In Compiled Form
 
