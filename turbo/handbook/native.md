@@ -20,7 +20,7 @@ AndroidのためのTurboネイティブも、複数のデスティネーショ�
 
 The best way to see what's possible with the native adapters is to setup the demo native application. We have one [for iOS](https://github.com/hotwired/turbo-ios/blob/main/Demo/README.md) and [for Android](https://github.com/hotwired/turbo-android/blob/main/demo/README.md). You can open the code in your native environments and follow along to explore all the features.
 
-ネイティブアダプタで何ができるのか調べるのに最も良い方法は、デモのネイティブアプリケーションを設定してみることです。[iOS用](https://github.com/hotwired/turbo-ios/blob/main/Demo/README.md)と[Android用](https://github.com/hotwired/turbo-android/blob/main/demo/README.md)を用意しています。手元のネイティブ環境でコードを開いて見て、すべての機能を調査してみてください。
+ネイティブアダプタで何ができるのか調べるのに最も良い方法は、デモのネイティブアプリケーションを設定してみることです。[iOS用](https://github.com/hotwired/turbo-ios/blob/main/Demo/README.md)と[Android用](https://github.com/hotwired/turbo-android/blob/main/demo/README.md)を用意しています。手元のネイティブ環境でコードを開いてみて、すべての機能を試してみてください。
 
 -----
 ※1: [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview)はiOSアプリからWEBページを見るために利用されるクラスです。
