@@ -22,7 +22,10 @@ You can download the latest distributable script from the GitHub releases page, 
 
 ## As An npm Package
 
+## npm パッケージ形式
+
 You can install Turbo from npm via the `npm` or `yarn` packaging tools. Then require or import that in your code:
+パッケージングツールの`npm`や`yarn`を利用して npm から Turbo をインストールできます。下記のようにコード内で require や import できます。
 
 ```javascript
 import * as Turbo from "@hotwired/turbo";
