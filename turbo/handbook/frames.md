@@ -10,12 +10,11 @@ description: "Turbo Frames decompose pages into independent contexts, which can 
 # Turboフレームを分解する
 
 Turbo Frames allow predefined parts of a page to be updated on request. Any links and forms inside a frame are captured, and the frame contents automatically updated after receiving a response. Regardless of whether the server provides a full document, or just a fragment containing an updated version of the requested frame, only that particular frame will be extracted from the response to replace the existing content.
-
-Turbo フレームは、ページ内のあらかじめ決められた一部がリクエストに応じて更新されることを可能にします。フレームの中のすべてのリンクやフォームは捕捉され、フレームのコンテンツはレスポンスを受け取ると自動的に更新されます。サーバーが完全なドキュメントを提供するか、リクエストされたフレームの更新版が入った断片を提供するかどうかに関わらず、個々のフレームはレスポンスから抜き取られ、既存のコンテンツに置き換えられます。
+Turbo フレームは、事前に定義されたページの一部分をリクエストに応じて更新できるようにします。フレームの中にあるすべてのリンクやフォームは捕捉され、フレームのコンテンツはレスポンスを受け取ると自動的に更新されます。
+個々のフレームは、サーバーが完全なドキュメントを提供するか、リクエストされたフレームの更新版が入った断片を提供するかどうかに関わらず、レスポンスを切り取って、既存のコンテンツを置き換えます。
 
 Frames are created by wrapping a segment of the page in a `<turbo-frame>` element. Each element must have a unique ID, which is used to match the content being replaced when requesting new pages from the server. A single page can have multiple frames, each establishing their own context:
-
-フレームは `<turbo-frame>` 要素に囲われたページの一部によって作られます。各要素には一意のIDが必要です。このIDは、サーバーから新しいページを要求するときに、置き換えられる内容と一致させるために使われます。単一のページは多数のフレームを持つことができ、それぞれが独自のコンテキストを確立しています。
+フレームはページの一部を `<turbo-frame>` 要素で囲うことで作られます。各要素には一意のIDが必要です。このIDは、サーバーへリクエストした新しいページと置き換えるコンテンツを一致させるのに使用します。ひとつのページに多数のフレームを持たせることができ、それぞれのフレームは独自のコンテキストを確立しています。
 
 ```html
 <body>
@@ -37,12 +36,11 @@ Frames are created by wrapping a segment of the page in a `<turbo-frame>` elemen
 ```
 
 This page has two frames: One to display the message itself, with a link to edit it. One to list all the comments, with a form to add another. Each create their own context for navigation, capturing both links and submitting forms.
-
-このページは2つのフレームを持っています。ひとつはメッセージの表示と、メッセージ編集へのリンクです。もうひとつはすべてのコメントのリストと、コメントを追加するフォームです。それぞれがナビゲーション用の独自のコンテキストを作成し、リンクとフォーム送信の両方を捕捉します。
+このページには2つのフレームがあります。ひとつめのフレームには、メッセージの表示とそれを編集するリンクがあります。ふたつめのフレームにはコメントリストと、コメントを追加するフォームがありです。それぞれがナビゲーション用の独自のコンテキストを作成し、リンクとフォーム送信の両方を捕捉します。
 
 When the link to edit the message is clicked, the response provided by `/messages/1/edit` has its `<turbo-frame id="message_1">` segment extracted, and the content replaces the frame from where the click originated. The edit response might look like this:
-
-メッセージ編集へのリンクをクリックすると、`/messages/1/edit` から返されるレスポンスの Turbo フレーム部分 `<turbo-frame id="message_1">` が抽出され、クリックされた元のフレームが抽出された内容に置き換えられます。メッセージ編集のレスポンスは次のように書くことができます。
+メッセージ編集のリンクをクリックすると、`/messages/1/edit` から提供されたレスポンスの Turbo フレーム部分 `<turbo-frame id="message_1">` が抽出され、クリックされた元のフレームのコンテンツが置き換えられます。
+レスポンスコンテンツは次のようなものです。
 
 ```html
 <body>
@@ -59,11 +57,9 @@ When the link to edit the message is clicked, the response provided by `/message
 ```
 
 Notice how the `<h1>` isn't inside the `<turbo-frame>`. This means it'll be ignored when the form replaces the display of the message upon editing. Only content inside a matching `<turbo-frame>` is used when the frame is updated.
-
-`<h1>` が `<turbo-frame>` の中にないことに注目してください。これは編集を行うためにメッセージの表示とフォームを置き換えるとき `<h1>` は無視されるという意味です。フレームが更新されるとき、一致した `<turbo-frame>` の中の内容だけが使用されます。
+`<h1>` が `<turbo-frame>` の中にないことに注目してください。これは編集フォームとメッセージ表示を置き換えるときに `<h1>` は無視されるということです。フレームの更新には、一致した `<turbo-frame>` の中のコンテンツだけが使用されます。
 
 Thus your page can easily play dual purposes: Make edits in place within a frame or edits outside of a frame where the entire page is dedicated to the action.
-
 つまりこのページでは、かんたんに2つの目的を果たせます。それはフレームの内側で即時に編集を行うか、もしくはページ全体が編集処理専用である、フレームの外側で編集を行うかということです。
 
 ## Eager-Loading Frames
