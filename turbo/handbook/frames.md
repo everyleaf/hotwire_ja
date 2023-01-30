@@ -63,11 +63,10 @@ Thus your page can easily play dual purposes: Make edits in place within a frame
 つまりこのページでは、かんたんに2つの目的を果たせます。それはフレームの内側で即時に編集を行うか、もしくはページ全体が編集処理専用である、フレームの外側で編集を行うかということです。
 
 ## Eager-Loading Frames
-## フレームの先読み
+## フレームの事前読み込み
 
 Frames don't have to be populated when the page that contains them is loaded. If a `src` attribute is present on the `turbo-frame` tag, the referenced URL will automatically be loaded as soon as the tag appears on the page:
-
-フレームを含んだページが読み込まれた時点でフレームが表示されている必要はありません。もし `turbo-frame` タグに `src` 属性が存在する場合は `turbo-frame` タグがページに現れるとすぐに、 `src` が参照している URL が自動的に読み込まれます。
+ページが読み込まれた時点でフレームの中身を配置しておく必要はありません。`turbo-frame` タグに `src` 属性があれば、ページにタグが出現した時点で `src` が参照している URL が自動的に読み込まれます。
 
 ```html
 <body>
@@ -86,12 +85,10 @@ Frames don't have to be populated when the page that contains them is loaded. If
 ```
 
 This page lists all the emails available in your <a href="http://itsnotatypo.com">imbox</a> immediately upon loading the page, but then makes two subsequent requests to present small trays at the bottom of the page for emails that have been set aside or are waiting for a later reply. These trays are created out of separate HTTP requests made to the URLs referenced in the `src`.
-
-このページは、ページが読み込まれるとすぐに `<a href="http://itsnotatypo.com">imbox</a>` から取得できるすべてのメールの一覧を表示しますが、その後、取り置きメールや返信待ちのメールのための小さなトレイをページ下部に作成する2つの後続リクエストを行います。それらのトレイは `src` が参照している URL から作られた個別の HTTP リクエストから生み出されます。
+このページは、読み込まれるとすぐに `<a href="http://itsnotatypo.com">imbox</a>` に入っているすべてのメールの一覧を表示しますが、その後、取り置きメールや返信待ちのメールのためにあるページ下部の小さなトレイへ向けて2つの後続リクエストを発行します。それらのトレイは `src` が参照している URL から作られた個別の HTTP リクエストから生み出されます。
 
 In the example above, the trays start empty, but it's also possible to populate the eager-loading frames with initial content, which is then overwritten when the content is fetched from the `src`:
-
-また、上記の例ですと表示開始時のトレイは空っぽですが、フレームを先読みして初期コンテンツをいれておくこともできます。`src` からコンテンツを取得したタイミングでフレームの内容は上書きされます。
+また、上記の例ではページ読み込み時点のトレイのフレームに中身はありませんが、先読みして初期コンテンツをいれておくこともできます。`src` からコンテンツを取得したタイミングでフレームの内容は上書きされます。
 
 ```html
 <turbo-frame id="set_aside_tray" src="/emails/set_aside">
@@ -100,7 +97,7 @@ In the example above, the trays start empty, but it's also possible to populate 
 ```
 
 Upon loading the imbox page, the set-aside tray is loaded from `/emails/set_aside`, and the response must contain a corresponding `<turbo-frame id="set_aside_tray">` element as in the original example:
-imbox ページを読み込んだとき、取り置きメールのトレイは `/emails/set_aside` から読み込まれ、そして元の例のように、レスポンスは対応する `<turbo-frame id="set_aside_tray">` 要素を必ず含みます。
+imbox ページを読み込むとき、取り置きメールのトレイは `/emails/set_aside` を読み込みます。またレスポンスには読み込み側に対応するフレーム要素を必ず含みます。例文では `<turbo-frame id="set_aside_tray">` にあたります。
 
 ```html
 <body>
@@ -119,16 +116,13 @@ imbox ページを読み込んだとき、取り置きメールのトレイは `
 ```
 
 This page now works in both its minimized form, where only the `div` with the individual emails are loaded into the tray frame on the imbox page, but also as a direct destination where a header and a description is provided. Just like in the example with the edit message form.
-
-メッセージを編集するフォームの例と同様に、このページは直接の目的である見出しと説明文の表示をするだけでなく、 imbox ページにあるトレイフレームの中に `div` タグと個々のメールを読み出すだけの最小化されたフォームも動作しています。
+このページの直接の目的は見出しと説明文の表示ですが、imbox ページにあるトレイフレームの中で `div` タグと個々のメールを読み出すだけの最小化されたフォームも動作しています。メッセージを編集するフォームの例と同様です。
 
 Note that the `<turbo-frame>` on `/emails/set_aside` does not contain a `src` attribute. That attribute is only added to the frame that needs to lazily load the content, not to the rendered frame that provides the content.
-
-`/emails/set_aside` にある `<turbo-frame>` タグは `src` 属性を含んでいないことに注目してください。 `src` 属性はフレームがレンダリングされたときに内容を表示するのではなく、内容を遅延読み込みしてほしい場合にのみ追加します。
+`/emails/set_aside` にある `<turbo-frame>` タグは `src` 属性を含んでいないことに注目してください。 `src` 属性はフレームが読み込まれたときにコンテンツを表示するのではなく、遅延読み込みしてほしい場合にのみ追加します。
 
 During navigation, a Frame will set `[aria-busy="true"]` on the `<turbo-frame>` element when fetching the new contents. When the navigation completes, the Frame will remove the `[aria-busy]` attribute. When navigating the `<turbo-frame>` through a `<form>` submission, Turbo will toggle the `[aria-busy="true"]` attribute in tandem with the Frame's.
-
-ナビゲーション中、フレームは新しい内容を取得するときに、 `<turbo-frame>` 要素の中に `[aria-busy="true"]` をセットします。ナビゲーションが完了したとき、フレームは `[aria-busy]` 属性を削除します。フレームが `<form>` の送信を通じて `<turbo-frame>` をナビゲーションしているとき、Turbo はフレームと協力して `[aria-busy="true"]` 属性を切り替えます。
+ナビゲーション中、フレームは新しいコンテンツを取得するときに、`<turbo-frame>` 要素の中に `[aria-busy="true"]` をセットします。ナビゲーションが完了したとき、フレームは `[aria-busy]` 属性を削除します。フレームが `<form>` の送信を通じて `<turbo-frame>` をナビゲーションしているとき、Turbo はフレームと協力して `[aria-busy="true"]` 属性を切り替えます。
 
 [aria-busy]: https://www.w3.org/TR/wai-aria/#aria-busy
 
