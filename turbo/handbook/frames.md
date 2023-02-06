@@ -133,19 +133,16 @@ Frames that aren't visible when the page is first loaded can be marked with `loa
 ページが最初に読み込まれたときに見えていないフレームは、`loading="lazy"` をマークしておくことで、フレームが見えるようになるまで読み込みを遅延させることができます。`loading="lazy"` は `img` タグの `lazy=true` 属性のように動作します。`loading="lazy"` はフレームが `summary`/`detail` ペアやモーダル、または最初は非表示でその後表示されるものの中にあるときに、読み込みを遅延させる最適な方法です。
 
 ## Cache Benefits to Loading Frames
-## ローディングフレームにおけるキャッシュの利点
+## フレームの読み込みにおけるキャッシュの利点
 
 Turning page segments into frames can help make the page simpler to implement, but an equally important reason for doing this is to improve cache dynamics. Complex pages with many segments are hard to cache efficiently, especially if they mix content shared by many with content specialized for an individual user. The more segments, the more dependent keys required for the cache look-up, the more frequently the cache will churn.
-
-ページの区分をフレームに変えるとページの実装が簡単になりますが、キャッシュダイナミクスの改善は同じくらい重要なことです。多数の区分を持つ複雑なページは、効率的にキャッシュすることが難しくなります。特に、多くの人と共有する内容と、個々のユーザーに特化した内容が混在している場合です。区分の数が多くなると、キャッシュの検索に必要な依存キーが増え、キャッシュの更新頻度が上がっていきます。
+ページの区分をフレームに置き換えるとページの実装がシンプルになりますが、同じくらい重要なこととしてキャッシュダイナミクスの改善があります。多数の区分を持つ複雑なページは、効率的にキャッシュすることが難しくなります。特に、不特定のユーザー向けのコンテンツと、特定の個人ユーザー向けのコンテンツが混在している場合です。区分の数が多くなると、キャッシュの検索に必要な依存キーが増え、キャッシュの更新頻度が上がっていきます。
 
 Frames are ideal for separating segments that change on different timescales and for different audiences. Sometimes it makes sense to turn the per-user element of a page into a frame, if the bulk of the rest of the page is then easily shared across all users. Other times, it makes sense to do the opposite, where a heavily personalized page turns the one shared segment into a frame to serve it from a shared cache.
-
-フレームは、異なる所要時間で変化する区分や、異なる閲覧者に向けた区分を分離するのに適しています。 ページの大部分がすべてのユーザーに共有しやすいときなどは、ページ内にあるユーザー毎の要素をフレームに置きかえることは理にかなっています。 またその逆に、ほとんどが個別化されたページでひとつの共有要素をフレームに置き換えて共有キャッシュから提供することも理にかなっています。
+フレームは、所要時間や閲覧者が異なる区分を分離するのに適しています。ページの大部分がすべてのユーザーに共有しやすいときは、ページ内にあるユーザー毎の要素をフレームに置きかえることは理にかなっています。 またその逆に、ほとんどが個別化されたページでひとつの共有要素をフレームに置き換えて共有キャッシュから提供することも理にかなっています。
 
 While the overhead of fetching loading frames is generally very low, you should still be judicious in just how many you load, especially if these frames would create load-in jitter on the page. Frames are, however, essentially free if the content isn't immediately visible upon loading the page. Either because they're hidden behind modals or below the fold.
-
-ローディングフレームを取得するオーバーヘッドは一般的にとても小さいですが、それでも読み込むフレーム数には十分に注意したほうがよく、特にフレームがページに読み込みジッターを発生させないようにしましょう。しかしながらフレームは、ページ読み込み時にすぐに表示されないときは基本的に自由です。モーダルの後ろや、折りたたまれたコンテンツに隠れているからです。
+フレームの読み込みのオーバーヘッドは一般的にとても小さいですが、それでも読み込むフレーム数には十分に注意したほうがよく、特にフレームがページに読み込みジッターを発生させないようにしましょう。しかしながら、ページ読み込み直後に見えていないフレームは基本的に自由です。モーダルの後ろや、折りたたまれたコンテンツに隠れているからです。
 
 ## Targeting Navigation Into or Out of a Frame
 ## ナビゲーションの対象をフレーム内かフレームの外か決める
