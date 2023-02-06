@@ -240,7 +240,6 @@ Clicking the `<a rel="next">` element will set _both_ the `<turbo-frame>` elemen
 ## アンチフォージェリのサポート (CSRF)
 
 Turbo provides [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection by checking the DOM for the existence of a `<meta>` tag with a `name` value of either `csrf-param` or `csrf-token`. For example:
-
 Turbo は、DOMをチェックして `name` 属性の値に `csrf-param` か `csrf-token` が入っている `<meta>` タグが存在する場合 [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) 保護を提供しています。
 
 ```html
@@ -248,5 +247,4 @@ Turbo は、DOMをチェックして `name` 属性の値に `csrf-param` か `cs
 ```
 
 Upon form submissions, the token will be automatically added to the request's headers as `X-CSRF-TOKEN`. Requests made with `data-turbo="false"` will skip adding the token to headers.
-
 フォームを送信したとき、トークンは自動的にリクエストヘッダーへ `X-CSRF-TOKEN` として付与されます。リクエストが `data-turbo="false"` とともに作られると、ヘッダーへのトークン付与をスキップします。
