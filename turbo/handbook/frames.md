@@ -200,21 +200,11 @@ Sometimes you want most links to operate within the frame context, but not other
 ## Promoting a Frame Navigation to a Page Visit
 ## フレームのナビゲーションをページアクセスに昇格させる
 
-Navigating Frames provides applications with an opportunity to change part of
-the page's contents while preserving the rest of the document's state (for
-example, its current scroll position or focused element). There are times when
-we want changes to a Frame to also affect the browser's [history][].
+Navigating Frames provides applications with an opportunity to change part of the page's contents while preserving the rest of the document's state (for example, its current scroll position or focused element). There are times when we want changes to a Frame to also affect the browser's [history][].
+フレームをナビゲートすることで、フレーム以外のドキュメントの状態を維持したままページコンテンツの一部だけを変更することができます（例：現在の画面スクロール位置や要素のフォーカスなど）。しかし、時にはフレームの変更をブラウザの履歴に反映させたい場合もあります。
 
-フレームをナビゲートすることで、フレーム以外のドキュメントの状態を維持したままページ内容の一部だけを変更することができます。
-（例：現在の画面スクロール位置や要素のフォーカスなど）
-しかし、時にはフレームの変更をブラウザの履歴に反映させたい場合もあります。
-
-To promote a Frame navigation to a Visit, render the element with the
-`[data-turbo-action]` attribute. The attribute supports all [Visit][] values,
-and can be declared on:
-
-フレームのナビゲーションをページアクセスに昇格させるには、描画する要素に `[data-turbo-action]` 属性をもたせます。
-この属性はすべてのアクセスの値についてサポートしており、また以下の要素に対して宣言できます。
+To promote a Frame navigation to a Visit, render the element with the `[data-turbo-action]` attribute. The attribute supports all [Visit][] values, and can be declared on:
+フレームのナビゲーションをページアクセスに昇格させるには、描画する要素に `[data-turbo-action]` 属性をもたせます。この属性はすべてのアクセスの値についてサポートしており、また以下の要素に対して宣言できます。
 
 * the `<turbo-frame>` element
 * any `<a>` elements that navigate the `<turbo-frame>`
@@ -227,9 +217,7 @@ and can be declared on:
 * `<turbo-frame>` をナビゲートするすべての `<form>` 要素
 * `<turbo-frame>` をナビゲートする `<form>` の中にある、すべての `<input type="submit">` および `<button>` 要素
 
-For example, consider a Frame that renders a paginated list of articles and
-transforms navigations into ["advance" Actions][advance]:
-
+For example, consider a Frame that renders a paginated list of articles and transforms navigations into ["advance" Actions][advance]:
 例えば、ページ分割された記事のリストを表示し、ナビゲーションを "advance" アクションに変換するフレームについて考えてみましょう。
 
 ```html
@@ -238,17 +226,11 @@ transforms navigations into ["advance" Actions][advance]:
 </turbo-frame>
 ```
 
-Clicking the `<a rel="next">` element will set _both_ the `<turbo-frame>` 
-element's `[src]` attribute _and_ the browser's path to `/articles?page=2`.
-
+Clicking the `<a rel="next">` element will set _both_ the `<turbo-frame>` element's `[src]` attribute _and_ the browser's path to `/articles?page=2`.
 `<a rel="next">` 要素をクリックすると `<turbo-frame>` の `[src]` 属性とブラウザのURLパスの _両方_ に `/articles?page=2` がセットされます。
 
-**Note:** when rendering the page after refreshing the browser, it is _the
-application's_ responsibility to render the _second_ page of articles along with
-any other state derived from the URL path and search parameters.
-
-**注記:**
-ブラウザを更新してページが再描画される場合、URLパスや検索パラメータから得られる状態とともに _2_ ページ目の記事を描画するのは _アプリケーション_ の責任です。
+**Note:** when rendering the page after refreshing the browser, it is _the application's_ responsibility to render the _second_ page of articles along with any other state derived from the URL path and search parameters.
+**注記:** ブラウザを更新してページが再描画される場合、URLパスや検索パラメータから得られる状態とともに _2_ ページ目の記事を描画するのは _アプリケーション_ の責任です。
 
 [history]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [Visit]: /handbook/drive#page-navigation-basics
