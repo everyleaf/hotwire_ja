@@ -145,18 +145,13 @@ While the overhead of fetching loading frames is generally very low, you should 
 フレームの読み込みのオーバーヘッドは一般的にとても小さいですが、それでも読み込むフレーム数には十分に注意したほうがよく、特にフレームがページに読み込みジッターを発生させないようにしましょう。しかしながら、ページ読み込み直後に見えていないフレームは基本的に自由です。モーダルの後ろや、折りたたまれたコンテンツに隠れているからです。
 
 ## Targeting Navigation Into or Out of a Frame
-## ナビゲーションの対象をフレーム内かフレームの外か決める
+## ナビゲーションの対象をフレームの内部にするか、外部にするか
 
 By default, navigation within a frame will target just that frame. This is true for both following links and submitting forms. But navigation can drive the entire page instead of the enclosing frame by setting the target to `_top`. Or it can drive another named frame by setting the target to the ID of that frame.
-
-デフォルトでは、フレーム内のナビゲーションはそのフレームを対象としています。それはリンクの追跡とフォームの送信の両方に当てはまります。
-ですが、ナビゲーションはその対象を `_top` に設定することで、フレームに囲まれたコンテンツではなく、ページ全体を操作することができます。
-またはその対象をターゲットをフレームの ID に設定することで、他の名前つきフレームを操作することもできます。
+デフォルトでは、フレーム内のナビゲーションはそのフレームを対象としています。それはリンクの追跡とフォームの送信の両方に当てはまります。ですが、ナビゲーションはその対象を `_top` に設定することで、フレームに囲まれたコンテンツではなく、ページ全体を操作することができます。またはその対象をターゲットをフレームの ID に設定することで、他の名前つきフレームを操作することもできます。
 
 In the example with the set-aside tray, the links within the tray point to individual emails. You don't want those links to look for frame tags that match the `set_aside_tray` ID. You want to navigate directly to that email. This is done by marking the tray frames with the `target` attribute:
-
-例文の中で、取り置きメールのトレイの中のリンクは個別のメールを指しています。
-それらのリンクに `set_aside_tray` という ID と一致するフレームタグを探させるのではなく、個々のメールへ直接ナビゲートさせるほうがよいです。取り置きメールトレイのフレームに `target` 属性を付与することで実現できます。
+例文の中で、取り置きメールのトレイの中のリンクは個別のメールを指しています。それらのリンクに `set_aside_tray` という ID と一致するフレームタグを探させるのではなく、個々のメールへ直接ナビゲートさせるほうがよいです。取り置きメールトレイのフレームに `target` 属性を付与することで実現できます。
 
 ```html
 <body>
@@ -176,10 +171,7 @@ In the example with the set-aside tray, the links within the tray point to indiv
 ```
 
 Sometimes you want most links to operate within the frame context, but not others. This is also true of forms. You can add the `data-turbo-frame` attribute on non-frame elements to control this:
-
-多くのリンクはフレームの内容の中を操作し、その他の箇所を操作させないことが多いでしょう。
-それはフォームにも当てはまります。
-フレームではない要素を操作するために、その要素に `data-turbo-frame` 属性を付与することができます。
+多くのリンクはフレームの内容の中を操作し、その他の箇所を操作させないことが多いでしょう。それはフォームにも当てはまります。フレームではない要素を操作するために、その要素に `data-turbo-frame` 属性を付与することができます。
 
 ```html
 <body>
