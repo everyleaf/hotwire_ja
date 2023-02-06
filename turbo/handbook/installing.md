@@ -11,6 +11,7 @@ description: "Learn how to install Turbo in your application."
 # アプリケーションに Turbo をインストール
 
 Turbo can either be installed in compiled form by referencing the Turbo distributable script directly in the `<head>` of your application or through npm via a bundler like Webpack.
+
 Turbo は、アプリケーションの`<head>`内で直接 Turbo 配布スクリプトを参照してコンパイルされた形でインストールするか、Webpack などのバンドル経由で npm を使用してインストールすることができます。
 
 ## In Compiled Form
@@ -18,6 +19,7 @@ Turbo は、アプリケーションの`<head>`内で直接 Turbo 配布スク�
 ## コンパイル済みスクリプト
 
 You can download the latest distributable script from the GitHub releases page, then reference that in your `<script>` tag on your page. Or you can float on the latest release of Turbo using a CDN bundler like Skypack. See <a href="https://cdn.skypack.dev/@hotwired/turbo">https://cdn.skypack.dev/@hotwired/turbo</a> for more details.
+
 最新の配布スクリプトは、GitHub のリリースページからダウンロードできます。そして、ページ内の`<script>`タグ内で参照できます。または、Skypack のような CDN バンドラーを利用してリリースされた最新の Turbo を使用できます。詳細は、[https://cdn.skypack.dev/@hotwired/turbo](https://cdn.skypack.dev/@hotwired/turbo)を参照してください。
 
 ## As An npm Package
@@ -25,6 +27,7 @@ You can download the latest distributable script from the GitHub releases page, 
 ## npm パッケージ
 
 You can install Turbo from npm via the `npm` or `yarn` packaging tools. Then require or import that in your code:
+
 パッケージングツールの`npm`や`yarn`を利用して npm から Turbo をインストールできます。下記のようにコード内で require や import できます。
 
 ```javascript
@@ -36,4 +39,5 @@ import * as Turbo from "@hotwired/turbo";
 ## Ruby on Rails アプリケーション
 
 The Turbo JavaScript framework is included with [the turbo-rails gem](https://github.com/hotwired/turbo-rails) for direct use with the asset pipeline.
+
 JavaScript フレームワークの Turbo は、アセットパイプラインで直接利用できるように [turbo-rails gem](https://github.com/hotwired/turbo-rails) に含まれています。
