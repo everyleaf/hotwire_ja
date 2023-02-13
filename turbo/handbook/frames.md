@@ -14,7 +14,7 @@ Turbo フレームは、事前に定義されたページの一部分をリク�
 個々のフレームは、サーバーが完全なドキュメントを提供するか、リクエストされたフレームの更新版が入った断片を提供するかどうかに関わらず、レスポンスを切り取って、既存のコンテンツを置き換えます。
 
 Frames are created by wrapping a segment of the page in a `<turbo-frame>` element. Each element must have a unique ID, which is used to match the content being replaced when requesting new pages from the server. A single page can have multiple frames, each establishing their own context:
-フレームはページの一部を `<turbo-frame>` 要素で囲うことで作られます。各要素には一意のIDが必要です。このIDは、サーバーへリクエストした新しいページと置き換えるコンテンツを一致させるのに使用します。ひとつのページに多数のフレームを持たせることができ、それぞれのフレームは独自のコンテキストを確立しています。
+フレームはページの一部を `<turbo-frame>` 要素で囲うことで作られます。各要素には一意のIDが必要です。このIDは、サーバーに要求したページからフレームが置き換えられるコンテンツを一致させるのに使用します。ひとつのページに多数のフレームを持たせることができ、それぞれのフレームは独自のコンテキストを確立しています。
 
 ```html
 <body>
