@@ -36,7 +36,7 @@ Frames are created by wrapping a segment of the page in a `<turbo-frame>` elemen
 ```
 
 This page has two frames: One to display the message itself, with a link to edit it. One to list all the comments, with a form to add another. Each create their own context for navigation, capturing both links and submitting forms.
-このページには2つのフレームがあります。ひとつめのフレームには、メッセージの表示とそれを編集するリンクがあります。ふたつめのフレームにはコメントリストと、コメントを追加するフォームがありです。それぞれがナビゲーション用の独自のコンテキストを作成し、リンクとフォーム送信の両方を捕捉します。
+このページには2つのフレームがあります。ひとつめのフレームには、メッセージの表示とそれを編集するリンクがあります。そしてふたつめのフレームにはコメントリストと、コメントを追加するフォームがあります。それぞれがナビゲーション用の独自のコンテキストを作成し、リンクとフォーム送信の両方を捕捉します。
 
 When the link to edit the message is clicked, the response provided by `/messages/1/edit` has its `<turbo-frame id="message_1">` segment extracted, and the content replaces the frame from where the click originated. The edit response might look like this:
 メッセージ編集のリンクをクリックすると、`/messages/1/edit` から提供されたレスポンスの Turbo フレーム部分 `<turbo-frame id="message_1">` が抽出され、クリックされた元のフレームのコンテンツが置き換えられます。
