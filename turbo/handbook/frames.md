@@ -14,7 +14,7 @@ Turbo フレームは、事前に定義されたページの一部分をリク�
 個々のフレームは、サーバーが完全なドキュメントを提供するか、リクエストされたフレームの更新版が入った断片を提供するかどうかに関わらず、レスポンスを切り取って、既存のコンテンツを置き換えます。
 
 Frames are created by wrapping a segment of the page in a `<turbo-frame>` element. Each element must have a unique ID, which is used to match the content being replaced when requesting new pages from the server. A single page can have multiple frames, each establishing their own context:
-フレームはページの一部を `<turbo-frame>` 要素で囲うことで作られます。各要素には一意のIDが必要です。このIDは、サーバーに要求したページからフレームが置き換えられるコンテンツを一致させるのに使用します。ひとつのページに多数のフレームを持たせることができ、それぞれのフレームは独自のコンテキストを確立しています。
+フレームはページの一部を `<turbo-frame>` 要素で囲うことで作られます。各要素は必ず一意のIDを持っており、リクエストに応じてサーバーから新しいページが来た際に、置き換えるべきコンテンツを一致させるのに使用します。ひとつのページに多数のフレームを持たせることができ、それぞれのフレームは独自のコンテキストを確立しています。
 
 ```html
 <body>
@@ -60,7 +60,7 @@ Notice how the `<h1>` isn't inside the `<turbo-frame>`. This means it'll be igno
 `<h1>` が `<turbo-frame>` の中にないことに注目してください。これは編集フォームとメッセージ表示を置き換えるときに `<h1>` は無視されるということです。フレームの更新には、一致した `<turbo-frame>` の中のコンテンツだけが使用されます。
 
 Thus your page can easily play dual purposes: Make edits in place within a frame or edits outside of a frame where the entire page is dedicated to the action.
-つまりこのページでは、かんたんに2つの目的を果たせます。それはフレームの内側で即時に編集を行うか、もしくはページ全体が編集処理専用である、フレームの外側で編集を行うかということです。
+つまりこのページは2つの用途に使えます。フレームの内側で即時に編集を行うという用途、もしくはページ全体が編集処理専用である、フレームの外側で編集を行うという用途です。
 
 ## Eager-Loading Frames
 ## フレームの事前読み込み
@@ -85,7 +85,7 @@ Frames don't have to be populated when the page that contains them is loaded. If
 ```
 
 This page lists all the emails available in your <a href="http://itsnotatypo.com">imbox</a> immediately upon loading the page, but then makes two subsequent requests to present small trays at the bottom of the page for emails that have been set aside or are waiting for a later reply. These trays are created out of separate HTTP requests made to the URLs referenced in the `src`.
-このページは、読み込まれるとすぐに `<a href="http://itsnotatypo.com">imbox</a>` に入っているすべてのメールの一覧を表示しますが、その後、取り置きメールや返信待ちのメールのためにあるページ下部の小さなトレイへ向けて2つの後続リクエストを発行します。それらのトレイは `src` が参照している URL から作られた個別の HTTP リクエストから生み出されます。
+このページは、読み込まれるとすぐに `<a href="http://itsnotatypo.com">imbox</a>` に入っているすべてのメールの一覧を表示しますが、その後、取り置きメールや返信待ちのメールのためにあるページ下部の小さなトレイへ向けて2つの後続リクエストを発行します。それらのトレイは `src` が参照している URL に基づいて作られる個別の HTTP リクエストから生み出されます。
 
 In the example above, the trays start empty, but it's also possible to populate the eager-loading frames with initial content, which is then overwritten when the content is fetched from the `src`:
 また、上記の例ではページ読み込み時点のトレイのフレームに中身はありませんが、先読みして初期コンテンツをいれておくこともできます。`src` からコンテンツを取得したタイミングでフレームの内容は上書きされます。
@@ -97,7 +97,7 @@ In the example above, the trays start empty, but it's also possible to populate 
 ```
 
 Upon loading the imbox page, the set-aside tray is loaded from `/emails/set_aside`, and the response must contain a corresponding `<turbo-frame id="set_aside_tray">` element as in the original example:
-imbox ページを読み込むとき、取り置きメールのトレイは `/emails/set_aside` を読み込みます。またレスポンスには読み込み側に対応するフレーム要素を必ず含みます。例文では `<turbo-frame id="set_aside_tray">` にあたります。
+imbox ページを読み込むとき、取り置きメールのトレイは `/emails/set_aside` を読み込みます。またレスポンスには読み込み側に対応するフレーム要素を必ず含みます。元の例では `<turbo-frame id="set_aside_tray">` にあたります。
 
 ```html
 <body>
@@ -119,7 +119,7 @@ This page now works in both its minimized form, where only the `div` with the in
 このページの直接の目的は見出しと説明文の表示ですが、imbox ページにあるトレイフレームの中で `div` タグと個々のメールを読み出すだけの最小化されたフォームも動作しています。メッセージを編集するフォームの例と同様です。
 
 Note that the `<turbo-frame>` on `/emails/set_aside` does not contain a `src` attribute. That attribute is only added to the frame that needs to lazily load the content, not to the rendered frame that provides the content.
-`/emails/set_aside` にある `<turbo-frame>` タグは `src` 属性を含んでいないことに注目してください。 `src` 属性はフレームが読み込まれたときにコンテンツを表示するのではなく、遅延読み込みしてほしい場合にのみ追加します。
+`/emails/set_aside` にある `<turbo-frame>` タグは `src` 属性を含んでいないことに注目してください。 `src` 属性は、フレームが読み込まれたときにコンテンツを表示するのではなく、遅延読み込みしてほしい場合にのみ追加します。
 
 During navigation, a Frame will set `[aria-busy="true"]` on the `<turbo-frame>` element when fetching the new contents. When the navigation completes, the Frame will remove the `[aria-busy]` attribute. When navigating the `<turbo-frame>` through a `<form>` submission, Turbo will toggle the `[aria-busy="true"]` attribute in tandem with the Frame's.
 ナビゲーション中、フレームは新しいコンテンツを取得するときに、`<turbo-frame>` 要素の中に `[aria-busy="true"]` をセットします。ナビゲーションが完了したとき、フレームは `[aria-busy]` 属性を削除します。フレームが `<form>` の送信を通じて `<turbo-frame>` をナビゲーションしているとき、Turbo はフレームと協力して `[aria-busy="true"]` 属性を切り替えます。
@@ -136,10 +136,10 @@ Frames that aren't visible when the page is first loaded can be marked with `loa
 ## フレームの読み込みにおけるキャッシュの利点
 
 Turning page segments into frames can help make the page simpler to implement, but an equally important reason for doing this is to improve cache dynamics. Complex pages with many segments are hard to cache efficiently, especially if they mix content shared by many with content specialized for an individual user. The more segments, the more dependent keys required for the cache look-up, the more frequently the cache will churn.
-ページの区分をフレームに置き換えるとページの実装がシンプルになりますが、同じくらい重要なこととしてキャッシュダイナミクスの改善があります。多数の区分を持つ複雑なページは、効率的にキャッシュすることが難しくなります。特に、不特定のユーザー向けのコンテンツと、特定の個人ユーザー向けのコンテンツが混在している場合です。区分の数が多くなると、キャッシュの検索に必要な依存キーが増え、キャッシュの更新頻度が上がっていきます。
+ページセグメントをフレームに置き換えるとページの実装がシンプルになりますが、同じくらい重要なこととしてキャッシュダイナミクスの改善があります。多数のセグメントを持つ複雑なページは、効率的にキャッシュすることが難しくなります。特に、不特定のユーザー向けのコンテンツと、特定の個人ユーザー向けのコンテンツが混在している場合です。セグメントの数が多くなると、キャッシュの検索に必要な依存キーが増え、キャッシュの更新頻度が上がっていきます。
 
 Frames are ideal for separating segments that change on different timescales and for different audiences. Sometimes it makes sense to turn the per-user element of a page into a frame, if the bulk of the rest of the page is then easily shared across all users. Other times, it makes sense to do the opposite, where a heavily personalized page turns the one shared segment into a frame to serve it from a shared cache.
-フレームは、所要時間や閲覧者が異なる区分を分離するのに適しています。ページの大部分がすべてのユーザーに共有しやすいときは、ページ内にあるユーザー毎の要素をフレームに置きかえることは理にかなっています。 またその逆に、ほとんどが個別化されたページでひとつの共有要素をフレームに置き換えて共有キャッシュから提供することも理にかなっています。
+フレームは、所要時間や閲覧者が異なるページセグメントを分離するのに適しています。ページの大部分がすべてのユーザーに共有しやすいときは、ページ内にあるユーザー毎の要素をフレームに置きかえることは理にかなっています。 またその逆に、ほとんどが個別化されたページでひとつの共有セグメントをフレームに置き換えて共有キャッシュから提供することも理にかなっています。
 
 While the overhead of fetching loading frames is generally very low, you should still be judicious in just how many you load, especially if these frames would create load-in jitter on the page. Frames are, however, essentially free if the content isn't immediately visible upon loading the page. Either because they're hidden behind modals or below the fold.
 フレームの読み込みのオーバーヘッドは一般的にとても小さいですが、それでも読み込むフレーム数には十分に注意したほうがよく、特にフレームがページに読み込みジッターを発生させないようにしましょう。しかしながら、ページ読み込み直後に見えていないフレームは基本的に自由です。モーダルの後ろや、折りたたまれたコンテンツに隠れているからです。
@@ -151,7 +151,7 @@ By default, navigation within a frame will target just that frame. This is true 
 デフォルトでは、フレーム内のナビゲーションはそのフレームを対象としています。それはリンクの追跡とフォームの送信の両方に当てはまります。ですが、ナビゲーションはその対象を `_top` に設定することで、フレームに囲まれたコンテンツではなく、ページ全体を操作することができます。またはその対象をターゲットをフレームの ID に設定することで、他の名前つきフレームを操作することもできます。
 
 In the example with the set-aside tray, the links within the tray point to individual emails. You don't want those links to look for frame tags that match the `set_aside_tray` ID. You want to navigate directly to that email. This is done by marking the tray frames with the `target` attribute:
-例文の中で、取り置きメールのトレイの中のリンクは個別のメールを指しています。それらのリンクに `set_aside_tray` という ID と一致するフレームタグを探させるのではなく、個々のメールへ直接ナビゲートさせるほうがよいです。取り置きメールトレイのフレームに `target` 属性を付与することで実現できます。
+例の中で、取り置きメールのトレイの中のリンクは個別のメールを指しています。それらのリンクに `set_aside_tray` という ID と一致するフレームタグを探させるのではなく、個々のメールへ直接ナビゲートさせたいとします。取り置きメールトレイのフレームに `target` 属性を付与することで実現できます。
 
 ```html
 <body>
