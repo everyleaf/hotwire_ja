@@ -19,16 +19,22 @@ Frames are created by wrapping a segment of the page in a `<turbo-frame>` elemen
 ```html
 <body>
   <div id="navigation">Links targeting the entire page</div>
+  <div id="navigation">リンクのターゲットをページ全体にする</div>
 
   <turbo-frame id="message_1">
     <h1>My message title</h1>
+    <h1>メッセージタイトル</h1>
     <p>My message content</p>
+    <p>メッセージ内容</p>
     <a href="/messages/1/edit">Edit this message</a>
+    <a href="/messages/1/edit">このメッセージを編集</a>
   </turbo-frame>
 
   <turbo-frame id="comments">
     <div id="comment_1">One comment</div>
+    <div id="comment_1">1つ目のコメント</div>
     <div id="comment_2">Two comments</div>
+    <div id="comment_2">2つ目のコメント</div>
 
     <form action="/messages/comments">...</form>
   </turbo-frame>
@@ -45,11 +51,13 @@ When the link to edit the message is clicked, the response provided by `/message
 ```html
 <body>
   <h1>Editing message</h1>
+  <h1>メッセージの編集</h1>
 
   <turbo-frame id="message_1">
     <form action="/messages/1">
       <input name="message[name]" type="text" value="My message title">
       <textarea name="message[content]">My message content</textarea>
+      <textarea name="message[content]">メッセージ内容</textarea>
       <input type="submit">
     </form>
   </turbo-frame>
@@ -71,6 +79,7 @@ Frames don't have to be populated when the page that contains them is loaded. If
 ```html
 <body>
   <h1>Imbox</h1>
+  <h1>受信トレイ</h1>
 
   <div id="emails">
     ...
@@ -102,13 +111,16 @@ imbox ページを読み込むとき、取り置きメールのトレイは `/em
 ```html
 <body>
   <h1>Set Aside Emails</h1>
+  <h1>取り置きトレイ</h1>
 
   <p>These are emails you've set aside</p>
+  <p>このトレイのメールは取り置き設定したものです</p>
 
   <turbo-frame id="set_aside_tray">
     <div id="emails">
       <div id="email_1">
         <a href="/emails/1">My important email</a>
+        <a href="/emails/1">重要なメール</a>
       </div>
     </div>
   </turbo-frame>
@@ -156,6 +168,7 @@ In the example with the set-aside tray, the links within the tray point to indiv
 ```html
 <body>
   <h1>Imbox</h1>
+  <h1>受信トレイ</h1>
   ...
   <turbo-frame id="set_aside_tray" src="/emails/set_aside" target="_top">
   </turbo-frame>
@@ -163,6 +176,7 @@ In the example with the set-aside tray, the links within the tray point to indiv
 
 <body>
   <h1>Set Aside Emails</h1>
+  <h1>取り置きトレイ</h1>
   ...
   <turbo-frame id="set_aside_tray" target="_top">
     ...
@@ -179,20 +193,24 @@ Sometimes you want most links to operate within the frame context, but not other
     ...
     <a href="/messages/1/edit">
       Edit this message (within the current frame)
+      このメッセージを編集 (message_1 のフレーム内を置き換える)
     </a>
 
     <a href="/messages/1/permission" data-turbo-frame="_top">
       Change permissions (replace the whole page)
+      権限の変更 (ページ全体を置き換える)
     </a>
   </turbo-frame>
 
   <form action="/messages/1/delete" data-turbo-frame="message_1">
     <a href="/messages/1/warning" data-turbo-frame="_self">
       Load warning within current frame
+      message_1 のフレーム内で警告を出す
     </a>
 
     <input type="submit" value="Delete this message">
     (with a confirmation shown in a specific frame)
+    (特定のフレームに確認メッセージを表示する)
   </form>
 </body>
 ```
@@ -223,6 +241,7 @@ For example, consider a Frame that renders a paginated list of articles and tran
 ```html
 <turbo-frame data-turbo-action="advance">
   <a href="/articles?page=2" rel="next">Next page</a>
+  <a href="/articles?page=2" rel="next">次のページ</a>
 </turbo-frame>
 ```
 
