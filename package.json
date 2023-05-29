@@ -1,0 +1,8 @@
+{
+  "name": "hotwire_ja",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:everyleaf/hotwire_ja.git",
+  "author": "akira888 <a.cup.of.happiness@gmail.com>",
+  "license": "MIT"
+}
