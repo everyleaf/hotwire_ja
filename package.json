@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:everyleaf/hotwire_ja.git",
   "author": "akira888 <a.cup.of.happiness@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
 }
