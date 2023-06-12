@@ -6,6 +6,7 @@
   "author": "akira888 <a.cup.of.happiness@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1"
+    "@11ty/eleventy": "^2.0.1",
+    "markdown-it": "^13.0.1"
   }
 }
