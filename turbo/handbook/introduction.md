@@ -1,4 +1,5 @@
 ---
+layout: base.njk
 description: "Turbo bundles several techniques for creating fast, modern web applications without having to reach for a client-side JavaScript framework."
 ---
 
