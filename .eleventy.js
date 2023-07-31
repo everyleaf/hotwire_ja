@@ -6,7 +6,7 @@ var md = require('markdown-it')({
 });
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("bundle.css");
+  eleventyConfig.addPassthroughCopy({ '_assets': 'assets' });
   return {
     dir: {
       includes: "layouts",
