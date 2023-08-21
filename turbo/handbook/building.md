@@ -108,7 +108,7 @@ Certain page elements are inherently _temporary_, like flash messages or alerts.
 
 Turbo Drive adds a `data-turbo-preview` attribute to the `<html>` element when it displays a preview from cache. You can check for the presence of this attribute to selectively enable or disable behavior when a preview is visible.
 
-Turbo ドライブは、キャッシュからプレビューを表示する際に、`<html>` に`data-turbo-preview` 属性を付与します。この要素の有無を調べることで、プレビュー表示次の振る舞いを選択的に有効にしたり無効にしたりできます。
+Turbo ドライブは、キャッシュからプレビューを表示する際に、`<html>` 要素に`data-turbo-preview` 属性を付与します。この属性の有無を調べることで、プレビュー表示時の振る舞いを選択的に有効にしたり無効にしたりできます。
 
 ```js
 if (document.documentElement.hasAttribute("data-turbo-preview")) {
