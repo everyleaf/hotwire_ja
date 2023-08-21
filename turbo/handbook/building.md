@@ -16,22 +16,22 @@ n memory.
 JavaScript の `window` と `document` オブジェクトはページの変更をまたいでその状態を保持します。そして、メモリ上に置いた他のオブジェクトもそのまま残るのです。
 
 With awareness and a little extra care, you can design your application to gracefully handle this constraint without tightly coupling it to Turbo.
-この事実に気づき、そしてそのためにほんの少しのケアすれば、アプリケーションを Turbo に強固に結びつけることなく、この制約を洗練された形で扱えるようデザインできます。
+この事実に気づき、そしてそのためにほんの少しのケアをすれば、アプリケーションを Turbo に強固に結びつけることなく、この制約を洗練された形で扱えるようデザインできます。
 
 ## Working with Script Elements
-## Script 要素と
+## Script 要素と協働する
 
 Your browser automatically loads and evaluates any `<script>` elements present on the initial page load.
 最初のページロードの際に存在する `<script>` 要素を、ブラウザは自動的に読み込んで評価します。
 
 When you navigate to a new page, Turbo Drive looks for any `<script>` elements in the new page’s `<head>` which aren’t present on the current page. Then it appends them to the current `<head>` where they’re loaded and evaluated by the browser. You can use this to load additional JavaScript files on-demand.
-新しいページにアクセスするとき、 Turbo ドライブは新しいページの `<head>` 要素に、何か現在のページにはなかった `<script>` 要素がないかを探します。そして、あった場合、現在のページの `<head>` に追加し、ブラウザによる読み込みと評価が行われます。これによって、必要な時にのみ、JzavaScript を読み込むことができるのです。
+新しいページにアクセスするとき、 Turbo ドライブは新しいページの `<head>` 要素に、何か現在のページにはなかった `<script>` 要素がないかを探します。そして、あった場合、現在のページの `<head>` に追加し、ブラウザによる読み込みと評価が行われます。これによって、必要な時にのみ、JavaScript を読み込むことができるのです。
 
 Turbo Drive evaluates `<script>` elements in a page’s `<body>` each time it renders the page. You can use inline body scripts to set up per-page JavaScript state or bootstrap client-side models. To install behavior, or to perform more complex operations when the page changes, avoid script elements and use the `turbo:load` event instead.
 Turbo ドライブはページの `<body>` 内にある `<script>` 要素を、ページを描画するたびに評価します。ページごとの JavaScript の状態をセットしたり、クライアント側のモデルのブートストラップに、インラインのbody scriptを使うことができます。ページの変更時に、振る舞いをつけくわえたり、もっと複雑な操作を行いたい時は、 <script> 要素を避けて代わりに `turbo:load` イベントを使いましょう。
 
 Annotate `<script>` elements with `data-turbo-eval="false"` if you do not want Turbo to evaluate them after rendering. Note that this annotation will not prevent your browser from evaluating scripts on the initial page load.
-描画後に<script> 要素を Turbo に評価させたくない場合、`data-turbo-eval="false"` 要素をともなってアノテーションしましょう。このアノテーションは、ブラウザが最初のページロードの際に <script> 要素を評価するのは伏せがないので注意です。
+描画後に<script> 要素を Turbo に評価させたくない場合、`data-turbo-eval="false"` 要素をともなってアノテーションしましょう。このアノテーションは、ブラウザが最初のページロードの際の<script> 要素の評価は防がないので注意です。
 
 ### Loading Your Application’s JavaScript Bundle
 ### アプリケーションの JavaScript バンドルを読み込む
@@ -47,7 +47,7 @@ Always make sure to load your application’s JavaScript bundle using `<script>`
 ```
 
 You should also consider configuring your asset packaging system to fingerprint each script so it has a new URL when its contents change. Then you can use the `data-turbo-track` attribute to force a full page reload when you deploy a new JavaScript bundle. See [Reloading When Assets Change](/handbook/drive#reloading-when-assets-change) for information.
-使っているアセット・パッキングシステムの、内容が変わった際に新しいURLを付与するために各スクリプトにフィンガープリントを付与する設計についても考慮が必要です。その際は、`data-turbo-track` 属性を使って、新しい JavaScript のバンドルがデプロイされた際にはページがすべて再読み込みされるようにできます。詳しくは[Reloadin When Assets Change](/handbook/drive#reloading-when-assets-change)を見てください。
+使っているアセット・パッキングシステムの、内容が変わった際に新しいURLを付与するために各スクリプトにフィンガープリントを付与する設計についても考慮が必要です。その際は、`data-turbo-track` 属性を使って、新しい JavaScript のバンドルがデプロイされた際にはページがすべて再読み込みされるようにできます。詳しくは[Reloading When Assets Change](/handbook/drive#reloading-when-assets-change)を見てください。
 
 
 
