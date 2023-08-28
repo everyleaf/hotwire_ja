@@ -55,7 +55,7 @@ You should also consider configuring your asset packaging system to fingerprint 
 ## キャッシュを理解する
 
 Turbo Drive maintains a cache of recently visited pages. This cache serves two purposes: to display pages without accessing the network during restoration visits, and to improve perceived performance by showing temporary previews during application visits.
-Turbo ドライブは、最近アクセスしたページのキャッシュを維持します。このキャッシュには、二つの目的があります。ページの復元表示の間、ネットワークにアクセスすることなくページを表示することと、アプリケーションのアクセスの間、一時的なプレビューを表示することで体感でのパフォーマンスを上げることです。
+Turbo ドライブは、最近アクセスしたページのキャッシュを維持します。このキャッシュには、二つの目的があります。ページの再構成の間、ネットワークにアクセスすることなくページを表示することと、アプリケーションのアクセスの間、一時的なプレビューを表示することで体感でのパフォーマンスを上げることです。
 
 When navigating by history (via [Restoration Visits](/handbook/drive#restoration-visits)), Turbo Drive will restore the page from cache without loading a fresh copy from the network, if possible.
 履歴によるナビゲーション ([Restoration Visits](/handbook/drive#restoration-visits)経由)の場合、Turbo ドライブは可能であれば、ネットワークを介して新たなコピーを読み込むことなく、キャッシュからページを復元します。
@@ -164,6 +164,7 @@ Turbo.cache.exemptPageFromCache()
 
 // 現在のページのキャッシュコントロールを`no-preview`に設定する
 Turbo.cache.exemptPageFromPreview()
+```
 
 Both functions will create a `<meta name="turbo-cache-control">` element in the `<head>` if the element is not already present.
 どちらの関数も`<meta name="turbo-cache-control">`要素がまだなければ、`<head>`の中に`<meta name="turbo-cache-control">`を書き込むことができます。
