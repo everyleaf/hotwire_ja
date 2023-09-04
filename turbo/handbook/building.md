@@ -204,7 +204,7 @@ Keep in mind that your application will not always be in a pristine state when t
 
 
 Also note that Turbo Drive navigation may not be the only source of page updates in your application, so you may wish to move your initialization code into a separate function which you can call from `turbo:load` and anywhere else you may change the DOM.
-また、Turboドライブのナビゲーションだけが アプリケーションでのページ更新の唯一の源というわけではないことも心にとめておいてください。そのため、初期化のコードを関数化して分離し、`turbo:load`からもDOMを変、温厚するかもしれない他のどこからでも呼べるようにしたくなるかもしれません。
+また、Turboドライブのナビゲーションだけが アプリケーションでのページ更新の唯一の源というわけではないことも心にとめておいてください。そのため、初期化のコードを関数化して分離し、`turbo:load`からも、DOMを変更するかもしれない他のどこからでも呼べるようにしたくなるかもしれません。
 
 When possible, avoid using the `turbo:load` event to add other event listeners directly to elements on the page body. Instead, consider using [event delegation](https://learn.jquery.com/events/event-delegation/) to register event listeners once on `document` or `window`.
 可能であれば、`turbo:load`イベントを、他のイベントリスナーをページ・ボティに直接追加するのに使うのは避けましょう。その代わり、 [event delegation](https://learn.jquery.com/events/event-delegation/) を利用してイベントリスナーを`document` あるいは `window` に追加することを考慮してください。
