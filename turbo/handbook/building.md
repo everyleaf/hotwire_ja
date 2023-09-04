@@ -200,7 +200,7 @@ document.addEventListener("turbo:load", function() {
 ```
 
 Keep in mind that your application will not always be in a pristine state when this event is fired, and you may need to clean up behavior installed for the previous page.
-アプリケーションでは、イベントが発火した際にいつでも初期状態なわけではなく、前のページのためにセットされた振る舞いを綺麗にする必要があるかもしれない、ということを心にとめておいてください。
+アプリケーションは、イベントが発火した際にいつでも初期状態なわけではなく、前のページのためにセットされた振る舞いを綺麗にする必要があるかもしれない、ということを心にとめておいてください。
 
 
 Also note that Turbo Drive navigation may not be the only source of page updates in your application, so you may wish to move your initialization code into a separate function which you can call from `turbo:load` and anywhere else you may change the DOM.
