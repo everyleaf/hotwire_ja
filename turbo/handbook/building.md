@@ -222,7 +222,7 @@ You can handle all of these updates, including updates from Turbo Drive page loa
 これらの、Turboドライブからのページロードを含めたすべての更新を、単一の箇所とのやりとりとライフサイクル・コールバックで管理することができます。 Turboの姉妹フレームワークである[Stimulus](https://stimulus.hotwired.dev)がそれを提供します。
 
 Stimulus lets you annotate your HTML with controller, action, and target attributes:
-Stimulusを使ってアプリのHTNMLにコントローラー、アクション、そしてターゲット属性をアノテーションすることができます。
+Stimulusを使ってアプリのHTMLにコントローラー、アクション、そしてターゲット属性をアノテーションすることができます。
 
 ```html
 <div data-controller="hello">
