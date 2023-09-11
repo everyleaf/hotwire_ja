@@ -180,7 +180,7 @@ Turbo.cache.resetCacheControl()
 ## JavaScriptのふるまいを取りこむ
 
 You may be used to installing JavaScript behavior in response to the `window.onload`, `DOMContentLoaded`, or jQuery `ready` events. With Turbo, these events will fire only in response to the initial page load, not after any subsequent page changes. We compare two strategies for connecting JavaScript behavior to the DOM below.
-JavaScriptのふるまいをレスポンスに取り込むために、`window.onload`や`DOMContentLoaded`、それにjQuery の`ready`イベントに慣れているかもしれません。Turbo では、これらのイベントは一番最初のページロードに対するレスポンスでのみ発火します。後続のページの変更の際には何も起こりません。JavaScriptの振る舞いをDOM配下に連結するための2つの戦略を比べてみましょう。
+`window.onload`や`DOMContentLoaded`、それにjQuery の`ready`イベントに応じて、JavaScriptのふるまいをレスポンスに注入するのはおなじみのやり方です。Turbo では、これらのイベントは一番最初のページロードに対するレスポンスでのみ発火します。後続のページの変更の際には何も起こりません。JavaScriptの振る舞いをDOM配下に連結するための2つの戦略を比べてみましょう。
 
 ### Observing Navigation Events
 ### ナビゲーションイベントを監視する
@@ -207,7 +207,7 @@ Also note that Turbo Drive navigation may not be the only source of page updates
 また、Turboドライブのナビゲーションだけが アプリケーションでのページ更新の唯一の源というわけではないことも心にとめておいてください。そのため、初期化のコードを関数化して分離し、`turbo:load`からも、DOMを変更するかもしれない他のどこからでも呼べるようにしたくなるかもしれません。
 
 When possible, avoid using the `turbo:load` event to add other event listeners directly to elements on the page body. Instead, consider using [event delegation](https://learn.jquery.com/events/event-delegation/) to register event listeners once on `document` or `window`.
-可能であれば、`turbo:load`イベントを、他のイベントリスナーをページ・ボティに直接追加するのに使うのは避けましょう。その代わり、 [event delegation](https://learn.jquery.com/events/event-delegation/) を利用してイベントリスナーを`document` あるいは `window` に追加することを考慮してください。
+他のイベントリスナーをページ・ボティに直接追加するのに`turbo:load`イベントを使うのは、できるだけ避けましょう。その代わり、 [event delegation](https://learn.jquery.com/events/event-delegation/) を利用してイベントリスナーを`document` あるいは `window` に追加することを考慮してください。
 
 See the [Full List of Events](/reference/events) for more information.
 より詳しい情報は、 [イベント全リスト](/reference/events) にあります。
@@ -280,7 +280,7 @@ Stimulus はドキュメントが変更されたときにはいつでも、こ�
 
 Often you’ll want to perform client-side transformations to HTML received from the server. For example, you might want to use the browser’s knowledge of the user’s current time zone to group a collection of elements by date.
 サーバーから受け取ったHTMLに、クライアントサイドで変更を施したい場合というのはよくあります。
-例えば、ブラウザの知っているユーザーの現在のタイムゾーンを、要素を日毎にグルーピングするのに使いたい、というような場合です。
+例えば、要素を日毎にグルーピングするのに、ブラウザが認識している、ユーザーの現在のタイムゾーンを使いたい、というような場合です。
 
 Suppose you have annotated a set of elements with `data-timestamp` attributes indicating the elements’ creation times in UTC. You have a JavaScript function that queries the document for all such elements, converts the timestamps to local time, and inserts date headers before each element that occurs on a new day.
 要素のセットに`data-timestamp`属性をアノテートするとしましょう。これらの要素の作成日時はUTCです。そして、こういった要素をドキュメントの中からすべて探しだし、タイムスタンプをローカルタイムに変更し、新しい日付に変わった要素の前に日付の見出しを挿入するJavaScriptの関数を用意します。
