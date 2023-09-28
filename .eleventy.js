@@ -9,7 +9,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ '_assets': 'assets' });
   return {
     dir: {
-      includes: "layouts",
-    }
+      layouts: "layouts",
+      includes: "_includes",
+    },
+    templateFormats: ['html', 'md', 'liquid', 'njk'],
+    htmlTemplateEngine: 'liquid'
   }
 };
