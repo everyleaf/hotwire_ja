@@ -1,5 +1,5 @@
 ---
-layout: base.njk
+layout: base.html
 ---
 
 # タイトル(未定)

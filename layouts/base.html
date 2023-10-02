@@ -1,0 +1,24 @@
+---
+title: Hotwire
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/_site/assets/main.css">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <main class="grid docs">
+
+      <header class="docs__index grid__custom-item">
+        {%# include navigation.html %}
+      </header>
+
+      <section id="content" class="docs__content grid__custom-item">
+        {{ content }}
+      </section>
+    </main>
+  </body>
+</html>
