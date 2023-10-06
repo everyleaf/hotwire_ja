@@ -8,7 +8,7 @@ var md = require('markdown-it')({
 module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection("turbo_handbook", (collectionApi) =>
-    collectionApi.getAll()
+    collectionApi.getFilteredByTag("turbo_handbook")
   );
 
   eleventyConfig.addPassthroughCopy({ '_assets': 'assets' });
