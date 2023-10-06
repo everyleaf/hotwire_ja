@@ -1,4 +1,7 @@
 {
+  "tags": [
+    "turbo_handbook"
+  ],
   "layout": "base.html",
   "section_title": "Handbook"
 }

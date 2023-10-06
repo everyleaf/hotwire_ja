@@ -1,16 +1,8 @@
-<input type="checkbox" id="hamburger" class="nav-checkbox"/>
-<label class="nav-mobile-button" for="hamburger"><span></span> Menu</label>
-
 <nav class="nav">
-
-  <label class="nav-mobile-button nav-mobile-button--close" for="hamburger"><span></span> close</label>
-
-  <ul class="nav__list {% if type == "horizontal" %} nav__list--horizontal{% endif %}">
+  <ul>
     <li>
-      <a class="nav__list-link{% if section_title == "Handbook" %} active{% endif %}" href="/turbo/handbook/introduction">Handbook</a>
-
-      {% include 'section-nav.html', section: "turbo/handbook" %}
+      <a class="nav__list-link{% if section_title == 'Handbook' %} active{% endif %}" href="/turbo/handbook/introduction">Handbook</a>
+      {% include 'section-nav.html', section: 'turbo_handbook' %}
     </li>
   </ul>
-
 </nav>

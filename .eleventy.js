@@ -6,6 +6,11 @@ var md = require('markdown-it')({
 });
 
 module.exports = function(eleventyConfig) {
+
+  eleventyConfig.addCollection("turbo_handbook", (collectionApi) =>
+    collectionApi.getAll()
+  );
+
   eleventyConfig.addPassthroughCopy({ '_assets': 'assets' });
   return {
     dir: {
