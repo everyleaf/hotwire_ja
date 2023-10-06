@@ -1,5 +1,4 @@
 ---
-permalink: /handbook/drive.html
 description: "Turbo Drive accelerates links and form submissions by negating the need for full page reloads."
 ---
 

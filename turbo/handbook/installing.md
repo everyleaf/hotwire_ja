@@ -1,5 +1,4 @@
 ---
-permalink: /handbook/installing.html
 description: "Learn how to install Turbo in your application."
 ---
 

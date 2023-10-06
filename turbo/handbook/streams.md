@@ -1,5 +1,4 @@
 ---
-permalink: /handbook/streams.html
 description: "Turbo Streams deliver page changes over WebSocket, SSE or in response to form submissions using just HTML and a set of CRUD-like actions."
 ---
 

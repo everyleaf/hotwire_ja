@@ -1,5 +1,4 @@
 ---
-permalink: /handbook/frames.html
 description: "Turbo Frames decompose pages into independent contexts, which can be lazy-loaded and scope interaction."
 ---
 
