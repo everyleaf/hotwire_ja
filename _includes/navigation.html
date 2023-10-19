@@ -1,11 +1,8 @@
 <nav class="nav">
-  <h2>サイドバー</h2>
-  <p>{{ section_title }}</p>
-  <ul>
+  <ul class="nav__list ">
     <li>
-      <a class="nav__list-link{% if section_title == 'Handbook' %} active{% endif %}" href="/turbo/handbook/introduction">Handbook</a>
+      <a class="nav__list-link active" href="/turbo/handbook/introduction">Handbook</a>
       {% include 'section-nav.html', section: 'turbo_handbook' %}
     </li>
   </ul>
-  <p>サイドバーここまで</p>
 </nav>
