@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0 1em;
   color: $color-background;
-  background-color: $color-text;
+  background-color: $color-brand;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,7 +68,7 @@
 }
 
 .jump__list-link--active {
-  color: $color-brand !important;
+  color: $color-accent !important;
   text-decoration: none;
   pointer-events: none;
 }
