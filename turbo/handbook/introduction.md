@@ -7,7 +7,6 @@ description: "Turbo bundles several techniques for creating fast, modern web app
 [DHHの許諾](https://github.com/hotwired/turbo-site/issues/96)のもと、[公式のTurboHandbook](https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975)として、翻訳をしています。
 このサイトの全ての文責は、[株式会社万葉](https://everyleaf.com/)にあります。
 
-# Introduction
 # はじめに
 
 Turboは 高速でモダンで、そして進歩的に改良されたWebアプリケーションを、JavaScriptをあまり使わずに作るためのいくつかの技術をまとめたものです。
@@ -19,7 +18,7 @@ Turbo を使えば、サーバーにHTMLを直接配布させることができ�
 
 Wire上でHTMLを扱うことの利点については、<a href="https://hotwired.dev/">Hotwireサイト</a>で詳しく知ることができます。以下は、Turboがこれを可能にするテクニックについて書いていきます。
 
-## Turbo ドライブ: Navigate within a persistent process
+## Turbo ドライブ: 永続的プロセス内でのページの変更
 
 今までのシングルページ・アプリケーションを、古臭くいちいちページ遷移するやり方と比べたときの主な魅力は、動作のスピードです。SPAがそのスピードを可能にできるのは、アプリケーションのプロセスをいちいち破棄することなく、本当にページが遷移する際にのみ初期化するからです。
 
