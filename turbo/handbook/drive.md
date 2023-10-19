@@ -2,9 +2,6 @@
 description: "Turbo Drive accelerates links and form submissions by negating the need for full page reloads."
 ---
 
-[DHHの許諾](https://github.com/hotwired/turbo-site/issues/96)のもと、[公式のTurboHandbook](https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975)として、翻訳をしています。
-このサイトの全ての文責は、[株式会社万葉](https://everyleaf.com/)にあります。
-
 # Turbo ドライブを使ったナビゲート
 
 Turbo ドライブは、ページ単位のナビゲーションを強化する、Turbo の一部機能です。

@@ -2,9 +2,6 @@
 description: "Learn how to install Turbo in your application."
 ---
 
-[DHH の許諾](https://github.com/hotwired/turbo-site/issues/96)のもと、[公式の TurboHandbook](https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/8d5105992ae576e7757bbf695d2a0d9e003fe3dc)として、翻訳をしています。
-このサイトの全ての文責は、[株式会社万葉](https://everyleaf.com/)にあります。
-
 # アプリケーションに Turbo をインストール
 
 Turbo は、アプリケーションの `<head>` 内で直接 Turbo 配布スクリプトを参照してコンパイルされた形でインストールするか、Webpack などのバンドル経由で npm を使用してインストールすることができます。
