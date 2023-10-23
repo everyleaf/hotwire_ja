@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/main.css">
+    <title>Hotwire</title>
+  </head>
+  <body>
+  <nav class="jump">
+    <ul class="jump__list">
+      <li><a class="jump__list-link jump__list-link--hotwire" href="https://hotwired.dev">Hotwire:</a></li>
+      <li><a class="jump__list-link jump__list-link--active" href="https://turbo.hotwired.dev">Turbo</a></li>
+    </ul>
+  </nav>
+    <main class="grid docs">
+
+      <header class="docs__index grid__custom-item">
+        <nav class="nav">
+  <ul class="nav__list ">
+    <li>
+      <a class="nav__list-link active" href="/turbo/handbook/introduction">Handbook</a>
+      <ul class="nav__sublist active">
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/introduction">はじめに</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/drive">Turbo ドライブを使ったナビゲート</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/frames">Turboフレームを分解する</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/streams">Turbo ストリームを利用してみよう</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/native">iOS と Android をネイティブにやる</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/building">Turbo アプリケーションの構築</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/installing">アプリケーションに Turbo をインストール</a>
+    </li>
+</ul>
+
+    </li>
+  </ul>
+</nav>
+
+      </header>
+
+      <section id="content" class="docs__content grid__custom-item">
+        <h1>iOS と Android をネイティブにやる</h1>
+<p>iOS のための Turbo ネイティブは、 Turbo 対応の Web アプリケーションをネイティブな iOS のシェルにラップするためのツールを提供します。そのツールは複数の View Controller にまたがった単一の WKWebView インスタンス(※1)を管理し、 Turbo によって最適化されたクライアントサイドのパフォーマンスを備えたネイティブなナビゲーション UI を提供します。詳細は <a href="https://github.com/hotwired/turbo-ios">Turbo Native: iOS</a> をご覧ください。</p>
+<p>Android のための Turbo ネイティブも、複数のデスティネーションにまたがった単一の WebView のインスタンスを管理するための同様のツールを提供します。詳細は <a href="https://github.com/hotwired/turbo-android">Turbo Native: Android</a> をご覧ください。</p>
+<p>ネイティブアダプタで何ができるのか調べるのに最も良い方法は、デモのネイティブアプリケーションを設定してみることです。 <a href="https://github.com/hotwired/turbo-ios/blob/main/Demo/README.md">iOS 用</a>と <a href="https://github.com/hotwired/turbo-android/blob/main/demo/README.md">Android 用</a>を用意しています。手元のネイティブ環境でコードを開いてみて、すべての機能を試してみてください。</p>
+<hr>
+<p>※1: <a href="https://developer.apple.com/documentation/webkit/wkwebview">WKWebView</a> は iOS アプリから WEB ページを見るために利用されるクラスです。</p>
+
+      </section>
+      <footer class="docs__footer grid__item grid__item--start-4 grid__item--span-8">
+        <footer>
+          <p class="footer-headline">
+            <small>
+              <a href="https://github.com/hotwired/turbo-site/issues/96">DHHの許諾</a>のもと、<a href="https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975">公式のTurboHandbook</a>として、翻訳をしています。
+            </small>
+            <br>
+            <small>
+              このサイトの全ての文責は、<a href="https://everyleaf.com/">株式会社万葉</a>にあります。
+            </small>
+          </p>
+        </footer>
+      </footer>
+    </main>
+  </body>
+</html>

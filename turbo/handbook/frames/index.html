@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/main.css">
+    <title>Hotwire</title>
+  </head>
+  <body>
+  <nav class="jump">
+    <ul class="jump__list">
+      <li><a class="jump__list-link jump__list-link--hotwire" href="https://hotwired.dev">Hotwire:</a></li>
+      <li><a class="jump__list-link jump__list-link--active" href="https://turbo.hotwired.dev">Turbo</a></li>
+    </ul>
+  </nav>
+    <main class="grid docs">
+
+      <header class="docs__index grid__custom-item">
+        <nav class="nav">
+  <ul class="nav__list ">
+    <li>
+      <a class="nav__list-link active" href="/turbo/handbook/introduction">Handbook</a>
+      <ul class="nav__sublist active">
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/introduction">はじめに</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/drive">Turbo ドライブを使ったナビゲート</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/frames">Turboフレームを分解する</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/streams">Turbo ストリームを利用してみよう</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/native">iOS と Android をネイティブにやる</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/building">Turbo アプリケーションの構築</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/installing">アプリケーションに Turbo をインストール</a>
+    </li>
+</ul>
+
+    </li>
+  </ul>
+</nav>
+
+      </header>
+
+      <section id="content" class="docs__content grid__custom-item">
+        <h1>Turboフレームを分解する</h1>
+<p>Turbo フレームは、事前に定義されたページの一部分をリクエストに応じて更新できるようにします。フレームの中にあるすべてのリンクやフォームは捕捉され、フレームのコンテンツはレスポンスを受け取ると自動的に更新されます。
+個々のフレームは、サーバーが完全なドキュメントを提供するか、リクエストされたフレームの更新版が入った断片を提供するかどうかに関わらず、レスポンスを切り取って、既存のコンテンツを置き換えます。</p>
+<p>フレームはページの一部を <code>&lt;turbo-frame&gt;</code> 要素で囲うことで作られます。各要素は必ず一意のIDを持っており、リクエストに応じてサーバーから新しいページが来た際に、置き換えるべきコンテンツを一致させるのに使用します。ひとつのページに多数のフレームを持たせることができ、それぞれのフレームは独自のコンテキストを確立しています。</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;div id=&quot;navigation&quot;&gt;Links targeting the entire page&lt;/div&gt;
+  &lt;div id=&quot;navigation&quot;&gt;リンクのターゲットをページ全体にする&lt;/div&gt;
+
+  &lt;turbo-frame id=&quot;message_1&quot;&gt;
+    &lt;h1&gt;メッセージタイトル&lt;/h1&gt;
+    &lt;p&gt;メッセージ内容&lt;/p&gt;
+    &lt;a href=&quot;/messages/1/edit&quot;&gt;このメッセージを編集&lt;/a&gt;
+  &lt;/turbo-frame&gt;
+
+  &lt;turbo-frame id=&quot;comments&quot;&gt;
+    &lt;div id=&quot;comment_1&quot;&gt;1つ目のコメント&lt;/div&gt;
+    &lt;div id=&quot;comment_2&quot;&gt;2つ目のコメント&lt;/div&gt;
+
+    &lt;form action=&quot;/messages/comments&quot;&gt;...&lt;/form&gt;
+  &lt;/turbo-frame&gt;
+&lt;/body&gt;
+</code></pre>
+<p>このページには2つのフレームがあります。ひとつめのフレームには、メッセージの表示とそれを編集するリンクがあります。そしてふたつめのフレームにはコメントリストと、コメントを追加するフォームがあります。それぞれがナビゲーション用の独自のコンテキストを作成し、リンクとフォーム送信の両方を捕捉します。</p>
+<p>メッセージ編集のリンクをクリックすると、<code>/messages/1/edit</code> から提供されたレスポンスの Turbo フレーム部分 <code>&lt;turbo-frame id=&quot;message_1&quot;&gt;</code> が抽出され、クリックされた元のフレームのコンテンツが置き換えられます。
+レスポンスコンテンツは次のようなものです。</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;h1&gt;メッセージの編集&lt;/h1&gt;
+
+  &lt;turbo-frame id=&quot;message_1&quot;&gt;
+    &lt;form action=&quot;/messages/1&quot;&gt;
+      &lt;input name=&quot;message[name]&quot; type=&quot;text&quot; value=&quot;My message title&quot;&gt;
+      &lt;textarea name=&quot;message[content]&quot;&gt;メッセージ内容&lt;/textarea&gt;
+      &lt;input type=&quot;submit&quot;&gt;
+    &lt;/form&gt;
+  &lt;/turbo-frame&gt;
+&lt;/body&gt;
+</code></pre>
+<p><code>&lt;h1&gt;</code> が <code>&lt;turbo-frame&gt;</code> の中にないことに注目してください。これは編集フォームとメッセージ表示を置き換えるときに <code>&lt;h1&gt;</code> は無視されるということです。フレームの更新には、一致した <code>&lt;turbo-frame&gt;</code> の中のコンテンツだけが使用されます。</p>
+<p>つまりこのページは2つの用途に使えます。フレームの内側で即時に編集を行うという用途、もしくはページ全体が編集処理専用である、フレームの外側で編集を行うという用途です。</p>
+<h2>フレームの事前読み込み</h2>
+<p>ページが読み込まれた時点でフレームの中身を配置しておく必要はありません。<code>turbo-frame</code> タグに <code>src</code> 属性があれば、ページにタグが出現した時点で <code>src</code> が参照している URL が自動的に読み込まれます。</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;h1&gt;受信トレイ&lt;/h1&gt;
+
+  &lt;div id=&quot;emails&quot;&gt;
+    ...
+  &lt;/div&gt;
+
+  &lt;turbo-frame id=&quot;set_aside_tray&quot; src=&quot;/emails/set_aside&quot;&gt;
+  &lt;/turbo-frame&gt;
+
+  &lt;turbo-frame id=&quot;reply_later_tray&quot; src=&quot;/emails/reply_later&quot;&gt;
+  &lt;/turbo-frame&gt;
+&lt;/body&gt;
+</code></pre>
+<p>このページは、読み込まれるとすぐに <code>&lt;a href=&quot;http://itsnotatypo.com&quot;&gt;imbox&lt;/a&gt;</code> に入っているすべてのメールの一覧を表示しますが、その後、取り置きメールや返信待ちのメールのためにあるページ下部の小さなトレイへ向けて2つの後続リクエストを発行します。それらのトレイは <code>src</code> が参照している URL に基づいて作られる個別の HTTP リクエストから生み出されます。</p>
+<p>また、上記の例ではページ読み込み時点のトレイのフレームに中身はありませんが、先読みして初期コンテンツをいれておくこともできます。<code>src</code> からコンテンツを取得したタイミングでフレームの内容は上書きされます。</p>
+<pre><code class="language-html">&lt;turbo-frame id=&quot;set_aside_tray&quot; src=&quot;/emails/set_aside&quot;&gt;
+  &lt;img src=&quot;/icons/spinner.gif&quot;&gt;
+&lt;/turbo-frame&gt;
+</code></pre>
+<p>imbox ページを読み込むとき、取り置きメールのトレイは <code>/emails/set_aside</code> を読み込みます。またレスポンスには読み込み側に対応するフレーム要素を必ず含みます。元の例では <code>&lt;turbo-frame id=&quot;set_aside_tray&quot;&gt;</code> にあたります。</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;h1&gt;取り置きトレイ&lt;/h1&gt;
+
+  &lt;p&gt;このトレイのメールは取り置き設定したものです&lt;/p&gt;
+
+  &lt;turbo-frame id=&quot;set_aside_tray&quot;&gt;
+    &lt;div id=&quot;emails&quot;&gt;
+      &lt;div id=&quot;email_1&quot;&gt;
+        &lt;a href=&quot;/emails/1&quot;&gt;重要なメール&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/turbo-frame&gt;
+&lt;/body&gt;
+</code></pre>
+<p>このページの直接の目的は見出しと説明文の表示ですが、imbox ページにあるトレイフレームの中で <code>div</code> タグと個々のメールを読み出すだけの最小化されたフォームも動作しています。メッセージを編集するフォームの例と同様です。</p>
+<p><code>/emails/set_aside</code> にある <code>&lt;turbo-frame&gt;</code> タグは <code>src</code> 属性を含んでいないことに注目してください。 <code>src</code> 属性は、フレームが読み込まれたときにコンテンツを表示するのではなく、遅延読み込みしてほしい場合にのみ追加します。</p>
+<p>ナビゲーション中、フレームは新しいコンテンツを取得するときに、<code>&lt;turbo-frame&gt;</code> 要素の中に <code>[aria-busy=&quot;true&quot;]</code> をセットします。ナビゲーションが完了したとき、フレームは <code>[aria-busy]</code> 属性を削除します。フレームが <code>&lt;form&gt;</code> の送信を通じて <code>&lt;turbo-frame&gt;</code> をナビゲーションしているとき、Turbo はフレームと協力して <code>[aria-busy=&quot;true&quot;]</code> 属性を切り替えます。</p>
+<h2>フレームの遅延読み込み</h2>
+<p>ページが最初に読み込まれたときに見えていないフレームは、<code>loading=&quot;lazy&quot;</code> をマークしておくことで、フレームが見えるようになるまで読み込みを遅延させることができます。<code>loading=&quot;lazy&quot;</code> は <code>img</code> タグの <code>lazy=true</code> 属性のように動作します。<code>loading=&quot;lazy&quot;</code> はフレームが <code>summary</code>/<code>detail</code> ペアやモーダル、または最初は非表示でその後表示されるものの中にあるときに、読み込みを遅延させる最適な方法です。</p>
+<h2>フレームの読み込みにおけるキャッシュの利点</h2>
+<p>ページセグメントをフレームに置き換えるとページの実装がシンプルになりますが、同じくらい重要なこととしてキャッシュダイナミクスの改善があります。多数のセグメントを持つ複雑なページは、効率的にキャッシュすることが難しくなります。特に、不特定のユーザー向けのコンテンツと、特定の個人ユーザー向けのコンテンツが混在している場合です。セグメントの数が多くなると、キャッシュの検索に必要な依存キーが増え、キャッシュの更新頻度が上がっていきます。</p>
+<p>フレームは、所要時間や閲覧者が異なるページセグメントを分離するのに適しています。ページの大部分がすべてのユーザーに共有しやすいときは、ページ内にあるユーザー毎の要素をフレームに置きかえることは理にかなっています。 またその逆に、ほとんどが個別化されたページでひとつの共有セグメントをフレームに置き換えて共有キャッシュから提供することも理にかなっています。</p>
+<p>フレームの読み込みのオーバーヘッドは一般的にとても小さいですが、それでも読み込むフレーム数には十分に注意したほうがよく、特にフレームがページに読み込みジッターを発生させないようにしましょう。しかしながら、ページ読み込み直後に見えていないフレームは基本的に自由です。モーダルの後ろや、折りたたまれたコンテンツに隠れているからです。</p>
+<h2>ナビゲーションの対象をフレームの内部にするか、外部にするか</h2>
+<p>デフォルトでは、フレーム内のナビゲーションはそのフレームを対象としています。それはリンクの追跡とフォームの送信の両方に当てはまります。ですが、ナビゲーションはその対象を <code>_top</code> に設定することで、フレームに囲まれたコンテンツではなく、ページ全体を操作することができます。またはその対象をターゲットをフレームの ID に設定することで、他の名前つきフレームを操作することもできます。</p>
+<p>例の中で、取り置きメールのトレイの中のリンクは個別のメールを指しています。それらのリンクに <code>set_aside_tray</code> という ID と一致するフレームタグを探させるのではなく、個々のメールへ直接ナビゲートさせたいとします。取り置きメールトレイのフレームに <code>target</code> 属性を付与することで実現できます。</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;h1&gt;受信トレイ&lt;/h1&gt;
+  ...
+  &lt;turbo-frame id=&quot;set_aside_tray&quot; src=&quot;/emails/set_aside&quot; target=&quot;_top&quot;&gt;
+  &lt;/turbo-frame&gt;
+&lt;/body&gt;
+
+&lt;body&gt;
+  &lt;h1&gt;取り置きトレイ&lt;/h1&gt;
+  ...
+  &lt;turbo-frame id=&quot;set_aside_tray&quot; target=&quot;_top&quot;&gt;
+    ...
+  &lt;/turbo-frame&gt;
+&lt;/body&gt;
+</code></pre>
+<p>多くのリンクはフレームの内容の中を操作し、その他の箇所を操作させないことが多いでしょう。それはフォームにも当てはまります。フレームではない要素を操作するために、その要素に <code>data-turbo-frame</code> 属性を付与することができます。</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;turbo-frame id=&quot;message_1&quot;&gt;
+    ...
+    &lt;a href=&quot;/messages/1/edit&quot;&gt;
+      このメッセージを編集 (message_1 のフレーム内を置き換える)
+    &lt;/a&gt;
+
+    &lt;a href=&quot;/messages/1/permission&quot; data-turbo-frame=&quot;_top&quot;&gt;
+      権限の変更 (ページ全体を置き換える)
+    &lt;/a&gt;
+  &lt;/turbo-frame&gt;
+
+  &lt;form action=&quot;/messages/1/delete&quot; data-turbo-frame=&quot;message_1&quot;&gt;
+    &lt;a href=&quot;/messages/1/warning&quot; data-turbo-frame=&quot;_self&quot;&gt;
+      message_1 のフレーム内で警告を出す
+    &lt;/a&gt;
+
+    &lt;input type=&quot;submit&quot; value=&quot;Delete this message&quot;&gt;
+    (特定のフレームに確認メッセージを表示する)
+  &lt;/form&gt;
+&lt;/body&gt;
+</code></pre>
+<h2>フレームのナビゲーションをページアクセスに昇格させる</h2>
+<p>フレームをナビゲートすることで、フレーム以外のドキュメントの状態を維持したままページコンテンツの一部だけを変更することができます（例：現在の画面スクロール位置や要素のフォーカスなど）。しかし、時にはフレームの変更をブラウザの履歴に反映させたい場合もあります。</p>
+<p>フレームのナビゲーションをページアクセスに昇格させるには、描画する要素に <code>[data-turbo-action]</code> 属性をもたせます。この属性はすべてのアクセスの値についてサポートしており、また以下の要素に対して宣言できます。</p>
+<ul>
+<li><code>&lt;turbo-frame&gt;</code> 要素</li>
+<li><code>&lt;turbo-frame&gt;</code> をナビゲートするすべての <code>&lt;a&gt;</code> 要素</li>
+<li><code>&lt;turbo-frame&gt;</code> をナビゲートするすべての <code>&lt;form&gt;</code> 要素</li>
+<li><code>&lt;turbo-frame&gt;</code> をナビゲートする <code>&lt;form&gt;</code> の中にある、すべての <code>&lt;input type=&quot;submit&quot;&gt;</code> および <code>&lt;button&gt;</code> 要素</li>
+</ul>
+<p>例えば、ページ分割された記事のリストを表示し、ナビゲーションを &quot;advance&quot; アクションに変換するフレームについて考えてみましょう。</p>
+<pre><code class="language-html">&lt;turbo-frame data-turbo-action=&quot;advance&quot;&gt;
+  &lt;a href=&quot;/articles?page=2&quot; rel=&quot;next&quot;&gt;次のページ&lt;/a&gt;
+&lt;/turbo-frame&gt;
+</code></pre>
+<p><code>&lt;a rel=&quot;next&quot;&gt;</code> 要素をクリックすると <code>&lt;turbo-frame&gt;</code> の <code>[src]</code> 属性とブラウザのURLパスの <em>両方</em> に <code>/articles?page=2</code> がセットされます。</p>
+<p><strong>注記:</strong> ブラウザを更新してページが再描画される場合、URLパスや検索パラメータから得られる状態とともに <em>2</em> ページ目の記事を描画するのは <em>アプリケーション</em> の責任です。</p>
+<h2>アンチフォージェリのサポート (CSRF)</h2>
+<p>Turbo は、DOMをチェックして <code>name</code> 属性の値に <code>csrf-param</code> か <code>csrf-token</code> が入っている <code>&lt;meta&gt;</code> タグが存在する場合 <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">CSRF</a> 保護を提供しています。</p>
+<pre><code class="language-html">&lt;meta name=&quot;csrf-token&quot; content=&quot;[your-token]&quot;&gt;
+</code></pre>
+<p>フォームを送信したとき、トークンは自動的にリクエストヘッダーへ <code>X-CSRF-TOKEN</code> として付与されます。リクエストが <code>data-turbo=&quot;false&quot;</code> とともに作られると、ヘッダーへのトークン付与をスキップします。</p>
+
+      </section>
+      <footer class="docs__footer grid__item grid__item--start-4 grid__item--span-8">
+        <footer>
+          <p class="footer-headline">
+            <small>
+              <a href="https://github.com/hotwired/turbo-site/issues/96">DHHの許諾</a>のもと、<a href="https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975">公式のTurboHandbook</a>として、翻訳をしています。
+            </small>
+            <br>
+            <small>
+              このサイトの全ての文責は、<a href="https://everyleaf.com/">株式会社万葉</a>にあります。
+            </small>
+          </p>
+        </footer>
+      </footer>
+    </main>
+  </body>
+</html>

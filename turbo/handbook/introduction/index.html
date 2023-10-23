@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/main.css">
+    <title>Hotwire</title>
+  </head>
+  <body>
+  <nav class="jump">
+    <ul class="jump__list">
+      <li><a class="jump__list-link jump__list-link--hotwire" href="https://hotwired.dev">Hotwire:</a></li>
+      <li><a class="jump__list-link jump__list-link--active" href="https://turbo.hotwired.dev">Turbo</a></li>
+    </ul>
+  </nav>
+    <main class="grid docs">
+
+      <header class="docs__index grid__custom-item">
+        <nav class="nav">
+  <ul class="nav__list ">
+    <li>
+      <a class="nav__list-link active" href="/turbo/handbook/introduction">Handbook</a>
+      <ul class="nav__sublist active">
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/introduction">はじめに</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/drive">Turbo ドライブを使ったナビゲート</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/frames">Turboフレームを分解する</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/streams">Turbo ストリームを利用してみよう</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/native">iOS と Android をネイティブにやる</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/building">Turbo アプリケーションの構築</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/installing">アプリケーションに Turbo をインストール</a>
+    </li>
+</ul>
+
+    </li>
+  </ul>
+</nav>
+
+      </header>
+
+      <section id="content" class="docs__content grid__custom-item">
+        <h1>はじめに</h1>
+<p>Turboは 高速でモダンで、そして進歩的に改良されたWebアプリケーションを、JavaScriptをあまり使わずに作るためのいくつかの技術をまとめたものです。
+Turboは流行のクライアントサイドフレームワークの代替手段を提供します。
+流行のクライアントサイドフレームワークとは、全てのロジックをフロントエンドに置いて、あなたのアプリのサーバーサイドをJSON APIに毛が生えたようなものに制限してしまうものです。</p>
+<p>Turbo を使えば、サーバーにHTMLを直接配布させることができます。それはつまり、すべてのロジック、例えばパーミッションをチェックしたり、ドメインモデルとやりとりしたり、その他アプリケーションのプログラミングに関わるあらゆることを、多かれ少なかれ、お好みのプログラミング言語に限定して書くことができるということです。
+もう、JSONに分たれた両側（クライアントサイドとサーバーサイド）に、同じロジックを複製して書かなくて良いのです。全てのロジックはサーバ上で動き、ブラウザは、最終的なHTMLを扱うだけになります。</p>
+<p>Wire上でHTMLを扱うことの利点については、<a href="https://hotwired.dev/">Hotwireサイト</a>で詳しく知ることができます。以下は、Turboがこれを可能にするテクニックについて書いていきます。</p>
+<h2>Turbo ドライブ: 永続的プロセス内でのページの変更</h2>
+<p>今までのシングルページ・アプリケーションを、古臭くいちいちページ遷移するやり方と比べたときの主な魅力は、動作のスピードです。SPAがそのスピードを可能にできるのは、アプリケーションのプロセスをいちいち破棄することなく、本当にページが遷移する際にのみ初期化するからです。</p>
+<p>Turboドライバは、それと同じスピードを、SPAと同じ永続的プロセスモデルによって可能にしています。ただしそのために、その枠組みにのっとったアプリケーションを職人芸で組み上げる必要はありません。メンテナンスの必要なクライアントサイドのルーターも、慎重に管理しなければならないステート（状態）もありません。永続的プロセスはTurboによって管理されるため、プログラマは自分のサーバーサイドのコードだけを書けばいいのです。まるで、ゼロ年代初頭ーーいまのSPAモンスターの複雑性と関わりなく穏やかだったころに、時が戻ったように！</p>
+<p>これは、同じドメインにリンクされた<code>&lt;a href&gt;</code>がクリックされるたびに、それを横から掠め取ることで実現されます。具体的には、対象範囲のリンクをクリックするたび、Turboドライブは、ブラウザがそのリンクに遷移するのを押しとどめ、ブラウザのURLを<a href="https://developer.mozilla.org/ja/docs/Web/API/History">History API</a>を使って更新し、<a href="https://developer.mozilla.org/ja/docs/Web/API/fetch"><code>fetch</code></a>を使って新しいページをリクエストし、それからHTMLレスポンスを描画します。</p>
+<p>フォームでも同じ扱いをします。フォームがサブミットされると、それはTurboドライブの<code>fetch</code>リクエストに変換され、TurboドライブはそのリクエストからのリダイレクトとHTMLレスポンスの描画を行います。</p>
+<p>描画中、Turboドライブは現在の<code>&lt;body&gt;</code>要素を即座に置き換え、<code>&lt;head&gt;</code>要素の内容をマージします。JavaScriptの<a href="https://developer.mozilla.org/ja/docs/Web/API/Window">Window</a>と<a href="https://developer.mozilla.org/ja/docs/Web/API/Document">document objects</a>、そしてその<code>&lt;html&gt;</code> 要素は、前の描画から次の描画へと移る際も保持されます。</p>
+<p>*Turboドライブと直接やり取りして、ユーザーのアクションがどのように画面遷移につながるか、リクエストのライフサイクルへフックするかを制御することもできますが、ほとんどの場合、いくつかの規約を採用することで、置き換え時のスピードを速くすることができます。</p>
+<h2>Turboフレーム: 複雑なページをパーツに分ける</h2>
+<p>多くのWebアプリケーションは、いくつかの独立したセグメントを含んだページを提供します。例えば意見を交わせるディスカッションのためのページであれば、トップにナビゲーションバー、中央にメッセージのリスト、下に新しいメッセージの投稿フォーム、そして関連トピックの並んだサイドバーといった具合です。このディスカッション・ページを生成しようとするなら、普通は、一連のやり方で各セグメントを生成し、それを一つにまとめて、その結果を単一のHTMLレスポンスとしてブラウザに送ることになるでしょう。</p>
+<p>Turboフレームを使うと、これらの独立したセグメントを、それぞれ別のフレームに配置することができます。そのフレームは、自身のナビゲーションの範囲が限定されており、遅延して読み込まれる場合があります。範囲の限定されたナビゲーションとはつまり、フレーム内でのすべてのやり取り、たとえばリンクのクリックやフォームの送信がフレームの内側で起こり、ページの他の部分は更新やリロードが起こらないということです。</p>
+<p>独立したセグメントを、それ専用のナビゲーション・コンテキスト内にラップするためには、<code>&lt;turbo-frame&gt;</code>で囲みます。
+例としては下記のようになります。</p>
+<pre><code class="language-html">&lt;turbo-frame id=&quot;new_message&quot;&gt;
+  &lt;form action=&quot;/messages&quot; method=&quot;post&quot;&gt;
+    ...
+  &lt;/form&gt;
+&lt;/turbo-frame&gt;
+</code></pre>
+<p>上記のフォームを送信した際、Turbo は、リダイレクトされた HTML レスポンスから<code>&lt;turbo-frame id=&quot;new_message&quot;&gt;</code>要素に合致する部分を抽出し、既存の<code>new_message</code>フレーム要素の中身と、取得した要素の内容を入れ替えます。ページ内の他の部分は、そのまま残ります。</p>
+<p>フレームは、ナビゲーションの範囲を限定するだけでなく、その内容の読み込みを遅延させることもあります。フレームの読み込みを遅延させるためには、自動的に読み込まれるURLを値にもった<code>src</code>属性を付与します。範囲の限定されたナビゲーションを使って、Turboは結果のレスポンスから合致するフレームを探索・抽出し、内容を置き換えます。</p>
+<pre><code class="language-html">&lt;turbo-frame id=&quot;messages&quot; src=&quot;/messages&quot;&gt;
+  &lt;p&gt;This message will be replaced by the response from /messages.&lt;/p&gt;
+&lt;/turbo-frame&gt;
+</code></pre>
+<p>これは、古めかしいフレーム、ともすると<code>&lt;iframe&gt;</code>のように思えるかもしれません。しかしTurboフレームは、同一のDOMの一部であり、&quot;実際の&quot;フレームと関連した奇妙さや妥協は一切ありません。Turboフレームは共通のCSSでスタイル付けされ、共通のJavaScriptのコンテキストの一部であり、どのような追加のコンテンツセキュリティ制限の下にも置かれません。</p>
+<p>それぞれのセグメントを独立したコンテキストに変えるだけでなく、Turboフレームは下記のことを可能にします。</p>
+<p>1.<strong>効果的なキャッシュ</strong>。以前、例に出したディスカッション・ページでは、関連話題を集めたサイドバーは、新しい関連トピックが現れるたびに一旦キャッシュを破棄する必要があります。しかしその際、中央のメッセージリストはキャッシュの破棄は必要ではありません。全てのものが単一ページを構成する場合、独立したセグメントのうちどれかがキャッシュを破棄すると、すべてのキャッシュが破棄されます。フレームを使えば、各セグメントは独立してキャッシュするため、より少ない独立キーで、より長持ちするキャッシュを得ることができます。
+1.<strong>並行実行</strong>。遅延読み込みされるそれぞれのフレームは、それぞれ独自のHTTPリクエスト/レスポンスで生成されます。つまり、それぞれ個別のプロセスで扱うことが可能です。プロセスを手で管理することなしに、並行実行が可能になるのです。表示を完了するまで400msかかる複雑な構成のページは、フレームによって分割できるかもしれません。そのフレームは、最初のリクエストにたったの50msしかかからず、それぞれ三つの遅延読み込みのフレームにも50msずつかかるとしましょう。そうすると、全てのページは100msで表示を完了することができます。なぜなら、それぞれ三つのフレームは、一つずつ順番に処理されるのではなく、同時に実行されるからです。
+1.<strong>モバイル対応</strong>。モバイルアプリでは、たいてい、大きくて複雑な構成のページにすることはできません。各セグメントは、その目的のためだけの画面を必要とします。Turboフレームで構成されたアプリケーションでは、複巣の要素を組み合わせたページを、それぞれのセグメントに分割する準備ができています。これらのセグメントはネイティブアプリのSheetやスクリーンに、そのまま使うことができます（というのも、各セグメントは、それぞれ専用のURLを持っているからです）。</p>
+<h2>Turboストリーム: Deliver live page changes</h2>
+<p>非同期なアクションに応答してページの一部を変化させることで、アプリケーションをとても生き生きしたものできます。Turboフレームはそのような更新を、一つのフレーム内でのHTTPプロトコルでの直接のやりとりに応じて行います。一方で、Turboストリームは、ページのどの部分であってもその更新に、WebSocketコネクションやSSE（Sever-sent events）、その他のトランスポートを使います。(<a href="http://itsnotatypo.com">imbox</a>を見てください。ここでは、新しいemailの着信が、自動的に反映されます）。</p>
+<p>Turboストリームは、<code>&lt;turbo-stream&gt;</code> 要素を、7つの基本のアクション、<code>append</code>、 <code>prepend</code>、 <code>replace</code>、 <code>update</code>、 <code>remove</code>、 <code>before</code>、 <code>after</code>とともに導入します。これらのアクションは、あなたが操作したい要素の ID を指定する<code>target</code>属性と一緒に使われます。そのアクションと<code>target</code>属性によって、ページをリフレッシュするのに必要とされる全てのミューテーションをエンコードできます。いくつかのストリーム要素を一つのストリームメッセージにまとめることさえできます。簡単に、挿入や置き換えをしたい HTML を<code>&lt;a href=&quot;https://developer.mozilla.org/ja/docs/Web/HTML/Element/template&quot;&gt;template tag&lt;/a&gt;</code>で囲います。あとはTurboがやってくれます。</p>
+<pre><code class="language-html">&lt;turbo-stream action=&quot;append&quot; target=&quot;messages&quot;&gt;
+  &lt;template&gt;
+    &lt;div id=&quot;message_1&quot;&gt;My new message!&lt;/div&gt;
+  &lt;/template&gt;
+&lt;/turbo-stream&gt;
+</code></pre>
+<p>このストリーム要素は、My new message! を含んだ<code>div</code>を取得し、ID<code>messages</code>のついたコンテナに追加します。
+次のコードは、既存の要素を置き換えるだけです。</p>
+<pre><code class="language-html">&lt;turbo-stream action=&quot;replace&quot; target=&quot;message_1&quot;&gt;
+  &lt;template&gt;
+    &lt;div id=&quot;message_1&quot;&gt;This changes the existing message!&lt;/div&gt;
+  &lt;/template&gt;
+&lt;/turbo-stream&gt;
+</code></pre>
+<p>Turboストリームは、かつてのRailsの世界、初めは<a href="https://weblog.rubyonrails.org/2006/3/28/rails-1-1-rjs-active-record-respond_to-integration-tests-and-500-other-things/">RJS</a>と呼ばれ、次に<a href="https://signalvnoise.com/posts/3697-server-generated-javascript-responses">SJR</a>と呼ばれたものと概念的に連続しています。けれど、それをJavaScriptを書く必要がなく実現しています。
+それらの利点は維持されています。</p>
+<ol>
+<li><strong>サーバーサイドテンプレートの再利用</strong>: リアルタイムなページの変更は、最初にページがロードされた時に使われたのと同じサーバサイドテンプレートを使って生成されています。</li>
+<li><strong>Wire上のHTML</strong>: 送っているものは全てHTMLなので、プロセスを更新するのにクライアントサイドのJavascriptは、必要ありません(もちろん、Turboの後ろでは動いてますが)。そう、HTMLのペイロードは、同等の内容のJSONよりも少し大きいかもしれません。gzip を使うことで、たいていは、その差異は無視できるものです。そして、JSONを取得して、HTMLに変換するのに必要な全てのクライアントサイドの労力を節約できます。</li>
+<li><strong>より単純な制御フロー</strong>: WebSocket、SSEやフォーム時の送信に対してのメッセージが来たときに、次に何が起こるかは明らかです。そこには、ルーティングやイベントの連鎖、そのほかの必要な回り道はありません。どのように変化するかを教えてくれるシングルタグに囲まれたHTMLが変更されるだけです。</li>
+</ol>
+<p>今や、RJSとSJRと違って、Turboストリームの部品として、独自に定義したJavaScriptの関数を呼ぶことはできません。しかし、これは特色であって、バグではありません。独自に定義したJavaScript関数を呼ぶようなテクニックは、レスポンスにともなって、あまりに多くのJavaScriptが送られるようになる時、容易にこんがらかった混沌を生み出してしまいます。Turboは、DOMを更新することだけに、正面から取り組みます。そして、そのほかの振る舞いについては、 <a href="https://stimulus.hotwired.    dev">Stimulus</a>のアクションを使ってライフサイクル・コールバックと結びつけることを期待しています。</p>
+<h2>Turboネイティブ: iOSとAndroid両用のハイブリッド・アプリケーション</h2>
+<p>Turboネイティブは、iOSとAndroid両用のハイブリッド・アプリケーションを構築するための理想です。サーバーサイドでレンダリングされた既存のHTMLを使って、ネイティブ・ラッパーにアプリの機能性の基礎的な範囲を確保することができます。そして、節約したすべての時間を、非常に忠実度の高いネイティブ・コントローラーから利益を得られるいくつかの画面をよりよくすることに使うことができるのです。</p>
+<p>Basecampのようなアプリケーションは、何百もの画面を持っています。これらの画面の一つ一つを書き直すのは、骨折りばかりが膨大で、得られるものはほとんどありません。ネイティブならではの火力は、ハイ・ファイを必要とする高度なタッチ性能に取っておくほうがいいでしょう。Basecampのinbox内の”新着お知らせ&quot;といった機能は、たとえば、使用感がしっくりくるスワイプコントロールの使い所です。しかしほとんどのページ、たとえば単独のメッセージを表示するようなページでは、完全なネイディブで作ったからといって、特に得られるものはありません。</p>
+<p>ハイブリッドでアプリを作ると、開発プロセスをスピードアップするだけでなく、より自由に、遅くて厄介なアプリストアのリリースプロセスを経ることなくアプリを更新できるようになります。HTMLで完結するものはなんでも、Webアプリケーション内で変更し、すぐに全てのユーザーに届けられます。ビッグ・テックが変更を受け入れるのも、ユーザーがアプリを更新するのも待つことはありません。</p>
+<p>TurboネイディブはiOSとAndoroidのために利用可能な推奨開発プラクティスを利用することを前提としています。Turboネイティブは、ネイティブのAPIを抽象化して遠ざけたフレームワークではありません。また、ネイティブコードを、プラットフォーム間で共用できるようにする試みでさえありません。共用部分は、HTMLです。このHTMLは、サーバーサイドでレンダリングされます。しかし、ネイティブの制御は推奨されるネイディブのAPIで書かれます。</p>
+<p>より詳しいドキュメントは<a href="https://github.com/hotwired/turbo-ios">Turboネイティブ: iOS</a>と<a href="https://github.com/hotwired/turbo-android">Turboネイティブ: Android</a> のリポジトリを見てください。Turboの力でどんなかっこいいアプリが作られるかを感じるには、HEYのネイティブアプリ<a href="https://apps.apple.com/us/app/hey-email/id1506603805">iOS版</a> と <a href="https://play.google.com/store/apps/details?id=com.basecamp.hey&hl=en_US&gl=US">Android版</a>を見てください。</p>
+<h2>バックエンド・フレームワークとの統合</h2>
+<p>Turboを使うのに、バックエンド・フレームワークは必要ありません。全ての機能は、さらなる抽象化なしに、直接に使われるように設計されています。しかし、もしTurboと統合されたバックエンド・フレームワークを使う機会があるのなら、人生はより単純になるでしょう。<a href="https://github.com/hotwired/turbo-rails">その中のRuby on Railsむけの統合のための実装例がこちらです。</a>.</p>
+
+      </section>
+      <footer class="docs__footer grid__item grid__item--start-4 grid__item--span-8">
+        <footer>
+          <p class="footer-headline">
+            <small>
+              <a href="https://github.com/hotwired/turbo-site/issues/96">DHHの許諾</a>のもと、<a href="https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975">公式のTurboHandbook</a>として、翻訳をしています。
+            </small>
+            <br>
+            <small>
+              このサイトの全ての文責は、<a href="https://everyleaf.com/">株式会社万葉</a>にあります。
+            </small>
+          </p>
+        </footer>
+      </footer>
+    </main>
+  </body>
+</html>

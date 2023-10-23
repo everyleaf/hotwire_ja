@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/main.css">
+    <title>Hotwire</title>
+  </head>
+  <body>
+  <nav class="jump">
+    <ul class="jump__list">
+      <li><a class="jump__list-link jump__list-link--hotwire" href="https://hotwired.dev">Hotwire:</a></li>
+      <li><a class="jump__list-link jump__list-link--active" href="https://turbo.hotwired.dev">Turbo</a></li>
+    </ul>
+  </nav>
+    <main class="grid docs">
+
+      <header class="docs__index grid__custom-item">
+        <nav class="nav">
+  <ul class="nav__list ">
+    <li>
+      <a class="nav__list-link active" href="/turbo/handbook/introduction">Handbook</a>
+      <ul class="nav__sublist active">
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/introduction">はじめに</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/drive">Turbo ドライブを使ったナビゲート</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/frames">Turboフレームを分解する</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/streams">Turbo ストリームを利用してみよう</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/native">iOS と Android をネイティブにやる</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/building">Turbo アプリケーションの構築</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/installing">アプリケーションに Turbo をインストール</a>
+    </li>
+</ul>
+
+    </li>
+  </ul>
+</nav>
+
+      </header>
+
+      <section id="content" class="docs__content grid__custom-item">
+        <h1>アプリケーションに Turbo をインストール</h1>
+<p>Turbo は、アプリケーションの <code>&lt;head&gt;</code> 内で直接 Turbo 配布スクリプトを参照してコンパイルされた形でインストールするか、Webpack などのバンドル経由で npm を使用してインストールすることができます。</p>
+<h2>In Compiled Form</h2>
+<h2>コンパイル済みスクリプト</h2>
+<p>最新の配布スクリプトは、GitHub のリリースページからダウンロードできます。そして、ページ内の <code>&lt;script&gt;</code> タグ内で参照できます。または、Skypack のような CDN バンドラーを利用してリリースされた最新の Turbo を使用できます。詳細は、<a href="https://cdn.skypack.dev/@hotwired/turbo">https://cdn.skypack.dev/@hotwired/turbo</a> を参照してください。</p>
+<h2>npm パッケージ</h2>
+<p>パッケージングツールの <code>npm</code> や <code>yarn</code> を利用して npm から Turbo をインストールできます。下記のようにコード内で require や import できます。</p>
+<pre><code class="language-javascript">import * as Turbo from &quot;@hotwired/turbo&quot;;
+</code></pre>
+<h2>Ruby on Rails アプリケーション</h2>
+<p>JavaScript フレームワークの Turbo は、アセットパイプラインで直接利用できるように <a href="https://github.com/hotwired/turbo-rails">turbo-rails gem</a> に含まれています。</p>
+
+      </section>
+      <footer class="docs__footer grid__item grid__item--start-4 grid__item--span-8">
+        <footer>
+          <p class="footer-headline">
+            <small>
+              <a href="https://github.com/hotwired/turbo-site/issues/96">DHHの許諾</a>のもと、<a href="https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975">公式のTurboHandbook</a>として、翻訳をしています。
+            </small>
+            <br>
+            <small>
+              このサイトの全ての文責は、<a href="https://everyleaf.com/">株式会社万葉</a>にあります。
+            </small>
+          </p>
+        </footer>
+      </footer>
+    </main>
+  </body>
+</html>

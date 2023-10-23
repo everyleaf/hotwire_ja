@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/main.css">
+    <title>Hotwire</title>
+  </head>
+  <body>
+  <nav class="jump">
+    <ul class="jump__list">
+      <li><a class="jump__list-link jump__list-link--hotwire" href="https://hotwired.dev">Hotwire:</a></li>
+      <li><a class="jump__list-link jump__list-link--active" href="https://turbo.hotwired.dev">Turbo</a></li>
+    </ul>
+  </nav>
+    <main class="grid docs">
+
+      <header class="docs__index grid__custom-item">
+        <nav class="nav">
+  <ul class="nav__list ">
+    <li>
+      <a class="nav__list-link active" href="/turbo/handbook/introduction">Handbook</a>
+      <ul class="nav__sublist active">
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/introduction">はじめに</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/drive">Turbo ドライブを使ったナビゲート</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/frames">Turboフレームを分解する</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/streams">Turbo ストリームを利用してみよう</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/native">iOS と Android をネイティブにやる</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/building">Turbo アプリケーションの構築</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/installing">アプリケーションに Turbo をインストール</a>
+    </li>
+</ul>
+
+    </li>
+  </ul>
+</nav>
+
+      </header>
+
+      <section id="content" class="docs__content grid__custom-item">
+        <h1>Turbo ドライブを使ったナビゲート</h1>
+<p>Turbo ドライブは、ページ単位のナビゲーションを強化する、Turbo の一部機能です。
+リンクのクリックとフォームの送信を監視し、それらをバックグラウンドで実行し、全リロードを行わずにページを更新します。以前 <a href="https://github.com/turbolinks/turbolinks">Turbolinks</a> という名前で知られていたライブラリの進化版です。</p>
+<p>${toc}</p>
+<h2>ページ・ナビゲーションの基本</h2>
+<p>Turbo ドライブは、ページ・ナビゲーションを、ある<em>アクション</em>をともなった、ある<em>ロケーション</em> (URL)へのアクセスという形で表現します。</p>
+<p>アクセスは、ページの描画のために、クリックから始まるすべてのナビゲーション・ライフサイクルを要求します。そのサイクルには、ブラウザ履歴の更新や、ネットワーク・リクエストの発行、キャッシュからのページのコピーの再構築、最終的なレスポンスの描画、スクロール位置の更新も含まれます。</p>
+<p>アクセスには二つの種類があります。<em>アプリケーション・アクセス</em>、<em>advance</em> あるいは <em>replace</em> のアクションを伴うものと、<em>リストア・アクセス</em>、<em>restore</em> のアクションを伴うものです。</p>
+<h2>アプリケーション・アクセス</h2>
+<p>アプリケーション・アクセスは、Turbo ドライブが使えるリンクのクリック、あるいはプログラムによる<a href="/reference/drive#turbodrivevisit"><code>Turbo.visit(location)</code></a> の呼び出しです。
+アプリケーション・アクセスは常にネットワーク・リクエストを発行します。レスポンスが戻ってくると、Turbo ドライブはその HTML を描画し、アクセスを完了します。</p>
+<p>可能であれば、Turbo ドライブはアクセスがはじまった直後に、キャッシュからプレビューを描画します。これによって、同じページ間の頻繁なナビゲーションの体感スピードは改善します。</p>
+<p>もしアクセス先のロケーションがアンカーを含んでいる場合、Turbo ドライブはアンカー先の要素へスクロールします。含まれていなければ、そのページのトップへとスクロールします。</p>
+<p>アプリケーション・アクセスはブラウザ履歴に残ります。アクセスに伴う <em>アクション</em> によって、どのように残るかは異なります。</p>
+<p><img src="https://s3.amazonaws.com/turbolinks-docs/images/advance.svg" alt="advance アクセス・アクション"></p>
+<p>デフォルトのアクセスのアクションは <em>advance</em> です。advance アクセスの間、Turbo ドライブは<a href="https://developer.mozilla.org/ja/docs/Web/API/History/pushState"><code>history.pushState</code></a>を用いてブラウザ履歴に項目を積みます。</p>
+<p>Turbo ドライブ <a href="https://github.com/hotwired/turbo-ios">iOS adapter</a>を用いるアプリケーションは、普通はナビゲーション・スタックに新しい view コントローラーを積むことで Advance アクセスを扱います。同様に、<a href="https://github.com/hotwired/turbo-android">Android adapter</a>  を用いたアプリケーションは、新しいアクティビティをバックスタックに積みます。</p>
+<p><img src="https://s3.amazonaws.com/turbolinks-docs/images/replace.svg" alt="replace アクセス・アクション"></p>
+<p>ブラウザ履歴に新しい履歴項目を積まずにロケーションにアクセスをしたいことがあるかもしれません。<a href="https://developer.mozilla.org/ja/docs/Web/API/History/replaceState"><code>history.replaceState</code></a> を用いた <em>replace</em> アクセス・アクションは一番上の履歴項目を破棄し、新しいロケーションにそれを取り替えます。</p>
+<p>次のリンクが replace アクセスを発火させるよう指定するために、該当リンクに <code>data-turbo-action=&quot;replace&quot;</code> をアノテーションします。</p>
+<pre><code class="language-html">&lt;a href=&quot;/edit&quot; data-turbo-action=&quot;replace&quot;&gt;編集&lt;/a&gt;
+</code></pre>
+<p>プログラム的に replace アクションとともにロケーションにアクセスするには、<code>Turbo.visit</code>に<code>action: &quot;replace&quot;</code> オプションを渡します。</p>
+<pre><code class="language-js">Turbo.visit(&quot;/edit&quot;, { action: &quot;replace&quot; })
+</code></pre>
+<p>Turbo ドライブ <a href="https://github.com/hotwired/turbo-ios">iOS adapter</a>を用いるアプリケーションは一般に、最上位の view コントローラーを閉じ、新しい view コントローラーをナビゲーション・スタック上にアニメーションなしでpushすることで更新を扱います。</p>
+<h2>リストア・アクセス</h2>
+<p>Turbo ドライブは、ブラウザバックやブラウザで前に進むボタンでの移動があった場合に、自動的にリストア・アクセスを開始します。<a href="https://github.com/hotwired/turbo-ios">iOS</a> あるいは <a href="https://github.com/hotwired/turbo-android">Android</a> アダプタを使うアプリケーションは、ナビゲーション・スタック内で後ろに戻る動きがあった場合に、リストア・アクセスを開始します。</p>
+<p><img src="https://s3.amazonaws.com/turbolinks-docs/images/restore.svg" alt="Restore visit action"></p>
+<p>可能であれば、Turbo ドライブは、リクエストを発生させることなくキャッシュからページの複製を描画します。それが不可能な場合、ネットワークごしに、ページの新しい複製を作ろうとします。詳しくは、<a href="/handbook/building#understanding-caching">Understanding Caching</a> を見てください。</p>
+<p>Turbo ドライブは各ページのスクロール位置を、ナビゲーション移動が起こる前に保存し、リストア・アクセスにおいて保存された位置まで自動的に戻ります。</p>
+<p>リストア・アクセスは <em>restore</em> アクションを伴い、Turbo ドライブはそれを内部的な利用のために取っておいてあります。わざわざリンクにアノテーションをしたり、<code>Turbo.visit</code> を <code>restore</code> アクションと共に発動したりするべきではありません。</p>
+<h2>アクセスを開始前にキャンセルする</h2>
+<p>Application visits can be canceled before they start, regardless of whether they were initiated by a link click or a call to <a href="/reference/drive#turbovisit"><code>Turbo.visit</code></a>.
+アプリケーション・アクセスは開始前にキャンセルできます。それが、リンクのクリックによって始まったものでも、<a href="/reference/drive#turbovisit"><code>Turbo.visit</code></a> によって始まったものでも。</p>
+<p>アクセスが始まろうとする瞬間に気づくために、<code>turbo:before-visit</code> を待ち受け、<code>event.detail.url</code> ( jQuery を使っている場合は <code>$event.originalEvent.detail.url</code> )を使いましょう。そして、<code>event.preventDefault()</code> でキャンセルするのです。</p>
+<p>リストア・アクセスは、<code>turbo:before-visit</code> を発火しないのでキャンセルすることができません。 Turbo ドライブは、リストア・アクセスを、<em>すでに存在する</em>アクセス履歴への応答の場合に発行します。よくあるのは、ブラウザバックやブラウザで前に進む場合です。</p>
+<h2>描画の一時停止</h2>
+<p>アプリケーションは描画を一時停止して、実行前に追加で下準備をすることができます。</p>
+<p><code>turbo:before-render</code> イベントを待ち受けることで、描画が始まろうとする瞬間に気づくことができます。そこで、<code>event.preventDefault()</code> で描画を停止させましょう。下準備が終わったら、<code>event.detail.resume()</code> を呼ぶことで描画を再開します。</p>
+<p>アクセスにexitのアニメーションを追加する例です。</p>
+<pre><code class="language-javascript">document.addEventListener('turbo:before-render', async (event) =&gt; {
+  event.preventDefault()
+
+  await animateOut()
+
+  event.detail.resume()
+})
+</code></pre>
+<h2>リクエストの一時停止</h2>
+<p>アプリケーションはリクエストを一時停止して、実行前に追加で下準備をすることができます。</p>
+<p><code>turbo:before-fetch-request</code> イベントを待ち受けることで、リクエストが始まろうとする瞬間に気づくことができます。そこで、<code>event.preventDefault()</code> でリクエストを停止させましょう。下準備が終わったら、<code>event.detail.resume()</code> を呼ぶことでリクエストを再開します。</p>
+<p>リクエストに <code>Authorization</code> ヘッダを設定する例です。</p>
+<pre><code class="language-javascript">document.addEventListener('turbo:before-fetch-request', async (event) =&gt; {
+  event.preventDefault()
+
+  const token = await getSessionToken(window.app)
+  event.detail.fetchOptions.headers['Authorization'] = `Bearer ${token}`
+
+  event.detail.resume()
+})
+</code></pre>
+<h2>異なるメソッドでアクセスを行う</h2>
+<p>デフォルトでは、リンクのクリックはサーバへ <code>GET</code> リクエストを送ります。しかし、これを <code>data-turbo-method</code> で変更することができます。</p>
+<pre><code class="language-html">&lt;a href=&quot;/articles/54&quot; data-turbo-method=&quot;delete&quot;&gt;Delete the article&lt;/a&gt;
+</code></pre>
+<p>リンクは隠されたformに変換され、DOM内の <code>a</code> 要素の次の位置に配置されます。これは、リンクは別のフォームの中には配置できないということです。フォームをネストすることはできないからです。</p>
+<p>アクセシビリティの観点からも、 GET 以外のリクエストには実際のフォームとボタンを使うのが望ましいでしょう。</p>
+<h2>特定のリンク/フォームでの Turbo ドライブの無効化</h2>
+<p>Turbo ドライブは、対象となる要素かその親要素で <code>data-turbo=&quot;false&quot;</code> を宣言することで、要素単位で無効化することができます。</p>
+<pre><code class="language-html">&lt;a href=&quot;/&quot; data-turbo=&quot;false&quot;&gt;Disabled&lt;/a&gt;
+
+&lt;form action=&quot;/messages&quot; method=&quot;post&quot; data-turbo=&quot;false&quot;&gt;
+  ...
+&lt;/form&gt;
+
+&lt;div data-turbo=&quot;false&quot;&gt;
+  &lt;a href=&quot;/&quot;&gt;Disabled&lt;/a&gt;
+  &lt;form action=&quot;/messages&quot; method=&quot;post&quot;&gt;
+    ...
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+<p>親要素で Turbo ドライブが無効化されている際に、再度 Turbo ドライブを有効化するには、<code>data-turbo=&quot;true&quot;</code> を使います。</p>
+<pre><code class="language-html">&lt;div data-turbo=&quot;false&quot;&gt;
+  &lt;a href=&quot;/&quot; data-turbo=&quot;true&quot;&gt;Enabled&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Turbo ドライブが無効化されたリンク/フォームは、ブラウザから通常通りに扱われます。</p>
+<p>ドライブを都度無効化するのではなく、必要なときにだけ有効化するには、 <code>Turbo.session.drive = false</code> を設定することができます。
+その上で、<code>data-turbo=&quot;true&quot;</code> を使って要素ごとにドライブを有効化します。
+JavaScript パック内で Turbo をインポートしている場合、このようにして設定をグローバルにできます。</p>
+<pre><code class="language-js">import { Turbo } from &quot;@hotwired/turbo-rails&quot;
+Turbo.session.drive = false
+</code></pre>
+<h2>進行状況を表示する</h2>
+<p>Turbo ドライブのナビゲーション中、ブラウザはその進行状況インジケータを表示しません。 Turbo ドライブは、リクエスト発行中のフィードバックを示すため、CSS ベースのプログレスバーを導入しています。</p>
+<p>このプログレスバーはデフォルトで利用可能です。読み込みに500ms以上を要するページ全てに自動的に表示されます（この表示設定は <a href="/reference/drive#turbodrivesetprogressbardelay"><code>Turbo.setProgressBarDelay</code></a> で変更できます）。</p>
+<p>このプログレスバーは <code>turbo-progress-bar</code> クラス名を持つ <code>&lt;div&gt;</code> 要素です。デフォルトのスタイルはドキュメントの先頭で指定されるため、後で設定されるルールによって上書き可能です。</p>
+<p>例えば、次のCSSを当てると太い緑のプログレスバーが表示されます。</p>
+<pre><code class="language-css">.turbo-progress-bar {
+  height: 5px;
+  background-color: green;
+}
+</code></pre>
+<p>プログレスバーを完全に無効化するには、その要素の <code>visibility</code> スタイルを <code>hidden</code> に設定します。</p>
+<pre><code class="language-css">.turbo-progress-bar {
+  visibility: hidden;
+}
+</code></pre>
+<p>プログレスバーと歩調を合わせるために、Turbo ドライブは、アクセスあるいはフォームの送信から始まるページのナビゲーションの間、そのページの <code>&lt;html&gt;</code> 要素の<a href="https://www.w3.org/TR/wai-aria/#aria-busy"> <code>[aria-busy]</code>  属性</a>を切り替えます。 Turbo ドライブはナビゲーション開始時に <code>[aria-busy=&quot;true&quot;]</code> をセットし、ナビゲーション完了時に <code>[aria-busy]</code> 属性を取り除きます。</p>
+<h2>アセット変更時のリロード</h2>
+<p>Turbo ドライブは、あるページから別のページへの遷移時に <code>&lt;head&gt;</code> 内のアセット要素のURLを追跡し、URLが変更されていればフル・リロードを発行します。これによってユーザーは、最新のアプリケーションのスクリプトやスタイルを入手できます。</p>
+<p>アセット要素を <code>data-turbo-track=&quot;reload&quot;</code> をつけてアノテーションし、アセットのURLにバージョン識別番号をつけます。識別子は番号でも、最終更新日時でもよいですし、アセットの内容のダイジェストならもっといいでしょう。次の例のようにします。</p>
+<pre><code class="language-html">&lt;head&gt;
+  ...
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;/application-258e88d.css&quot; data-turbo-track=&quot;reload&quot;&gt;
+  &lt;script src=&quot;/application-cbd3cd4.js&quot; data-turbo-track=&quot;reload&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+<h2>特定のトリガーで確実にフル・リロードを行う</h2>
+<p><code>&lt;meta name=&quot;turbo-visit-control&quot;&gt;</code> 要素をあるページの <code>&lt;head&gt;</code> に含めることで、そのページにアクセスしたとき確実にフル・リロードするようにできます。</p>
+<pre><code class="language-html">&lt;head&gt;
+  ...
+  &lt;meta name=&quot;turbo-visit-control&quot; content=&quot;reload&quot;&gt;
+&lt;/head&gt;
+</code></pre>
+<p>この設定は、Trubo ドライブのページ変更とうまく協調できないサードパーティ JavaScript ライブラリの回避方法として有用です。</p>
+<h2>ルートロケーションの設定</h2>
+<p>デフォルトでは、Turbo ドライブは同じオリジンでのURLのみをロード対象とします。つまり、同じプロトコル、ドメイン名、ポートが現在のドキュメントと同一のURLのみということです。他のすべてのURLはフォールバックされて、ページのフル・リロードが走ります。</p>
+<p>場合によっては、同一オリジン上のパスで、Turbo ドライブの範囲を限定したいこともあるでしょう。 Turbo ドライブのあるアプリケーションが <code>/app</code> の path にあり、Turbo ドライブでないヘルプページが <code>/help</code> にある場合、アプリからヘルプページへのリンクには Turbo ドライブを使うべきではありません。</p>
+<p>ページの <code>&lt;head&gt;</code> 内に <code>&lt;meta name=&quot;turbo-root&quot;&gt;</code> 要素を加えることで、Turbo ドライブの範囲を特定のルートロケーションに定めることができます。 Turbo ドライブは、このパスがプリフィックスでついた、同一URLのみをロードの対象とします。</p>
+<pre><code class="language-html">&lt;head&gt;
+  ...
+  &lt;meta name=&quot;turbo-root&quot; content=&quot;/app&quot;&gt;
+&lt;/head&gt;
+</code></pre>
+<h2>フォームの送信</h2>
+<p>Turbo ドライブは、リンクのクリックと似たやり方でフォームの送信を扱います。主な違いは、フォームの送信は HTTP の POST メソッドを使って状態をもつリクエストを発行できますが、リンクのクリックは HTTP の状態を持たない GET リクエストしか発行できません。</p>
+<p>フォームの送信を通じて、Turbo ドライブは <code>&lt;form&gt;</code> 要素を対象とした一連の <a href="/reference/events">events</a> をディスパッチし、documentへと <a href="https://developer.mozilla.org/ja/docs/Learn/JavaScript/Building_blocks/Events#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E3%83%90%E3%83%96%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3%E3%83%AA%E3%83%B3%E3%82%B0">バブリング</a> していきます。</p>
+<ol>
+<li><code>turbo:submit-start</code></li>
+<li><code>turbo:before-fetch-request</code></li>
+<li><code>turbo:before-fetch-response</code></li>
+<li><code>turbo:submit-end</code></li>
+</ol>
+<p>フォームを送信する間、まず送信開始時に Turbo ドライブは &quot;submitter&quot; 要素の <a href="https://developer.mozilla.org/ja/docs/Web/HTML/Attributes/disabled">disabled</a> 属性をセットし、送信終了時に <a href="https://developer.mozilla.org/ja/docs/Web/HTML/Attributes/disabled">disabled</a> 属性を取り除きます。<code>&lt;form&gt;</code> 要素の送信時、ブラウザは送信の口火を切る <code>&lt;input type=&quot;submit&quot;&gt;</code> か <code>&lt;button&gt;</code> 要素を <a href="https://developer.mozilla.org/ja/docs/Web/API/SubmitEvent/submitter">submitter</a> として扱います。 <code>&lt;form&gt;</code> 要素をプログラム的に送信するためには、 <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit">HTMLFormElement.requestSubmit()</a> メソッドを呼び出して <code>&lt;input type=&quot;submit&quot;&gt;</code> か <code>&lt;button&gt;</code> 要素をオプショナルなパラメーターとして渡します。</p>
+<p>もし <code>&lt;form&gt;</code> 送信中に行いたい他の変更があるなら（例えば、<em>すべての</em> <a href="https://developer.mozilla.org/ja/docs/Web/API/HTMLFormElement/elements">送信される <code>&lt;form&gt;</code> 内のフィールド</a>を disable にしたいなど）、独自にイベント・リスナーを宣言することができます。</p>
+<pre><code class="language-js">addEventListener(&quot;turbo:submit-start&quot;, ({ target }) =&gt; {
+  for (const field of target.elements) {
+    field.disabled = true
+  }
+})
+</code></pre>
+<h2>フォーム送信後のリダイレクト</h2>
+<p>フォームの送信によるステートフルなリクエストの後、Turbo ドライブはサーバーに <a href="https://en.wikipedia.org/wiki/HTTP_303">HTTP 303 リダイレクト・レスポンス</a> を期待します。このレスポンスに続いて、ドライブは、レスポンスを利用してページのリロードなしのナビゲートと更新を行います。</p>
+<p>このルールの例外は、レスポンスが 4xx あるいは 5xx のステータスコードで描画された場合です。この場合、 <code>422 Unprocessable Entity</code> の応答がサーバーから帰ってきた時はフォームバリデーションエラーが描画され、 <code>500 Internal Server Error</code> の時は &quot;Something Went Wrong&quot; の壊れたサーバー状態が描画されます。</p>
+<p>Turbo が POST リクエストに通常の200ステータスの応答を許さないのは、POST リクエストは、ブラウザが POST アクセスにリロードが走った際に、&quot;フォームを再送信しますか?&quot;のダイアログを出す振る舞いを、組み込みで持っているからです。Turbo はこれを再現できません。代わりに Turobo は、フォームのアクションを変えることはせず、描画しようとするフォーム送信の現在のURLに止まります。なぜなら、リロードは存在しないアクションURLへも GET リクエストを発行してしまうからです。</p>
+<p>フォーム送信が GET リクエストの場合は、フォームに <code>data-turbo-frame</code> ターゲットを与えられることで直接レスポンスを描画します。描画の一部としてURLを更新したい場合は、 <code>data-turbo-action</code> 属性を渡します。</p>
+<h2>フォーム送信後のストリーミング</h2>
+<p>サーバーはフォームの送信に対して、レスポンス・ボディ内の一つ以上の <code>&lt;turbo-stream&gt;</code> 要素を伴う <code>Content-Type: text/vnd.turbo-stream.html</code> <a href="streams">Turboストリーム</a>メッセージで応答することもあります。この応答によって、ナビゲーションなしに、ページの複数箇所を更新することができます。
+<br><br></p>
+
+      </section>
+      <footer class="docs__footer grid__item grid__item--start-4 grid__item--span-8">
+        <footer>
+          <p class="footer-headline">
+            <small>
+              <a href="https://github.com/hotwired/turbo-site/issues/96">DHHの許諾</a>のもと、<a href="https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975">公式のTurboHandbook</a>として、翻訳をしています。
+            </small>
+            <br>
+            <small>
+              このサイトの全ての文責は、<a href="https://everyleaf.com/">株式会社万葉</a>にあります。
+            </small>
+          </p>
+        </footer>
+      </footer>
+    </main>
+  </body>
+</html>

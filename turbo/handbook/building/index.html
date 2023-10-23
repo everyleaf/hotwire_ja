@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/main.css">
+    <title>Building Your Turbo Application</title>
+  </head>
+  <body>
+  <nav class="jump">
+    <ul class="jump__list">
+      <li><a class="jump__list-link jump__list-link--hotwire" href="https://hotwired.dev">Hotwire:</a></li>
+      <li><a class="jump__list-link jump__list-link--active" href="https://turbo.hotwired.dev">Turbo</a></li>
+    </ul>
+  </nav>
+    <main class="grid docs">
+
+      <header class="docs__index grid__custom-item">
+        <nav class="nav">
+  <ul class="nav__list ">
+    <li>
+      <a class="nav__list-link active" href="/turbo/handbook/introduction">Handbook</a>
+      <ul class="nav__sublist active">
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/introduction">はじめに</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/drive">Turbo ドライブを使ったナビゲート</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/frames">Turboフレームを分解する</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/streams">Turbo ストリームを利用してみよう</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/native">iOS と Android をネイティブにやる</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/building">Turbo アプリケーションの構築</a>
+    </li>
+    <li>
+      <a class="nav__sublist-link" href="/turbo/handbook/installing">アプリケーションに Turbo をインストール</a>
+    </li>
+</ul>
+
+    </li>
+  </ul>
+</nav>
+
+      </header>
+
+      <section id="content" class="docs__content grid__custom-item">
+        <h1>Turbo アプリケーションの構築</h1>
+<p>Turbo は、リンクを押す、あるいはフォームを送信する際に、全ページの読み込み直しを避けることで速さを実現しています。アプリケーションはブラウザの中で持続的な、息の長いプロセスとなります。これによって、JavaScript の構成も考え方を変えなければなりません。</p>
+<p>実際に、ナビゲーションごとに環境をリセットするための、全ページの読み込み直しに頼ることはもうできません。
+JavaScript の <code>window</code> と <code>document</code> オブジェクトはページの変更をまたいでその状態を保持します。そして、メモリ上に置いた他のオブジェクトもそのまま残るのです。</p>
+<p>この事実に気づき、そしてそのためにほんの少しのケアをすれば、アプリケーションを Turbo に強固に結びつけることなく、この制約を洗練された形で扱えるようデザインできます。</p>
+<h2>Script 要素と協働する</h2>
+<p>最初のページロードの際に存在する <code>&lt;script&gt;</code> 要素を、ブラウザは自動的に読み込んで評価します。</p>
+<p>新しいページにアクセスするとき、 Turbo ドライブは新しいページの <code>&lt;head&gt;</code> 要素に、何か現在のページにはなかった <code>&lt;script&gt;</code> 要素がないかを探します。そして、あった場合、現在のページの <code>&lt;head&gt;</code> に追加し、ブラウザによる読み込みと評価が行われます。これによって、必要な時にのみ、JavaScript を読み込むことができるのです。</p>
+<p>Turbo ドライブはページの <code>&lt;body&gt;</code> 内にある <code>&lt;script&gt;</code> 要素を、ページを描画するたびに評価します。ページごとの JavaScript の状態をセットしたり、クライアント側のモデルのブートストラップに、インラインのbody scriptを使うことができます。ページの変更時に、振る舞いをつけくわえたり、もっと複雑な操作を行いたい時は、 <code>&lt;script&gt;</code> 要素を避けて代わりに <code>turbo:load</code> イベントを使いましょう。</p>
+<p>描画後に<code>&lt;script&gt;</code> 要素を Turbo に評価させたくない場合、<code>data-turbo-eval=&quot;false&quot;</code> 要素をともなってアノテーションしましょう。このアノテーションは、ブラウザが最初のページロードの際の<code>&lt;script&gt;</code> 要素の評価は防がないので注意です。</p>
+<h3>アプリケーションの JavaScript バンドルを読み込む</h3>
+<p>アプリケーションの JavaScript バンドルが必ず読み込まれるようにするために、<code>&lt;script&gt;</code> 要素をドキュメントの <code>&lt;head&gt;</code> 内に配置しましょう。そうしなければ、 Turbo ドライブはページの変更ごとにバンドルを再読み込みするでしょう。</p>
+<pre><code class="language-html">&lt;head&gt;
+  ...
+  &lt;script src=&quot;/application-cbd3cd4.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+<p>使っているアセット・パッキングシステムの、内容が変わった際に新しいURLを付与するために各スクリプトにフィンガープリントを付与する設計についても考慮が必要です。その際は、<code>data-turbo-track</code> 属性を使って、新しい JavaScript のバンドルがデプロイされた際にはページがすべて再読み込みされるようにできます。詳しくは<a href="/handbook/drive#reloading-when-assets-change">Reloading When Assets Change</a>を見てください。</p>
+<h2>キャッシュを理解する</h2>
+<p>Turbo ドライブは、最近アクセスしたページのキャッシュを維持します。このキャッシュには、二つの目的があります。ページの再構成の間、ネットワークにアクセスすることなくページを表示することと、アプリケーションのアクセスの間、一時的なプレビューを表示することで体感でのパフォーマンスを上げることです。</p>
+<p>履歴によるナビゲーション (<a href="/handbook/drive#restoration-visits">Restoration Visits</a>経由)の場合、Turbo ドライブは可能であれば、ネットワークを介して新たなコピーを読み込むことなく、キャッシュからページを復元します。</p>
+<p>一方で、通常のナビゲーション（<a href="/handbook/drive#application-visits">Application Visits</a>経由）の場合、Turbo ドライブは即時にキャッシュからページを復元し、並行してネットワークを介して最新のコピーを読み込む間、プレビューとして復元したページを表示します。これによって、頻繁にアクセスされるロケーションについては、瞬間的にページがロードされるような錯覚を与えることができます。</p>
+<p>Turbo ドライブは現在のページを、新しいページを描画する直前にキャッシュにコピーします。Turbo ドライブはページを<a href="https://developer.mozilla.org/ja/docs/Web/API/Node/cloneNode"><code>cloneNode(true)</code></a>を使ってコピーすることに注意してください。つまり、アタッチされたイベントリスナーや、紐づけられたデータはすべて破棄されます。</p>
+<h3>ページキャッシュへの備え</h3>
+<p>もし、Turbo Drive が document をキャッシュする前に準備する必要があるなら、<code>turbo:before-cache</code> イベントをリッスンするといいでしょう。このイベントにより、フォームをリセットしたり、展開したUIを戻したり、サードパーティのウィジェットを破棄したりして、ページがもう一度表示される準備をすることができます。</p>
+<pre><code class="language-js">document.addEventListener(&quot;turbo:before-cache&quot;, function() {
+  // ...
+})
+</code></pre>
+<p>本質的に_一時的_ なページ要素というのもあります。たとえばフラッシュメッセージやアラートなどです。もしそれらが document とともにキャッシュされてしまうと、復元時に再表示されてしまいますが、大抵の場合それは望ましい挙動ではありません。そのような要素には、<code>data-turbo-temporary</code> をアノテートすることで、 Turbo ドライブは自動的に、キャッシュ時にそれらの要素を取り除きます。</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;div class=&quot;flash&quot; data-turbo-temporary&gt;
+    カートが更新されました！
+  &lt;/div&gt;
+  ...
+&lt;/body&gt;
+</code></pre>
+<h3>Previewが表示しているかどうかの検出</h3>
+<p>Turbo ドライブは、キャッシュからプレビューを表示する際に、<code>&lt;html&gt;</code> 要素に<code>data-turbo-preview</code> 属性を付与します。この属性の有無を調べることで、プレビュー表示時の振る舞いを選択的に有効にしたり無効にしたりできます。</p>
+<pre><code class="language-js">if (document.documentElement.hasAttribute(&quot;data-turbo-preview&quot;)) {
+  // Turbo ドライブはプレビューを表示している
+}
+</code></pre>
+<h3>キャッシュのオプトアウト</h3>
+<p>キャッシュのページごとの振る舞いは、<code>&lt;meta name=&quot;turbo-cache-control&quot;&gt;</code>要素をページの<code>&lt;head&gt;</code>に含め、キャッシュのディレクティブを宣言することでコントロールできます。</p>
+<p>ページのキャッシュ版を、アプリケーションのアクセス時のプレビューとして見せたくない場合は、<code>no-preview</code>ディレクティブを使います。<code>no-preview</code> とされたページのキャッシュは、再構成の場合にのみ利用されます。</p>
+<p>キャッシュを全く使わないように指定するには、<code>no-cache</code>ディレクティブを使います。no-cacheとされたページは、常にネットワークを通じて内容を取得します。ページの再構成時も同様です。</p>
+<pre><code class="language-html">&lt;head&gt;
+  ...
+  &lt;meta name=&quot;turbo-cache-control&quot; content=&quot;no-cache&quot;&gt;
+&lt;/head&gt;
+</code></pre>
+<p>アプリケーションのキャッシュを完全に無効にするためには、全てのページに<code>no-cache</code> ディレクティブが含まれるようにしてください。</p>
+<h3>クライアントサイドのキャッシュのオプトアウト</h3>
+<p><code>&lt;meta name=&quot;turbo-cache-control&quot;&gt;</code> 要素の値はまた、<code>Turbo.cache</code>を通じて参照できるクライアントサイドのAPIによってもコントロールできます。</p>
+<pre><code class="language-js">// 現在のページのキャッシュコントロールを`no-cache`に設定する
+Turbo.cache.exemptPageFromCache()
+
+// 現在のページのキャッシュコントロールを`no-preview`に設定する
+Turbo.cache.exemptPageFromPreview()
+</code></pre>
+<p>どちらの関数も<code>&lt;meta name=&quot;turbo-cache-control&quot;&gt;</code>要素がまだなければ、<code>&lt;head&gt;</code>の中に<code>&lt;meta name=&quot;turbo-cache-control&quot;&gt;</code>を書き込むことができます。</p>
+<p>前に設定したキャッシュコントロールの値は、以下のようにリセットできます。</p>
+<pre><code class="language-js">Turbo.cache.resetCacheControl()
+</code></pre>
+<h2>JavaScriptのふるまいを取りこむ</h2>
+<p><code>window.onload</code>や<code>DOMContentLoaded</code>、それにjQuery の<code>ready</code>イベントに応じて、JavaScriptのふるまいをレスポンスに注入するのはおなじみのやり方です。Turbo では、これらのイベントは一番最初のページロードに対するレスポンスでのみ発火します。後続のページの変更の際には何も起こりません。JavaScriptの振る舞いをDOM配下に連結するための2つの戦略を比べてみましょう。</p>
+<h3>ナビゲーションイベントを監視する</h3>
+<p>Turbo ドライブはナビゲーション中の一連のイベントを開始します。これらの中でもっとも重要なものは <code>turbo:load</code> イベントです。これは最初のページロードの際に発火し、Turbo ドライブのvisitごとにも発火します。</p>
+<p><code>DOMContentLoaded</code> の代わりに<code>turbo:load</code> イベントを監視することで、ページの変更ごとにJavaScriptの振る舞いをセットすることができます。</p>
+<pre><code class="language-js">document.addEventListener(&quot;turbo:load&quot;, function() {
+  // ...
+})
+</code></pre>
+<p>アプリケーションは、イベントが発火した際にいつでも初期状態なわけではなく、前のページのためにセットされた振る舞いを綺麗にする必要があるかもしれない、ということを心にとめておいてください。</p>
+<p>また、Turboドライブのナビゲーションだけが アプリケーションでのページ更新の唯一の源というわけではないことも心にとめておいてください。そのため、初期化のコードを関数化して分離し、<code>turbo:load</code>からも、DOMを変更するかもしれない他のどこからでも呼べるようにしたくなるかもしれません。</p>
+<p>他のイベントリスナーをページ・ボティに直接追加するのに<code>turbo:load</code>イベントを使うのは、できるだけ避けましょう。その代わり、 <a href="https://learn.jquery.com/events/event-delegation/">event delegation</a> を利用してイベントリスナーを<code>document</code> あるいは <code>window</code> に追加することを考慮してください。</p>
+<p>より詳しい情報は、 <a href="/reference/events">イベント全リスト</a> にあります。</p>
+<h3>Stimulus を使ってふるまいを追加する</h3>
+<p>あたらしいDOMは、フレームのナビゲーション、ストリーム・メッセージ、それにクライアント・サイドのレンダリング操作という方法によっていつでもページに現われる可能性があります。そしてこれらの新しい要素は、まるで新しいページロードが走ったかのように初期化される必要があることも、よくあります。</p>
+<p>これらの、Turboドライブからのページロードを含めたすべての更新を、単一の箇所とのやりとりとライフサイクル・コールバックで管理することができます。 Turboの姉妹フレームワークである<a href="https://stimulus.hotwired.dev">Stimulus</a>がそれを提供します。</p>
+<p>Stimulusを使ってアプリのHTMLにコントローラー、アクション、そしてターゲット属性をアノテーションすることができます。</p>
+<pre><code class="language-html">&lt;div data-controller=&quot;hello&quot;&gt;
+  &lt;input data-hello-target=&quot;name&quot; type=&quot;text&quot;&gt;
+  &lt;button data-action=&quot;click-&gt;hello#greet&quot;&gt;挨拶&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>対応したコントローラーを実装すれば、Stimulus は自動的に接続してくれます。</p>
+<pre><code class="language-js">// hello_controller.js
+import { Controller } from &quot;@hotwired/stimulus&quot;
+
+export default class extends Controller {
+  greet() {
+    console.log(`こんにちは、 ${this.name}さん!`)
+  }
+
+  get name() {
+    return this.targets.find(&quot;name&quot;).value
+  }
+}
+</code></pre>
+<p>Stimulus はドキュメントが変更されたときにはいつでも、これらのコントーローラーへの接続と接続切断、さらにイベント・ハンドラの統合を行います。それには、 <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">MutationObserver</a> API が利用されます。その結果、Turbo ドライブのページ変更、 Turbo フレームのナビゲーション、そして Turbo ストリームのメッセージを、他の方法でのDOM更新を扱うのと同じ方法で扱うことができるのです。</p>
+<h2>変更をべき等にする</h2>
+<p>サーバーから受け取ったHTMLに、クライアントサイドで変更を施したい場合というのはよくあります。
+例えば、要素を日毎にグルーピングするのに、ブラウザが認識している、ユーザーの現在のタイムゾーンを使いたい、というような場合です。</p>
+<p>要素のセットに<code>data-timestamp</code>属性をアノテートするとしましょう。これらの要素の作成日時はUTCです。そして、こういった要素をドキュメントの中からすべて探しだし、タイムスタンプをローカルタイムに変更し、新しい日付に変わった要素の前に日付の見出しを挿入するJavaScriptの関数を用意します。</p>
+<p>もし、この関数が<code>turbo:load</code>時に実行されるよう設定したら、何が起こるでしょう。このページにナビゲートしてきたら、関数が日付の見出しを挿入します。ページを去る際に、Turbo ドライブが変更された（日付の挿入された）ページのコピーをキャッシュします。さて、ユーザーがブラウザの戻るボタンを押し、Turbo ドライブがページを復元したとき、<code>turbo:load</code> がもう一度発火し、関数は二つ目の日付の見出したちを重ねて挿入することになります。</p>
+<p>この問題を避けるために、変更する関数を <em>べき等</em> にしましょう。べき等な変更は、複数回それを適用しても、その最初の適用以上に結果を変えることはありません。</p>
+<p>べき等な変更をつくるテクニックの一つは、すでに実行されたかどうかを、それぞれの処理された要素に<code>data</code> 属性をセットすることで追跡できるようにすることです。Turbo ドライブがキャッシュからページを復元する際、これらの属性は残っています。これらの属性を変更のための関数で走査し、どの要素がすでに処理済みなのかを決定するのです。</p>
+<p>より堅牢なテクニックは、ただ変更自体を走査することです。前述の日付でのグルーピングの例でいえば、新しい日付を挿入する前に、その日付がすでにあるかどうかをチェックするのです。このやり方は元の変更で処理されていない新しい挿入要素だけを無駄なく取り扱うことができます。</p>
+<h2>ページのロードにまたがって要素を永続化する</h2>
+<p>Turbo ドライブではある要素に <em>permanent</em> とマーキングすることができます。永続化要素は、ページのロードにまたがって保持されるため、これらの要素に施した変更を、ナビゲーション後に再び施す必要はありません。</p>
+<p>ショッピングカートを実装するTurbo ドライブを考えてみましょう。各ページのトップには、現在カートに入っている商品の数がアイコンで表示されています。このカウンターは、商品が追加されたり削除されるたび、 JavaScript で動的に更新されます。</p>
+<p>さて、ユーザーがアプリケーション内のいくつかのページを移動することを考えてみましょう。カートに商品を追加し、ブラウザの「戻る」ボタンを押します。ナビゲーション上で、Turbo ドライブは以前のページの状態をキャッシュから復元します。すると、カート内の商品数は、誤って1から0に変わるのです。</p>
+<p>この問題は、カウンター要素をパーマネントなものとしてマーキングすることで避けられます。HTMLの<code>id</code> を付与し、<code>data-turbo-permanent</code>属性をアノテーションすることで、パーマネント指定をしましょう。</p>
+<pre><code class="language-html">&lt;div id=&quot;cart-counter&quot; data-turbo-permanent&gt;1 アイテム&lt;/div&gt;
+</code></pre>
+<p>それぞれの描画の前に、Turbo ドライブはすべての永続要素をIDでマッチし、それを元ページから新ページに移し、そのデータとイベント・リスナーを保存します。</p>
+
+      </section>
+      <footer class="docs__footer grid__item grid__item--start-4 grid__item--span-8">
+        <footer>
+          <p class="footer-headline">
+            <small>
+              <a href="https://github.com/hotwired/turbo-site/issues/96">DHHの許諾</a>のもと、<a href="https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975">公式のTurboHandbook</a>として、翻訳をしています。
+            </small>
+            <br>
+            <small>
+              このサイトの全ての文責は、<a href="https://everyleaf.com/">株式会社万葉</a>にあります。
+            </small>
+          </p>
+        </footer>
+      </footer>
+    </main>
+  </body>
+</html>
