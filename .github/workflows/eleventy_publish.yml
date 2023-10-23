@@ -24,7 +24,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: github-pages
-          path: _site/artifact.tar
+          path: _site
           if-no-files-found: error
   deploy:
     needs: build
