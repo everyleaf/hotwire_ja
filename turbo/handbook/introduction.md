@@ -1,11 +1,6 @@
 ---
-permalink: /handbook/introduction.html
-redirect_from: /handbook/
 description: "Turbo bundles several techniques for creating fast, modern web applications without having to reach for a client-side JavaScript framework."
 ---
-
-[DHHの許諾](https://github.com/hotwired/turbo-site/issues/96)のもと、[公式のTurboHandbook](https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975)として、翻訳をしています。
-このサイトの全ての文責は、[株式会社万葉](https://everyleaf.com/)にあります。
 
 # はじめに
 

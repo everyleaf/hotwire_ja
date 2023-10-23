@@ -1,5 +1,6 @@
-# タイトル(未定)
+---
+layout: base.html
+---
 
-## 目次
+# Turbo Handbook
 
-- [Turbo Handbook]()

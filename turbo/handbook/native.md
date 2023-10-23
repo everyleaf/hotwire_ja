@@ -1,10 +1,6 @@
 ---
-permalink: /handbook/native.html
 description: "Turbo Native lets your majestic monolith form the center of your native iOS and Android apps, with seamless transitions between web and native sections."
 ---
-
-[DHHの許諾](https://github.com/hotwired/turbo-site/issues/96)のもと、[公式のTurboHandbook](https://turbo.hotwired.dev/handbook/introduction)を[オリジナル](https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975)として、翻訳をしています。
-このサイトの全ての文責は、[株式会社万葉](https://everyleaf.com/)にあります。
 
 # iOS と Android をネイティブにやる
 

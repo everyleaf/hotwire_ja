@@ -1,5 +1,5 @@
 ---
-permalink: /handbook/building.html
+title: Building Your Turbo Application
 description: "Learn more about building an application with Turbo."
 ---
 
