@@ -9,6 +9,18 @@ on:
         description: 'Are you sure you want to run the publish process manually?'
         required: true
         type: boolean
+  workflow_call:
+    inputs:
+      artifact_name:
+        description: 'Artifact name'
+        required: false
+        default: 'github-pages'
+        type: string
+      path:
+        description: "Path of the directory containing the static assets."
+        required: true
+        default: "_site/"
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,11 +32,24 @@ jobs:
           node-version: 18
       - run: npm ci
       - run: npm run publish
+      - name: Archive artifact
+        shell: sh
+        if: runner.os == 'Linux'
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory "$INPUT_PATH" \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            .
+        env:
+          INPUT_PATH: ${{ inputs.path }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: github-pages
-          path: _site
+          name: ${{ inputs.artifact_name }}
+          path: ${{ inputs.path }}
           if-no-files-found: error
   deploy:
     needs: build
