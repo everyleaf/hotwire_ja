@@ -36,6 +36,7 @@ jobs:
         shell: sh
         if: runner.os == 'Linux'
         run: |
+          export -p
           tar \
             --dereference --hard-dereference \
             --directory "$INPUT_PATH" \
