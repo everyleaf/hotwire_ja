@@ -39,8 +39,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: $ARTIFACT_NAME
-          path: $ARTIFACT_PATH
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACT_PATH }}
           if-no-files-found: error
   deploy:
     needs: build
