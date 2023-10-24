@@ -16,7 +16,7 @@
       "serve": "npm-run-all -s clean build:11ty build:css -p watch:** --silent",
       "publish": "run-s build:**",
       "clean": "del-cli \"_public/**\"",
-      "build:11ty": "eleventy",
+      "build:11ty": "eleventy --pathprefix=hotwire_ja",
       "watch:11ty": "eleventy --serve --quiet",
       "build:css": "sass --style=compressed _assets/css/main.scss _site/assets/main.css",
       "watch:css": "npm run build:css -- --watch"

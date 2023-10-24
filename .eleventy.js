@@ -1,3 +1,5 @@
+const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+
 // enable everything
 var md = require('markdown-it')({
   html: true,
@@ -6,10 +8,7 @@ var md = require('markdown-it')({
 });
 
 module.exports = function(eleventyConfig) {
-
-  eleventyConfig.addCollection("turbo_handbook", (collectionApi) =>
-    collectionApi.getFilteredByTag("turbo_handbook")
-  );
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 
   eleventyConfig.addPassthroughCopy({ '_assets': 'assets' });
   return {
@@ -18,6 +17,7 @@ module.exports = function(eleventyConfig) {
       includes: "_includes",
     },
     templateFormats: ['html', 'md', 'liquid', 'njk'],
-    htmlTemplateEngine: 'liquid'
+    htmlTemplateEngine: 'liquid',
+    pathPrefix: "/",
   }
 };
