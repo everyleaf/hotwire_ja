@@ -9,21 +9,13 @@ on:
         description: 'Are you sure you want to run the publish process manually?'
         required: true
         type: boolean
-  workflow_call:
-    inputs:
-      artifact_name:
-        description: 'Artifact name'
-        required: false
-        default: 'github-pages'
-        type: string
-      path:
-        description: "Path of the directory containing the static assets."
-        required: true
-        default: "_site/"
-        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ARTIFACT_PATH: '_site/'
+      ARTIFACT_NAME: 'github-pages'
+
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node
@@ -39,18 +31,16 @@ jobs:
           export -p
           tar \
             --dereference --hard-dereference \
-            --directory "$INPUT_PATH" \
+            --directory "$ARTIFACT_PATH" \
             -cvf "$RUNNER_TEMP/artifact.tar" \
             --exclude=.git \
             --exclude=.github \
             .
-        env:
-          INPUT_PATH: ${{ inputs.path }}
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ inputs.artifact_name }}
-          path: ${{ inputs.path }}
+          name: $ARTIFACT_NAME
+          path: $ARTIFACT_PATH
           if-no-files-found: error
   deploy:
     needs: build
