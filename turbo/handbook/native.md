@@ -1,5 +1,6 @@
 ---
-description: "Turbo Native lets your majestic monolith form the center of your native iOS and Android apps, with seamless transitions between web and native sections."
+title: "iOS と Android をネイティブにやる"
+description: "Turbo ネイティブは、モノリシック構造をネイティブのiOSおよびAndroidアプリの中心とし、ウェブとネイティブのセクション間でシームレスな遷移を実現します。"
 ---
 
 # iOS と Android をネイティブにやる

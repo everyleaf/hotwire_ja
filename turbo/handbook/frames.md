@@ -1,5 +1,6 @@
 ---
-description: "Turbo Frames decompose pages into independent contexts, which can be lazy-loaded and scope interaction."
+title: "Turboフレームを分解する"
+description: "Turbo Framesはページを独立したコンテキストに分解し、それらを遅延ロードできるようにし、インタラクションの範囲を制限します。"
 ---
 
 # Turboフレームを分解する

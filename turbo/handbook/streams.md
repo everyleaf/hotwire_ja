@@ -1,5 +1,6 @@
 ---
-description: "Turbo Streams deliver page changes over WebSocket, SSE or in response to form submissions using just HTML and a set of CRUD-like actions."
+title: "Turbo ストリームを利用してみよう"
+description: "Turbo ストリームは、WebSocketやSSEを利用して、またはフォームの送信に応答して、HTMLと一連のCRUDのようなアクションを使用してページの変更を配信します。"
 ---
 
 # Turbo ストリームを利用してみよう

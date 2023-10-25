@@ -1,5 +1,6 @@
 ---
-description: "Turbo bundles several techniques for creating fast, modern web applications without having to reach for a client-side JavaScript framework."
+title: "はじめに"
+description: "Turboは、クライアントサイドのJavaScriptフレームワークを使用することなく、高速でモダンなウェブアプリケーションを作成するためのいくつかの技術を提供します。"
 ---
 
 # はじめに
