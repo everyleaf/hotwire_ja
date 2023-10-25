@@ -1,4 +1,5 @@
 const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+const markdownItAnchor = require('markdown-it-anchor');
 
 // enable everything
 var md = require('markdown-it')({
@@ -8,9 +9,18 @@ var md = require('markdown-it')({
 });
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+  md.use(markdownItAnchor, { // add anchors to headings
+    level: '2',
+    permalink: 'true',
+    permalinkClass: 'anchor',
+    permalinkSymbol: '﹟',
+    permalinkBefore: 'true'
+  });
 
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPassthroughCopy({ '_assets': 'assets' });
+  eleventyConfig.setLibrary('md', md);
+
   return {
     dir: {
       layouts: "layouts",

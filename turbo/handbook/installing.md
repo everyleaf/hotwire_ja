@@ -6,9 +6,8 @@ description: "Learn how to install Turbo in your application."
 
 Turbo は、アプリケーションの `<head>` 内で直接 Turbo 配布スクリプトを参照してコンパイルされた形でインストールするか、Webpack などのバンドル経由で npm を使用してインストールすることができます。
 
-## In Compiled Form
-
 ## コンパイル済みスクリプト
+
 最新の配布スクリプトは、GitHub のリリースページからダウンロードできます。そして、ページ内の `<script>` タグ内で参照できます。または、Skypack のような CDN バンドラーを利用してリリースされた最新の Turbo を使用できます。詳細は、[https://cdn.skypack.dev/@hotwired/turbo](https://cdn.skypack.dev/@hotwired/turbo) を参照してください。
 
 ## npm パッケージ
