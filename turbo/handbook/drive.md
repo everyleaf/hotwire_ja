@@ -20,7 +20,7 @@ Turbo ドライブは、ページ・ナビゲーションを、ある*アクシ�
 
 ## アプリケーション・アクセス
 
-アプリケーション・アクセスは、Turbo ドライブが使えるリンクのクリック、あるいはプログラムによる[`Turbo.visit(location)`](/reference/drive#turbodrivevisit) の呼び出しです。
+アプリケーション・アクセスは、Turbo ドライブが使えるリンクのクリック、あるいはプログラムによる[`Turbo.visit(location)`](https://turbo.hotwired.dev/reference/drive#turbodrivevisit) の呼び出しです。
 アプリケーション・アクセスは常にネットワーク・リクエストを発行します。レスポンスが戻ってくると、Turbo ドライブはその HTML を描画し、アクセスを完了します。
 
 可能であれば、Turbo ドライブはアクセスがはじまった直後に、キャッシュからプレビューを描画します。これによって、同じページ間の頻繁なナビゲーションの体感スピードは改善します。
@@ -63,7 +63,7 @@ Turbo.visit("/edit", { action: "replace" })
 
 ![Restore visit action](https://s3.amazonaws.com/turbolinks-docs/images/restore.svg)
 
-可能であれば、Turbo ドライブは、リクエストを発生させることなくキャッシュからページの複製を描画します。それが不可能な場合、ネットワークごしに、ページの新しい複製を作ろうとします。詳しくは、[Understanding Caching](/handbook/building#understanding-caching) を見てください。
+可能であれば、Turbo ドライブは、リクエストを発生させることなくキャッシュからページの複製を描画します。それが不可能な場合、ネットワークごしに、ページの新しい複製を作ろうとします。詳しくは、[キャッシュを理解する](/turbo/handbook/building#キャッシュを理解する) を見てください。
 
  Turbo ドライブは各ページのスクロール位置を、ナビゲーション移動が起こる前に保存し、リストア・アクセスにおいて保存された位置まで自動的に戻ります。
 
@@ -71,8 +71,8 @@ Turbo.visit("/edit", { action: "replace" })
 
 ## アクセスを開始前にキャンセルする
 
-Application visits can be canceled before they start, regardless of whether they were initiated by a link click or a call to [`Turbo.visit`](/reference/drive#turbovisit).
-アプリケーション・アクセスは開始前にキャンセルできます。それが、リンクのクリックによって始まったものでも、[`Turbo.visit`](/reference/drive#turbovisit) によって始まったものでも。
+Application visits can be canceled before they start, regardless of whether they were initiated by a link click or a call to [`Turbo.visit`](https://turbo.hotwired.dev/reference/drive#turbovisit).
+アプリケーション・アクセスは開始前にキャンセルできます。それが、リンクのクリックによって始まったものでも、[`Turbo.visit`](https://turbo.hotwired.dev/reference/drive#turbovisit) によって始まったものでも。
 
 アクセスが始まろうとする瞬間に気づくために、`turbo:before-visit` を待ち受け、`event.detail.url` ( jQuery を使っている場合は `$event.originalEvent.detail.url` )を使いましょう。そして、`event.preventDefault()` でキャンセルするのです。
 
@@ -171,7 +171,7 @@ Turbo.session.drive = false
 
  Turbo ドライブのナビゲーション中、ブラウザはその進行状況インジケータを表示しません。 Turbo ドライブは、リクエスト発行中のフィードバックを示すため、CSS ベースのプログレスバーを導入しています。
 
-このプログレスバーはデフォルトで利用可能です。読み込みに500ms以上を要するページ全てに自動的に表示されます（この表示設定は [`Turbo.setProgressBarDelay`](/reference/drive#turbodrivesetprogressbardelay) で変更できます）。
+このプログレスバーはデフォルトで利用可能です。読み込みに500ms以上を要するページ全てに自動的に表示されます（この表示設定は [`Turbo.setProgressBarDelay`](https://turbo.hotwired.dev/reference/drive#turbodrivesetprogressbardelay) で変更できます）。
 
 このプログレスバーは `turbo-progress-bar` クラス名を持つ `<div>` 要素です。デフォルトのスタイルはドキュメントの先頭で指定されるため、後で設定されるルールによって上書き可能です。
 
@@ -267,7 +267,7 @@ addEventListener("turbo:submit-start", ({ target }) => {
 })
 ```
 
-[events]: /reference/events
+[events]: https://turbo.hotwired.dev/reference/events
 [バブリング]: https://developer.mozilla.org/ja/docs/Learn/JavaScript/Building_blocks/Events#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E3%83%90%E3%83%96%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3%E3%83%AA%E3%83%B3%E3%82%B0
 [要素]: https://developer.mozilla.org/ja/docs/Web/API/HTMLFormElement/elements
 [disabled]: https://developer.mozilla.org/ja/docs/Web/HTML/Attributes/disabled
@@ -288,5 +288,5 @@ Turbo が POST リクエストに通常の200ステータスの応答を許さ�
 
 ## フォーム送信後のストリーミング
 
-サーバーはフォームの送信に対して、レスポンス・ボディ内の一つ以上の `<turbo-stream>` 要素を伴う `Content-Type: text/vnd.turbo-stream.html` [Turboストリーム](streams)メッセージで応答することもあります。この応答によって、ナビゲーションなしに、ページの複数箇所を更新することができます。
+サーバーはフォームの送信に対して、レスポンス・ボディ内の一つ以上の `<turbo-stream>` 要素を伴う `Content-Type: text/vnd.turbo-stream.html` [Turboストリーム](/turbo/handbook/streams)メッセージで応答することもあります。この応答によって、ナビゲーションなしに、ページの複数箇所を更新することができます。
 <br><br>
