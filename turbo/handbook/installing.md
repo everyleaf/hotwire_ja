@@ -1,5 +1,6 @@
 ---
-description: "Learn how to install Turbo in your application."
+title: "アプリケーションに Turbo をインストール"
+description: "アプリケーションにTurboをインストールする方法を学びましょう。"
 ---
 
 # アプリケーションに Turbo をインストール

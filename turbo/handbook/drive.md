@@ -1,5 +1,6 @@
 ---
-description: "Turbo Drive accelerates links and form submissions by negating the need for full page reloads."
+title: "Turbo ドライブを使ったナビゲート"
+description: "Turbo ドライブは、ページ全体の再読み込みの必要を無くすことで、リンクとフォームの送信を高速化します。"
 ---
 
 # Turbo ドライブを使ったナビゲート

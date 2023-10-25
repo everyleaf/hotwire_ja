@@ -1,6 +1,6 @@
 ---
-title: Building Your Turbo Application
-description: "Learn more about building an application with Turbo."
+title: Turbo アプリケーションの構築
+description: "Turboを使用してアプリケーションを構築する方法についてもっと学びましょう。"
 ---
 
 # Turbo アプリケーションの構築
