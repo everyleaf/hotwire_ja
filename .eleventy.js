@@ -1,5 +1,6 @@
 const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 const markdownItAnchor = require('markdown-it-anchor');
+const markdownItToc = require('markdown-it-toc-done-right');
 
 // enable everything
 var md = require('markdown-it')({
@@ -15,6 +16,10 @@ module.exports = function(eleventyConfig) {
     permalinkClass: 'anchor',
     permalinkSymbol: '﹟',
     permalinkBefore: 'true'
+  });
+  md.use(markdownItToc, { // make a TOC with ${toc}
+    level: '2',
+    listType: 'ul'
   });
 
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
