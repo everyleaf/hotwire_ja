@@ -97,18 +97,3 @@
     background-color: $color-accent;
   }
 }
-
-.landing-actions__icon--guide {
-  -webkit-mask: url('/assets/icon-guide.svg') center / 100% no-repeat;
-  mask: url('/assets/icon-guide.svg') center / 100% no-repeat;
-}
-
-.landing-actions__icon--install {
-  -webkit-mask: url('/assets/icon-install.svg') center / 100% no-repeat;
-  mask: url('/assets/icon-install.svg') center / 100% no-repeat;
-}
-
-.landing-actions__icon--github {
-  -webkit-mask: url('/assets/icon-github.svg') center / 100% no-repeat;
-  mask: url('/assets/icon-github.svg') center / 100% no-repeat;
-}
