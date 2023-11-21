@@ -1,6 +1,6 @@
 ---
 title: Streams
-description: Streamsの7つのアクション
+description: Turbo ストリームのリファレンス
 ---
 
 # Streams
