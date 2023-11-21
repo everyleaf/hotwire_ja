@@ -102,4 +102,4 @@ targetのdom_idで指定された要素の後にtemplateタグ内のコンテン
 ## Stream要素を処理する
 Turboはstreamアクションを受け取り処理するためにあらゆる形式のストリームとつながることが出来ます。Streamソースはそのイベントの`data`属性にstreamアクションHTMLを含む[MessageEvent](https://developer.mozilla.org/ja/docs/Web/API/MessageEvent)を送信する必要があります。それから `Turbo.session.connectStreamSource(source)`によって接続され、`Turbo.session.connectStreamSource(source)`によって切断されます。もし`MessageEvents`を生成するものとは異なるソースからstreamアクションを処理する必要がある場合には、`Turbo.renderStreamMessage(streamActionHTML)`と使うことでそれを行うことが出来ます。
 
-これらをまとめる良い方法は、turbo-railsが[TurboCableStreamSourceElement](https://github.com/hotwired/turbo-rails/blob/main/app/javascript/turbo/cable_stream_source_element.js)で行っているようにカスタムエレメントを使用することです。
+これらをまとめる良い方法は、turbo-railsが[TurboCableStreamSourceElement](https://github.com/hotwired/turbo-rails/blob/main/app/javascript/turbo/cable_stream_source_element.js)で行っているようにカスタム要素を使用することです。
