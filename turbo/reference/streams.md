@@ -8,7 +8,7 @@ description: Streamsの7つのアクション
 ## 7つのアクション
 
 ### Append 追加する
-targetのdom_idによって指定されたコンテナにtemplateタグ内のコンテンツを追加します。
+target の dom_id によって指定されたコンテナに template タグ内のコンテンツを追加します。
 
 ```html
 <turbo-stream action="append" target="dom_id">
@@ -39,13 +39,13 @@ targetのdom_idで指定された要素を置き換えます。
 ```html
 <turbo-stream action="replace" target="dom_id">
   <template>
-    dom_idで指定された要素に置き換えるためのコンテンツ
+    dom_idで指定された要素を置き換えるためのコンテンツ
   </template>
 </turbo-stream>
 ```
 
 ### Update 更新する
-targetのdom_idで指定されたコンテナにtemplateタグ内のコンテンツを更新します。
+target の dom_id で指定されたコンテナを template タグ内のコンテンツで更新します。
 
 ```html
 <turbo-stream action="update" target="dom_id">
@@ -69,13 +69,13 @@ targetのdom_idで指定された要素の前に、templateタグ内のコンテ
 ```html
 <turbo-stream action="before" target="dom_id">
   <template>
-    dom_idで指定された要素の前に配置するコンテンツ
+    dom_idで指定された要素の前に配置するためのコンテンツ
   </template>
 </turbo-stream>
 ```
 
 ### After 要素の前に挿入
-targetのdom_idで指定された要素のあとにtemplateタグ内のコンテンツを挿入します。
+targetのdom_idで指定された要素の後にtemplateタグ内のコンテンツを挿入します。
 
 ```html
 <turbo-stream action="after" target="dom_id">
