@@ -5,10 +5,14 @@ description: "A reference of everything you can do with Turbo Frames."
 ---
 
 # Frames
+フレーム
 
 ## Basic frame
+基本フレーム
 
 Confines all navigation within the frame by expecting any followed link or form submission to return a response including a matching frame tag:
+
+フレーム内でのナビゲーションを制限し、フォローされたリンクやフォームの送信が、マッチングするフレームタグを含むレスポンスを返すことを期待する。
 
 ```html
 <turbo-frame id="messages">
