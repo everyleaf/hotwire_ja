@@ -168,6 +168,3 @@ through instances of the `FrameElement` class.
 ## Functions
 
 * `FrameElement.reload()` is a function that reloads the frame element from its `src`.
-
-[Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[preview]: https://turbo.hotwired.dev/handbook/building#detecting-when-a-preview-is-visible
