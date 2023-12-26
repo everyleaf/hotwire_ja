@@ -15,7 +15,7 @@ We’ve implemented our first controller and learned how Stimulus connects HTML 
 
 ## 「クリップボードにコピーする」機能を作る
 
-BasecampのUIには、以下のようなボタンがよく見られる：
+BasecampのUIには、以下のようなボタンがよく見られます：
 
 <p><img src="https://stimulus.hotwired.dev/assets/bc3-clipboard-ui.png" width="1023" height="317" style="max-width: 100%; height: auto;" alt="スクリーンショット。 電子メールアドレスが入力されたテキストフィールドと、その右側にある「クリップボードにコピー」ボタンを示している。"></p>
 
