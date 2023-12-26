@@ -21,7 +21,7 @@ BasecampのUIには、以下のようなボタンがよく見られる：
 
 これらのボタンをクリックすると、URLやメールアドレスなどのテキストがクリップボードにコピーされます。
 
-ウェブプラットフォームには<a href="https://www.w3.org/TR/clipboard-apis/" target="_blank">システムのクリップボードにアクセスするAPI</a>がありますが、それを行うHTML要素はありません。 クリップボードにコピー」ボタンを実装するには、JavaScriptを使う必要があります。
+ウェブプラットフォームには<a href="https://www.w3.org/TR/clipboard-apis/" target="_blank">システムのクリップボードにアクセスするAPI</a>がありますが、それを行うHTML要素はありません。「クリップボードにコピー」ボタンを実装するには、JavaScriptを使う必要があります。
 
 <details>
     <summary>原文</summary>
