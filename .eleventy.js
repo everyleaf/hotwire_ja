@@ -1,4 +1,5 @@
 const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItToc = require('markdown-it-toc-done-right');
 
@@ -23,6 +24,7 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+  eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPassthroughCopy({ '_assets': 'assets' });
   eleventyConfig.setLibrary('md', md);
 

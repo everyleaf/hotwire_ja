@@ -7,6 +7,7 @@
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "del-cli": "^3.0.1",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.7",
