@@ -2,6 +2,7 @@
 permalink: /reference/events.html
 order: 04
 description: "A reference of everything you can do with Turbo Events."
+description: "Turbo イベントでできるすべてのことのレファレンス"
 ---
 
 # Events
