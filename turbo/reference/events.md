@@ -9,7 +9,7 @@ description: "Turbo イベントでできるすべてのことのレファレン
 # イベント
 
 Turbo emits events that allow you to track the navigation lifecycle and respond to page loading. Except where noted, Turbo fires events on the `document.documentElement` object (i.e., the `<html>` element).
-Turboは、ナビゲーション・ライフサイクルを追跡しページのロードに返答できるイベントを発行します。
+Turboは、ナビゲーション・ライフサイクルを追跡しページの読み込みに返答できるイベントを発行します。
 特記がない限り、`Turboはdocument.documentElement`オブジェクト（つまり、<html>要素）でイベントを発生させます。これにより、ページの読み込みやナビゲーションのさまざまな段階でイベントをキャッチして処理することが可能になります。
 
 (Note that when using jQuery, the data on the event must be accessed as `$event.originalEvent.detail`.)
