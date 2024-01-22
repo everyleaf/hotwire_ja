@@ -50,7 +50,7 @@ Turboは、GitHubで開発された[pjax](https://github.com/defunkt/jquery-pjax
 
 しかし、Turboだけではまだまだ話の半分に過ぎません。 ページの全更新よりももっと細かいものの実装にも目を向ける必要があります。 要素の表示・非表示の切り替え、クリップボードへのコンテンツのコピー、リストへの新しいTODOの追加といった私たちがモダンなウェブアプリケーションでイメージするようなインタラクションの実現の方法についてです。
 
-Stimulus以前は、Basecampは様々なスタイルやパターンを使って、これらのモダンインタラクションを実現していました。 あるコードはjQueryをひとつまみ、あるコードはバニラJavaScriptを同じ大きさでひとつまみ、またあるコードはより大きなオブジェクト指向のサブシステムを使いました。 それらはすべて、`deta-behavioir`属性に指定した明示的なイベント処理で動かしていました。
+Stimulus以前は、Basecampは様々なスタイルやパターンを使って、これらのモダンインタラクションを実現していました。 あるコードはjQueryをひとつまみ、あるコードはバニラJavaScriptを同じ大きさでひとつまみ、またあるコードはより大きなオブジェクト指向のサブシステムを使いました。 それらはすべて、`data-behavior`属性に指定した明示的なイベント処理で動かしていました。
 
 (参考: [Code Spelunking in the all new Basecamp](https://signalvnoise.com/posts/3167-code-spelunking-in-the-all-new-basecamp))
 
