@@ -73,3 +73,4 @@ Turbo.session.drive = false
 ```
 
 Turns Turbo Drive off by default. You must now opt-in to Turbo Drive on a per-link and per-form basis using `data-turbo="true"`.
+デフォルトで Turbo ドライブをオフに設定できます。この状況下で Turbo ドライブを部分的に利用したい場合は、`data-turbo="true"` を設定することで、リンクやフォームごとに Turbo ドライブをオプトインできます。
