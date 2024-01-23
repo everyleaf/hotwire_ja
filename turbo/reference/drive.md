@@ -64,6 +64,7 @@ Turbo.setConfirmMethod(confirmMethod)
 ```
 
 Sets the method that is called by links decorated with [`data-turbo-confirm`](/handbook/drive#requiring-confirmation-for-a-visit). The default is the browser's built in `confirm`. The method should return `true` if the visit can proceed.
+[`data-turbo-confirm`](/handbook/drive#requiring-confirmation-for-a-visit) を指定したリンクによって呼び出されるメソッドを設定できます。デフォルトは、ブラウザのビルドインである `confirm` が設定されています。この設定したメソッドは、画面遷移可能な場合には `true` を返す必要があります。
 
 ## Turbo.session.drive
 
