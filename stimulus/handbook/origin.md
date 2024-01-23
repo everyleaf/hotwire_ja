@@ -80,7 +80,7 @@ Stimulusが適用されたHTMLを見ると、プログレッシブエンハン�
 ```html
 <div data-controller="clipboard">
   PIN: <input data-clipboard-target="source" type="text" value="1234" readonly>
-  <button data-action="clipboard#copy">Copy to Clipboard</button>
+  <button data-action="clipboard#copy">クリップボードにコピー</button>
 </div>
 ```
 
