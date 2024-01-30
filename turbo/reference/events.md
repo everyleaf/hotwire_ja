@@ -56,7 +56,7 @@ Turbo emits events that allow you to track the navigation lifecycle and respond 
 
 </details>
 
-* `turbo:before-fetch-request` は、Turbo がページの取得のためにネットワークリクエストを発行する前に発火します。リクエスト先は `event.detail.url` で取得でき、オプションオブジェクトは `event.detail.fetchOptions` で取れます。このイベントは、そのイベントを引き起こし、`event.target` プロパティでアクセスできるそれぞれの要素（turboフレームあるいはフォーム要素）で発火されます。リクエストは `event.detail.resume` によってキャンセル、あるいは継続されます（詳細は [リクエストの停止](/handbook/drive#リクエストの停止)参照)。
+* `turbo:before-fetch-request` は、Turbo がページの取得のためにネットワークリクエストを発行する前に発火します。リクエスト先は `event.detail.url` で取得できます。また、オプションオブジェクトは `event.detail.fetchOptions` で取得できます。。このイベントが発火されるのは、そのイベントを引き起こしたそれぞれの要素（turboフレームあるいはフォーム要素）です。要素は、`event.target` プロパティでアクセスできます。リクエストは `event.detail.resume` によってキャンセル、あるいは継続されます（詳細は [リクエストの停止](/handbook/drive#リクエストの停止)参照)。
 
 
 <details>
@@ -65,7 +65,7 @@ Turbo emits events that allow you to track the navigation lifecycle and respond 
 
 </details>
 
-* `turbo:before-fetch-response`  はネットワークリクエストの完了前に発火します。フェッチのオプションオブジェクトは `event.detail` で取得できます。このイベントは、そのイベントを引き起こし、`event.target` プロパティでアクセスできるそれぞれの要素（turboフレームあるいはフォーム要素）で発火されます。
+* `turbo:before-fetch-response`  はネットワークリクエストの完了前に発火します。フェッチのオプションオブジェクトは `event.detail` で取得できます。このイベントが発火されるのは、そのイベントを引き起こしたそれぞれの要素（turboフレームあるいはフォーム要素）です。その要素には、`event.target` プロパティでアクセスできます。
 
 
 <details>
@@ -75,7 +75,7 @@ Turbo emits events that allow you to track the navigation lifecycle and respond 
 
 </details>
 
-* `turbo:submit-end` はフォームのサブミッション-開始したネットワークリクエストが完了した後に発火します。`FormSubmission` オブジェクトは `event.detail.formSubmission` でアクセスできます。また、 `event.detail` 内に含まれる `FormSubmissionResult` プロパティも同様にアクセスできます。
+* `turbo:submit-end` はフォームのサブミッションによって開始したネットワークリクエストが完了した後に発火します。`FormSubmission` オブジェクトは `event.detail.formSubmission` でアクセスできます。また、 `event.detail` 内に含まれる `FormSubmissionResult` プロパティも同様にアクセスできます。
 
 
 <details>
@@ -127,7 +127,7 @@ Turbo emits events that allow you to track the navigation lifecycle and respond 
 * `turbo:load` fires once after the initial page load, and again after every Turbo visit. Access visit timing metrics with the `event.detail.timing` object.
 </details>
 
-* `turbo:before-frame-render` は `<turbo-frame>` 要素を描画する前に発火します。新しい `<turbo-frame>` 要素は `event.detail.newFrame` で取得できます。描画は `event.detail.resume` によってキャンセルまたは継続できます。(詳細は [描画の一時停止](/handbook/frames#pausing-rendering))。Turbo ドライブがレスポンスをどのように描画するかは、`event.detail.render` 関数を上書きしてカスタマイズできます。 （詳細は [描画のカスタマイズ](/handbook/frames#custom-rendering))。
+* `turbo:before-frame-render` は `<turbo-frame>` 要素を描画する前に発火します。新しい `<turbo-frame>` 要素は `event.detail.newFrame` で取得できます。描画は `event.detail.resume` によってキャンセルまたは継続できます。(詳細は [描画の一時停止](https://turbo.hotwired.dev/handbook/frames#pausing-rendering))。Turbo ドライブがレスポンスをどのように描画するかは、`event.detail.render` 関数を上書きしてカスタマイズできます。 （詳細は [描画のカスタマイズ](https://turbo.hotwired.dev/handbook/frames#custom-rendering))。
 
 <details>
     <summary>原文</summary>
@@ -136,7 +136,7 @@ Turbo emits events that allow you to track the navigation lifecycle and respond 
 
 </details>
 
-* `turbo:frame-render` は `<turbo-frame>` 要素が描画された直後に発火します。特定の `<turbo-frame>` 要素がイベントの対象になります。 `FetchResponse` オブジェクトには、`event.detail.fetchResponse` プロパティで取得できます。
+* `turbo:frame-render` は `<turbo-frame>` 要素が描画された直後に発火します。特定の `<turbo-frame>` 要素がイベントの対象になります。 `FetchResponse` オブジェクトは、`event.detail.fetchResponse` プロパティで取得できます。
 
 <details>
     <summary>原文</summary>
@@ -146,7 +146,7 @@ Turbo emits events that allow you to track the navigation lifecycle and respond 
 </details>
 
 
-* `turbo:frame-load` は `<turbo-frame>` 要素がナビゲートされ、ロードが終了した時点で発火します（`turbo:frame-render` の後です）。特定の `<turbo-frame>` 要素がイベントの対象になります。.
+* `turbo:frame-load` は `<turbo-frame>` 要素がナビゲートされ、ロードが終了した時点で発火します（`turbo:frame-render` の後です）。特定の `<turbo-frame>` 要素がイベントの対象になります。
 
 <details>
     <summary>原文</summary>
@@ -164,7 +164,7 @@ Turbo emits events that allow you to track the navigation lifecycle and respond 
 * `turbo:frame-missing` fires when the response to a `<turbo-frame>` element request does not contain a matching `<turbo-frame>` element. By default, Turbo writes an informational message into the frame and throws an exception. Cancel this event to override this handling. You can access the [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) instance with `event.detail.response`, and perform a visit by calling `event.detail.visit(...)`.
 </details>
 
-* `turbo:fetch-request-error` はフォームかフレームが取ってこようとしたリクエストが、ネットワークエラーで失敗したときに発火します。このイベントはイベントを起動した各々の要素（turboフレームかフォーム要素）上に発火し、`event.target` プロパティでアクセスできます。イベントはキャンセルされます。
+* `turbo:fetch-request-error` はフォームかフレームが取ってこようとしたリクエストが、ネットワークエラーで失敗したときに発火します。このイベントはイベントを起動した各々の要素（turboフレームかフォーム要素）上に発火し、`event.target` プロパティでアクセスできます。このイベントはキャンセルできます。
 
 <details>
     <summary>原文</summary>
