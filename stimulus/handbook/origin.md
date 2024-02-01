@@ -151,6 +151,8 @@ Basecampでも、必要に応じて、いくつかの重たいアプローチを
 
 ぜひお試しください。
 
+David Heinemeier Hansson
+
 <details>
     <summary>原文</summary>
 At Basecamp we’ve used this architecture across several different versions of Basecamp and other applications for years. GitHub has used a similar approach to great effect. This is not only a valid alternative to the mainstream understanding of what a “modern” web application looks like, it’s an incredibly compelling one.
@@ -166,4 +168,6 @@ This set of alternative frameworks is about avoiding the heavy lifting as much a
 Above all, it’s a toolkit for small teams who want to compete on fidelity and reach with much larger teams using more laborious, mainstream approaches.
 
 Give it a go.
+
+David Heinemeier Hansson
 </details>
