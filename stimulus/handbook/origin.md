@@ -135,7 +135,7 @@ It really is a remarkably different paradigm. One that I’m sure many veteran J
 If, on the other hand, you have nagging sense that what you’re working on does not warrant the intense complexity and application separation such contemporary techniques imply, then you’re likely to find refuge in our approach.
 </details>
 
-## Stimulusとそれに関連するアイデアは、自然に抽出されたもの
+## Stimulusと関連するアイデアは、自然に抽出されたもの
 
 Basecampでは、このアーキテクチャをBasecampのいくつかのバージョンや他のアプリケーションで長年使ってきました。 GitHubも同様のアプローチで大きな効果を上げています。 これは、 「モダンな」 Webアプリケーションがどのようなものであるかについての主流の考え方に対する有効な代替案であるだけでなく、信じられないほど説得力のあるものです。
 
