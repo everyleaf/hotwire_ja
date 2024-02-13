@@ -56,7 +56,7 @@ Turbo emits events that allow you to track the navigation lifecycle and respond 
 
 </details>
 
-* `turbo:before-fetch-request` は、Turbo がページの取得のためにネットワークリクエストを発行する前に発火します。リクエスト先は `event.detail.url` で取得できます。また、オプションオブジェクトは `event.detail.fetchOptions` で取得できます。。このイベントが発火されるのは、そのイベントを引き起こしたそれぞれの要素（turboフレームあるいはフォーム要素）です。要素は、`event.target` プロパティでアクセスできます。リクエストは `event.detail.resume` によってキャンセル、あるいは継続されます（詳細は [リクエストの停止](/handbook/drive#リクエストの停止)参照)。
+* `turbo:before-fetch-request` は、Turbo がページの取得のためにネットワークリクエストを発行する前に発火します。リクエスト先は `event.detail.url` で取得できます。また、オプションオブジェクトは `event.detail.fetchOptions` で取得できます。このイベントが発火されるのは、そのイベントを引き起こしたそれぞれの要素（turboフレームあるいはフォーム要素）です。要素は、`event.target` プロパティでアクセスできます。リクエストは `event.detail.resume` によってキャンセル、あるいは継続されます（詳細は [リクエストの停止](/handbook/drive#リクエストの停止)参照)。
 
 
 <details>
