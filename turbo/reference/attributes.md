@@ -5,24 +5,14 @@ title: "Attributes"
 description: "A reference of everything you can do with element attributes and meta tags."
 ---
 
-# Attributes and Meta Tags
+# 属性とメタタグ
 
-## Data Attributes
+## データ属性
 
-The following data attributes can be applied to elements to customize Turbo's behaviour.
+次のデータ属性はTurboの振る舞いをカスタマイズするために、要素に適用できる。
 
-* `data-turbo="false"` disables Turbo Drive on links and forms including descendants. To reenable when an ancestor has opted out, use `data-turbo="true"`. Be careful: when Turbo Drive is disabled, browsers treat link clicks as normal, but [native adapters](/handbook/native) may exit the app.
-* `data-turbo-track="reload"` tracks the element's HTML and performs a full page reload when it changes. Typically used to [keep `script` and CSS `link` elements up-to-date](/handbook/drive#reloading-when-assets-change).
-* `data-turbo-frame` identifies the Turbo Frame to navigate. Refer to the [Frames documentation](/reference/frames) for further details.
-* `data-turbo-preload` signals to [Drive](/handbook/drive#preload-links-into-the-cache) to pre-fetch the next page's content
-* `data-turbo-action` customizes the [Visit](/handbook/drive#page-navigation-basics) action. Valid values are `replace` or `advance`. Can also be used with Turbo Frames to [promote frame navigations to page visits](/handbook/frames#promoting-a-frame-navigation-to-a-page-visit).
-* `data-turbo-permanent` [persists the element between page loads](/handbook/building#persisting-elements-across-page-loads). The element must have a unique `id` attribute. It also serves to exclude elements from being morphed when using [page refreshes with morphing](/handbook/page_refreshes.html)
-* `data-turbo-temporary` removes the element before the document is cached, preventing it from reappearing when restored.
-* `data-turbo-eval="false"` prevents inline `script` elements from being re-evaluated on Visits.
-* `data-turbo-method` changes the link request type from the default `GET`. Ideally, non-`GET` requests should be triggered with forms, but `data-turbo-method` might be useful where a form is not possible.
-* `data-turbo-stream` specifies that a link or form can accept a Turbo Streams response. Turbo [automatically requests stream responses](/handbook/streams#streaming-from-http-responses) for form submissions with non-`GET` methods; `data-turbo-stream` allows Turbo Streams to be used with `GET` requests as well.
-* `data-turbo-confirm` presents a confirm dialog with the given value. Can be used on `form` elements or links with `data-turbo-method`.
-* `data-turbo-submits-with` specifies text to display when submitting a form. Can be used on `input` or `button` elements. While the form is submitting the text of the element will show the value of `data-turbo-submits-with`. After the submission, the original text will be restored. Useful for giving user feedback by showing a message like "Saving..." while an operation is in progress.
+* `data-turbo="false"`は、リンクやフォームのTurboドライブを無効にします。このデータ属性を指定した要素の子孫要素のTurboドライブも無効になります。Turboドライブを有効にしたい場合は、`data-turbo="true"`を使います。Turboドライブを無効にする場合、振る舞いの違いに注意してください。ブラウザではリンクをクリックした時の振る舞いが通常通りになります。[native adapters](/handbook/native)では、アプリが終了するかもしれません。
+
 
 <details>
 <summary>原文</summary>
@@ -43,14 +33,7 @@ The following data attributes can be applied to elements to customize Turbo's be
 * `data-turbo-submits-with` specifies text to display when submitting a form. Can be used on `input` or `button` elements. While the form is submitting the text of the element will show the value of `data-turbo-submits-with`. After the submission, the original text will be restored. Useful for giving user feedback by showing a message like "Saving..." while an operation is in progress.
 </details>
 
-## Automatically Added Attributes
-
-The following attributes are automatically added by Turbo and are useful to determine the Visit state at a given moment.
-
-* `disabled` is added to the form submitter while the form request is in progress, to prevent repeat submissions.
-* `data-turbo-preview` is added to the `html` element when displaying a [preview](/handbook/building#detecting-when-a-preview-is-visible) during a Visit.
-* `data-turbo-visit-direction` is added to the `html` element during a visit, with a value of `forward` or `back` or `none`, to indicate its direction.
-* `aria-busy` is added to `html` and `turbo-frame` elements when a navigation is in progress.
+## 自動的に追加される属性 
 
 <details>
 <summary>原文</summary>
@@ -63,16 +46,8 @@ The following attributes are automatically added by Turbo and are useful to dete
 * `aria-busy` is added to `html` and `turbo-frame` elements when a navigation is in progress.
 </details>
 
-## Meta Tags
+## メタタグ
 
-The following `meta` elements, added to the `head`, can be used to customize caching and Visit behavior.
-
-* `<meta name="turbo-cache-control">` to [opt out of caching](/handbook/building#opting-out-of-caching).
-* `<meta name="turbo-visit-control" content="reload">` will perform a full page reload whenever Turbo navigates to the page, including when the request originates from a `<turbo-frame>`.
-* `<meta name="turbo-root">` to [scope Turbo Drive to a particular root location](/handbook/drive#setting-a-root-location).
-* `<meta name="view-transition" content="same-origin">` to trigger view transitions on browsers that support the [View Transition API](https://caniuse.com/view-transitions).
-* `<meta name="turbo-refresh-method" content="morph">` will configure [page refreshes with morphing](/handbook/page_refreshes.html).
-* `<meta name="turbo-refresh-scroll" content="preserve">` will enable [scroll preservation during page refreshes](/handbook/page_refreshes.html).
 
 <details>
 <summary>原文</summary>
