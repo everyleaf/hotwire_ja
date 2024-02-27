@@ -1,4 +1,4 @@
-<ul class="nav__sublist active">
+<ul class="nav__sublist {% if tags[0] == section %} active{% endif %}">
   {%- assign sortedEntries = collections[section]  -%}
   {%- for entry in sortedEntries -%}
   <li>

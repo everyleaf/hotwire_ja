@@ -3,5 +3,6 @@
     "turbo_reference"
   ],
   "layout": "base.html",
-  "section_title": "リファレンス"
+  "section_title": "リファレンス",
+  "section_code": "turbo_reference"
 }
