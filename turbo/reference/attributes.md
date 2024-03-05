@@ -12,7 +12,10 @@ description: "A reference of everything you can do with element attributes and m
 次のデータ属性はTurboの振る舞いをカスタマイズするために、要素に適用できる。
 
 * `data-turbo="false"`は、リンクやフォームのTurboドライブを無効にします。このデータ属性を指定した要素の子孫要素のTurboドライブも無効になります。Turboドライブを有効にしたい場合は、`data-turbo="true"`を使います。Turboドライブを無効にする場合、振る舞いの違いに注意してください。ブラウザではリンクをクリックした時の振る舞いが通常通りになります。[native adapters](/handbook/native)では、アプリが終了するかもしれません。
-
+* `data-turbo-track="reload"`はHTML要素を追跡し、それが変わったときに全ページをリロードします。通常、[`script`や`CSS`のリンクを最新の状態に保つために](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#%E3%82%A2%E3%82%BB%E3%83%83%E3%83%88%E5%A4%89%E6%9B%B4%E6%99%82%E3%81%AE%E3%83%AA%E3%83%AD%E3%83%BC%E3%83%89)使われます。
+* `data-turbo-frame`は、ナビゲートするためのTurboフレームを識別するためのものです。詳細は、[フレームのドキュメント](https://everyleaf.github.io/hotwire_ja/turbo/turbo/reference/frames)を参照してください。
+* `data-turbo-preload`は、Turboドライブに次のページのコンテンツをプリフェッチさせます。
+* `data-turbo-action`は、[Visit](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%BB%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%9F%BA%E6%9C%AC)アクションをカスタマイズします。
 
 <details>
 <summary>原文</summary>
