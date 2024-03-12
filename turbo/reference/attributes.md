@@ -1,8 +1,7 @@
 ---
-permalink: /reference/attributes.html
 order: 05
-title: "Attributes"
-description: "A reference of everything you can do with element attributes and meta tags."
+title: "要素属性とメタタグのリファレンス"
+description: "要素属性とメタタグのリファレンス"
 ---
 
 # 属性とメタタグ
@@ -12,10 +11,17 @@ description: "A reference of everything you can do with element attributes and m
 次のデータ属性はTurboの振る舞いをカスタマイズするために、要素に適用できる。
 
 * `data-turbo="false"`は、リンクやフォームのTurboドライブを無効にします。このデータ属性を指定した要素の子孫要素のTurboドライブも無効になります。Turboドライブを有効にしたい場合は、`data-turbo="true"`を使います。Turboドライブを無効にする場合、振る舞いの違いに注意してください。ブラウザではリンクをクリックした時の振る舞いが通常通りになります。[native adapters](/handbook/native)では、アプリが終了するかもしれません。
-* `data-turbo-track="reload"`はHTML要素を追跡し、それが変わったときに全ページをリロードします。通常、[`script`や`CSS`のリンクを最新の状態に保つために](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#%E3%82%A2%E3%82%BB%E3%83%83%E3%83%88%E5%A4%89%E6%9B%B4%E6%99%82%E3%81%AE%E3%83%AA%E3%83%AD%E3%83%BC%E3%83%89)使われます。
+* `data-turbo-track="reload"`はHTML要素を追跡し、それが変わったときに全ページをリロードします。通常、[`script`や`CSS`のリンクを最新の状態に保つために](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アセット変更時のリロード)使われます。
 * `data-turbo-frame`は、ナビゲートするためのTurboフレームを識別するためのものです。詳細は、[フレームのドキュメント](https://everyleaf.github.io/hotwire_ja/turbo/turbo/reference/frames)を参照してください。
 * `data-turbo-preload`は、Turboドライブに次のページのコンテンツをプリフェッチさせます。
-* `data-turbo-action`は、[Visit](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%BB%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%9F%BA%E6%9C%AC)アクションをカスタマイズします。
+* `data-turbo-action`は、[Visit](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ページ・ナビゲーションの基本)アクションをカスタマイズします。
+* `data-turbo-permanent`は、[ページ・ロード間で要素を永続化します](https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#ページのロードにまたがって要素を永続化する)。その要素の`id`属性はユニークでないといけません。[モーフィングによるページ更新](https://turbo.hotwired.dev/handbook/page_refreshes.html)から要素を除外したい場合も、`data-turbo-permanent`を使います。
+* `data-turbo-temporary`は、ドキュメントがキャッシュされる前に要素を削除します。これにより、ブラウザバックした時でもページが変わります。
+* `data-turbo-eval="false"`で、ページを再表示したときにインラインの`script`要素が再評価されないようになります。
+* `data-turbo-method`で、リンクのリクエストタイプをデフォルトの`GET`から変更できます。理想的には、`GET`ではないリクエストはフォームで発行されるべきですが、`data-turbo-method`はフォームが使えない場合に便利かもしれません。
+* `data-turbo-stream`により、リンクまたはフォームがTurbo ストリームのレスポンスを受け付けられます。Turboは、`GET`でないメソッドによるフォーム送信に対して、[自動的にストリーム・レスポンスを要求します](https://everyleaf.github.io/hotwire_ja/turbo/handbook/streams/#http-レスポンスからのストリーミング)。`data-turbo-stream`により、`GET`リクエストに対してもTurbo ストリームを使えます。
+* `data-turbo-confirm`は、指定された値で確認ダイアログを表示します。`data-turbo-method`を持つ`form`要素またはリンクで使えます。
+* `data-turbo-submits-with`により、フォーム送信時に表示するテキストを指定できます。この属性は、`input`要素または`button`要素で使えます。フォームが送信されている間、要素のテキストは`data-turbo-submits-with`の値を表示します。送信後は、元のテキストに戻ります。操作の進行中に「保存中...」のようなメッセージを表示すれば、ユーザーにフィードバックを与えられるので便利です。
 
 <details>
 <summary>原文</summary>
