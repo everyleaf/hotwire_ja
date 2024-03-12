@@ -23,10 +23,23 @@ module.exports = function(eleventyConfig) {
     listType: 'ul'
   });
 
+  eleventyConfig.addCollection('turbo_handbook', collectionApi => {
+    return collectionApi.getFilteredByTag('turbo_handbook').sort((a, b) => {
+      return a.data.order - b.data.order;
+    });
+  })
+
+  eleventyConfig.addCollection('turbo_reference', collectionApi => {
+    return collectionApi.getFilteredByTag('turbo_reference').sort((a, b) => {
+      return a.data.order - b.data.order;
+    });
+  })
+
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPassthroughCopy({ '_assets': 'assets' });
   eleventyConfig.setLibrary('md', md);
+  eleventyConfig.setDataDeepMerge(true);
 
   return {
     dir: {

@@ -33,6 +33,7 @@
   - 上記は [Front Matter Data](https://www.11ty.dev/docs/data-frontmatter/) と呼ばれるもので、Eleventyでビルドする際に必要な情報です。以下の対応をお願いします
     - permalinkの行は削除してください（本家と階層構造が異なるため）
     - titleやdescriptionがある場合は翻訳してください
+    - orderはそのまま残すようにしてください。これはリファレンスのページの並び順を指定するためのものです
 
 
 # PRの応対について
