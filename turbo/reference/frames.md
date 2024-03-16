@@ -1,14 +1,13 @@
 ---
-permalink: /reference/frames.html
 order: 02
-description: "A reference of everything you can do with Turbo Frames."
+description: "Turboフレームのリファレンス"
 ---
 
 # フレーム
 
 ## 基本フレーム
 
-フレーム内のリンクまたはフォームのレスポンスにマッチするフレームタグがあることを期待し、フレーム内の全ナビゲーションを制限しています。
+フレーム内にある、リンク先または送信したフォームのレスポンスにこのフレームとマッチするフレームタグが含まれていることを期待し、フレーム内の全ナビゲーションを制限しています。
 
 ```html
 <turbo-frame id="messages">
