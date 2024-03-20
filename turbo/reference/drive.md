@@ -14,15 +14,19 @@ Turbo.visit(location, { action: action })
 Turbo.visit(location, { frame: frame })
 ```
 
-指定された _location_（URLまたはパスを含む文字列）に対して、指定された _action_（"advance" または "replace" のいずれかの文字列）で[アプリケーション・アクセス](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アプリケーション・アクセス)を行います。
+指定された _location_（URLまたはパスを含む文字列）に対して、指定された _action_（"advance" または "replace" のいずれかの文字列）で[アプリケーション・アクセス]を行います。
 
-_location_ がクロスオリジンなURLまたは、指定されたルートの範囲外にある場合（[ルートロケーションの設定](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ルートロケーションの設定)を参照）、Turbo は、`window.location` を利用し画面全体の再読み込みを行います。
+_location_ がクロスオリジンなURLまたは、指定されたルートの範囲外にある場合（[ルートロケーションの設定]を参照）、Turbo は、`window.location` を利用し画面全体の再読み込みを行います。
 
 _action_ が指定されていない場合、Turbo ドライブは、`"advance"`が指定されたとみなします。
 
-画面遷移が実行される前に、Turbo Driveは `document` に対して、 `turbo:before-visit` イベントを発火します。アプリケーション側では、このイベントを検知し、`event.preventDefault()` を利用して画面遷移をキャンセルできます。（[アクセスを開始前にキャンセルする](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アクセスを開始前にキャンセルする)を参照）。」
+画面遷移が実行される前に、Turbo Driveは `document` に対して、 `turbo:before-visit` イベントを発火します。アプリケーション側では、このイベントを検知し、`event.preventDefault()` を利用して画面遷移をキャンセルできます。（[アクセスを開始前にキャンセルする]を参照）。」
 
-_frame_ が指定されている場合、指定された値と一致する `[id]` 属性を持つ `<turbo-frame>` 要素を、指定された _location_ へナビゲートします。`<turbo-frame>` 要素が見つからない場合は、画面全体での[アプリケーション・アクセス](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アプリケーション・アクセス)を行います。
+_frame_ が指定されている場合、指定された値と一致する `[id]` 属性を持つ `<turbo-frame>` 要素を、指定された _location_ へナビゲートします。`<turbo-frame>` 要素が見つからない場合は、画面全体での[アプリケーション・アクセス]を行います。
+
+[アプリケーション・アクセス]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アプリケーション・アクセス
+[ルートロケーションの設定]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ルートロケーションの設定
+[アクセスを開始前にキャンセルする]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アクセスを開始前にキャンセルする
 
 <details>
 <summary>原文</summary>
@@ -70,9 +74,11 @@ Removes all entries from the Turbo Drive page cache. Call this when state has ch
 Turbo.setProgressBarDelay(delayInMilliseconds)
 ```
 
-ナビゲーション中にプログレスバーが表示されるまでの遅延をミリ秒単位で設定できます。デフォルトでは、プログレスバーは500ミリ秒後に表示されます。
+ナビゲーション中にプログレスバーが表示されるまでの遅延をミリ秒単位で設定できます。デフォルトでは、[プログレスバー]は500ミリ秒後に表示されます。
 
 iOS または Android アダプターと併用した場合、このメソッドは動作しないので注意しましょう。
+
+[プログレスバー]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#進行状況を表示する
 
 <details>
 <summary>原文</summary>
@@ -91,7 +97,9 @@ Note that this method has no effect when used with the iOS or Android adapters.
 Turbo.setConfirmMethod(confirmMethod)
 ```
 
-[`data-turbo-confirm`](https://turbo.hotwired.dev/handbook/drive#requiring-confirmation-for-a-visit) を指定したリンクによって呼び出されるメソッドを設定できます。デフォルトは、ブラウザのビルドインである `confirm` が設定されています。この設定したメソッドは、画面遷移可能な場合には `true` を返す必要があります。
+[`data-turbo-confirm`] を指定したリンクによって呼び出されるメソッドを設定できます。デフォルトは、ブラウザのビルドインである `confirm` が設定されています。この設定したメソッドは、画面遷移可能な場合には `true` を返す必要があります。
+
+[`data-turbo-confirm`]: https://turbo.hotwired.dev/handbook/drive#requiring-confirmation-for-a-visit
 
 <details>
 <summary>原文</summary>
