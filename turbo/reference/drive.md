@@ -83,7 +83,7 @@ Sets the delay after which the [progress bar](/handbook/drive#displaying-progres
 
 Note that this method has no effect when used with the iOS or Android adapters.
 
-</deitals>
+</details>
 
 ## Turbo.setConfirmMethod
 
@@ -110,7 +110,7 @@ Turbo.session.drive = false
 
 デフォルトで Turbo ドライブをオフに設定できます。また、Turbo ドライブを部分的に利用したい場合は、`data-turbo="true"` を設定することで、リンクやフォームごとに Turbo ドライブをオプトインできます。
 
-<deitals>
+<details>
 <summary>原文</summary>
 
 ## Turbo.session.drive
