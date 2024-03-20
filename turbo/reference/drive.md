@@ -70,11 +70,20 @@ Removes all entries from the Turbo Drive page cache. Call this when state has ch
 Turbo.setProgressBarDelay(delayInMilliseconds)
 ```
 
-Sets the delay after which the [progress bar](/handbook/drive#displaying-progress) will appear during navigation, in milliseconds. The progress bar appears after 500ms by default.
 ナビゲーション中にプログレスバーが表示されるまでの遅延をミリ秒単位で設定できます。デフォルトでは、プログレスバーは500ミリ秒後に表示されます。
 
+iOS または Android アダプターと併用した場合、このメソッドは動作しないので注意しましょう。
+
+<details>
+<summary>原文</summary>
+
+## Turbo.setProgressBarDelay
+
+Sets the delay after which the [progress bar](/handbook/drive#displaying-progress) will appear during navigation, in milliseconds. The progress bar appears after 500ms by default.
+
 Note that this method has no effect when used with the iOS or Android adapters.
-iOS または Android アダプターと併用した場合、このメソッドは動作しないことに注意しましょう。
+
+</deitals>
 
 ## Turbo.setConfirmMethod
 
