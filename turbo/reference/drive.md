@@ -108,5 +108,13 @@ Sets the method that is called by links decorated with [`data-turbo-confirm`](/h
 Turbo.session.drive = false
 ```
 
+デフォルトで Turbo ドライブをオフに設定できます。また、Turbo ドライブを部分的に利用したい場合は、`data-turbo="true"` を設定することで、リンクやフォームごとに Turbo ドライブをオプトインできます。
+
+<deitals>
+<summary>原文</summary>
+
+## Turbo.session.drive
+
 Turns Turbo Drive off by default. You must now opt-in to Turbo Drive on a per-link and per-form basis using `data-turbo="true"`.
-デフォルトで Turbo ドライブをオフに設定できます。この状況下で Turbo ドライブを部分的に利用したい場合は、`data-turbo="true"` を設定することで、リンクやフォームごとに Turbo ドライブをオプトインできます。
+
+</details>
