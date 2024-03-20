@@ -49,11 +49,20 @@ If _frame_ is specified, find a `<turbo-frame>` element with an `[id]` attribute
 Turbo.cache.clear()
 ```
 
+Turbo ドライブによってキャッシュされたページ情報を全て削除します。サーバー上の状態が変更され、キャッシュされたページに影響を与える可能性がある場合は、この `Turbo.cache.clear()` を呼んでください。
+
+**注記:** この機能は以前 `Turbo.clearCache()` として公開されていましたが、トップレベルで非推奨となり、代わりに新しい `Turbo.cache.clear()` の利用を推奨しています。
+
+<details>
+<summary>原文</summary>
+
+## Turbo.cache.clear
+
 Removes all entries from the Turbo Drive page cache. Call this when state has changed on the server that may affect cached pages.
-Turbo ドライブによるページキャッシュ内の、すべての項目を削除します。サーバー上でキャッシュされた画面に対して影響を与える可能性がある状態が変更された際は、この `Turbo.cache.clear()` を呼んでください。
 
 **Note:** This function was previously exposed as `Turbo.clearCache()`. The top-level function was deprecated in favor of the new `Turbo.cache.clear()` function.
-**注記:** この機能は以前 `Turbo.clearCache()` として公開されていましたが、トップレベルで非推奨となり、代わりに新しい `Turbo.cache.clear()` の利用を推奨しています。
+
+</details>
 
 ## Turbo.setProgressBarDelay
 
