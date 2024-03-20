@@ -1,5 +1,5 @@
 ---
-permalink: /reference/drive.html
+title: Drive
 order: 01
 description: "Turbo ドライブのリファレンス"
 ---
