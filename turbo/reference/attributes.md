@@ -1,34 +1,34 @@
 ---
 order: 05
-title: "要素属性とメタタグのリファレンス"
-description: "要素属性とメタタグのリファレンス"
+title: "属性とメタタグ"
+description: "属性とメタタグのリファレンス"
 ---
 
 # 属性とメタタグ
 
 ## データ属性
 
-次のデータ属性はTurboの振る舞いをカスタマイズするために、要素に適用できる。
+次のデータ属性を要素に対して利用することで、Turbo の挙動をカスタマイズできます。
 
-* `data-turbo="false"`は、リンクやフォームのTurboドライブを無効にします。このデータ属性を指定した要素の子孫要素のTurboドライブも無効になります。Turboドライブを有効にしたい場合は、`data-turbo="true"`を使います。Turboドライブを無効にする場合、振る舞いの違いに注意してください。ブラウザではリンクをクリックした時の振る舞いが通常通りになります。[native adapters](/handbook/native)では、アプリが終了するかもしれません。
+* `data-turbo="false"`は、リンクやフォーム、その子孫要素に対しても Turbo ドライブを無効にします。Turbo ドライブを有効にしたい場合は、`data-turbo="true"`を使います。Turbo ドライブを無効にする場合、振る舞いの違いに注意してください。ブラウザではリンクをクリックした時の振る舞いが通常通りになります。[native adapters](/handbook/native)では、アプリが終了するかもしれません。
 * `data-turbo-track="reload"`はHTML要素を追跡し、それが変わったときに全ページをリロードします。通常、[`script`や`CSS`のリンクを最新の状態に保つために](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アセット変更時のリロード)使われます。
-* `data-turbo-frame`は、ナビゲートするためのTurboフレームを識別するためのものです。詳細は、[フレームのドキュメント](https://everyleaf.github.io/hotwire_ja/turbo/turbo/reference/frames)を参照してください。
-* `data-turbo-preload`は、Turboドライブに次のページのコンテンツをプリフェッチさせます。
+* `data-turbo-frame`は、ナビゲートするための Turbo フレームを識別します。詳細は、[フレームのドキュメント](https://everyleaf.github.io/hotwire_ja/turbo/turbo/reference/frames)を参照してください。
+* `data-turbo-preload`は、Turbo ドライブに次のページのコンテンツをプリフェッチさせます。
 * `data-turbo-action`は、[Visit](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ページ・ナビゲーションの基本)アクションをカスタマイズします。
 * `data-turbo-permanent`は、[ページ・ロード間で要素を永続化します](https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#ページのロードにまたがって要素を永続化する)。その要素の`id`属性はユニークでないといけません。[モーフィングによるページ更新](https://turbo.hotwired.dev/handbook/page_refreshes.html)から要素を除外したい場合も、`data-turbo-permanent`を使います。
 * `data-turbo-temporary`は、ドキュメントがキャッシュされる前に要素を削除します。これにより、ブラウザバックした時でもページが変わります。
-* `data-turbo-eval="false"`で、ページを再表示したときにインラインの`script`要素が再評価されないようになります。
+* `data-turbo-eval="false"`を指定することで、ページを再表示したときにインラインの`script`要素を再評価しません。
 * `data-turbo-method`で、リンクのリクエストタイプをデフォルトの`GET`から変更できます。理想的には、`GET`ではないリクエストはフォームで発行されるべきですが、`data-turbo-method`はフォームが使えない場合に便利かもしれません。
-* `data-turbo-stream`により、リンクまたはフォームがTurbo ストリームのレスポンスを受け付けられます。Turboは、`GET`でないメソッドによるフォーム送信に対して、[自動的にストリーム・レスポンスを要求します](https://everyleaf.github.io/hotwire_ja/turbo/handbook/streams/#http-レスポンスからのストリーミング)。`data-turbo-stream`により、`GET`リクエストに対してもTurbo ストリームを使えます。
+* `data-turbo-stream`により、リンクまたはフォームが Turbo ストリームのレスポンスを受け付けられます。Turbo は、`GET`でないメソッドによるフォーム送信に対して、[自動的にストリーム・レスポンスを要求します](https://everyleaf.github.io/hotwire_ja/turbo/handbook/streams/#http-レスポンスからのストリーミング)。`data-turbo-stream`により、`GET`リクエストに対しても Turbo ストリームを使えます。
 * `data-turbo-confirm`は、指定された値で確認ダイアログを表示します。`data-turbo-method`を持つ`form`要素またはリンクで使えます。
-* `data-turbo-submits-with`により、フォーム送信時に表示するテキストを指定できます。この属性は、`input`要素または`button`要素で使えます。フォームが送信されている間、要素のテキストは`data-turbo-submits-with`の値を表示します。送信後は、元のテキストに戻ります。操作の進行中に「保存中...」のようなメッセージを表示すれば、ユーザーにフィードバックを与えられるので便利です。
+* `data-turbo-submits-with`により、フォーム送信時に表示するテキストを指定できます。この属性は、`input`要素または`button`要素で使えます。フォーム送信中に、要素のテキストは`data-turbo-submits-with`の値を表示します。送信後は、元のテキストに戻ります。操作の進行中に「保存中...」のようなメッセージを表示すれば、ユーザーにフィードバックを与えられるので便利です。
 
 <details>
 <summary>原文</summary>
 
 The following data attributes can be applied to elements to customize Turbo's behaviour.
 
-* `data-turbo="false"` disables Turbo Drive on links and forms including descendants. To reenable when an ancestor has opted out, use `data-turbo="true"`. Be careful: when Turbo Drive is disabled, browsers treat link clicks as normal, but [native adapters](/handbook/native) may exit the app.
+* `data-turbo="false"` disables Turbo Drive on links and forms including descendants. To reenable when an ancestor has opted out, use `data-turbo="true"`. Be careful: when  Turbo  Drive is disabled, browsers treat link clicks as normal, but [native adapters](/handbook/native) may exit the app.
 * `data-turbo-track="reload"` tracks the element's HTML and performs a full page reload when it changes. Typically used to [keep `script` and CSS `link` elements up-to-date](/handbook/drive#reloading-when-assets-change).
 * `data-turbo-frame` identifies the Turbo Frame to navigate. Refer to the [Frames documentation](/reference/frames) for further details.
 * `data-turbo-preload` signals to [Drive](/handbook/drive#preload-links-into-the-cache) to pre-fetch the next page's content
