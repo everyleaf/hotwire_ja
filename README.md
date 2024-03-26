@@ -13,7 +13,7 @@
 ## 手順
 1. このリポジトリをフォークします
 2. issueのdescriptionにある翻訳対象のリンクとファイルの設置場所を参考に、mdファイルをブランチに追加します
-3. レビュー時のために英文を残しておいてほしいので、原文の１行下に訳文を記述する形でコミットを作ってください（[見本](https://github.com/everyleaf/hotwire_ja/blob/a205170001cdf132abef928a1d9b7abea6293328/turbo/handbook/streams.md?plain=1)）
+3. 原文（英文）を`<details>~</details>`にしまい込む形で残してください（コードサンプルは含まない）。訳文の1行下に対応する原文を置きます。`<details>`には`<summary>原文</summary>`をつけてください（[見本](https://github.com/everyleaf/hotwire_ja/blob/281d8a39097cbacc9c36331fd7e496c6d8729c3e/turbo/reference/events.md)）
 4. PRを作成する際は該当issueへのリンクと、着手した原文のコミットハッシュをdescriptionに記載の上、レビューに出してください
 
 ## 気にしていただきたいこと
