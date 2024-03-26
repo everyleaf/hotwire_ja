@@ -16,7 +16,7 @@ description: "属性とメタタグのリファレンス"
 * `data-turbo-preload`は、Turbo ドライブに次のページのコンテンツをプリフェッチさせます。
 * `data-turbo-action`は、[Visit](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ページ・ナビゲーションの基本)アクションをカスタマイズします。
 * `data-turbo-permanent`は、[ページ・ロード間で要素を永続化します](https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#ページのロードにまたがって要素を永続化する)。その要素の`id`属性はユニークでないといけません。[モーフィングによるページ更新](https://turbo.hotwired.dev/handbook/page_refreshes.html)から要素を除外したい場合も、`data-turbo-permanent`を使います。
-* `data-turbo-temporary`は、ドキュメントがキャッシュされる前に要素を削除します。これにより、ブラウザバックした時でもページが変わります。
+* `data-turbo-temporary`は、ドキュメントがキャッシュされる前に要素を削除します。これにより、`data-turbo-temporary`がある要素をキャッシュから復元しません。
 * `data-turbo-eval="false"`を指定することで、ページを再表示したときにインラインの`script`要素を再評価しません。
 * `data-turbo-method`で、リンクのリクエストタイプをデフォルトの`GET`から変更できます。理想的には、`GET`ではないリクエストはフォームで発行されるべきですが、`data-turbo-method`はフォームが使えない場合に便利かもしれません。
 * `data-turbo-stream`により、リンクまたはフォームが Turbo ストリームのレスポンスを受け付けられます。Turbo は、`GET`でないメソッドによるフォーム送信に対して、[自動的にストリーム・レスポンスを要求します](https://everyleaf.github.io/hotwire_ja/turbo/handbook/streams/#http-レスポンスからのストリーミング)。`data-turbo-stream`により、`GET`リクエストに対しても Turbo ストリームを使えます。
