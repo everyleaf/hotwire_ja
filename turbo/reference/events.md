@@ -1,7 +1,6 @@
 ---
-permalink: /reference/events.html
+title: イベント
 order: 04
-description: "A reference of everything you can do with Turbo Events."
 description: "Turbo イベントでできるすべてのことのレファレンス"
 ---
 
