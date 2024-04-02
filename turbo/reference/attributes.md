@@ -14,7 +14,7 @@ description: "属性とメタタグのリファレンス"
 * `data-turbo-track="reload"`はHTML要素を追跡し、それが変わったときに全ページをリロードします。通常、[`script`や`CSS`のリンクを最新の状態に保つために][]使われます。
 * `data-turbo-frame`は、ナビゲートするための Turbo フレームを識別します。詳細は、[フレームのドキュメント][]を参照してください。
 * `data-turbo-preload`は、Turbo ドライブに次のページのコンテンツをプリフェッチさせます。
-* `data-turbo-action`は、[Visit][]アクションをカスタマイズします。
+* `data-turbo-action`は、[Visit][]アクションをカスタマイズします。有効な値は、`replace`あるいは`advance`のいずれかです。 Turbo フレームと一緒に使うことで、[フレームのナビゲーションをページアクセスに昇格][]できます。
 * `data-turbo-permanent`は、[ページ・ロード間で要素を永続化します][]。その要素の`id`属性はユニークでないといけません。[モーフィングによるページ更新][]から要素を除外したい場合も、`data-turbo-permanent`を使います。
 * `data-turbo-temporary`は、ドキュメントがキャッシュされる前に要素を削除します。これにより、`data-turbo-temporary`がある要素をキャッシュから復元しません。
 * `data-turbo-eval="false"`を指定することで、ページを再表示したときにインラインの`script`要素を再評価しません。
@@ -27,6 +27,7 @@ description: "属性とメタタグのリファレンス"
 [`script`や`CSS`のリンクを最新の状態に保つために]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アセット変更時のリロード
 [フレームのドキュメント]: https://everyleaf.github.io/hotwire_ja/turbo/turbo/reference/frames
 [Visit]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ページ・ナビゲーションの基本
+[フレームのナビゲーションをページアクセスに昇格]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/frames/#フレームのナビゲーションをページアクセスに昇格させる
 [ページ・ロード間で要素を永続化します]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#ページのロードにまたがって要素を永続化する
 <!-- 以下のページの日本語化が終わったら、日本語版のURLに変更 -->
 [モーフィングによるページ更新]: https://turbo.hotwired.dev/handbook/page_refreshes.html
