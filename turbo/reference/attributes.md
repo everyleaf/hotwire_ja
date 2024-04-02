@@ -54,6 +54,15 @@ The following data attributes can be applied to elements to customize Turbo's be
 
 ## 自動的に追加される属性 
 
+次の属性は Turbo が自動的に追加します。ある瞬間の Visit の状態を判断するのに便利です。
+
+* `disabled`は、フォーム送信中、フォームの送信ボタンに追加されます。これは、フォームの再送信を防ぐためです。
+* `data-turbo-preview`は、Visit 中に[プレビュー][]を表示しているときに、`html`要素に追加されます。
+* `data-turbo-visit-direction`は、Visit 中に`html`要素に追加されます。この属性の値には、`forward`、`back`、`none`のいずれかが入ります。これらは、Visitの方向を表しています。
+* `aria-busy`は、ページ遷移中、`html`要素と`turbo-frame`要素に追加されます。
+
+[プレビュー]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#previewが表示しているかどうかの検出
+
 <details>
 <summary>原文</summary>
 
