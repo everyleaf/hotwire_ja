@@ -76,6 +76,20 @@ The following attributes are automatically added by Turbo and are useful to dete
 
 ## メタタグ
 
+次の`meta`要素を`head`要素に追加することで、キャッシュや Visit の振る舞いをカスタマイズできます。
+
+* `<meta name="turbo-cache-control">`で、[キャッシュのオプトアウト][]ができます。
+* `<meta name="turbo-visit-control" content="reload">`で、Turbo でページ遷移するたびに、全ページリロードします。これは、`<turbo-frame>`からリクエストした時も同様です。
+* `<meta name="turbo-root">`で、[Turbo ドライブを適用するルートロケーションを設定][]できます。
+* `<meta name="view-transition" content="same-origin">`により、[View Transition API][]をサポートしているブラウザでビュートランジションが動きます。
+* `<meta name="turbo-refresh-method" content="morph">`で、[モーフィングによるページ更新][]が使えます。
+* `<meta name="turbo-refresh-scroll" content="preserve">`で、[ページ更新時にスクロールの位置を保存][]します。
+
+[キャッシュのオプトアウト]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#キャッシュのオプトアウト
+[Turbo ドライブを適用するルートロケーションを設定]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ルートロケーションの設定
+[View Transition API]: https://caniuse.com/view-transitions
+[モーフィングによるページ更新]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/page_refreshes
+[ページ更新時にスクロールの位置を保存]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/page_refreshes
 
 <details>
 <summary>原文</summary>
