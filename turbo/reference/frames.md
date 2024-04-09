@@ -233,7 +233,7 @@ through instances of the `FrameElement` class.
 
 ## 関数
 
-* `FrameElement.reload()`は、フレーム要素をその`src`からリロードします。
+* `FrameElement.reload()`は、フレーム要素をその`src`からリロードする関数です。
 
 <details>
 <summary>原文</summary>
