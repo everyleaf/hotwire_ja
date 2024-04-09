@@ -129,7 +129,7 @@ attributes and JavaScript properties.
 * `loading`は[列挙属性][]で、`"eager"`と`"lazy"`を指定できます。`"eager"`を指定した場合は、`src`属性の値へすぐに遷移します。`lazy`を指定した場合は、`src`属性の値への遷移は、要素がビューポートに表示されるまで遅れます。デフォルト値は`"eager"`です。
 * `busy`は[真偽属性][]で、`<turbo-frame>`によるリクエストが開始されたときに`true`、終了したときに`false`になります。
 * `disabled`は[真偽属性][]で、この属性があるとナビゲーションができなくなります。
-* `target`には、子孫の`<a>`がクリックされたときに遷移する別の`<turbo-frame>`要素をIDで指定します。`target="_top "`の場合、ページ全体が遷移します。
+* `target`には、子孫の`<a>`がクリックされたときに遷移する別の`<turbo-frame>`要素をIDで指定します。`target="_top"`の場合、ページ全体が遷移します。
 * `complete`は[真偽属性][]で、`<turbo-frame>`要素がナビゲーションを終了したかどうかを示します。
 * `autoscroll`は真偽属性で、読み込み後に`<turbo-frame>`要素（および、その子孫の`<turbo-frame>`要素）をスクロールして表示するかどうかをコントロールします。`data-autoscroll-block`属性に、[Element.scrollIntoView({ block: "..." })][Element.scrollIntoView]で有効な `"end"`、`"start"`、`"center"`、`"nearest"`のどれかを指定することで、垂直方向のスクロールをコントロールします。`data-autoscroll-block`属性がない場合、デフォルト値は `"end"`です。`data-autoscroll-behavior`属性に、[Element.scrollIntoView({ behavior: "..." })][Element.scrollIntoView]で有効な `"auto"`、`"smooth"`のどれかを指定することで、スクロールの振る舞いをコントロールします。`data-autoscroll-behavior`属性がない場合、デフォルト値は `"auto"`です。
 
