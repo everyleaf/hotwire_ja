@@ -25,7 +25,7 @@ Turboドライブは、それと同じスピードを、SPAと同じ永続的プ
 
 フォームでも同じ扱いをします。フォームがサブミットされると、それはTurboドライブの`fetch`リクエストに変換され、TurboドライブはそのリクエストからのリダイレクトとHTMLレスポンスの描画を行います。
 
-描画中、Turboドライブは現在の`<body>`要素を即座に置き換え、`<head>`要素の内容をマージします。JavaScriptの<a href="https://developer.mozilla.org/ja/docs/Web/API/Window">Window</a>と<a href="https://developer.mozilla.org/ja/docs/Web/API/Document">document objects</a>、そしてその`<html>` 要素は、前の描画から次の描画へと移る際も保持されます。
+描画中、Turboドライブは`<body>`要素の内容を置き換え、`<head>`要素の内容をマージします。JavaScriptの<a href="https://developer.mozilla.org/ja/docs/Web/API/Window">Window</a>と<a href="https://developer.mozilla.org/ja/docs/Web/API/Document">document objects</a>、そしてその`<html>` 要素は、前の描画から次の描画へと移る際も保持されます。
 
 
 *Turboドライブと直接やり取りして、ユーザーのアクションがどのように画面遷移につながるか、リクエストのライフサイクルへフックするかを制御することもできますが、ほとんどの場合、いくつかの規約を採用することで、置き換え時のスピードを速くすることができます。
@@ -70,7 +70,7 @@ Turboフレームを使うと、これらの独立したセグメントを、そ
 
 非同期なアクションに応答してページの一部を変化させることで、アプリケーションをとても生き生きしたものできます。Turboフレームはそのような更新を、一つのフレーム内でのHTTPプロトコルでの直接のやりとりに応じて行います。一方で、Turboストリームは、ページのどの部分であってもその更新に、WebSocketコネクションやSSE（Sever-sent events）、その他のトランスポートを使います。(<a href="http://itsnotatypo.com">imbox</a>を見てください。ここでは、新しいemailの着信が、自動的に反映されます）。
 
-Turboストリームは、`<turbo-stream>` 要素を、7つの基本のアクション、`append`、 `prepend`、 `replace`、 `update`、 `remove`、 `before`、 `after`とともに導入します。これらのアクションは、あなたが操作したい要素の ID を指定する`target`属性と一緒に使われます。そのアクションと`target`属性によって、ページをリフレッシュするのに必要とされる全てのミューテーションをエンコードできます。いくつかのストリーム要素を一つのストリームメッセージにまとめることさえできます。簡単に、挿入や置き換えをしたい HTML を`<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/template">template tag</a>`で囲います。あとはTurboがやってくれます。
+Turboストリームは、`<turbo-stream>` 要素を、8つの基本のアクション、`append`、 `prepend`、 `replace`、 `update`、 `remove`、 `before`、 `after`、`refresh`とともに導入します。これらのアクションは、あなたが操作したい要素の ID を指定する`target`属性と一緒に使われます。そのアクションと`target`属性によって、ページをリフレッシュするのに必要とされる全てのミューテーションをエンコードできます。いくつかのストリーム要素を一つのストリームメッセージにまとめることさえできます。簡単に、挿入や置き換えをしたい HTML を`<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/template">template tag</a>`で囲います。あとはTurboがやってくれます。
 
 ```html
 <turbo-stream action="append" target="messages">
