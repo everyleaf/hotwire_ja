@@ -201,6 +201,32 @@ imbox ページを読み込むとき、取り置きメールのトレイは `/em
 [Visit]: /handbook/drive#page-navigation-basics
 [advance]: /handbook/drive#application-visits
 
+## フレームからの脱却
+
+`<turbo-frame>`を起点としたリクエストはそのフレームのコンテンツを取得することを期待されることがほとんどです（`target`属性や`data-turbo-frame`属性の使い方によっては、ページ内の別のコンテンツが期待されます）。
+つまり、レスポンスには常に`<turbo-frame>`要素が含まれていなければなりません。Turbo が期待する`<turbo-frame>`要素が　レスポンスにない場合、それはエラーとみなされます。フレーム内に状況を伝えるメッセージが描画され、例外もスローされます。
+
+`<turbo-frame>`リクエストに対するレスポンスを、フルページナビゲーションの代わりとなる、効果的にフレームから"脱却"した、新しいページとして扱いたい場面もあるでしょう。セッションが有効期限切れなどで失われ、アプリケーションのログインページへリダイレクトする場合はその典型的な例です。この場合、Turbo はセッション切れエラーとして扱うよりもログインページを表示させた方が良いでしょう。
+
+その最も簡単な方法は、[`turbo-visit-control`][meta] meta タグをhead要素内に含めることです。それはログインページはページ全体の再読み込みが必要であるという指定になります。
+
+```html
+<head>
+  <meta name="turbo-visit-control" content="reload">
+  ...
+</head>
+```
+
+Turbo Railsを使っているなら、`turbo_page_requires_reload`ヘルパーを使えば同じことができます。
+
+`turbo-visit-control` `reload`を指定したページは、フレーム内を起点としたリクエストに対しても常にフルページナビゲーションとなります。
+
+If your application needs to handle missing frames in some other way, you can intercept the
+[`turbo:frame-missing`][events] event to, for example, transform the response or perform a visit to another location.
+
+[meta]: https://turbo.hotwired.dev/reference/attributes#meta-tags
+[events]: https://turbo.hotwired.dev/reference/events
+
 ## アンチフォージェリのサポート (CSRF)
 
 Turbo は、DOMをチェックして `name` 属性の値に `csrf-param` か `csrf-token` が入っている `<meta>` タグが存在する場合 [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) 保護を提供しています。
@@ -210,3 +236,41 @@ Turbo は、DOMをチェックして `name` 属性の値に `csrf-param` か `cs
 ```
 
 フォームを送信したとき、トークンは自動的にリクエストヘッダーへ `X-CSRF-TOKEN` として付与されます。リクエストが `data-turbo="false"` とともに作られると、ヘッダーへのトークン付与をスキップします。
+
+# Custom Rendering
+
+Turbo's default `<turbo-frame>` rendering process replaces the contents of the requesting `<turbo-frame>` element with the contents of a matching `<turbo-frame>` element in the response. In practice, a `<turbo-frame>` element's contents are rendered as if they operated on by [`<turbo-stream action="update">`](/reference/streams#update) element. The underlying renderer extracts the contents of the `<turbo-frame>` in the response and uses them to replace the requesting `<turbo-frame>` element's contents. The `<turbo-frame>` element itself remains unchanged, save for the [`[src]`, `[busy]`, and `[complete]` attributes that Turbo Drive manages](/reference/frames#html-attributes) throughout the stages of the element's request-response lifecycle.
+
+Applications can customize the `<turbo-frame>` rendering process by adding a `turbo:before-frame-render` event listener and overriding the `event.detail.render` property.
+
+For example, you could merge the response `<turbo-frame>` element into the requesting `<turbo-frame>` element with [morphdom](https://github.com/patrick-steele-idem/morphdom):
+
+```javascript
+import morphdom from "morphdom"
+
+addEventListener("turbo:before-frame-render", (event) => {
+  event.detail.render = (currentElement, newElement) => {
+    morphdom(currentElement, newElement, { childrenOnly: true })
+  }
+})
+```
+
+Since `turbo:before-frame-render` events bubble up the document, you can override one `<turbo-frame>` element's rendering by attaching the event listener directly to the element, or override all `<turbo-frame>` elements' rendering by attaching the listener to the `document`.
+
+## Pausing Rendering
+
+Applications can pause rendering and make additional preparations before continuing.
+
+Listen for the `turbo:before-frame-render` event to be notified when rendering is about to start, and pause it using `event.preventDefault()`. Once the preparation is done continue rendering by calling `event.detail.resume()`.
+
+An example use case is adding exit animation:
+
+```javascript
+document.addEventListener("turbo:before-frame-render", async (event) => {
+  event.preventDefault()
+
+  await animateOut()
+
+  event.detail.resume()
+})
+```
