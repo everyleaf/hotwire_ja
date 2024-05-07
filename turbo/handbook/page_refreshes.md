@@ -1,18 +1,18 @@
 ---
-description: "Turbo can perform smooth page refreshes with morphing and scroll preservation."
+description: "Turbo はモーフィングとスクロール・ページネーションによってスムースなページの更新を可能にします"
 order: 3
 ---
 
 # モーフィングによるスムーズなページリフレッシュ
 
- [Turbo Drive](/handbok/drive.html)は全ページを読み込み直さないことによってナビゲーションを速くしています。しかし、 Turbo がページへの忠実度をさらに上げるやり方があります：現在のページをもう一度ロードすることです（ページリフレッシュ）
+ [Turbo Drive](/turbo/handbook/drive.html)は全ページを読み込み直さないことによってナビゲーションを速くしています。しかし、 Turbo がページへの忠実度をさらに上げるやり方があります：現在のページをもう一度ロードすることです（ページリフレッシュ）
 
  ページリフレッシュのよくある使われ方は、フォームを送信してリダイレクトで返ってくる場合です。この場合、ページの `<body>` を置き換えるより、変更された内容のみを反映できれば、体感はぐっと良くなります。 Turbo はこの改善を、モーフィングとスクロール位置の保存によって行うことができます。
 
   <details>
   <summary>原文</summary>
 
-  [Turbo Drive](/handbook/drive.html) makes navigation faster by avoiding full-page reloads. But there is a scenario where Turbo can raise the fidelity bar further: loading the current page again (page refresh).
+  [Turbo Drive](https://turbo.hotwired.dev/handbook/drive) makes navigation faster by avoiding full-page reloads. But there is a scenario where Turbo can raise the fidelity bar further: loading the current page again (page refresh).
 
   A typical scenario for page refreshes is submitting a form and getting redirected back. In such scenarios, sensations significantly improve if only the changed contents get updated instead of replacing the `<body>` of the page. Turbo can do this on your behalf with morphing and scroll preservation.
   </details>
@@ -99,7 +99,7 @@ Sometimes, you want to ignore certain elements while morphing. For example, you 
 
 
 ## Turbo フレーム
- ページリフレッシュ時、画面の中でモーフィングを使ってリロードする範囲を、 [turbo フレーム](/handbook/frames.html) を使って定義できます。定義のためには、そのフレームに `refresh="morph"` でフラグを立てておく必要があります。
+ ページリフレッシュ時、画面の中でモーフィングを使ってリロードする範囲を、 [turbo フレーム](/turbo/handbook/frames.html) を使って定義できます。定義のためには、そのフレームに `refresh="morph"` でフラグを立てておく必要があります。
 
 ```html
 <turbo-frame id="my-frame" refresh="morph">
@@ -112,7 +112,7 @@ Sometimes, you want to ignore certain elements while morphing. For example, you 
   <details>
   <summary>原文</summary>
 
-You can use [turbo frames](/handbook/frames.html) to define regions in your screen that will get reloaded using morphing when a page refresh happens. To do so, you must flag those frames with `refresh="morph"`.
+You can use [turbo frames](https://turbo.hotwired.dev/handbook/frames) to define regions in your screen that will get reloaded using morphing when a page refresh happens. To do so, you must flag those frames with `refresh="morph"`.
 
 ```html
 <turbo-frame id="my-frame" refresh="morph">
@@ -125,7 +125,7 @@ With this mechanism, you can load additional content that didn't arrive in the i
   </details>
 
 ## ページリフレッシュのブロードキャスト
-  `refresh` と呼ばれる新しい[turbo ストリームのアクション](/handbook/streams.html)があります。このアクションは、ページリフレッシュを起こします。
+  `refresh` と呼ばれる新しい[turbo ストリームのアクション](/turbo/handbook/streams.html)があります。このアクションは、ページリフレッシュを起こします。
 
 ```html
 <turbo-stream action="refresh"></turbo-stream>
@@ -148,7 +148,7 @@ turbo_stream_from @calendar
   <details>
   <summary>原文</summary>
 
-There is a new [turbo stream action](/handbook/streams.html) called `refresh` that will trigger a page refresh:
+There is a new [turbo stream action](https://turbo.hotwired.dev/handbook/streams) called `refresh` that will trigger a page refresh:
 
 ```html
 <turbo-stream action="refresh"></turbo-stream>
