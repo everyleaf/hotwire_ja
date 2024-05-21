@@ -3,5 +3,6 @@
     "turbo_handbook"
   ],
   "layout": "base.html",
-  "section_title": "ハンドブック"
+  "section_title": "ハンドブック",
+  "section_code": "turbo_handbook"
 }
