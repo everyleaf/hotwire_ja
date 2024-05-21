@@ -1,11 +1,11 @@
 ---
-description: "Turbo はモーフィングとスクロール・ページネーションによってスムースなページの更新を可能にします"
+description: "Turbo はモーフィングとスクロール位置の保存によってスムースなページの更新を可能にします"
 order: 3
 ---
 
 # モーフィングによるスムーズなページリフレッシュ
 
- [Turbo Drive](/turbo/handbook/drive.html)は全ページを読み込み直さないことによってナビゲーションを速くしています。しかし、 Turbo がページへの忠実度をさらに上げるやり方があります：現在のページをもう一度ロードすることです（ページリフレッシュ）
+ [Turbo Drive](/turbo/handbook/drive/)は全ページを読み込み直さないことによってナビゲーションを速くしています。しかし、 Turbo がページへの忠実度をさらに上げるやり方があります：現在のページをもう一度ロードすることです（ページリフレッシュ）
 
  ページリフレッシュのよくある使われ方は、フォームを送信してリダイレクトで返ってくる場合です。この場合、ページの `<body>` を置き換えるより、変更された内容のみを反映できれば、体感はぐっと良くなります。 Turbo はこの改善を、モーフィングとスクロール位置の保存によって行うことができます。
 
@@ -99,7 +99,7 @@ Sometimes, you want to ignore certain elements while morphing. For example, you 
 
 
 ## Turbo フレーム
- ページリフレッシュ時、画面の中でモーフィングを使ってリロードする範囲を、 [turbo フレーム](/turbo/handbook/frames.html) を使って定義できます。定義のためには、そのフレームに `refresh="morph"` でフラグを立てておく必要があります。
+ ページリフレッシュ時、画面の中でモーフィングを使ってリロードする範囲を、 [turbo フレーム](/turbo/handbook/frames/) を使って定義できます。定義のためには、そのフレームに `refresh="morph"` でフラグを立てておく必要があります。
 
 ```html
 <turbo-frame id="my-frame" refresh="morph">
@@ -125,7 +125,7 @@ With this mechanism, you can load additional content that didn't arrive in the i
   </details>
 
 ## ページリフレッシュのブロードキャスト
-  `refresh` と呼ばれる新しい[turbo ストリームのアクション](/turbo/handbook/streams.html)があります。このアクションは、ページリフレッシュを起こします。
+  `refresh` と呼ばれる新しい[turbo ストリームのアクション](/turbo/handbook/streams/)があります。このアクションは、ページリフレッシュを起こします。
 
 ```html
 <turbo-stream action="refresh"></turbo-stream>
