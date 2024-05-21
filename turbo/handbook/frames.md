@@ -221,11 +221,49 @@ Turbo Railsを使っているなら、`turbo_page_requires_reload`ヘルパー�
 
 `turbo-visit-control` `reload`を指定したページは、フレーム内を起点としたリクエストに対しても常にフルページナビゲーションとなります。
 
-If your application needs to handle missing frames in some other way, you can intercept the
-[`turbo:frame-missing`][events] event to, for example, transform the response or perform a visit to another location.
+レスポンスにフレームが見つからないときの処理を他の方法にしなくてはならないときは、[`turbo:frame-missing`][events] イベントを補足することで対応できます。
+それは例えば、レスポンスの変換や、他のロケーションへアクセスする処理などです。
 
 [meta]: https://turbo.hotwired.dev/reference/attributes#meta-tags
 [events]: https://turbo.hotwired.dev/reference/events
+
+<details>
+<summary>原文</summary>
+
+## "Breaking out" from a Frame
+
+In most cases, requests that originate from a `<turbo-frame>` are expected to fetch content for that frame (or for
+another part of the page, depending on the use of the `target` or `data-turbo-frame` attributes). This means the
+response should always contain the expected `<turbo-frame>` element. If a response is missing the `<turbo-frame>`
+element that Turbo expects, it's considered an error; when it happens Turbo will write an informational message into the
+frame, and throw an exception.
+
+In certain, specific cases, you might want the response to a `<turbo-frame>` request to be treated as a new, full-page
+navigation instead, effectively "breaking out" of the frame. The classic example of this is when a lost or expired
+session causes an application to redirect to a login page. In this case, it's better for Turbo to display that login
+page rather than treat it as an error.
+
+The simplest way to achieve this is to specify that the login page requires a full-page reload, by including the
+[`turbo-visit-control`][meta] meta tag:
+
+```html
+<head>
+  <meta name="turbo-visit-control" content="reload">
+  ...
+</head>
+```
+
+If you're using Turbo Rails, you can use the `turbo_page_requires_reload` helper to accomplish the same thing.
+
+Pages that specify `turbo-visit-control` `reload` will always result in a full-page navigation, even if the request
+originated from inside a frame.
+
+If your application needs to handle missing frames in some other way, you can intercept the
+[`turbo:frame-missing`][events] event to, for example, transform the response or perform a visit to another location.
+
+[meta]: /reference/attributes#meta-tags
+[events]: /reference/events
+</details>
 
 ## アンチフォージェリのサポート (CSRF)
 
@@ -237,10 +275,31 @@ Turbo は、DOMをチェックして `name` 属性の値に `csrf-param` か `cs
 
 フォームを送信したとき、トークンは自動的にリクエストヘッダーへ `X-CSRF-TOKEN` として付与されます。リクエストが `data-turbo="false"` とともに作られると、ヘッダーへのトークン付与をスキップします。
 
+# カスタムレンダリング
+
+Turbo の`<turbo-frame>`におけるデフォルトの描画処理は、リクエストしている`<turbo-frame>`要素のコンテンツを、レスポンス内の一致した`<turbo-frame>`要素のコンテンツで置き換えるというものです。実際には、`<turbo-frame>`要素のコンテンツは[`<turbo-stream action="update">`](/reference/streams#update)要素によって操作されているかのように描画されます。
+アプリケーションは、`turbo:before-frame-render`イベントリスナーの付与と`event.detail.render`プロパティの上書きを行うことで`<turbo-frame>`の描画処理をカスタマイズできます。
+例えば、[morphdom](https://github.com/patrick-steele-idem/morphdom)によってリクエストした`<turbo-frame>`要素の中にレスポンスの`<turbo-frame>`要素をいれてしまうこともできます。
+
+```javascript
+import morphdom from "morphdom"
+
+addEventListener("turbo:before-frame-render", (event) => {
+  event.detail.render = (currentElement, newElement) => {
+    morphdom(currentElement, newElement, { childrenOnly: true })
+  }
+})
+```
+
+`turbo:before-frame-render`イベントはドキュメントを上層へ伝播します。`<turbo-frame>`要素に直接イベントリスナーをアタッチしてその要素の描画を上書きしたり、
+`document`にイベントリスナーをアタッチしてすべての`<turbo-frame>`要素の描画を上書きする、ということもできます。
+
+<details>
+<summary>原文</summary>
+
 # Custom Rendering
 
 Turbo's default `<turbo-frame>` rendering process replaces the contents of the requesting `<turbo-frame>` element with the contents of a matching `<turbo-frame>` element in the response. In practice, a `<turbo-frame>` element's contents are rendered as if they operated on by [`<turbo-stream action="update">`](/reference/streams#update) element. The underlying renderer extracts the contents of the `<turbo-frame>` in the response and uses them to replace the requesting `<turbo-frame>` element's contents. The `<turbo-frame>` element itself remains unchanged, save for the [`[src]`, `[busy]`, and `[complete]` attributes that Turbo Drive manages](/reference/frames#html-attributes) throughout the stages of the element's request-response lifecycle.
-
 Applications can customize the `<turbo-frame>` rendering process by adding a `turbo:before-frame-render` event listener and overriding the `event.detail.render` property.
 
 For example, you could merge the response `<turbo-frame>` element into the requesting `<turbo-frame>` element with [morphdom](https://github.com/patrick-steele-idem/morphdom):
@@ -257,12 +316,33 @@ addEventListener("turbo:before-frame-render", (event) => {
 
 Since `turbo:before-frame-render` events bubble up the document, you can override one `<turbo-frame>` element's rendering by attaching the event listener directly to the element, or override all `<turbo-frame>` elements' rendering by attaching the listener to the `document`.
 
+</details>
+
+## 描画の一時停止
+
+アプリケーションは描画を一時停止させ、再開する前に追加の準備をすることができます。
+`turbo:before-frame-render`イベントを待ち受けることでフレームの描画が開始されたことに気づけます。そして`event.preventDefault()`を使って描画を一時停止させます。
+準備が整ったら`event.detail.resume()`を使って描画を再開させます。
+
+以下は、描画を停止させて exit アニメーションを加えたいときのユースケースです。
+
+```javascript
+document.addEventListener("turbo:before-frame-render", async (event) => {
+  event.preventDefault()
+
+  await animateOut()
+
+  event.detail.resume()
+})
+```
+
+<details>
+<summary>原文</summary>
+
 ## Pausing Rendering
 
 Applications can pause rendering and make additional preparations before continuing.
-
 Listen for the `turbo:before-frame-render` event to be notified when rendering is about to start, and pause it using `event.preventDefault()`. Once the preparation is done continue rendering by calling `event.detail.resume()`.
-
 An example use case is adding exit animation:
 
 ```javascript
@@ -274,3 +354,4 @@ document.addEventListener("turbo:before-frame-render", async (event) => {
   event.detail.resume()
 })
 ```
+</details>
