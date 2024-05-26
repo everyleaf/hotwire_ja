@@ -97,7 +97,7 @@ Note that this method has no effect when used with the iOS or Android adapters.
 Turbo.setConfirmMethod(confirmMethod)
 ```
 
-[`data-turbo-confirm`] を指定したリンクによって呼び出されるメソッドを設定できます。デフォルトは、ブラウザのビルドインである `confirm` が設定されています。この設定したメソッドは、画面遷移可能な場合には `true` を返す必要があります。
+[`data-turbo-confirm`] を指定したリンクによって呼び出されるメソッドを設定できます。デフォルトは、ブラウザの組み込みの `confirm` が設定されています。ここで設定したメソッドは、画面遷移可能な場合には `true` を返す必要があります。
 
 [`data-turbo-confirm`]: https://turbo.hotwired.dev/handbook/drive#requiring-confirmation-for-a-visit
 
