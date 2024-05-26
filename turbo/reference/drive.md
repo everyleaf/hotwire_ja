@@ -14,7 +14,7 @@ Turbo.visit(location, { action: action })
 Turbo.visit(location, { frame: frame })
 ```
 
-指定された _location_（URLまたはパスを含む文字列）に対して、指定された _action_（"advance" または "replace" のいずれかの文字列）で[アプリケーション・アクセス]を行います。
+指定された _location_（URLまたはパスを含む文字列）に対して、指定された _action_（`"advance"` または `"replace"` のいずれかの文字列）で[アプリケーション・アクセス]を行います。
 
 _location_ がクロスオリジンなURLまたは、指定されたルートの範囲外にある場合（[ルートロケーションの設定]を参照）、Turbo は、`window.location` を利用し画面全体の再読み込みを行います。
 
