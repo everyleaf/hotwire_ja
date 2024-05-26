@@ -55,7 +55,7 @@ Turbo.cache.clear()
 
 Turbo ドライブによってキャッシュされたページ情報を全て削除します。サーバー上の状態が変更され、キャッシュされたページに影響を与える可能性がある場合は、この `Turbo.cache.clear()` を呼んでください。
 
-**注記:** この機能は以前 `Turbo.clearCache()` として公開されていましたが、トップレベルで非推奨となり、代わりに新しい `Turbo.cache.clear()` の利用を推奨しています。
+**注記:** この機能は以前 `Turbo.clearCache()` として公開されていましたが、トップレベルで非推奨となり、代わりに新しい `Turbo.cache.clear()` の利用が推奨されています。
 
 <details>
 <summary>原文</summary>
