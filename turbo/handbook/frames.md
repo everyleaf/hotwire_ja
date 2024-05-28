@@ -57,6 +57,60 @@ Turbo フレームは、事前に定義されたページの一部分をリク�
 フレームは、ドキュメント内で区分けしたコンテンツやナビゲーション同士を互いに影響させないように動作します。その区分けの影響は子孫コンテンツの`<a>`要素や`<form>`要素にまで及ぶため、むやみに導入すべきではありません。
 また Turbo フレームは [Turbo ストリーム](/turbo/handbook/streams/)のサポートを提供していません。アプリケーションが`<turbo-stream>`要素のために`<turbo-frame>`要素を使用している場合は、その`<turbo-frame>`要素を他の[ビルトインのHTML要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element)に変更してください。
 
+<details>
+<summary>原文</summary>
+
+# Decompose with Turbo Frames
+
+Turbo Frames allow predefined parts of a page to be updated on request. Any links and forms inside a frame are captured, and the frame contents automatically updated after receiving a response. Regardless of whether the server provides a full document, or just a fragment containing an updated version of the requested frame, only that particular frame will be extracted from the response to replace the existing content.
+
+Frames are created by wrapping a segment of the page in a `<turbo-frame>` element. Each element must have a unique ID, which is used to match the content being replaced when requesting new pages from the server. A single page can have multiple frames, each establishing their own context:
+
+```html
+<body>
+  <div id="navigation">Links targeting the entire page</div>
+
+  <turbo-frame id="message_1">
+    <h1>My message title</h1>
+    <p>My message content</p>
+    <a href="/messages/1/edit">Edit this message</a>
+  </turbo-frame>
+
+  <turbo-frame id="comments">
+    <div id="comment_1">One comment</div>
+    <div id="comment_2">Two comments</div>
+
+    <form action="/messages/comments">...</form>
+  </turbo-frame>
+</body>
+```
+
+This page has two frames: One to display the message itself, with a link to edit it. One to list all the comments, with a form to add another. Each create their own context for navigation, capturing both links and submitting forms.
+
+When the link to edit the message is clicked, the response provided by `/messages/1/edit` has its `<turbo-frame id="message_1">` segment extracted, and the content replaces the frame from where the click originated. The edit response might look like this:
+
+```html
+<body>
+  <h1>Editing message</h1>
+
+  <turbo-frame id="message_1">
+    <form action="/messages/1">
+      <input name="message[name]" type="text" value="My message title">
+      <textarea name="message[content]">My message content</textarea>
+      <input type="submit">
+    </form>
+  </turbo-frame>
+</body>
+```
+
+Notice how the `<h1>` isn't inside the `<turbo-frame>`. This means it will remain unchanged when the form replaces the display of the message upon editing. Only content inside a matching `<turbo-frame>` is used when the frame is updated.
+
+Thus your page can easily play dual purposes: Make edits in place within a frame or edits outside of a frame where the entire page is dedicated to the action.
+
+Frames serve a specific purpose: to compartmentalize the content and navigation for a fragment of the document. Their presence has ramification on any `<a>` elements or `<form>` elements contained by their child content, and shouldn't be introduced unnecessarily. Turbo Frames do not contribute support to the usage of [Turbo Stream](/handbook/streams). If your application utilizes `<turbo-frame>` elements for the sake of a `<turbo-stream>` element, change the `<turbo-frame>` into another [built-in element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element).
+
+</details>
+
 ## フレームの事前読み込み
 
 ページが読み込まれた時点でフレームの中身を配置しておく必要はありません。`turbo-frame` タグに `src` 属性があれば、ページにタグが出現した時点で `src` が参照している URL が自動的に読み込まれます。
@@ -113,9 +167,80 @@ imbox ページを読み込むとき、取り置きメールのトレイは `/em
 
 [aria-busy]: https://www.w3.org/TR/wai-aria/#aria-busy
 
+<details>
+<summary>原文</summary>
+
+## Eager-Loading Frames
+
+Frames don't have to be populated when the page that contains them is loaded. If a `src` attribute is present on the `turbo-frame` tag, the referenced URL will automatically be loaded as soon as the tag appears on the page:
+
+```html
+<body>
+  <h1>Imbox</h1>
+
+  <div id="emails">
+    ...
+  </div>
+
+  <turbo-frame id="set_aside_tray" src="/emails/set_aside">
+  </turbo-frame>
+
+  <turbo-frame id="reply_later_tray" src="/emails/reply_later">
+  </turbo-frame>
+</body>
+```
+
+This page lists all the emails available in your <a href="http://itsnotatypo.com">imbox</a> immediately upon loading the page, but then makes two subsequent requests to present small trays at the bottom of the page for emails that have been set aside or are waiting for a later reply. These trays are created out of separate HTTP requests made to the URLs referenced in the `src`.
+
+In the example above, the trays start empty, but it's also possible to populate the eager-loading frames with initial content, which is then overwritten when the content is fetched from the `src`:
+
+```html
+<turbo-frame id="set_aside_tray" src="/emails/set_aside">
+  <img src="/icons/spinner.gif">
+</turbo-frame>
+```
+
+Upon loading the imbox page, the set-aside tray is loaded from `/emails/set_aside`, and the response must contain a corresponding `<turbo-frame id="set_aside_tray">` element as in the original example:
+
+```html
+<body>
+  <h1>Set Aside Emails</h1>
+
+  <p>These are emails you've set aside</p>
+
+  <turbo-frame id="set_aside_tray">
+    <div id="emails">
+      <div id="email_1">
+        <a href="/emails/1">My important email</a>
+      </div>
+    </div>
+  </turbo-frame>
+</body>
+```
+
+This page now works in both its minimized form, where only the `div` with the individual emails are loaded into the tray frame on the imbox page, but also as a direct destination where a header and a description is provided. Just like in the example with the edit message form.
+
+Note that the `<turbo-frame>` on `/emails/set_aside` does not contain a `src` attribute. That attribute is only added to the frame that needs to lazily load the content, not to the rendered frame that provides the content.
+
+During navigation, a Frame will set `[aria-busy="true"]` on the `<turbo-frame>` element when fetching the new contents. When the navigation completes, the Frame will remove the `[aria-busy]` attribute. When navigating the `<turbo-frame>` through a `<form>` submission, Turbo will toggle the Form's `[aria-busy="true"]` attribute in tandem with the Frame's.
+
+After navigation finishes, a Frame will set the `[complete]` attribute on the
+`<turbo-frame>` element.
+
+[aria-busy]: https://www.w3.org/TR/wai-aria/#aria-busy
+</details>
+
 ## フレームの遅延読み込み
 
 ページが最初に読み込まれたときに見えていないフレームは、`loading="lazy"` をマークしておくことで、フレームが見えるようになるまで読み込みを遅延させることができます。`loading="lazy"` は `img` タグの `lazy=true` 属性のように動作します。`loading="lazy"` はフレームが `summary`/`detail` ペアやモーダル、または最初は非表示でその後表示されるものの中にあるときに、読み込みを遅延させる最適な方法です。
+
+<details>
+<summary>原文</summary>
+
+## Lazy-Loading Frames
+
+Frames that aren't visible when the page is first loaded can be marked with `loading="lazy"` such that they don't start loading until they become visible. This works exactly like the `lazy=true` attribute on `img`. It's a great way to delay loading of frames that sit inside `summary`/`detail` pairs or modals or anything else that starts out hidden and is then revealed.
+</details>
 
 ## フレームの読み込みにおけるキャッシュの利点
 
@@ -124,6 +249,18 @@ imbox ページを読み込むとき、取り置きメールのトレイは `/em
 フレームは、所要時間や閲覧者が異なるページセグメントを分離するのに適しています。ページの大部分がすべてのユーザーに共有しやすいときは、ページ内にあるユーザー毎の要素をフレームに置きかえることは理にかなっています。 またその逆に、ほとんどが個別化されたページでひとつの共有セグメントをフレームに置き換えて共有キャッシュから提供することも理にかなっています。
 
 フレームの読み込みのオーバーヘッドは一般的にとても小さいですが、それでも読み込むフレーム数には十分に注意したほうがよく、特にフレームがページに読み込みジッターを発生させないようにしましょう。しかしながら、ページ読み込み直後に見えていないフレームは基本的に自由です。モーダルの後ろや、折りたたまれたコンテンツに隠れているからです。
+
+<details>
+<summary>原文</summary>
+
+## Cache Benefits to Loading Frames
+
+Turning page segments into frames can help make the page simpler to implement, but an equally important reason for doing this is to improve cache dynamics. Complex pages with many segments are hard to cache efficiently, especially if they mix content shared by many with content specialized for an individual user. The more segments, the more dependent keys required for the cache look-up, the more frequently the cache will churn.
+
+Frames are ideal for separating segments that change on different timescales and for different audiences. Sometimes it makes sense to turn the per-user element of a page into a frame, if the bulk of the rest of the page is then easily shared across all users. Other times, it makes sense to do the opposite, where a heavily personalized page turns the one shared segment into a frame to serve it from a shared cache.
+
+While the overhead of fetching loading frames is generally very low, you should still be judicious in just how many you load, especially if these frames would create load-in jitter on the page. Frames are, however, essentially free if the content isn't immediately visible upon loading the page. Either because they're hidden behind modals or below the fold.
+</details>
 
 ## ナビゲーションの対象をフレームの内部にするか、外部にするか
 
@@ -174,6 +311,59 @@ imbox ページを読み込むとき、取り置きメールのトレイは `/em
 </body>
 ```
 
+<details>
+<summary>原文</summary>
+
+## Targeting Navigation Into or Out of a Frame
+
+By default, navigation within a frame will target just that frame. This is true for both following links and submitting forms. But navigation can drive the entire page instead of the enclosing frame by setting the target to `_top`. Or it can drive another named frame by setting the target to the ID of that frame.
+
+In the example with the set-aside tray, the links within the tray point to individual emails. You don't want those links to look for frame tags that match the `set_aside_tray` ID. You want to navigate directly to that email. This is done by marking the tray frames with the `target` attribute:
+
+```html
+<body>
+  <h1>Imbox</h1>
+  ...
+  <turbo-frame id="set_aside_tray" src="/emails/set_aside" target="_top">
+  </turbo-frame>
+</body>
+
+<body>
+  <h1>Set Aside Emails</h1>
+  ...
+  <turbo-frame id="set_aside_tray" target="_top">
+    ...
+  </turbo-frame>
+</body>
+```
+
+Sometimes you want most links to operate within the frame context, but not others. This is also true of forms. You can add the `data-turbo-frame` attribute on non-frame elements to control this:
+
+```html
+<body>
+  <turbo-frame id="message_1">
+    ...
+    <a href="/messages/1/edit">
+      Edit this message (within the current frame)
+    </a>
+
+    <a href="/messages/1/permission" data-turbo-frame="_top">
+      Change permissions (replace the whole page)
+    </a>
+  </turbo-frame>
+
+  <form action="/messages/1/delete" data-turbo-frame="message_1">
+    <a href="/messages/1/warning" data-turbo-frame="_self">
+      Load warning within current frame
+    </a>
+
+    <input type="submit" value="Delete this message">
+    (with a confirmation shown in a specific frame)
+  </form>
+</body>
+```
+</details>
+
 ## フレームのナビゲーションをページアクセスに昇格させる
 
 フレームをナビゲートすることで、フレーム以外のドキュメントの状態を維持したままページコンテンツの一部だけを変更することができます（例：現在の画面スクロール位置や要素のフォーカスなど）。しかし、時にはフレームの変更をブラウザの履歴に反映させたい場合もあります。
@@ -200,6 +390,47 @@ imbox ページを読み込むとき、取り置きメールのトレイは `/em
 [history]: https://developer.mozilla.org/en-US/docs/Web/API/History
 [Visit]: /handbook/drive#page-navigation-basics
 [advance]: /handbook/drive#application-visits
+
+<details>
+<summary>原文</summary>
+
+## Promoting a Frame Navigation to a Page Visit
+
+Navigating Frames provides applications with an opportunity to change part of
+the page's contents while preserving the rest of the document's state (for
+example, its current scroll position or focused element). There are times when
+we want changes to a Frame to also affect the browser's [history][].
+
+To promote a Frame navigation to a Visit, render the element with the
+`[data-turbo-action]` attribute. The attribute supports all [Visit][] values,
+and can be declared on:
+
+* the `<turbo-frame>` element
+* any `<a>` elements that navigate the `<turbo-frame>`
+* any `<form>` elements that navigate the `<turbo-frame>`
+* any `<input type="submit">` or `<button>` elements contained within `<form>`
+  elements that navigate the `<turbo-frame>`
+
+For example, consider a Frame that renders a paginated list of articles and
+transforms navigations into ["advance" Actions][advance]:
+
+```html
+<turbo-frame id="articles" data-turbo-action="advance">
+  <a href="/articles?page=2" rel="next">Next page</a>
+</turbo-frame>
+```
+
+Clicking the `<a rel="next">` element will set _both_ the `<turbo-frame>`
+element's `[src]` attribute _and_ the browser's path to `/articles?page=2`.
+
+**Note:** when rendering the page after refreshing the browser, it is _the
+application's_ responsibility to render the _second_ page of articles along with
+any other state derived from the URL path and search parameters.
+
+[history]: https://developer.mozilla.org/en-US/docs/Web/API/History
+[Visit]: https://turbo.hotwired.dev/handbook/drive#page-navigation-basics
+[advance]: https://turbo.hotwired.dev/handbook/drive#application-visits
+</details>
 
 ## フレームからの脱却
 
@@ -261,8 +492,8 @@ originated from inside a frame.
 If your application needs to handle missing frames in some other way, you can intercept the
 [`turbo:frame-missing`][events] event to, for example, transform the response or perform a visit to another location.
 
-[meta]: /reference/attributes#meta-tags
-[events]: /reference/events
+[meta]: https://turbo.hotwired.dev/reference/attributes#meta-tags
+[events]: https://turbo.hotwired.dev/reference/events
 </details>
 
 ## アンチフォージェリのサポート (CSRF)
@@ -274,6 +505,20 @@ Turbo は、DOMをチェックして `name` 属性の値に `csrf-param` か `cs
 ```
 
 フォームを送信したとき、トークンは自動的にリクエストヘッダーへ `X-CSRF-TOKEN` として付与されます。リクエストが `data-turbo="false"` とともに作られると、ヘッダーへのトークン付与をスキップします。
+
+<details>
+<summary>原文</summary>
+
+## Anti-Forgery Support (CSRF)
+
+Turbo provides [CSRF](https://en.wikipedia.org/wiki/Cross-site_request_forgery) protection by checking the DOM for the existence of a `<meta>` tag with a `name` value of either `csrf-param` or `csrf-token`. For example:
+
+```html
+<meta name="csrf-token" content="[your-token]">
+```
+
+Upon form submissions, the token will be automatically added to the request's headers as `X-CSRF-TOKEN`. Requests made with `data-turbo="false"` will skip adding the token to headers.
+</details>
 
 # カスタムレンダリング
 
