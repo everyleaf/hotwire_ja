@@ -166,6 +166,31 @@ document.addEventListener('turbo:before-fetch-request', async (event) => {
 
 アクセシビリティの観点からも、 GET 以外のリクエストには実際のフォームとボタンを使うのが望ましいでしょう。
 
+## アクセス前に確認ダイアログを表示する
+
+リンクに `data-turbo-confirm` 属性を付けると、アクセス前に確認ダイアログが表示できます。
+
+```html
+<a href="/articles" data-turbo-confirm="このページから離れますか？">Back to articles</a>
+<a href="/articles/54" data-turbo-method="delete" data-turbo-confirm="本当に記事を削除しますか？">Delete the article</a>
+```
+
+確認時に呼ぶメソッドは `Turbo.setConfirmMethod` を使って、変更できます。確認時に呼ぶメソッドのデフォルトは、ブラウザに組み込まれてる `confirm` です。
+
+<details>
+<summary>原文</summary>
+
+Decorate links with `data-turbo-confirm`, and confirmation will be required for a visit to proceed.
+
+```html
+<a href="/articles" data-turbo-confirm="Do you want to leave this page?">Back to articles</a>
+<a href="/articles/54" data-turbo-method="delete" data-turbo-confirm="Are you sure you want to delete the article?">Delete the article</a>
+```
+
+Use `Turbo.setConfirmMethod` to change the method that gets called for confirmation. The default is the browser's built in `confirm`.
+
+</details>
+
 ## 特定のリンク/フォームでの Turbo ドライブの無効化
 
  Turbo ドライブは、対象となる要素かその親要素で `data-turbo="false"` を宣言することで、要素単位で無効化することができます。
