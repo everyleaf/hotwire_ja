@@ -231,6 +231,60 @@ import { Turbo } from "@hotwired/turbo-rails"
 Turbo.session.drive = false
 ```
 
+## ビュートランジション
+
+[ビュートランジション API]を[サポートしているブラウザ]では、Turboはページ間を移動するときにビュートランジションをトリガーします。
+
+Turbo は、現在と次のページの両方に以下の `<meta>` 要素があるときに、ビュートランジションをトリガーします。
+
+```html
+<meta name="view-transition" content="same-origin" />
+```
+
+Turbo は `<html>` 要素に `data-turbo-visit-direction` 属性を追加することで、トランジションの方向を指定できます。その属性の値として以下のものを使えます。
+
+- `forward`: ページを全て変える方向
+- `back`: ページを前のページに戻す方向
+- `none`: ページの一部を置き換える方向
+
+この属性を使えば、トランジション中で実行されるアニメーションをカスタマイズできます。
+
+```css
+html[data-turbo-visit-direction="forward"]::view-transition-old(sidebar):only-child {
+  animation: slide-to-right 0.5s ease-out;
+}
+```
+
+[サポートしているブラウザ]: https://caniuse.com/?search=View%20Transition%20API
+[ビュートランジション API]: https://developer.mozilla.org/ja/docs/Web/API/View_Transitions_API
+
+<details>
+<summary>原文</summary>
+
+In [browsers that support](https://caniuse.com/?search=View%20Transition%20API) the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) Turbo can trigger view transitions when navigating between pages.
+
+Turbo triggers a view transition when both the current and the next page have this meta tag:
+
+```
+<meta name="view-transition" content="same-origin" />
+```
+
+Turbo also adds a `data-turbo-visit-direction` attribute to the `<html>` element to indicate the direction of the transition. The attribute can have one of the following values:
+
+- `forward` in advance visits.
+- `back` in restoration visits.
+- `none` in replace visits.
+
+You can use this attribute to customize the animations that are performed during a transition:
+
+```css
+html[data-turbo-visit-direction="forward"]::view-transition-old(sidebar):only-child {
+  animation: slide-to-right 0.5s ease-out;
+}
+```
+
+</details>
+
 ## 進行状況を表示する
 
  Turbo ドライブのナビゲーション中、ブラウザはその進行状況インジケータを表示しません。 Turbo ドライブは、リクエスト発行中のフィードバックを示すため、CSS ベースのプログレスバーを導入しています。
