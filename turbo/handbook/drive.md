@@ -407,4 +407,102 @@ Turbo が POST リクエストに通常の200ステータスの応答を許さ�
 ## フォーム送信後のストリーミング
 
 サーバーはフォームの送信に対して、レスポンス・ボディ内の一つ以上の `<turbo-stream>` 要素を伴う `Content-Type: text/vnd.turbo-stream.html` [Turboストリーム](/turbo/handbook/streams)メッセージで応答することもあります。この応答によって、ナビゲーションなしに、ページの複数箇所を更新することができます。
-<br><br>
+
+## ホバーでリンク先のプリフェッチ
+
+Turbo は、ユーザーがリンクをクリックする前に発生した`mouseenter` イベントでリンク先を自動で読み込みます。これにより、リンク・ナビゲーションの待ち時間が短縮されます。通常、クリック・ナビゲーション単位で500から800ミリ秒の速度が向上します。
+
+リンク先のプリフェッチは、Turbo v8からデフォルトで有効になっています。ただ、以下のメタタグをページに追加すれば、無効化できます。
+
+```html
+<meta name="turbo-prefetch" content="false">
+```
+
+ユーザーが少しの間だけリンクをホバーしただけでリンク先をプリフェッチしないように、Turbo はリンク先をプリフェッチする前に100ミリ秒待ちます。
+
+HTML要素、あるいは、その祖先に `data-turbo-prefetch="false"`をつけることで、プリフェッチ機能を要素ごとに無効化できます。
+
+```html
+<html>
+  <head>
+    <meta name="turbo-prefetch" content="true">
+  </head>
+  <body>
+    <a href="/articles">Articles</a> <!-- このリンク先はプリフェッチされます -->
+    <a href="/about" data-turbo-prefetch="false">About</a> <!-- このリンク先はプリフェッチされません -->
+    <div data-turbo-prefetch="false"`>
+      <!-- このdiv内のリンクはプリフェッチされません -->
+    </div>
+  </body>
+</html>
+```
+
+`turbo:before-prefetch` イベントをインターセプトして `event.preventDefault()` を呼ぶことで、プログラムでプリフェッチ機能を無効化できます。
+
+```javascript
+document.addEventListener("turbo:before-prefetch", (event) => {
+  if (isSavingData() || hasSlowInternet()) {
+    event.preventDefault()
+  }
+})
+
+function isSavingData() {
+  return navigator.connection?.saveData
+}
+
+function hasSlowInternet() {
+  return navigator.connection?.effectiveType === "slow-2g" ||
+         navigator.connection?.effectiveType === "2g"
+}
+```
+
+
+<details>
+<summary>原文</summary>
+
+Turbo can also speed up perceived link navigation latency by automatically loading links on `mouseenter` events, and before the user clicks the link. This usually leads to a speed bump of 500-800ms per click navigation.
+
+Prefetching links is enabled by default since Turbo v8, but you can disable it by adding this meta tag to your page:
+
+```html
+<meta name="turbo-prefetch" content="false">
+```
+
+To avoid prefetching links that the user is briefly hovering, Turbo waits 100ms after the user hovers over the link before prefetching it. But you may want to disable the prefetching behavior on certain links leading to pages with expensive rendering.
+
+You can disable the behavior on a per-element basis by annotating the element or any of its ancestors with `data-turbo-prefetch="false"`.
+
+```html
+<html>
+  <head>
+    <meta name="turbo-prefetch" content="true">
+  </head>
+  <body>
+    <a href="/articles">Articles</a> <!-- This link is prefetched -->
+    <a href="/about" data-turbo-prefetch="false">About</a> <!-- Not prefetched -->
+    <div data-turbo-prefetch="false"`>
+      <!-- Links inside this div will not be prefetched -->
+    </div>
+  </body>
+</html>
+```
+
+You can also disable the behaviour programatically by intercepting the `turbo:before-prefetch` event and calling `event.preventDefault()`.
+
+```javascript
+document.addEventListener("turbo:before-prefetch", (event) => {
+  if (isSavingData() || hasSlowInternet()) {
+    event.preventDefault()
+  }
+})
+
+function isSavingData() {
+  return navigator.connection?.saveData
+}
+
+function hasSlowInternet() {
+  return navigator.connection?.effectiveType === "slow-2g" ||
+         navigator.connection?.effectiveType === "2g"
+}
+```
+</details>
