@@ -80,6 +80,43 @@ Application visits can be canceled before they start, regardless of whether they
 
 リストア・アクセスは、`turbo:before-visit` を発火しないのでキャンセルすることができません。 Turbo ドライブは、リストア・アクセスを、*すでに存在する*アクセス履歴への応答の場合に発行します。よくあるのは、ブラウザバックやブラウザで前に進む場合です。
 
+## 描画のカスタム
+
+ドキュメント全体に対して `turbo:before-render` イベントリスナーを追加し、 `event.detail.render` プロパティをオーバーライドすることで、アプリケーションの描画プロセスをカスタマイズできます。
+
+例えば、[morphdom]で、リクエストを投げたドキュメントの `<body>` 要素を、レスポンスのドキュメントにある `<body>` 要素にマージできます。
+
+```javascript
+import morphdom from "morphdom"
+
+addEventListener("turbo:before-render", (event) => {
+  event.detail.render = (currentElement, newElement) => {
+    morphdom(currentElement, newElement)
+  }
+})
+```
+
+[morphdom]: https://github.com/patrick-steele-idem/morphdom
+
+<details>
+<summary>原文</summary>
+
+Applications can customize the rendering process by adding a document-wide `turbo:before-render` event listener and overriding the `event.detail.render` property.
+
+For example, you could merge the response document's `<body>` element into the requesting document's `<body>` element with [morphdom](https://github.com/patrick-steele-idem/morphdom):
+
+```javascript
+import morphdom from "morphdom"
+
+addEventListener("turbo:before-render", (event) => {
+  event.detail.render = (currentElement, newElement) => {
+    morphdom(currentElement, newElement)
+  }
+})
+```
+
+</details>
+
 ## 描画の一時停止
 
 アプリケーションは描画を一時停止して、実行前に追加で下準備をすることができます。
