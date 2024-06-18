@@ -126,7 +126,7 @@ addEventListener("turbo:before-render", (event) => {
 アクセスにexitのアニメーションを追加する例です。
 
 ```javascript
-document.addEventListener('turbo:before-render', async (event) => {
+document.addEventListener("turbo:before-render", async (event) => {
   event.preventDefault()
 
   await animateOut()
@@ -144,11 +144,11 @@ document.addEventListener('turbo:before-render', async (event) => {
 リクエストに `Authorization` ヘッダを設定する例です。
 
 ```javascript
-document.addEventListener('turbo:before-fetch-request', async (event) => {
+document.addEventListener("turbo:before-fetch-request", async (event) => {
   event.preventDefault()
 
   const token = await getSessionToken(window.app)
-  event.detail.fetchOptions.headers['Authorization'] = `Bearer ${token}`
+  event.detail.fetchOptions.headers["Authorization"] = `Bearer ${token}`
 
   event.detail.resume()
 })
