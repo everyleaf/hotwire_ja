@@ -506,3 +506,74 @@ function hasSlowInternet() {
 }
 ```
 </details>
+
+## リンク先をキャッシュにプリロード
+
+[data-turbo-preload] 属性を使えば、リンク先をTurbo ドライブのキャッシュにプリロードできます。
+
+これにより、ページに初めてアクセスする前でもページのプレビューが提供され、ページアクセスが高速に感じられます。これはアプリケーション上で最も重要なページのプリロードに使えます。過剰な使用は、不要なコンテントを読み込むことになるので、避けてください。
+
+すべての `<a>` 要素がプリロードされるわけではありません。以下のような `[data-turbo-preload]` 属性を持つリンクはプリロードされません。
+
+* 他のドメインにアクセスするリンク
+* ある `<turbo-frame>` 要素に対して適用される `[data-turbo-frame]` 属性を持つリンク
+* 先祖要素の `<turbo-frame>` に対して適用されるリンク
+* `[data-turbo="false"]` 属性を持つリンク
+* `[data-turbo-stream]` 属性を持つリンク
+* `[data-turbo-method]` 属性を持つリンク
+* 先祖要素が `[data-turbo="false"]` 属性を持つリンク
+* 先祖要素が `[data-turbo-prefetch="false"]` 属性を持つリンク
+
+<br><br>
+
+プリロードされた `<a>` 要素は [turbo:before-fetch-request] と [turbo:before-fetch-response] イベントをディスパッチすることに注意してください。`turbo:before-fetch-request` イベントがプリロードにより発生したのかそれとも他のメカニズムにより発生したのかの区別は、リクエストの `X-Sec-Purpose` ヘッダーに `"prefetch"`がセットされているかどうかで確認できます（`X-Sec-Purpose` ヘッダーの値は `event.detail.fetchOptions.headers["X-Sec-Purpose"]` プロパティから取得できます）。
+
+```js
+addEventListener("turbo:before-fetch-request", (event) => {
+  if (event.detail.fetchOptions.headers["X-Sec-Purpose"] === "prefetch") {
+    // 追加のプリロード設定を行う
+  } else {
+    // 何かを行う
+  }
+})
+```
+
+
+[data-turbo-preload]: /hotwire_ja/turbo/reference/attributes#data-attributes
+[turbo:before-fetch-request]: /hotwire_ja/turbo/reference/events#turbo%3Abefore-fetch-request
+[turbo:before-fetch-response]: /hotwire_ja/turbo/reference/events#turbo%3Abefore-fetch-response
+
+<details>
+<summary>原文</summary>
+
+Preload links into Turbo Drive's cache using the [data-turbo-preload][] boolean attribute.
+
+This will make page transitions feel lightning fast by providing a preview of a page even before the first visit. Use it to preload the most important pages in your application. Avoid over usage, as it will lead to loading content that is not needed.
+
+Not every `<a>` element can be preloaded. The `[data-turbo-preload]` attribute
+won't have any effect on links that:
+
+* navigate to another domain
+* have a `[data-turbo-frame]` attribute that drives a `<turbo-frame>` element
+* drive an ancestor `<turbo-frame>` element
+* have the `[data-turbo="false"]` attribute
+* have the `[data-turbo-stream]` attribute
+* have a `[data-turbo-method]` attribute
+* have an ancestor with the `[data-turbo="false"]` attribute
+* have an ancestor with the `[data-turbo-prefetch="false"]` attribute
+
+It also dovetails nicely with pages that leverage [Eager-Loading Frames](/reference/frames#eager-loaded-frame) or [Lazy-Loading Frames](/reference/frames#lazy-loaded-frame). As you can preload the structure of the page and show the user a meaningful loading state while the interesting content loads.
+<br><br>
+
+Note that preloaded `<a>` elements will dispatch [turbo:before-fetch-request](/reference/events) and [turbo:before-fetch-response](/reference/events) events. To distinguish a preloading `turbo:before-fetch-request` initiated event from an event initiated by another mechanism, check whether the request's `X-Sec-Purpose` header (read from the `event.detail.fetchOptions.headers["X-Sec-Purpose"]` property) is set to `"prefetch"`:
+
+```js
+addEventListener("turbo:before-fetch-request", (event) => {
+  if (event.detail.fetchOptions.headers["X-Sec-Purpose"] === "prefetch") {
+    // do additional preloading setup…
+  } else {
+    // do something else…
+  }
+})
+```
+</details>
