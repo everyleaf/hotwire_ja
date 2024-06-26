@@ -35,15 +35,19 @@ _frame_ が指定されている場合、指定された値と一致する `[id]
 
 ## Turbo.visit
 
-Performs an [Application Visit][] to the given _location_ (a string containing a URL or path) with the specified _action_ (a string, either `"advance"` or `"replace"`).
+Performs an [Application Visit] to the given _location_ (a string containing a URL or path) with the specified _action_ (a string, either `"advance"` or `"replace"`).
 
-If _location_ is a cross-origin URL, or falls outside of the specified root (see [Setting a Root Location](/handbook/drive#setting-a-root-location)), Turbo performs a full page load by setting `window.location`.
+If _location_ is a cross-origin URL, or falls outside of the specified root (see [Setting a Root Location]), Turbo performs a full page load by setting `window.location`.
 
 If _action_ is unspecified, Turbo Drive assumes a value of `"advance"`.
 
-Before performing the visit, Turbo Drive fires a `turbo:before-visit` event on `document`. Your application can listen for this event and cancel the visit with `event.preventDefault()` (see [Canceling Visits Before They Start](/handbook/drive#canceling-visits-before-they-start)).
+Before performing the visit, Turbo Drive fires a `turbo:before-visit` event on `document`. Your application can listen for this event and cancel the visit with `event.preventDefault()` (see [Canceling Visits Before They Start]).
 
-If _frame_ is specified, find a `<turbo-frame>` element with an `[id]` attribute that matches the provided value, and navigate it to the provided _location_. If the `<turbo-frame>` cannot be found, perform a page-level [Application Visit][].
+If _frame_ is specified, find a `<turbo-frame>` element with an `[id]` attribute that matches the provided value, and navigate it to the provided _location_. If the `<turbo-frame>` cannot be found, perform a page-level [Application Visit].
+
+[Application Visit]: https://turbo.hotwired.dev/handbook/drive#application-visits
+[Setting a Root Location]: https://turbo.hotwired.dev/handbook/drive#setting-a-root-location
+[Canceling Visits Before They Start]: https://turbo.hotwired.dev/handbook/drive#canceling-visits-before-they-start
 
 </details>
 
@@ -85,9 +89,11 @@ iOS または Android アダプターと併用した場合、このメソッド�
 
 ## Turbo.setProgressBarDelay
 
-Sets the delay after which the [progress bar](/handbook/drive#displaying-progress) will appear during navigation, in milliseconds. The progress bar appears after 500ms by default.
+Sets the delay after which the [progress bar] will appear during navigation, in milliseconds. The progress bar appears after 500ms by default.
 
 Note that this method has no effect when used with the iOS or Android adapters.
+
+[progress bar]:https://turbo.hotwired.dev/handbook/drive#displaying-progress
 
 </details>
 
@@ -106,7 +112,9 @@ Turbo.setConfirmMethod(confirmMethod)
 
 ## Turbo.setConfirmMethod
 
-Sets the method that is called by links decorated with [`data-turbo-confirm`](/handbook/drive#requiring-confirmation-for-a-visit). The default is the browser's built in `confirm`. The method should return `true` if the visit can proceed.
+Sets the method that is called by links decorated with [`data-turbo-confirm`]. The default is the browser's built in `confirm`. The method should return `true` if the visit can proceed.
+
+[`data-turbo-confirm`]: https://turbo.hotwired.dev/handbook/drive#requiring-confirmation-for-a-visit
 
 </details>
 
