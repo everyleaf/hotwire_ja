@@ -434,12 +434,12 @@ any other state derived from the URL path and search parameters.
 
 ## フレームからの脱却
 
-`<turbo-frame>`を起点としたリクエストはそのフレームのコンテンツを取得することを期待されることがほとんどです（`target`属性や`data-turbo-frame`属性の使い方によっては、ページ内の別のコンテンツが期待されます）。
-つまり、レスポンスには常に`<turbo-frame>`要素が含まれていなければなりません。Turbo が期待する`<turbo-frame>`要素が　レスポンスにない場合、それはエラーとみなされます。フレーム内に状況を伝えるメッセージが描画され、例外もスローされます。
+`<turbo-frame>` を起点としたリクエストはそのフレームのコンテンツを取得することを期待されることがほとんどです（ `target` 属性や `data-turbo-frame` 属性の使い方によっては、ページ内の別のコンテンツが期待されます）。
+つまり、レスポンスには常に `<turbo-frame>` 要素が含まれていなければなりません。Turbo が期待する `<turbo-frame>` 要素が　レスポンスにない場合、それはエラーとみなされます。フレーム内に状況を伝えるメッセージが描画され、例外もスローされます。
 
-実際には`<turbo-frame>`リクエストに対するレスポンスを、フルページナビゲーションの代わりとなる、効果的にフレームから"脱却"した、新しいページとして扱いたい場面もあるでしょう。セッションが有効期限切れなどで失われ、アプリケーションのログインページへリダイレクトする場合はその典型的な例です。この場合、Turbo はセッション切れエラーとして扱うよりもログインページを表示させた方が良いでしょう。
+実際には `<turbo-frame>` リクエストに対するレスポンスを、フルページナビゲーションの代わりとなる、効果的にフレームから"脱却"した、新しいページとして扱いたい場面もあるでしょう。セッションが有効期限切れなどで失われ、アプリケーションのログインページへリダイレクトする場合はその典型的な例です。この場合、Turbo はセッション切れエラーとして扱うよりもログインページを表示させた方が良いでしょう。
 
-その最も簡単な方法は、[`turbo-visit-control`][meta]  meta タグをhead要素内に含めることです。このmetaタグによって、ログインページはページ全体の再読み込みが必要であるという指定になります。
+その最も簡単な方法は、[`turbo-visit-control`][meta] meta タグを head 要素内に含めることです。この meta タグによって、ログインページはページ全体の再読み込みが必要であるという指定になります。
 
 ```html
 <head>
@@ -448,9 +448,9 @@ any other state derived from the URL path and search parameters.
 </head>
 ```
 
-Turbo Railsを使っているなら、`turbo_page_requires_reload`ヘルパーを使えば同じことができます。
+Turbo Rails を使っているなら、`turbo_page_requires_reload` ヘルパーを使えば同じことができます。
 
-`turbo-visit-control` `reload`を指定したページは、フレーム内を起点としたリクエストに対しても常にフルページナビゲーションとなります。
+`turbo-visit-control` `reload` を指定したページは、フレーム内を起点としたリクエストに対しても常にフルページナビゲーションとなります。
 
 レスポンスにフレームが見つからないときの処理を他の方法にしなくてはならないときは、[`turbo:frame-missing`][events] イベントを補足することで対応できます。
 それは例えば、レスポンスの変換や、他のロケーションへアクセスする処理などです。
@@ -525,6 +525,9 @@ Upon form submissions, the token will be automatically added to the request's he
 Turbo の`<turbo-frame>`におけるデフォルトの描画処理は、リクエストしている`<turbo-frame>`要素のコンテンツを、レスポンス内の一致した`<turbo-frame>`要素のコンテンツで置き換えるというものです。実際には、`<turbo-frame>`要素のコンテンツは[`<turbo-stream action="update">`](/reference/streams#update)要素によって操作されているかのように描画されます。
 アプリケーションは、`turbo:before-frame-render`イベントリスナーの付与と`event.detail.render`プロパティの上書きを行うことで`<turbo-frame>`の描画処理をカスタマイズできます。
 例えば、[morphdom](https://github.com/patrick-steele-idem/morphdom)によってリクエストした`<turbo-frame>`要素の中にレスポンスの`<turbo-frame>`要素をいれてしまうこともできます。
+Turbo の `<turbo-frame>` におけるデフォルトの描画処理は、リクエストしている `<turbo-frame>` 要素のコンテンツを、レスポンス内の一致した `<turbo-frame>` 要素のコンテンツで置き換えるというものです。実際には、 `<turbo-frame>` 要素のコンテンツは [`<turbo-stream action="update">`](/reference/streams#update) 要素によって操作されているかのように描画されます。
+アプリケーションは、`turbo:before-frame-render` イベントリスナーの付与と `event.detail.render` プロパティの上書きを行うことで `<turbo-frame>` の描画処理をカスタマイズできます。
+例えば、 [morphdom](https://github.com/patrick-steele-idem/morphdom) によってリクエストした `<turbo-frame>` 要素の中にレスポンスの `<turbo-frame>` 要素をいれてしまうこともできます。
 
 ```javascript
 import morphdom from "morphdom"
@@ -536,8 +539,8 @@ addEventListener("turbo:before-frame-render", (event) => {
 })
 ```
 
-`turbo:before-frame-render`イベントはドキュメントを上層へ伝播します。`<turbo-frame>`要素に直接イベントリスナーをアタッチしてその要素の描画を上書きしたり、
-`document`にイベントリスナーをアタッチしてすべての`<turbo-frame>`要素の描画を上書きする、ということもできます。
+`turbo:before-frame-render` イベントはドキュメントを上層へ伝播します。 `<turbo-frame>` 要素に直接イベントリスナーをアタッチしてその要素の描画を上書きしたり、
+`document` にイベントリスナーをアタッチしてすべての `<turbo-frame>` 要素の描画を上書きする、ということもできます。
 
 <details>
 <summary>原文</summary>
@@ -566,8 +569,8 @@ Since `turbo:before-frame-render` events bubble up the document, you can overrid
 ## 描画の一時停止
 
 アプリケーションは描画を一時停止させ、再開する前に追加の準備をすることができます。
-`turbo:before-frame-render`イベントを待ち受けることでフレームの描画が開始されたことに気づけます。そして`event.preventDefault()`を使って描画を一時停止させます。
-準備が整ったら`event.detail.resume()`を使って描画を再開させます。
+`turbo:before-frame-render` イベントを待ち受けることでフレームの描画が開始されたことに気づけます。そして `event.preventDefault()` を使って描画を一時停止させます。
+準備が整ったら `event.detail.resume()` を使って描画を再開させます。
 
 以下は、描画を停止させて exit アニメーションを加えたいときのユースケースです。
 
