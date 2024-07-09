@@ -23,7 +23,7 @@ description: "属性とメタタグのリファレンス"
 * `data-turbo-confirm`は、指定された値で確認ダイアログを表示します。`data-turbo-method`を持つ`form`要素またはリンクで使えます。
 * `data-turbo-submits-with`により、フォーム送信時に表示するテキストを指定できます。この属性は、`input`要素または`button`要素で使えます。フォーム送信中に、要素のテキストは`data-turbo-submits-with`の値を表示します。送信後は、元のテキストに戻ります。操作の進行中に「保存中...」のようなメッセージを表示すれば、ユーザーにフィードバックを与えられるので便利です。
 
-[native adapters]: /handbook/native
+[native adapters]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/native/
 [`script`や`CSS`のリンクを最新の状態に保つために]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アセット変更時のリロード
 [フレームのドキュメント]: https://everyleaf.github.io/hotwire_ja/turbo/turbo/reference/frames
 [Visit]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ページ・ナビゲーションの基本
