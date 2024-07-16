@@ -25,7 +25,7 @@ description: "属性とメタタグのリファレンス"
 
 [native adapters]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/native/
 [`script`や`CSS`のリンクを最新の状態に保つために]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アセット変更時のリロード
-[フレームのドキュメント]: https://everyleaf.github.io/hotwire_ja/turbo/turbo/reference/frames
+[フレームのドキュメント]: https://everyleaf.github.io/hotwire_ja/turbo/reference/frames
 [Visit]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ページ・ナビゲーションの基本
 [フレームのナビゲーションをページアクセスに昇格]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/frames/#フレームのナビゲーションをページアクセスに昇格させる
 [ページ・ロード間で要素を永続化します]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#ページのロードにまたがって要素を永続化する
