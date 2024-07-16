@@ -30,7 +30,7 @@ Turboは、ナビゲーション・ライフサイクルを追跡しページの
 * `turbo:before-render` はページの描画前に発火します。新しい`<body>` 要素には  `event.detail.newBody` でアクセスできます。描画は `event.detail.resume` でキャンセルまたは継続できます(詳細は [描画の一時停止](https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive#描画の一時停止))。
  Turbo ドライブがレスポンスを描画する方法は、`event.detail.render` 関数で上書きしてカスタマイズできます (詳細は [描画のカスタマイズ](https://turbo.hotwired.dev/handbook/drive#custom-rendering))。
 
-* `turbo:before-stream-render` は Turbo ストリームがページの更新を描画する前に発火します。新しい `<turbo-stream>` には、`event.detail.newStream` でアクセスできます。要素の振る舞いをカスタマイズするには、`event.detail.render` 関数を上書きしてください（詳細は[アクションのカスタマイズ](https://turbo.hotwired.dev/handbook/streams#custom-actions))。
+* `turbo:before-stream-render` は Turbo ストリームがページの更新を描画する前に発火します。新しい `<turbo-stream>` には、`event.detail.newStream` でアクセスできます。要素の振る舞いをカスタマイズするには、`event.detail.render` 関数を上書きしてください（詳細は[アクションのカスタマイズ](https://turbo.hotwired.dev/handbook/streams#custom-actions))。
 
 * `turbo:render`は Turbo がページを描画した後に発火します。このイベントは、アプリケーションがキャッシュされたロケーションにアクセスする間、二度発火します。一度目はキャッシュされたバージョンが描画された後、二度目は新しいバージョンが描画された後です。
 
