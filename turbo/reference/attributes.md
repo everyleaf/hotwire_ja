@@ -1,5 +1,5 @@
 ---
-order: 05
+order: 5
 title: "属性とメタタグ"
 description: "属性とメタタグのリファレンス"
 ---

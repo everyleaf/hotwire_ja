@@ -1,7 +1,7 @@
 ---
+order: 3
 title: Turbo ストリーム
 description: Turbo ストリームのリファレンス
-order: 3
 ---
 
 # Turbo ストリーム
