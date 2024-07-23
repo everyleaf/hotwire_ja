@@ -1,11 +1,10 @@
 ---
-title: Streams
+title: Turbo ストリーム
 description: Turbo ストリームのリファレンス
 order: 3
 ---
 
-# Streams
-
+# Turbo ストリーム
 
 ## 7つのアクション
 
