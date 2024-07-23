@@ -6,7 +6,7 @@ order: 3
 
 # Streams
 
-## The seven actions
+
 ## 7つのアクション
 
 ### Append 追加する
