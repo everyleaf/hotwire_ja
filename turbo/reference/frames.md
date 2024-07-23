@@ -25,7 +25,23 @@ description: "Turboフレームのリファレンス"
 <details>
 <summary>原文</summary>
 
+# Frames
+
+## Basic frame
+
 Confines all navigation within the frame by expecting any followed link or form submission to return a response including a matching frame tag:
+
+```html
+<turbo-frame id="messages">
+  <a href="/messages/expanded">
+    Show all expanded messages in this frame.
+  </a>
+
+  <form action="/messages">
+    Show response from this form within this frame.
+  </form>
+</turbo-frame>
+```
 </details>
 
 ## フレームの事前読み込み
@@ -41,7 +57,15 @@ Confines all navigation within the frame by expecting any followed link or form 
 <details>
 <summary>原文</summary>
 
+## Eager-loaded frame
+
 Works like the basic frame, but the content is loaded from a remote `src` first.
+
+```html
+<turbo-frame id="messages" src="/messages">
+  Content will be replaced when /messages has been loaded.
+</turbo-frame>
+```
 </details>
 
 ## フレームの遅延読み込み
@@ -57,7 +81,15 @@ Works like the basic frame, but the content is loaded from a remote `src` first.
 <details>
 <summary>原文</summary>
 
+## Lazy-loaded frame
+
 Like an eager-loaded frame, but the content is not loaded from `src` until the frame is visible.
+
+```html
+<turbo-frame id="messages" src="/messages" loading="lazy">
+  Content will be replaced when the frame becomes visible and /messages has been loaded.
+</turbo-frame>
+```
 </details>
 
 ## デフォルトでページ全体を対象とするフレーム
@@ -78,6 +110,29 @@ Like an eager-loaded frame, but the content is not loaded from `src` until the f
 </turbo-frame>
 ```
 
+<details>
+<summary>原文</summary>
+
+## Frame targeting the whole page by default
+
+```html
+<turbo-frame id="messages" target="_top">
+  <a href="/messages/1">
+    Following link will replace the whole page, not this frame.
+  </a>
+
+  <a href="/messages/1" data-turbo-frame="_self">
+    Following link will replace just this frame.
+  </a>
+
+  <form action="/messages">
+    Submitting form will replace the whole page, not this frame.
+  </form>
+</turbo-frame>
+```
+
+</details>
+
 ## ナビゲーションターゲットが上書きされたフレーム
 
 ```html
@@ -96,6 +151,28 @@ Like an eager-loaded frame, but the content is not loaded from `src` until the f
 </turbo-frame>
 ```
 
+<details>
+<summary>原文</summary>
+
+## Frame with overwritten navigation targets
+
+```html
+<turbo-frame id="messages">
+  <a href="/messages/1">
+    Following link will replace this frame.
+  </a>
+
+  <a href="/messages/1" data-turbo-frame="_top">
+    Following link will replace the whole page, not this frame.
+  </a>
+
+  <form action="/messages" data-turbo-frame="navigation">
+    Submitting form will replace the navigation frame.
+  </form>
+</turbo-frame>
+```
+</details>
+
 ## ページ遷移をナビゲーションしやすくするフレーム
 
 ```html
@@ -109,6 +186,19 @@ Like an eager-loaded frame, but the content is not loaded from `src` until the f
 </turbo-frame>
 ```
 
+<details>
+<summary>原文</summary>
+
+## Frame that promotes navigations to Visits
+
+```html
+<turbo-frame id="messages" data-turbo-action="advance">
+  <a href="/messages?page=2">Advance history to next page</a>
+  <a href="/messages?page=2" data-turbo-action="replace">Replace history with next page</a>
+</turbo-frame>
+```
+</details>
+
 # 属性、プロパティ、関数
 
 `<turbo-frame>`要素は、独自のHTML属性とJavaScriptプロパティを持つ[カスタム要素][]です。
@@ -117,6 +207,8 @@ Like an eager-loaded frame, but the content is not loaded from `src` until the f
 
 <details>
 <summary>原文</summary>
+
+# Attributes, properties, and functions
 
 The `<turbo-frame>` element is a [custom element][] with its own set of HTML
 attributes and JavaScript properties.
@@ -140,6 +232,8 @@ attributes and JavaScript properties.
 
 <details>
 <summary>原文</summary>
+
+## HTML Attributes
 
 * `src` accepts a URL or path value that controls navigation
   of the element
@@ -199,6 +293,8 @@ attributes and JavaScript properties.
 <details>
 <summary>原文</summary>
 
+## Properties
+
 All `<turbo-frame>` elements can be controlled in JavaScript environments
 through instances of the `FrameElement` class.
 
@@ -229,7 +325,7 @@ through instances of the `FrameElement` class.
   when the `document` that contains the element is a [preview][].
 
 [Promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-[preview]: https://turbo.hotwired.dev/handbook/building#detecting-when-a-preview-is-visible  
+[preview]: https://turbo.hotwired.dev/handbook/building#detecting-when-a-preview-is-visible
 </details>
 
 ## 関数
@@ -238,6 +334,8 @@ through instances of the `FrameElement` class.
 
 <details>
 <summary>原文</summary>
+
+## Functions
 
 * `FrameElement.reload()` is a function that reloads the frame element from its `src`.
 </details>
