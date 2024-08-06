@@ -1,7 +1,7 @@
 ---
 title: Turbo アプリケーションの構築
 description: "Turboを使用してアプリケーションを構築する方法についてもっと学びましょう。"
-order: 6
+order: 7
 ---
 
 # Turbo アプリケーションの構築

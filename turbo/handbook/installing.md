@@ -1,7 +1,7 @@
 ---
 title: "アプリケーションに Turbo をインストール"
 description: "アプリケーションにTurboをインストールする方法を学びましょう。"
-order: 7
+order: 8
 ---
 
 # アプリケーションに Turbo をインストール
