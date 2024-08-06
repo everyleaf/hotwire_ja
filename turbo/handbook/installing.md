@@ -17,10 +17,19 @@ Turbo can either be referenced in compiled form via the Turbo distributable scri
 
 </details>
 
-
 ## コンパイル済みスクリプト
 
-最新の配布スクリプトは、GitHub のリリースページからダウンロードできます。そして、ページ内の `<script>` タグ内で参照できます。または、Skypack のような CDN バンドラーを利用してリリースされた最新の Turbo を使用できます。詳細は、[https://cdn.skypack.dev/@hotwired/turbo](https://cdn.skypack.dev/@hotwired/turbo) を参照してください。
+Skypack のような CDN バンドラーを利用してリリースされた最新の Turbo を使用できます。詳細は、[https://www.skypack.dev/view/@hotwired/turbo](https://www.skypack.dev/view/@hotwired/turbo) を参照してください。
+または[unpkgからコンパイルされたパッケージをダウンロードできます](https://unpkg.com/browse/@hotwired/turbo@latest/dist/)。
+
+<details>
+<summary>原文</summary>
+
+## In Compiled Form
+
+You can float on the latest release of Turbo using a CDN bundler like Skypack. See <a href="https://www.skypack.dev/view/@hotwired/turbo">https://www.skypack.dev/view/@hotwired/turbo</a> for more details. Or <a href="https://unpkg.com/browse/@hotwired/turbo@latest/dist/">download the compiled packages from unpkg</a>.
+
+</details>
 
 ## npm パッケージ
 
