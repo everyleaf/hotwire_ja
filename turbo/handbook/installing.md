@@ -39,6 +39,27 @@ You can float on the latest release of Turbo using a CDN bundler like Skypack. S
 import * as Turbo from "@hotwired/turbo";
 ```
 
+<details>
+<summary>原文</summary>
+
+## As An npm Package
+
+You can install Turbo from npm via the `npm` or `yarn` packaging tools. Then require or import that in your code:
+```javascript
+import * as Turbo from "@hotwired/turbo"
+```
+
+</details>
+
 ## Ruby on Rails アプリケーション
 
 JavaScript フレームワークの Turbo は、アセットパイプラインで直接利用できるように [turbo-rails gem](https://github.com/hotwired/turbo-rails) に含まれています。
+
+<details>
+<summary>原文</summary>
+
+## In a Ruby on Rails application
+
+The Turbo JavaScript framework is included with [the turbo-rails gem](https://github.com/hotwired/turbo-rails) for direct use with the asset pipeline.
+
+</details>
