@@ -6,7 +6,17 @@ order: 8
 
 # アプリケーションに Turbo をインストール
 
-Turbo は、アプリケーションの `<head>` 内で直接 Turbo 配布スクリプトを参照してコンパイルされた形でインストールするか、Webpack などのバンドル経由で npm を使用してインストールすることができます。
+Turbo は、アプリケーションの `<head>` 内にて Turbo 配布スクリプトから直接、または esbuild などのバンドル経由で npm を使用することによりコンパイルされた形で参照することができます。
+
+<details>
+<summary>原文</summary>
+
+# Installing Turbo in Your Application
+
+Turbo can either be referenced in compiled form via the Turbo distributable script directly in the `<head>` of your application or through npm via a bundler like esbuild.
+
+</details>
+
 
 ## コンパイル済みスクリプト
 
