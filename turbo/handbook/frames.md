@@ -523,7 +523,7 @@ Upon form submissions, the token will be automatically added to the request's he
 # カスタムレンダリング
 
 Turbo の `<turbo-frame>` におけるデフォルトの描画処理は、リクエストしている `<turbo-frame>` 要素のコンテンツを、レスポンス内の一致した `<turbo-frame>` 要素のコンテンツで置き換えるというものです。実際には、 `<turbo-frame>` 要素のコンテンツは [`<turbo-stream action="update">`](/reference/streams#update) 要素によって操作されているかのように描画されます。
-基本的なレンダラーは、レスポンスの中にある`<turbo-frame>`タグ内のコンテンツを抽出し、それを使ってリクエストした`<turbo-frame>`の持つコンテンツを置き換えます。Turbo frame 要素のライフサイクル(リクエスト-レスポンス)の段階を通じて[Turbo Drive が管理する `[src]`, `[busy]`, `[complete]` 属性](https://turbo.hotwired.dev/reference/frames#html-attributes)を除いて、`<turbo-frame>` 要素が変更されることはありません。
+基本的なレンダラーは、レスポンスの中にある`<turbo-frame>`タグ内のコンテンツを抽出し、リクエストした`<turbo-frame>`の持つコンテンツを、その抽出したコンテンツに置き換えます。[Turbo Drive が管理する `[src]`, `[busy]`, `[complete]` 属性](https://turbo.hotwired.dev/reference/frames#html-attributes)を除いて、`<turbo-frame>` 要素は、Turbo frame 要素のライフサイクル(リクエスト-レスポンス)の段階を通じて変更されることはありません。
 アプリケーションは、`turbo:before-frame-render` イベントリスナーの付与と `event.detail.render` プロパティの上書きを行うことで `<turbo-frame>` の描画処理をカスタマイズできます。
 例えば、 [morphdom](https://github.com/patrick-steele-idem/morphdom) によってリクエストした `<turbo-frame>` 要素の中にレスポンスの `<turbo-frame>` 要素をいれてしまうこともできます。
 
