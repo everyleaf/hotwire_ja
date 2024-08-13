@@ -1,16 +1,35 @@
 ---
 title: "アプリケーションに Turbo をインストール"
 description: "アプリケーションにTurboをインストールする方法を学びましょう。"
-order: 7
+order: 8
 ---
 
 # アプリケーションに Turbo をインストール
 
-Turbo は、アプリケーションの `<head>` 内で直接 Turbo 配布スクリプトを参照してコンパイルされた形でインストールするか、Webpack などのバンドル経由で npm を使用してインストールすることができます。
+Turbo は、アプリケーションの `<head>` 内にて Turbo 配布スクリプトから直接、または esbuild などのバンドル経由で npm を使用することにより、コンパイルされた形で参照することができます。
+
+<details>
+<summary>原文</summary>
+
+# Installing Turbo in Your Application
+
+Turbo can either be referenced in compiled form via the Turbo distributable script directly in the `<head>` of your application or through npm via a bundler like esbuild.
+
+</details>
 
 ## コンパイル済みスクリプト
 
-最新の配布スクリプトは、GitHub のリリースページからダウンロードできます。そして、ページ内の `<script>` タグ内で参照できます。または、Skypack のような CDN バンドラーを利用してリリースされた最新の Turbo を使用できます。詳細は、[https://cdn.skypack.dev/@hotwired/turbo](https://cdn.skypack.dev/@hotwired/turbo) を参照してください。
+Skypack のような CDN バンドラーを利用してリリースされた最新の Turbo を使用できます。詳細は、[https://www.skypack.dev/view/@hotwired/turbo](https://www.skypack.dev/view/@hotwired/turbo) を参照してください。
+または[unpkgからコンパイルされたパッケージをダウンロードできます](https://unpkg.com/browse/@hotwired/turbo@latest/dist/)。
+
+<details>
+<summary>原文</summary>
+
+## In Compiled Form
+
+You can float on the latest release of Turbo using a CDN bundler like Skypack. See <a href="https://www.skypack.dev/view/@hotwired/turbo">https://www.skypack.dev/view/@hotwired/turbo</a> for more details. Or <a href="https://unpkg.com/browse/@hotwired/turbo@latest/dist/">download the compiled packages from unpkg</a>.
+
+</details>
 
 ## npm パッケージ
 
@@ -20,6 +39,27 @@ Turbo は、アプリケーションの `<head>` 内で直接 Turbo 配布スク
 import * as Turbo from "@hotwired/turbo";
 ```
 
+<details>
+<summary>原文</summary>
+
+## As An npm Package
+
+You can install Turbo from npm via the `npm` or `yarn` packaging tools. Then require or import that in your code:
+```javascript
+import * as Turbo from "@hotwired/turbo"
+```
+
+</details>
+
 ## Ruby on Rails アプリケーション
 
 JavaScript フレームワークの Turbo は、アセットパイプラインで直接利用できるように [turbo-rails gem](https://github.com/hotwired/turbo-rails) に含まれています。
+
+<details>
+<summary>原文</summary>
+
+## In a Ruby on Rails application
+
+The Turbo JavaScript framework is included with [the turbo-rails gem](https://github.com/hotwired/turbo-rails) for direct use with the asset pipeline.
+
+</details>
