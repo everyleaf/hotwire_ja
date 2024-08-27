@@ -418,7 +418,7 @@ Turbo は、現在と次のページの両方に以下の `<meta>` 要素があ�
 <meta name="view-transition" content="same-origin" />
 ```
 
-Turbo は `<html>` 要素に `data-turbo-visit-direction` 属性を追加することで、トランジションの方向を指定できます。その属性の値として以下のものを使えます。
+Turbo は `<html>` 要素に `data-turbo-visit-direction` 属性を追加することで、トランジションの方向を指定できます。その属性の値として以下のいずれかを使えます。
 
 - `forward`: ページを全て変える方向
 - `back`: ページを前のページに戻す方向
