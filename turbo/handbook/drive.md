@@ -284,7 +284,7 @@ document.addEventListener("turbo:before-fetch-request", async (event) => {
 デフォルトでは、リンクのクリックはサーバへ `GET` リクエストを送ります。しかし、これを `data-turbo-method` で変更することができます。
 
 ```html
-<a href="/articles/54" data-turbo-method="delete">Delete the article</a>
+<a href="/articles/54" data-turbo-method="delete">記事を削除する</a>
 ```
 
 リンクは隠されたformに変換され、DOM内の `a` 要素の次の位置に配置されます。これは、リンクは別のフォームの中には配置できないということです。フォームをネストすることはできないからです。
@@ -311,8 +311,8 @@ You should also consider that for accessibility reasons, it's better to use actu
 リンクに `data-turbo-confirm` 属性を付けると、アクセス前に確認ダイアログが表示できます。
 
 ```html
-<a href="/articles" data-turbo-confirm="このページから離れますか？">Back to articles</a>
-<a href="/articles/54" data-turbo-method="delete" data-turbo-confirm="本当に記事を削除しますか？">Delete the article</a>
+<a href="/articles" data-turbo-confirm="このページから離れますか？">記事に戻る</a>
+<a href="/articles/54" data-turbo-method="delete" data-turbo-confirm="本当に記事を削除しますか？">記事を削除する</a>
 ```
 
 確認時に呼ぶメソッドは `Turbo.setConfirmMethod` を使って、変更できます。確認時に呼ぶメソッドのデフォルトは、ブラウザに組み込まれてる `confirm` です。
@@ -336,14 +336,14 @@ Use `Turbo.setConfirmMethod` to change the method that gets called for confirmat
  Turbo ドライブは、対象となる要素かその親要素で `data-turbo="false"` を宣言することで、要素単位で無効化することができます。
 
 ```html
-<a href="/" data-turbo="false">Disabled</a>
+<a href="/" data-turbo="false">無効化</a>
 
 <form action="/messages" method="post" data-turbo="false">
   ...
 </form>
 
 <div data-turbo="false">
-  <a href="/">Disabled</a>
+  <a href="/">無効化</a>
   <form action="/messages" method="post">
     ...
   </form>
@@ -740,8 +740,8 @@ HTML要素、あるいは、その祖先に `data-turbo-prefetch="false"`をつ�
     <meta name="turbo-prefetch" content="true">
   </head>
   <body>
-    <a href="/articles">Articles</a> <!-- このリンク先はプリフェッチされます -->
-    <a href="/about" data-turbo-prefetch="false">About</a> <!-- このリンク先はプリフェッチされません -->
+    <a href="/articles">記事</a> <!-- このリンク先はプリフェッチされます -->
+    <a href="/about" data-turbo-prefetch="false">概要</a> <!-- このリンク先はプリフェッチされません -->
     <div data-turbo-prefetch="false"`>
       <!-- このdiv内のリンクはプリフェッチされません -->
     </div>
