@@ -314,7 +314,7 @@ You should also consider that for accessibility reasons, it's better to use actu
 <a href="/articles/54" data-turbo-method="delete" data-turbo-confirm="本当に記事を削除しますか？">記事を削除する</a>
 ```
 
-確認時に呼ぶメソッドは `Turbo.setConfirmMethod` を使って、変更できます。確認時に呼ぶメソッドのデフォルトは、ブラウザに組み込まれてる `confirm` です。
+確認時に呼ぶメソッドは `Turbo.setConfirmMethod` を使って、変更できます。確認時に呼ぶメソッドのデフォルトは、ブラウザに組み込まれている `confirm` です。
 
 <details>
 <summary>原文</summary>
