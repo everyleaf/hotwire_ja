@@ -533,7 +533,7 @@ responsibility to ensure that the element is present on any page that requires
 streaming.
 典型的には、Turbo による全ページのナビゲーションは `<body>` 内に宣言され、その中で結果のドキュメントに置き換えられます。サーバーの責務として、その要素はストリーミングを要求する全てのページに存在しなければならないからです。
 
-バックエンドアプリケーションと Trubo ストリームを統合する、もう一つの簡単な方法は、[Mercure protocol](https://mercure.rocks) を利用することです。
+バックエンドアプリケーションと Turbo ストリームを統合する、もう一つの簡単な方法は、[Mercure protocol](https://mercure.rocks) を利用することです。
 Mercure は、サーバーアプリケーションに対して便利な方法を定義します。それは、ページの変更を [Server-Sent Events (SSE)](https://developer.mozilla.org/ja/docs/Web/API/Server-sent_events) を通して、全ての接続されたクライアントに送信できる方法です。[Learn how to use Mercure with Turbo Streams](https://mercure.rocks/docs/ecosystem/hotwire)
 
 [WebSocket]: https://developer.mozilla.org/ja/docs/Web/API/WebSocket
