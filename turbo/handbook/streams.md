@@ -117,6 +117,7 @@ WebSocket、SSE やフォーム送信の応答としての 1 つのストリー�
 
 <details>
 <summary>原文</summary>
+
 A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` elements. The stream message below demonstrates the eight possible stream actions:
 
 ```html
