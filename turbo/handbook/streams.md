@@ -357,6 +357,7 @@ Content-Type: text/vnd.turbo-stream.html; charset=utf-8
 
 <details>
 <summary>原文</summary>
+
 The key to Turbo Streams is the ability to reuse your existing server-side templates to perform live, partial page changes. The HTML template used to render each message in a list of such on the first page load is the same template that'll be used to add one new message to the list dynamically later. This is at the essence of the HTML-over-the-wire approach: You don't need to serialize the new message as JSON, receive it in JavaScript, render a client-side template. It's just the standard server-side templates reused.
 Another example from how this would look in Rails:
 ```erb
