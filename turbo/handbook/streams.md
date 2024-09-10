@@ -476,7 +476,7 @@ StreamActions.log = function () {
 <details>
 <summary>原文</summary>
 
-By default, Turbo Streams support [eight values for its `action` attribute](/reference/streams#the-seven-actions). If your application needs to support other behaviors, you can override the `event.detail.render` function.
+By default, Turbo Streams support [eight values for its `action` attribute](https://turbo.hotwired.dev/reference/streams#the-seven-actions). If your application needs to support other behaviors, you can override the `event.detail.render` function.
 
 For example, if you'd like to expand upon the eight actions to support `<turbo-stream>` elements with `[action="alert"]` or `[action="log"]`, you could declare a `turbo:before-stream-render` listener to provide custom behavior:
 
