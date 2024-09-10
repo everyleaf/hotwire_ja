@@ -459,7 +459,7 @@ addEventListener("turbo:before-stream-render", ((event) => {
 }))
 ```
 
-`turbo:before-stream-render` イベントをリッスンする方法に加え、アプリケーションはアクションを`StreamActions` にプロパティとして直接宣言もできます。
+`turbo:before-stream-render` イベントをリッスンする方法に加え、アプリケーションはアクションを `StreamActions` にプロパティとして直接宣言もできます。
 
 In addition to listening for `turbo:before-stream-render` events, applications
 can also declare actions as properties directly on `StreamActions`:
