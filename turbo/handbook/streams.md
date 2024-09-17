@@ -94,24 +94,12 @@ They can be used to surgically update the DOM after a user action such as removi
 </turbo-stream>
 
 
-<turbo-stream action="morph" target="current_step">
-  <template>
-    <li>新しいアイテム</li>
-  </template>
-</turbo-stream>
-
-<turbo-stream action="morph" target="current_step" children-only>
-  <template>
-    <li>新しいアイテム</li>
-  </template>
-</turbo-stream>
-
 <turbo-stream action="refresh" request-id="abcd-1234"></turbo-stream>
 ```
 
 全ての `<turbo-stream>` 要素は、その中に含まれる HTML を一つの `<template>` 要素で包まなければならないことに注意してください。
 
-Turboストリームは、ドキュメント内のどんな要素でも、[id](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/id)属性か[CSS セレクター](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Selectors) で解決できるものなら統合できます。対象の要素を[`<turbo-frame>`要素](/trubo/handbook/frames)に入れる必要はありません。もしアプリケーションで `<turbo-stream>` 要素のために`<turbo-frame>` 要素を使っているのなら、`<turbo-frame>` を他の [組み込み要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element) に変更しましょう。
+Turboストリームは、ドキュメント内のどんな要素でも、[id](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/id)属性か[CSS セレクター](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Selectors) で解決できるものなら統合できます(`<template>` 要素あるいは `<iframe>` 要素の中身を除いて）。対象の要素を[`<turbo-frame>`要素](/trubo/handbook/frames)に入れる必要はありません。もしアプリケーションで `<turbo-stream>` 要素のために`<turbo-frame>` 要素を使っているのなら、`<turbo-frame>` を他の [組み込み要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element) に変更しましょう。
 
 WebSocket、SSE やフォーム送信の応答としての 1 つのストリームメッセージの中で、任意の数のストリーム要素をレンダリングできます。
 
@@ -461,8 +449,6 @@ addEventListener("turbo:before-stream-render", ((event) => {
 
 `turbo:before-stream-render` イベントをリッスンする方法に加え、アプリケーションはアクションを `StreamActions` にプロパティとして直接宣言もできます。
 
-In addition to listening for `turbo:before-stream-render` events, applications
-can also declare actions as properties directly on `StreamActions`:
 
 ```javascript
 import { StreamActions } from "@hotwired/turbo"
@@ -522,16 +508,12 @@ Webscoket の更新を直接ドメインモデルからトリガーできます�
 
 しかしながら、Trubo 自体は、バックエンドに対して一切関知しません。他のエコシステム内の異なるフレームワークで密な統合を作成するためにも Rails に対する参考実装をみることを推奨します。
 
-Turboの `<turbo-stream-source>` カスタム要素は要素の `[src]` 属性を通してストリームのソースへ接続します。srcの値を `ws://` あるいは `wss://` URL で宣言した場合、 裏でストリームするソースは [WebSocket][] インスタンスとなります。その他の形の宣言であれば、[EventSource][] を通しての接続になります。
+Turboの `<turbo-stream-source>` カスタム要素は要素の `[src]` 属性を通してストリームのソースへ繋がります。srcの値を `ws://` あるいは `wss://` URL で宣言した場合、 裏でストリームするソースは [WebSocket][] インスタンスとなります。その他の形の宣言であれば、[EventSource][] を通しての接続になります。
 
-要素がドキュメントと接続した際に、ストリームのソースも接続されます。要素の接続が切れたら、ストリームも接続が切られます。
+要素がドキュメントと繋がった際に、ストリームのソースも繋がります。要素の繋がりが切れたら、ストリームも繋がりが切られます。
 
 ドキュメントの `<head>` はTurbo のナビゲーション間にわたって変わらないため、`<turbo-stream-source>` をドキュメントの `body` 要素にマウントするのが重要です。
 
-Typical full page navigations driven by Turbo will result in the `<body>` contents
-being discarded and replaced with the resulting document. It's the server's
-responsibility to ensure that the element is present on any page that requires
-streaming.
 典型的には、Turbo による全ページのナビゲーションは `<body>` 内に宣言され、その中で結果のドキュメントに置き換えられます。サーバーの責務として、その要素はストリーミングを要求する全てのページに存在しなければならないからです。
 
 バックエンドアプリケーションと Turbo ストリームを統合する、もう一つの簡単な方法は、[Mercure protocol](https://mercure.rocks) を利用することです。
