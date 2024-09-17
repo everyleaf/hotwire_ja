@@ -1,8 +1,7 @@
 ---
-order: 04
 title: "Turboフレームを分解する"
 description: "Turbo Framesはページを独立したコンテキストに分解し、それらを遅延ロードできるようにし、インタラクションの範囲を制限します。"
-order: 3
+order: 4
 ---
 
 # Turboフレームを分解する
