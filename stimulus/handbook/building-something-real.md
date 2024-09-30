@@ -6,7 +6,7 @@ layout: "stimulus--base.html"
 
 # 実際に使えるものを作る
 
-<a href="/stimulus/handbook/hello-stimulus/">Hello, Stimulus</a>の章で、はじめてコントローラを実装し、StimulusがHTMLとJavaScriptをどのように接続するかを学びました。 次は、Basecampで使われているコントローラを再現して、実際のアプリケーションで使えるものを見てみましょう。
+<a href="/stimulus/handbook/hello-stimulus/">Hello, Stimulus</a>の章で、はじめてコントローラを実装し、 Stimulus が HTML と JavaScript をどのように接続するかを学びました。 次は、Basecamp で使われているコントローラを再現して、実際のアプリケーションで使えるものを見てみましょう。
 
 <details>
     <summary>原文</summary>
