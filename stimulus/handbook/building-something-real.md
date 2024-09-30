@@ -10,6 +10,7 @@ layout: "stimulus--base.html"
 
 <details>
     <summary>原文</summary>
+
 We’ve implemented our first controller and learned how Stimulus connects HTML to JavaScript. Now let’s take a look at something we can use in a real application by recreating a controller from Basecamp.
 </details>
 
