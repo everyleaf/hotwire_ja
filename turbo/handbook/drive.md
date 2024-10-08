@@ -724,7 +724,7 @@ Servers may also respond to form submissions with a [Turbo Streams](streams) mes
 
 Turbo は、ユーザーがリンクをクリックする前に発生した`mouseenter` イベントでリンク先を自動で読み込みます。これにより、リンク・ナビゲーションの待ち時間が短縮されます。通常、クリック・ナビゲーション単位で 500 から 800 ミリ秒の速度が向上します。
 
-リンク先のプリフェッチは、Turbo v8からデフォルトで有効になっています。ただ、以下のメタタグをページに追加すれば、無効化できます。
+リンク先のプリフェッチは、Turbo v8 からデフォルトで有効になっています。ただ、以下のメタタグをページに追加すれば、無効化できます。
 
 ```html
 <meta name="turbo-prefetch" content="false">
