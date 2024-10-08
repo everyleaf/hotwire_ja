@@ -68,7 +68,7 @@ Turboフレームを使うと、これらの独立したセグメントを、そ
 
 ## Turboストリーム: Deliver live page changes
 
-非同期なアクションに応答してページの一部を変化させることで、アプリケーションをとても生き生きしたものできます。Turboフレームはそのような更新を、一つのフレーム内でのHTTPプロトコルでの直接のやりとりに応じて行います。一方で、Turboストリームは、ページのどの部分であってもその更新に、WebSocketコネクションやSSE（Sever-sent events）、その他のトランスポートを使います。(<a href="http://itsnotatypo.com">imbox</a>を見てください。ここでは、新しいemailの着信が、自動的に反映されます）。
+非同期なアクションに応答してページの一部を変化させることで、アプリケーションをとても生き生きしたものにできます。Turboフレームはそのような更新を、一つのフレーム内でのHTTPプロトコルでの直接のやりとりに応じて行います。一方で、Turboストリームは、ページのどの部分であってもその更新に、WebSocketコネクションやSSE（Sever-sent events）、その他のトランスポートを使います。(<a href="http://itsnotatypo.com">imbox</a>を見てください。ここでは、新しいemailの着信が、自動的に反映されます）。
 
 Turboストリームは、`<turbo-stream>` 要素を、7つの基本のアクション、`append`、 `prepend`、 `replace`、 `update`、 `remove`、 `before`、 `after`とともに導入します。これらのアクションは、あなたが操作したい要素の ID を指定する`target`属性と一緒に使われます。そのアクションと`target`属性によって、ページをリフレッシュするのに必要とされる全てのミューテーションをエンコードできます。いくつかのストリーム要素を一つのストリームメッセージにまとめることさえできます。簡単に、挿入や置き換えをしたい HTML を`<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/template">template tag</a>`で囲います。あとはTurboがやってくれます。
 
