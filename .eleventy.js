@@ -13,10 +13,11 @@ var md = require('markdown-it')({
 module.exports = function(eleventyConfig) {
   md.use(markdownItAnchor, { // add anchors to headings
     level: '2',
-    permalink: 'true',
-    permalinkClass: 'anchor',
-    permalinkSymbol: '﹟',
-    permalinkBefore: 'true'
+    permalink: markdownItAnchor.permalink.ariaHidden({
+      class: 'anchor',
+      symbol: '#',
+      placement: 'before'
+    }),
   });
   md.use(markdownItToc, { // make a TOC with ${toc}
     level: '2',
