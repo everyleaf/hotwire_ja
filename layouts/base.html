@@ -20,24 +20,22 @@ title: Hotwire
     <main class="grid docs">
 
       <header class="docs__index grid__custom-item">
-        {% render 'navigation.html' %}
+        {% include 'navigation.html' %}
       </header>
 
       <section id="content" class="docs__content grid__custom-item">
         {{ content }}
       </section>
       <footer class="docs__footer grid__item grid__item--start-4 grid__item--span-8">
-        <footer>
-          <p class="footer-headline">
-            <small>
-              <a href="https://github.com/hotwired/turbo-site/issues/96">DHHの許諾</a>のもと、<a href="https://turbo.hotwired.dev/handbook/introduction">公式のTurbo Handbook</a>を<a href="https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975">オリジナル</a>として、翻訳をしています。
-            </small>
-            <br>
-            <small>
-              このサイトの全ての文責は、<a href="https://everyleaf.com/">株式会社万葉</a>にあります。
-            </small>
-          </p>
-        </footer>
+        <p class="footer-headline">
+          <small>
+            <a href="https://github.com/hotwired/turbo-site/issues/96">DHHの許諾</a>のもと、<a href="https://turbo.hotwired.dev/handbook/introduction">公式のTurbo Handbook</a>を<a href="https://github.com/hotwired/turbo-site/commit/59943d962b37a02c1dcb68ebaa1057f713a45975">オリジナル</a>として、翻訳をしています。
+          </small>
+          <br>
+          <small>
+            このサイトの全ての文責は、<a href="https://everyleaf.com/">株式会社万葉</a>にあります。
+          </small>
+        </p>
       </footer>
     </main>
   </body>

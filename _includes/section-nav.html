@@ -1,23 +1,10 @@
-<ul class="nav__sublist active">
-    <li>
-      <a class="nav__sublist-link" href="/turbo/handbook/introduction">はじめに</a>
-    </li>
-    <li>
-      <a class="nav__sublist-link" href="/turbo/handbook/drive">Turbo ドライブを使ったナビゲート</a>
-    </li>
-    <li>
-      <a class="nav__sublist-link" href="/turbo/handbook/frames">Turboフレームを分解する</a>
-    </li>
-    <li>
-      <a class="nav__sublist-link" href="/turbo/handbook/streams">Turbo ストリームを利用してみよう</a>
-    </li>
-    <li>
-      <a class="nav__sublist-link" href="/turbo/handbook/native">iOS と Android をネイティブにやる</a>
-    </li>
-    <li>
-      <a class="nav__sublist-link" href="/turbo/handbook/building">Turbo アプリケーションの構築</a>
-    </li>
-    <li>
-      <a class="nav__sublist-link" href="/turbo/handbook/installing">アプリケーションに Turbo をインストール</a>
-    </li>
+<ul class="nav__sublist {% if tags[0] == section %} active{% endif %}">
+  {%- assign sortedEntries = collections[section] -%}
+  {%- for entry in sortedEntries -%}
+  <li>
+    <a class="nav__sublist-link{% if page.url == entry.url %} active{% endif %}" href="{{ entry.url | remove: '.html' }}">
+      {% if entry.data.title %}{{ entry.data.title }}{% else %}タイトルなし{% endif %}
+    </a>
+  </li>
+  {%- endfor -%}
 </ul>
