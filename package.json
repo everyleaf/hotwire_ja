@@ -5,8 +5,9 @@
   "repository": "git@github.com:everyleaf/hotwire_ja.git",
   "author": "akira888 <a.cup.of.happiness@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "del-cli": "^6.0.0",
     "markdown-it": "^14.1.0",

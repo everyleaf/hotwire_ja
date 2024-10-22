@@ -1,27 +1,32 @@
-const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const markdownItAnchor = require('markdown-it-anchor');
-const markdownItToc = require('markdown-it-toc-done-right');
+import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import markdownItAnchor from "markdown-it-anchor";
+import markdownItToc from "markdown-it-toc-done-right";
+import markdownIt from "markdown-it";
 
-// enable everything
-var md = require('markdown-it')({
-  html: true,
-  linkify: true,
-  typographer: true
-});
+export default function (eleventyConfig) {
+  eleventyConfig.setLibrary("md", markdownIt({
+    html: true,
+    linkify: true,
+    typographer: true
+  }));
 
-module.exports = function(eleventyConfig) {
-  md.use(markdownItAnchor, { // add anchors to headings
-    level: '2',
-    permalink: markdownItAnchor.permalink.ariaHidden({
-      class: 'anchor',
-      symbol: '#',
-      placement: 'before'
-    }),
+  eleventyConfig.amendLibrary("md", (mdLib) => {
+    return mdLib.use(markdownItAnchor, { // add anchors to headings
+      level: '2',
+      permalink: markdownItAnchor.permalink.ariaHidden({
+        class: 'anchor',
+        symbol: '#',
+        placement: 'before'
+      })
+    });
   });
-  md.use(markdownItToc, { // make a TOC with ${toc}
-    level: '2',
-    listType: 'ul'
+
+  eleventyConfig.amendLibrary("md", (mdLib) => {
+    return mdLib.use(markdownItToc, { // make a TOC with ${toc}
+      level: '2',
+      listType: 'ul'
+    });
   });
 
   eleventyConfig.addCollection('turbo_handbook', collectionApi => {
@@ -38,8 +43,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
-  eleventyConfig.addPassthroughCopy({ '_assets': 'assets' });
-  eleventyConfig.setLibrary('md', md);
+  eleventyConfig.addPassthroughCopy({'_assets': 'assets'});
   eleventyConfig.setDataDeepMerge(true);
 
   return {
