@@ -1,14 +1,14 @@
 
-@import "base/mixins",
-"base/elements",
-"components/anchor",
-"components/button",
-"components/jump",
-"components/nav",
-"components/foot",
-"components/page",
-"components/docs",
-"components/landing",
-"components/highlighter",
-"components/callout",
-"components/grid";
+@use "base/mixins";
+@use "base/elements";
+@use "components/anchor";
+@use "components/button";
+@use "components/jump";
+@use "components/nav";
+@use "components/foot";
+@use "components/page";
+@use "components/docs";
+@use "components/landing";
+@use "components/highlighter";
+@use "components/callout";
+@use "components/grid";

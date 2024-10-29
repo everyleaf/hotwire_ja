@@ -1,19 +1,21 @@
+@use "../base/mixins";
+
 // jump nav ///////////////////////////////////////////////////////////////
 
 .jump {
   width: 100%;
   margin: 0;
   padding: 0 1em;
-  color: $color-background;
-  background-color: $color-brand;
+  color: mixins.$color-background;
+  background-color: mixins.$color-brand;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: $sans-stack;
+  font-family: mixins.$sans-stack;
   text-transform: uppercase;
   font-style: italic;
 
-  @include media(medium) {
+  @include mixins.media(medium) {
     justify-content: flex-start;
   }
 }
@@ -44,21 +46,21 @@
   display: inline-block;
   margin: 0;
   padding: 0.5em 0.125em;
-  color: $color-background;
+  color: mixins.$color-background;
   font-weight: 500;
   text-decoration: none;
 
-  @include media(medium) {
+  @include mixins.media(medium) {
     padding: 0.125em;
-    font-size: $font-small;
+    font-size: mixins.$font-small;
   }
 
   &:visited {
-    color: $color-background;
+    color: mixins.$color-background;
   }
 
   &:hover {
-    color: $color-accent;
+    color: mixins.$color-accent;
   }
 }
 
@@ -68,7 +70,7 @@
 }
 
 .jump__list-link--active {
-  color: $color-accent !important;
+  color: mixins.$color-accent !important;
   text-decoration: none;
   pointer-events: none;
 }
@@ -81,7 +83,7 @@
 
 .jump__list-info {
 
-  @include media(small) {
+  @include mixins.media(small) {
     clip: rect(1px, 1px, 1px, 1px);
     position: absolute !important;
     height: 1px;
