@@ -835,6 +835,8 @@ function hasSlowInternet() {
 * 先祖要素が `[data-turbo="false"]` 属性を持つリンク
 * 先祖要素が `[data-turbo-prefetch="false"]` 属性を持つリンク
 
+また、[フレームの事前読み込み]や[フレームの遅延読み込み]を使ったページでも、プリロードはうまく噛み合います。ページの構造をプリロードし、興味があるコンテンツを読み込んでいる間、読み込んでいる状態を示すことができるからです。
+
 <br><br>
 
 プリロードされた `<a>` 要素は [turbo:before-fetch-request] と [turbo:before-fetch-response] イベントをディスパッチすることに注意してください。`turbo:before-fetch-request` イベントがプリロードにより発生したのかそれとも他のメカニズムにより発生したのかの区別は、リクエストの `X-Sec-Purpose` ヘッダーに `"prefetch"`がセットされているかどうかで確認できます（`X-Sec-Purpose` ヘッダーの値は `event.detail.fetchOptions.headers["X-Sec-Purpose"]` プロパティから取得できます）。
@@ -849,7 +851,8 @@ addEventListener("turbo:before-fetch-request", (event) => {
 })
 ```
 
-
+[フレームの事前読み込み]: /hotwire_ja/turbo/reference/frames#フレームの事前読み込み
+[フレームの遅延読み込み]: /hotwire_ja/turbo/reference/frames#フレームの遅延読み込み
 [data-turbo-preload]: /hotwire_ja/turbo/reference/attributes#data-attributes
 [turbo:before-fetch-request]: /hotwire_ja/turbo/reference/events#turbo%3Abefore-fetch-request
 [turbo:before-fetch-response]: /hotwire_ja/turbo/reference/events#turbo%3Abefore-fetch-response
