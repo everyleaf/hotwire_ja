@@ -1,3 +1,5 @@
+@use "../base/mixins";
+
 // scss-lint:disable VendorPrefix
 // intro //////////////////////////////////////////////////////////////////////
 
@@ -5,8 +7,8 @@
   position: relative;
   margin: 0;
   padding: 0;
-  background-color: $color-tint;
-  border-top: 0.4rem solid $color-brand;
+  background-color: mixins.$color-tint;
+  border-top: 0.4rem solid mixins.$color-brand;
 }
 
 .landing-intro__text {
@@ -14,12 +16,12 @@
   z-index: 1;
   margin: 1.75em 0 2em 0;
   text-align: center;
-  color: $color-text;
+  color: mixins.$color-text;
   font-weight: 800;
   line-height: 1.3;
 
-  @include media(medium) {
-    font-size: $font-xxxx-large;
+  @include mixins.media(medium) {
+    font-size: mixins.$font-xxxx-large;
   }
 }
 
@@ -27,7 +29,7 @@
 
 .landing-summary {
   text-align: left;
-  font-size: $font-large;
+  font-size: mixins.$font-large;
 }
 
 .landing-version {
@@ -35,16 +37,16 @@
   position: relative;
   padding: 0;
   margin: -2em 0 5em 0;
-  font-family: $sans-stack;
+  font-family: mixins.$sans-stack;
   font-weight: 600;
   font-style: italic;
-  font-size: $font-small;
+  font-size: mixins.$font-small;
   text-align: center;
 
   > span {
     display: inline-block;
     padding: 1em 2em;
-    background-color: $color-brand;
+    background-color: mixins.$color-brand;
     clip-path: polygon(5% 10%, 46% 1%, 46% 10%, 100% 0, 95% 90%, 31% 100%, 31% 90%, 0% 100%);
   }
 }
@@ -55,7 +57,7 @@
   grid-column: 3/4;
   margin: 0;
 
-  @include media(medium) {
+  @include mixins.media(medium) {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
@@ -66,21 +68,21 @@
   display: block;
   margin-bottom: 1em;
   padding: 1.5em 1em;
-  font-family: $sans-stack;
+  font-family: mixins.$sans-stack;
   font-style: italic;
   text-align: center;
   line-height: 1.25;
-  background-color: $color-background;
-  box-shadow: 0 0 2em rgba($color-text, 0.075);
+  background-color: mixins.$color-background;
+  box-shadow: 0 0 2em rgba(mixins.$color-text, 0.075);
   border-radius: 0.5em;
 
-  @include media(small) {
+  @include mixins.media(small) {
     max-width: 20em;
     margin-left: auto;
     margin-right: auto;
   }
 
-  @include media(medium) {
+  @include mixins.media(medium) {
     width: 32%;
     margin-bottom: 0;
   }
@@ -91,9 +93,9 @@
   width: 3.75em;
   height: 3.75em;
   margin: 0 auto 1em auto;
-  background-color: $color-brand;
+  background-color: mixins.$color-brand;
 
   .landing-actions__item:hover & {
-    background-color: $color-accent;
+    background-color: mixins.$color-accent;
   }
 }
