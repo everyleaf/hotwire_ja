@@ -1,4 +1,6 @@
 require "pathname"
+require "tempfile"
+
 require_relative "translated_file"
 require_relative "source_file"
 
@@ -20,13 +22,43 @@ class DiffTask
         source_files.each do |source_file|
           translated_file = source_file.find_translated_file(translated_files)
           next unless translated_file
-          pp translated_file
+
+          diff_content = diff(source_file, translated_file)
         end
       end
     end
   end
 
   private
+
+  def diff(source_file, translated_file)
+    translated_commit = translated_file.front_matter[:commit]
+    return unless translated_commit
+
+    Tempfile.open("diff.txt") do |tempfile|
+      sh("git",
+         "-C",
+         source_repository_path.to_s,
+         "diff",
+         "#{translated_commit}..#{source_latest_commit}",
+         source_file.path.to_s,
+         {out: tempfile})
+      tempfile.open.read
+    end
+  end
+
+  def source_latest_commit
+    @source_latest_commit ||= Tempfile.open("latest_commit.txt") do |tempfile|
+      sh("git",
+        "-C",
+        source_repository_path.to_s,
+        "rev-parse",
+        "--short",
+        "main",
+        {out: tempfile})
+      tempfile.open.read.strip
+    end
+  end
 
   def collect_source_files
     [HANDBOOK_DIR, REFERENCE_DIR].flat_map do |dir|
