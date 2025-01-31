@@ -9,6 +9,16 @@ title: Hotwire
     <meta name="description" content="{{ description }}">
     <link rel="stylesheet" href="/assets/main.css">
     <title>{{ title }}{% if section_title %}: {{ section_title }}{% endif %}</title>
+    <!-- Google tag (gtag.js) -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKW4KMRWKF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NKW4KMRWKF');
+    </script>
   </head>
   <body>
   <nav class="jump">
