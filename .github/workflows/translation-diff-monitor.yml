@@ -1,0 +1,31 @@
+name: Translation Diff Monitor
+on:
+  schedule:
+    - cron: 0 0 * * *
+jobs:
+  diff:
+    name: Diff translation
+    runs-on: ubuntu-latest
+    env:
+      TURBO_SITE_REPOSITORY: ${{ github.workspace }}/turbo-site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: hotwired/turbo-site
+          path: turbo-site
+          fetch-depth: 0
+      - name: Setup Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ruby
+      - name: Install dependencies
+        run: bundle
+      - name: Update translation
+        run: |
+          rake
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
