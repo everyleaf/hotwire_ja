@@ -37,6 +37,8 @@ class TranslatedFile
   end
 
   def parse_metadata
+    # hotwire_ja/turbo/handbook/introduction.md
+    # -> turbo, handbook, introduction.md
     project, category, filename = path.to_s.split("/").last(3)
     topic = filename.sub(".md", "")
     [project, category, topic]

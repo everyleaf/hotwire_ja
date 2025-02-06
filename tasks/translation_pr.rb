@@ -60,6 +60,7 @@ class TranslationPr
       "updated translation"
   end
 
+  # Use '~~~' because commit diff might include '```'.
   def generate_description(diff)
 <<-DESCRIPTION
 #{DIFF_START}
@@ -104,6 +105,8 @@ DESCRIPTION
       [nil, nil]
     else
       pr_info = JSON.parse(pr_raw_info, symbolize_names: true)
+      # Closed PR could be referenced by `gh pr view` command if there is no
+      # open PR which has the same branch name.
       return [nil, nil] if pr_info[:closed]
       [pr_info[:title], pr_info[:body]]
     end

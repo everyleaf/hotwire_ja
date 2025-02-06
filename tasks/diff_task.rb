@@ -70,6 +70,7 @@ class DiffTask
   end
 
   def collect_source_files
+    # e.g. turbo-site/_source/{handbook|reference}/01_introduction.md
     [HANDBOOK_DIR, REFERENCE_DIR].flat_map do |dir|
       Pathname.glob(source_repository_path.join(SOURCE_DIR, dir, "*.md")).map do |source_path|
         SourceFile.new(source_path)
@@ -83,6 +84,7 @@ class DiffTask
   end
 
   def collect_translated_files
+    # e.g. hotwire_ja/turbo/{handbook|reference}/introduction.md
     [HANDBOOK_DIR, REFERENCE_DIR].flat_map do |dir|
       Pathname.glob(translation_repository_path.join(TURBO_DIR, dir, "*.md")).map do |translated_path|
         TranslatedFile.new(translated_path)
