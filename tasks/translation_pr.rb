@@ -35,7 +35,7 @@ class TranslationPr
   DIFF_END = "<!-- Please write your description under here. -->"
 
   def repo
-    "#{onwer}/#{repository}"
+    "#{owner}/#{repository}"
   end
 
   def owner
