@@ -24,6 +24,7 @@ class TranslationPr
                   generate_description(diff_content),
                   source_latest_commit)
       end
+      sh("git", "switch", "main")
     end
   end
 
@@ -35,7 +36,7 @@ class TranslationPr
   DIFF_END = "<!-- Please write your description under here. -->"
 
   def repo
-    "#{onwer}/#{repository}"
+    "#{owner}/#{repository}"
   end
 
   def owner
@@ -91,15 +92,20 @@ DESCRIPTION
 
   def find_existed_pr
     pr_raw_info = Tempfile.open("pr.json") do |pr|
-      sh("gh",
-         "pr",
-         "view",
-         branch,
-         "--json", "closed,title,body",
-         "--repo", repo,
-         {out: pr}
-      )
-      pr.open.read
+      begin
+        sh("gh",
+          "pr",
+          "view",
+          branch,
+          "--json", "closed,title,body",
+          "--repo", repo,
+          {out: pr}
+        )
+        pr.open.read
+      rescue RuntimeError
+        # When existed pr doesn't exist, gh command raises RuntimeError.
+        ""
+      end
     end
     if pr_raw_info.empty?
       [nil, nil]
@@ -113,7 +119,8 @@ DESCRIPTION
   end
 
   def commit_latest_hash(source_latest_commit)
-    translated_file.update_commit_hash(source_latest_commit)
+    return unless translated_file.update_commit_hash(source_latest_commit)
+
     sh("git", "add", translated_file.path.to_s)
     sh("git",
        "commit",
@@ -142,7 +149,7 @@ DESCRIPTION
        "create",
        "--title", title,
        "--body", description,
-       "--base", "auto-translations-update",
+       "--base", "main",
        "--head", branch,
        "--repo", repo)
   end

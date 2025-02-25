@@ -25,7 +25,7 @@ class DiffTask
           next unless translated_file
 
           source_latest_commit, diff_content = diff(source_file, translated_file)
-          next unless diff_content
+          next if diff_content.nil? || diff_content.empty?
 
           translation_pr = TranslationPr.new(translation_repository_path,
                                              translated_file,
