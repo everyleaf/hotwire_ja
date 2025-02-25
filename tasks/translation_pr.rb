@@ -91,15 +91,20 @@ DESCRIPTION
 
   def find_existed_pr
     pr_raw_info = Tempfile.open("pr.json") do |pr|
-      sh("gh",
-         "pr",
-         "view",
-         branch,
-         "--json", "closed,title,body",
-         "--repo", repo,
-         {out: pr}
-      )
-      pr.open.read
+      begin
+        sh("gh",
+          "pr",
+          "view",
+          branch,
+          "--json", "closed,title,body",
+          "--repo", repo,
+          {out: pr}
+        )
+        pr.open.read
+      rescue RuntimeError
+        # When existed pr doesn't exist, gh command raises RuntimeError.
+        ""
+      end
     end
     if pr_raw_info.empty?
       [nil, nil]
