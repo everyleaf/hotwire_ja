@@ -147,7 +147,7 @@ DESCRIPTION
        "create",
        "--title", title,
        "--body", description,
-       "--base", "auto-translations-update",
+       "--base", "main",
        "--head", branch,
        "--repo", repo)
   end
