@@ -19,6 +19,7 @@ class TranslatedFile
   end
 
   def update_commit_hash(new_commit)
+    return if new_commit == front_matter[:commit]
     updated_content = content.sub(/(commit:\s*")[^"]+(")/, "\\1#{new_commit}\\2")
     path.write(updated_content)
   end

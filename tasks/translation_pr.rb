@@ -118,7 +118,8 @@ DESCRIPTION
   end
 
   def commit_latest_hash(source_latest_commit)
-    translated_file.update_commit_hash(source_latest_commit)
+    return unless translated_file.update_commit_hash(source_latest_commit)
+
     sh("git", "add", translated_file.path.to_s)
     sh("git",
        "commit",
