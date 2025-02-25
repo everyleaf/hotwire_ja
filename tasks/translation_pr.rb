@@ -24,6 +24,7 @@ class TranslationPr
                   generate_description(diff_content),
                   source_latest_commit)
       end
+      sh("git", "switch", "main")
     end
   end
 
