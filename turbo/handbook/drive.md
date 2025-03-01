@@ -2,7 +2,7 @@
 title: "Turbo ドライブを使ったナビゲート"
 description: "Turbo ドライブは、ページ全体の再読み込みの必要を無くすことで、リンクとフォームの送信を高速化します。"
 order: 2
-commit: "8849e6b"
+commit: "b2d93bd"
 ---
 
 # Turbo ドライブを使ったナビゲート
