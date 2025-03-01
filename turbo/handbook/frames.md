@@ -2,7 +2,7 @@
 title: "Turboフレームを分解する"
 description: "Turbo Framesはページを独立したコンテキストに分解し、それらを遅延ロードできるようにし、インタラクションの範囲を制限します。"
 order: 4
-commit: "8849e6b"
+commit: "b2d93bd"
 ---
 
 # Turboフレームを分解する
