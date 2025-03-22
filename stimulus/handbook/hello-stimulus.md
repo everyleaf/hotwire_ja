@@ -1,7 +1,7 @@
 ---
 title: "Hello, Stimulus"
 description: "簡単なコントローラを作ってみましょう。"
-layout: "stimulus--base.html"
+
 ---
 
 # Hello, Stimulus

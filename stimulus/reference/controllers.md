@@ -1,7 +1,7 @@
 ---
 title: Controllers
 description: "コントローラはStimulusアプリケーションの基本的な構成単位です"
-layout: "base.html"
+
 ---
 
 # Controllers

@@ -1,7 +1,7 @@
 ---
 title: CSS Classes
 description: CSSクラスを論理名でコントローラから参照できるようにする"
-layout: "base.html"
+
 ---
 
 # CSS Classes

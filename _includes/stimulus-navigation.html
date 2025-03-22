@@ -1,0 +1,15 @@
+<!-- wip -->
+<nav class="nav">
+  <ul class="nav__list">
+    <li>
+      <a class="nav__list-link{% if section_code == 'stimulus_handbook' %} active{% endif %}" href="/stimulus/handbook/introduction/">Handbook</a>
+
+      {% include 'section-nav.html', section: 'stimulus_handbook' %}
+    </li>
+    <li>
+      <a class="nav__list-link{% if section_code == 'stimulus_reference' %} active{% endif %}" href="/stimulus/reference/drive/">Reference</a>
+
+      {% include 'section-nav.html', section: 'stimulus_reference' %}
+    </li>
+  </ul>
+</nav>

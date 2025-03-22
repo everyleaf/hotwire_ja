@@ -1,7 +1,7 @@
 ---
 title: "実際に使えるものを作る"
 description: "簡単なコントローラを作ってみましょう。"
-layout: "stimulus--base.html"
+
 ---
 
 # 実際に使えるものを作る

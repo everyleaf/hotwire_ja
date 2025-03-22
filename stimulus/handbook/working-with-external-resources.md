@@ -1,7 +1,7 @@
 ---
 title: "外部リソースの利用"
 description: "Stimulusで外部リソースを取得して情報を更新したり、タイマーを使ったりする方法を見ていきましょう。"
-layout: "stimulus--base.html"
+
 ---
 
 # 外部リソースの利用

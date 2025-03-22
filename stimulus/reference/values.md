@@ -1,7 +1,7 @@
 ---
 title: Values
 description: "Valuesを使うことでコントローラ要素に設定したデータ属性を読み書きすることができます"
-layout: "base.html"
+
 ---
 
 # Values

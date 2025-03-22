@@ -1,7 +1,6 @@
 ---
 title: "Stimulusの原点"
 description: "Stimulusが他のフレームワークとどう違うか、何を求められて生まれたものかについて"
-layout: "stimulus--base.html"
 ---
 
 # Stimulusの原点
