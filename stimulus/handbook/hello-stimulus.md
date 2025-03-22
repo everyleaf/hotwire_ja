@@ -1,7 +1,7 @@
 ---
 title: "Hello, Stimulus"
 description: "簡単なコントローラを作ってみましょう。"
-
+order: 2
 ---
 
 # Hello, Stimulus

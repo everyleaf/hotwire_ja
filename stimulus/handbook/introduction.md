@@ -1,7 +1,7 @@
 ---
 title: "はじめに"
 description: "Stimulusはすでに持っているHTMLに簡単なアノテーションを加えることで要素とJavaScriptオブジェクトを接続することができるフレームワークです。"
-
+order: 1
 ---
 
 # はじめに

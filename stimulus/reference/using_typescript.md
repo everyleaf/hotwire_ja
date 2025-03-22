@@ -1,7 +1,7 @@
 ---
 title: Using Typescript
 description: "Stimulusの各プロパティの型を定義する方法について"
-
+order: 7
 ---
 
 # Typescriptを使う
