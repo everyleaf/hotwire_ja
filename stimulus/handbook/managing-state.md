@@ -1,7 +1,7 @@
 ---
 title: "ステート管理"
 description: "Stimulusでアプリケーションのステート管理はどのように行われるのかを見ていきましょう"
-layout: "stimulus--base.html"
+
 ---
 
 # ステート管理

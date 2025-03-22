@@ -1,7 +1,7 @@
 ---
 title: "アプリケーションにStimulusをインストールする"
 description: "様々なシステム環境のアプリケーションでStimulusをインストールする方法について"
-layout: "stimulus--base.html"
+
 ---
 
 # アプリケーションにStimulusをインストールする

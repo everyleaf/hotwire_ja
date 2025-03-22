@@ -1,7 +1,7 @@
 ---
 title: "はじめに"
 description: "Stimulusはすでに持っているHTMLに簡単なアノテーションを加えることで要素とJavaScriptオブジェクトを接続することができるフレームワークです。"
-layout: "stimulus--base.html"
+
 ---
 
 # はじめに
