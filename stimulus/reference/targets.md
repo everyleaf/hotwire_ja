@@ -1,7 +1,7 @@
 ---
 title: Targets
 description: "Targetを使うとコントローラで扱いたい重要な要素を参照することができます"
-
+order: 3
 ---
 
 # Targets

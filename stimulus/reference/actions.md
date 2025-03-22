@@ -1,7 +1,7 @@
 ---
 title: Actions
 description: "アクションはコントローラでDOMイベントを処理する方法です"
-
+order: 2
 ---
 
 # Actions

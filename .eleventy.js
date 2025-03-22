@@ -41,6 +41,18 @@ export default function (eleventyConfig) {
     });
   })
 
+  eleventyConfig.addCollection('stimulus_handbook', collectionApi => {
+    return collectionApi.getFilteredByTag('stimulus_handbook').sort((a, b) => {
+      return a.data.order - b.data.order;
+    });
+  })
+
+  eleventyConfig.addCollection('stimulus_reference', collectionApi => {
+    return collectionApi.getFilteredByTag('stimulus_reference').sort((a, b) => {
+      return a.data.order - b.data.order;
+    });
+  })
+
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPassthroughCopy({'_assets': 'assets'});

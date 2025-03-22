@@ -1,7 +1,7 @@
 ---
 title: Outlets
 description: "Outletを使うとコントローラが別のコントローラ(と要素)を参照することができます"
-
+order: 4
 ---
 
 # Outlets
