@@ -15,6 +15,8 @@ ${toc}
 <details>
 <summary>原文</summary>
 
+# Navigate with Turbo Drive
+
 Turbo Drive is the part of Turbo that enhances page-level navigation. It watches for link clicks and form submissions, performs them in the background, and updates the page without doing a full reload. It's the evolution of a library previously known as [Turbolinks](https://github.com/turbolinks/turbolinks).
 
 </details>
@@ -31,6 +33,8 @@ Turbo ドライブは、ページ・ナビゲーションを、ある*アクシ�
 
 <details>
 <summary>原文</summary>
+
+## Page Navigation Basics
 
 Turbo Drive models page navigation as a *visit* to a *location* (URL) with an *action*.
 
@@ -84,6 +88,8 @@ Turbo.visit("/edit", { action: "replace" })
 <details>
 <summary>原文</summary>
 
+## Application Visits
+
 Application visits are initiated by clicking a Turbo Drive-enabled link, or programmatically by calling [`Turbo.visit(location)`](/reference/drive#turbodrivevisit).
 
 An application visit always issues a network request. When the response arrives, Turbo Drive renders its HTML and completes the visit.
@@ -135,6 +141,8 @@ Applications using the Turbo Drive [iOS adapter](https://github.com/hotwired/tur
 <details>
 <summary>原文</summary>
 
+## Restoration Visits
+
 Turbo Drive automatically initiates a restoration visit when you navigate with the browser’s Back or Forward buttons. Applications using the [iOS](https://github.com/hotwired/turbo-ios) or [Android](https://github.com/hotwired/turbo-android) adapters initiate a restoration visit when moving backward in the navigation stack.
 
 ![Restore visit action](https://s3.amazonaws.com/turbolinks-docs/images/restore.svg)
@@ -158,6 +166,8 @@ Application visits can be canceled before they start, regardless of whether they
 
 <details>
 <summary>原文</summary>
+
+## Canceling Visits Before They Start
 
 Application visits can be canceled before they start, regardless of whether they were initiated by a link click or a call to [`Turbo.visit`](/reference/drive#turbovisit).
 
@@ -187,6 +197,8 @@ addEventListener("turbo:before-render", (event) => {
 
 <details>
 <summary>原文</summary>
+
+## Custom Rendering
 
 Applications can customize the rendering process by adding a document-wide `turbo:before-render` event listener and overriding the `event.detail.render` property.
 
@@ -225,6 +237,10 @@ document.addEventListener("turbo:before-render", async (event) => {
 <details>
 <summary>原文</summary>
 
+## Pausing Rendering
+
+Applications can pause rendering and make additional preparations before continuing.
+
 Listen for the `turbo:before-render` event to be notified when rendering is about to start, and pause it using `event.preventDefault()`. Once the preparation is done continue rendering by calling `event.detail.resume()`.
 
 An example use case is adding exit animation for visits:
@@ -261,6 +277,8 @@ document.addEventListener("turbo:before-fetch-request", async (event) => {
 <details>
 <summary>原文</summary>
 
+## Pausing Requests
+
 Application can pause request and make additional preparation before it will be executed.
 
 Listen for the `turbo:before-fetch-request` event to be notified when a request is about to start, and pause it using `event.preventDefault()`. Once the preparation is done continue request by calling `event.detail.resume()`.
@@ -294,6 +312,8 @@ document.addEventListener("turbo:before-fetch-request", async (event) => {
 <details>
 <summary>原文</summary>
 
+## Performing Visits With a Different Method
+
 By default, link clicks send a `GET` request to your server. But you can change this with `data-turbo-method`:
 
 ```html
@@ -319,6 +339,8 @@ You should also consider that for accessibility reasons, it's better to use actu
 
 <details>
 <summary>原文</summary>
+
+## Requiring Confirmation for a Visit
 
 Decorate links with `data-turbo-confirm`, and confirmation will be required for a visit to proceed.
 
@@ -373,6 +395,8 @@ Turbo.session.drive = false
 
 <details>
 <summary>原文</summary>
+
+## Disabling Turbo Drive on Specific Links or Forms
 
 Turbo Drive can be disabled on a per-element basis by annotating the element or any of its ancestors with `data-turbo="false"`.
 
@@ -438,6 +462,8 @@ html[data-turbo-visit-direction="forward"]::view-transition-old(sidebar):only-ch
 <details>
 <summary>原文</summary>
 
+## View transitions
+
 In [browsers that support](https://caniuse.com/?search=View%20Transition%20API) the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) Turbo can trigger view transitions when navigating between pages.
 
 Turbo triggers a view transition when both the current and the next page have this meta tag:
@@ -494,6 +520,8 @@ html[data-turbo-visit-direction="forward"]::view-transition-old(sidebar):only-ch
 <details>
 <summary>原文</summary>
 
+## Displaying Progress
+
 During Turbo Drive navigation, the browser will not display its native progress indicator. Turbo Drive installs a CSS-based progress bar to provide feedback while issuing a request.
 
 The progress bar is enabled by default. It appears automatically for any page that takes longer than 500ms to load. (You can change this delay with the [`Turbo.setProgressBarDelay`](/reference/drive#turbodrivesetprogressbardelay) method.)
@@ -540,6 +568,8 @@ In tandem with the progress bar, Turbo Drive will also toggle the [`[aria-busy]`
 <details>
 <summary>原文</summary>
 
+## Reloading When Assets Change
+
 As we saw above, Turbo Drive merges the contents of the `<head>` elements. However, if CSS or JavaScript change, that merge would evaluate them on top of the existing one. Typically, this would lead to undesirable conflicts. In such cases, it's necessary to fetch a completely new document through a standard, non-Ajax request.
 
 To accomplish this, just annotate those asset elements with `data-turbo-track="reload"` and include a version identifier in your asset URLs. The identifier could be a number, a last-modified timestamp, or better, a digest of the asset’s contents, as in the following example.
@@ -570,6 +600,8 @@ To accomplish this, just annotate those asset elements with `data-turbo-track="r
 
 <details>
 <summary>原文</summary>
+
+## Ensuring Specific Pages Trigger a Full Reload
 
 You can ensure visits to a certain page will always trigger a full reload by including a `<meta name="turbo-visit-control">` element in the page’s `<head>`.
 
@@ -603,6 +635,8 @@ This setting may be useful as a workaround for third-party JavaScript libraries 
 
 <details>
 <summary>原文</summary>
+
+## Setting a Root Location
 
 By default, Turbo Drive only loads URLs with the same origin—i.e. the same protocol, domain name, and port—as the current document. A visit to any other URL falls back to a full page load.
 
@@ -652,6 +686,8 @@ addEventListener("turbo:submit-start", ({ target }) => {
 <details>
 <summary>原文</summary>
 
+## Form Submissions
+
 Turbo Drive handles form submissions in a manner similar to link clicks. The key difference is that form submissions can issue stateful requests using the HTTP POST method, while link clicks only ever issue stateless HTTP GET requests.
 
 Throughout a submission, Turbo Drive will dispatch a series of [events][] that
@@ -699,6 +735,8 @@ Turbo が POST リクエストに通常の200ステータスの応答を許さ�
 <details>
 <summary>原文</summary>
 
+## Redirecting After a Form Submission
+
 After a stateful request from a form submission, Turbo Drive expects the server to return an [HTTP 303 redirect response](https://en.wikipedia.org/wiki/HTTP_303), which it will then follow and use to navigate and update the page without reloading.
 
 The exception to this rule is when the response is rendered with either a 4xx or 5xx status code. This allows form validation errors to be rendered by having the server respond with `422 Unprocessable Entity` and a broken server to display a "Something Went Wrong" screen on a `500 Internal Server Error`.
@@ -715,6 +753,8 @@ If the form submission is a GET request, you may render the directly rendered re
 
 <details>
 <summary>原文</summary>
+
+## Streaming After a Form Submission
 
 Servers may also respond to form submissions with a [Turbo Streams](streams) message by sending the header `Content-Type: text/vnd.turbo-stream.html` followed by one or more `<turbo-stream>` elements in the response body. This lets you update multiple parts of the page without navigating.
 
@@ -771,6 +811,8 @@ function hasSlowInternet() {
 
 <details>
 <summary>原文</summary>
+
+## Prefetching Links on Hover
 
 Turbo can also speed up perceived link navigation latency by automatically loading links on `mouseenter` events, and before the user clicks the link. This usually leads to a speed bump of 500-800ms per click navigation.
 
@@ -860,6 +902,8 @@ addEventListener("turbo:before-fetch-request", (event) => {
 
 <details>
 <summary>原文</summary>
+
+## Preload Links Into the Cache
 
 Preload links into Turbo Drive's cache using the [data-turbo-preload][] boolean attribute.
 
