@@ -179,7 +179,7 @@ Restoration visits cannot be canceled and do not fire `turbo:before-visit`. Turb
 
 ## 描画処理をカスタマイズする
 
-ドキュメント全体に対して `turbo:before-render` イベントリスナーを追加し、 `event.detail.render` プロパティをオーバーライドすることで、アプリケーションの描画プロセスをカスタマイズできます。
+ドキュメント全体に対して `turbo:before-render` イベントリスナーを追加し、 `event.detail.render` プロパティを上書きすることで、アプリケーションの描画処理をカスタマイズできます。
 
 例えば、[morphdom]で、リクエストを投げたドキュメントの `<body>` 要素を、レスポンスのドキュメントにある `<body>` 要素にマージできます。
 
