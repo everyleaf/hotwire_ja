@@ -1,3 +1,5 @@
+@use "../base/mixins";
+
 // default page layout ////////////////////////////////////////////////////////
 
 .page-header {
@@ -13,7 +15,7 @@
   padding: 3em 0;
   text-align: center;
 
-  @include media(medium) {
+  @include mixins.media(medium) {
 
     &:before {
       content: '';

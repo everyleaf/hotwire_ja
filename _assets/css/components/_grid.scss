@@ -1,9 +1,12 @@
+@use "sass:string";
+@use "../base/mixins";
+
 // grid system ////////////////////////////////////////////////////////////////
 .grid {
   display: grid;
   grid-template-columns: 1fr minmax(80vw, 100%) 1fr;
   align-items: start;
-  column-gap: unquote("min(5vw, 4rem)");
+  column-gap: string.unquote("min(5vw, 4rem)");
 
   > .grid {
     grid-column: 1 / -1;
@@ -13,16 +16,16 @@
     grid-column: 2;
   }
 
-  @include media(medium) {
+  @include mixins.media(medium) {
     grid-template-columns: 1fr repeat(12, minmax(2rem, 100%)) 1fr;
-    column-gap: unquote("min(3vw, 5rem)");
+    column-gap: string.unquote("min(3vw, 5rem)");
 
     > *:not([class*="grid"]) {
       grid-column: 4 / span 8;
     }
   }
 
-  @include media(x-large) {
+  @include mixins.media(x-large) {
     grid-template-columns: 1fr repeat(12, 7.5rem) 1fr;
     column-gap: 4rem;
   }
@@ -36,7 +39,7 @@
   &--bleed-right { grid-column-end: -1; }
   &--bleed-full { grid-column: 1 / -1; }
 
-  @include media(medium) {
+  @include mixins.media(medium) {
     //grid-column: 4 / span 8;
 
     &--span-3 { grid-column-end: span 3; }

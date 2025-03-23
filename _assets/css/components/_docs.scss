@@ -1,3 +1,5 @@
+@use "../base/mixins";
+
 // docs layout ////////////////////////////////////////////////////////////
 
 .docs {
@@ -7,11 +9,11 @@
 .docs__content {
   grid-column-start: 2;
 
-  @include media(medium) {
+  @include mixins.media(medium) {
     grid-column: 6 / span 8;
   }
 
-  @include media(large) {
+  @include mixins.media(large) {
     grid-column: 5 / span 8;
   }
 
@@ -34,14 +36,14 @@
   text-align: left;
   overflow-y: auto;
 
-  @include media(small) {
+  @include mixins.media(small) {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1em 0;
   }
 
-  @include media(medium) {
+  @include mixins.media(medium) {
     grid-column: 2 / span 4;
     position: -webkit-sticky;
     position: sticky;
@@ -51,7 +53,7 @@
     padding: 3.25em 0 0 0;
   }
 
-  @include media(large) {
+  @include mixins.media(large) {
     grid-column: 2 / span 3;
   }
 }
@@ -63,7 +65,7 @@
 .docs__screenshot {
   max-width: 100%;
   height: auto;
-  border: 0.2rem solid $color-background;
+  border: 0.2rem solid mixins.$color-background;
   border-radius: 5px;
-  box-shadow: 0 0 1em rgba($color-text, 0.1);
+  box-shadow: 0 0 1em rgba(mixins.$color-text, 0.1);
 }

@@ -2,6 +2,7 @@
 title: "Turbo ストリームを利用してみよう"
 description: "Turbo ストリームは、WebSocketやSSEを利用して、またはフォームの送信に応答して、HTMLと一連のCRUDのようなアクションを使用してページの変更を配信します。"
 order: 5
+commit: "93fa57b"
 ---
 
 # Turbo ストリームを利用してみよう
