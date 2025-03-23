@@ -177,7 +177,7 @@ Restoration visits cannot be canceled and do not fire `turbo:before-visit`. Turb
 
 </details>
 
-## 描画のカスタム
+## 描画処理をカスタマイズする
 
 ドキュメント全体に対して `turbo:before-render` イベントリスナーを追加し、 `event.detail.render` プロパティをオーバーライドすることで、アプリケーションの描画プロセスをカスタマイズできます。
 
