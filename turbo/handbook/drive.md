@@ -432,17 +432,17 @@ Turbo.session.drive = false
 
 </details>
 
-## ビュートランジション
+## ビュー遷移
 
-[ビュートランジション API]を[サポートしているブラウザ]では、Turbo はページ間を移動するときにビュートランジションをトリガーします。
+[ビュー遷移 API]を[サポートしているブラウザ]では、Turbo はページ間を移動するときにビュー遷移を発火をします。
 
-Turbo は、現在と次のページの両方に以下の `<meta>` 要素があるときに、ビュートランジションをトリガーします。
+Turbo は、現在と次のページの両方に以下の `<meta>` 要素があるときに、ビュー遷移を発火します。
 
 ```html
 <meta name="view-transition" content="same-origin" />
 ```
 
-Turbo は `<html>` 要素に `data-turbo-visit-direction` 属性を追加することで、ビュートランジションを実行するアクセスを指定できます。その属性の値として以下のいずれかを使えます。
+Turbo は `<html>` 要素に `data-turbo-visit-direction` 属性を追加することで、ビュート遷移を実行するアクセスを指定できます。その属性の値として以下のいずれかを使えます。
 
 - `forward`: advance アクションのアクセス
 - `back`: restore アクションのアクセス
@@ -457,7 +457,7 @@ html[data-turbo-visit-direction="forward"]::view-transition-old(sidebar):only-ch
 ```
 
 [サポートしているブラウザ]: https://caniuse.com/?search=View%20Transition%20API
-[ビュートランジション API]: https://developer.mozilla.org/ja/docs/Web/API/View_Transitions_API
+[ビュー遷移 API]: https://developer.mozilla.org/ja/docs/Web/API/View_Transitions_API
 
 <details>
 <summary>原文</summary>
