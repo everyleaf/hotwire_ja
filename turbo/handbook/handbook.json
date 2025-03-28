@@ -2,7 +2,8 @@
   "tags": [
     "turbo_handbook"
   ],
-  "layout": "base.html",
+  "layout": "turbo-docs.html",
   "section_title": "Turbo ハンドブック: Hotwire ドキュメント（有志翻訳版）",
-  "section_code": "turbo_handbook"
+  "section_code": "turbo_handbook",
+  "document_type": "turbo"
 }
