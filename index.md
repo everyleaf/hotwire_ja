@@ -1,5 +1,5 @@
 ---
-title: "はじめに"
+title: "Hotwire ドキュメント（有志翻訳版）"
 description: "Turboは、クライアントサイドのJavaScriptフレームワークを使用することなく、高速でモダンなウェブアプリケーションを作成するためのいくつかの技術を提供します。"
 layout: "base.html"
 ---
