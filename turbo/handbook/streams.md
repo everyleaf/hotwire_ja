@@ -2,7 +2,7 @@
 title: "Turbo ストリームを利用してみよう"
 description: "Turbo ストリームは、WebSocketやSSEを利用して、またはフォームの送信に応答して、HTMLと一連のCRUDのようなアクションを使用してページの変更を配信します。"
 order: 5
-commit: "93fa57b"
+commit: "5731979"
 ---
 
 # Turbo ストリームを利用してみよう
@@ -24,7 +24,7 @@ They can be used to surgically update the DOM after a user action such as removi
 
 ## メッセージとアクションの配信
 
-一つの Turbo ストリームメッセージは、`<turbo-stream>` 要素から構成される HTML の一部です。そのストリームメッセージは、下記の8つの実行可能なストリームアクションを示します。
+一つの Turbo ストリームメッセージは、`<turbo-stream>` 要素から構成される HTML の一部です。そのストリームメッセージは、下記の9つの実行可能なストリームアクションを示します。
 
 ```html
 <turbo-stream action="append" target="messages">
@@ -105,10 +105,12 @@ Turboストリームは、ドキュメント内のどんな要素でも、[id](h
 
 WebSocket、SSE やフォーム送信の応答としての 1 つのストリームメッセージの中で、任意の数のストリーム要素をレンダリングできます。
 
+また、ページ内に挿入された `<turbo-stream>` 要素は（フルページやフレームのロードなどによって）、Turboによって処理された後DOMから削除されます。これにより、ページやフレームが読み込まれたときにストリームアクションが自動的に実行されるようになります。
+
 <details>
 <summary>原文</summary>
 
-A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` elements. The stream message below demonstrates the eight possible stream actions:
+A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` elements. The stream message below demonstrates the nine possible stream actions:
 
 ```html
 <turbo-stream action="append" target="messages">
@@ -195,6 +197,8 @@ resolved by an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_att
 
 
 You can render any number of stream elements in a single stream message from a WebSocket, SSE or in response to a form submission.
+
+Also, any `<turbo-stream>` element that's inserted into the page (e.g. through full page or frame load), will be processed by Turbo and then removed from the dom. This allows stream actions to be executed automatically when a page or frame is loaded.
 
 </details>
 
@@ -411,7 +415,7 @@ The same is especially true for WebSocket updates. On poor connections, or if th
 
 ## JavaScript の実行に関してはどうでしょう？
 
-Turbo ストリームは、意図的に 8 つのアクションを利用するように制限します。それは、append, prepend, (insert) before, (insert) after, replace, update, remove そして refresh です。
+Turbo ストリームは、意図的に 9 つのアクションを利用するように制限します。それは、append, prepend, (insert) before, (insert) after, replace, update, remove, morph そして refresh です。
 もし上記のアクションが実行されたときに、追加の挙動をトリガーしたいならば、[Stimulus](https://stimulus.hotwired.dev) コントローラーを利用することで、その挙動を実現すべきです。
 この制限によって、Turbo ストリームがワイヤー上での HTML 配信という必要不可欠なタスクに専念することができ、追加のロジックは JavaScript 専用のファイル内に留められます。
 
@@ -421,16 +425,16 @@ Turbo ストリームの重要な利点は、続けて起こる全ての更新�
 <details>
 <summary>原文</summary>
 
-Turbo Streams consciously restricts you to eight actions: append, prepend, (insert) before, (insert) after, replace, update, remove, and refresh. If you want to trigger additional behavior when these actions are carried out, you should attach behavior using <a href="https://stimulus.hotwired.dev">Stimulus</a> controllers. This restriction allows Turbo Streams to focus on the essential task of delivering HTML over the wire, leaving additional logic to live in dedicated JavaScript files.
+Turbo Streams consciously restricts you to nine actions: append, prepend, (insert) before, (insert) after, replace, update, remove, morph, and refresh. If you want to trigger additional behavior when these actions are carried out, you should attach behavior using <a href="https://stimulus.hotwired.dev">Stimulus</a> controllers. This restriction allows Turbo Streams to focus on the essential task of delivering HTML over the wire, leaving additional logic to live in dedicated JavaScript files.
 
 Embracing these constraints will keep you from turning individual responses into a jumble of behaviors that cannot be reused and which make the app hard to follow. The key benefit from Turbo Streams is the ability to reuse templates for initial rendering of a page through all subsequent updates.
 </details>
 
 ## カスタム・アクション
 
-デフォルトでは、Turbo ストリームは [`action` 属性に8つの値](https://turbo.hotwired.dev/reference/streams#the-seven-actions)をサポートしています。もしアプリケーションが他の属性をサポートする必要が出てきたら、`event.detail.render` 関数をオーバーライドしましょう。
+デフォルトでは、Turbo ストリームは [`action` 属性に9つの値](https://turbo.hotwired.dev/reference/streams#the-seven-actions)をサポートしています。もしアプリケーションが他の属性をサポートする必要が出てきたら、`event.detail.render` 関数をオーバーライドしましょう。
 
-例えば、8つのアクションに加えて `<turbo-stream>` 要素に `[action="alert"]` あるいは `[action="log"]` をサポートするよう拡張したい場合、`turbo:before-stream-render` リスナーにカスタムした振る舞いを宣言できます。
+例えば、9つのアクションに加えて `<turbo-stream>` 要素に `[action="alert"]` あるいは `[action="log"]` をサポートするよう拡張したい場合、`turbo:before-stream-render` リスナーにカスタムした振る舞いを宣言できます。
 
 
 ```javascript
@@ -464,9 +468,9 @@ StreamActions.log = function () {
 <details>
 <summary>原文</summary>
 
-By default, Turbo Streams support [eight values for its `action` attribute](https://turbo.hotwired.dev/reference/streams#the-seven-actions). If your application needs to support other behaviors, you can override the `event.detail.render` function.
+By default, Turbo Streams support [nine values for its `action` attribute](https://turbo.hotwired.dev/reference/streams#the-seven-actions). If your application needs to support other behaviors, you can override the `event.detail.render` function.
 
-For example, if you'd like to expand upon the eight actions to support `<turbo-stream>` elements with `[action="alert"]` or `[action="log"]`, you could declare a `turbo:before-stream-render` listener to provide custom behavior:
+For example, if you'd like to expand upon the nine actions to support `<turbo-stream>` elements with `[action="alert"]` or `[action="log"]`, you could declare a `turbo:before-stream-render` listener to provide custom behavior:
 
 ```javascript
 addEventListener("turbo:before-stream-render", ((event) => {
@@ -506,7 +510,7 @@ Turbo に付随した全ての技術の中で、バックエンドフレーム�
 この gem は、Rails 内の WebScoket と非同期なレンダリングに対する組み込み済みのサポートを、それぞれ Action Cable や Active Job フレームワークを利用して実現しています。
 
 Active Record にミックスインされた [Broadcastable](https://github.com/hotwired/turbo-rails/blob/main/app/models/concerns/turbo/broadcastable.rb) を利用することで、
-Webscoket の更新を直接ドメインモデルからトリガーできます。さらに [Turbo::Streams::TagBuilder](https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb) を利用することで、インラインなコントローラーのレスポンスまたは専用テンプレート内で `<turbo-stream>` 要素をレンダリングできます。同時に、シンプルな DSL を通して、レンダリングに関する 5 つのアクションを実行できます。
+Webscoket の更新を直接ドメインモデルからトリガーできます。さらに [Turbo::Streams::TagBuilder](https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb) を利用することで、インラインなコントローラーのレスポンスまたは専用テンプレート内で `<turbo-stream>` 要素をレンダリングできます。同時に、シンプルな DSL を通して、レンダリングに関する 8 つのアクションを実行できます。
 
 しかしながら、Trubo 自体は、バックエンドに対して一切関知しません。他のエコシステム内の異なるフレームワークで密な統合を作成するためにも Rails に対する参考実装をみることを推奨します。
 
@@ -528,7 +532,7 @@ Mercure は、サーバーアプリケーションに対して便利な方法を
 <summary>原文</summary>
 
 Of all the techniques that are included with Turbo, it's with Turbo Streams you'll see the biggest advantage from close integration with your backend framework. As part of the official Hotwire suite, we've created a reference implementation for what such an integration can look like in the <a href="https://github.com/hotwired/turbo-rails">turbo-rails gem</a>. This gem relies on the built-in support for both WebSockets and asynchronous rendering present in Rails through the Action Cable and Active Job frameworks, respectively.
-Using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/concerns/turbo/broadcastable.rb">Broadcastable</a> concern mixed into Active Record, you can trigger WebSocket updates directly from your domain model. And using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb">Turbo::Streams::TagBuilder</a>, you can render `<turbo-stream>` elements in inline controller responses or dedicated templates, invoking the five actions with associated rendering through a simple DSL.
+Using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/concerns/turbo/broadcastable.rb">Broadcastable</a> concern mixed into Active Record, you can trigger WebSocket updates directly from your domain model. And using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb">Turbo::Streams::TagBuilder</a>, you can render `<turbo-stream>` elements in inline controller responses or dedicated templates, invoking the eight actions with associated rendering through a simple DSL.
 
 Turbo itself is completely backend-agnostic, though. So we encourage other frameworks in other ecosystems to look at the reference implementation provided for Rails to create their own tight integration.
 
