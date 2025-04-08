@@ -2,7 +2,7 @@
 title: "iOS と Android をネイティブにやる"
 description: "Turbo ネイティブは、モノリシック構造をネイティブのiOSおよびAndroidアプリの中心とし、ウェブとネイティブのセクション間でシームレスな遷移を実現します。"
 order: 6
-commit: "5731979"
+commit: "14aafc8"
 ---
 
 # iOS と Android をネイティブにやる
