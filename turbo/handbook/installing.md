@@ -2,7 +2,7 @@
 title: "アプリケーションに Turbo をインストール"
 description: "アプリケーションにTurboをインストールする方法を学びましょう。"
 order: 8
-commit: "5731979"
+commit: "14aafc8"
 ---
 
 # アプリケーションに Turbo をインストール
