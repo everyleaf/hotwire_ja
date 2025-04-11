@@ -432,7 +432,7 @@ Embracing these constraints will keep you from turning individual responses into
 
 ## カスタム・アクション
 
-デフォルトでは、Turbo ストリームは [`action` 属性に9つの値](https://turbo.hotwired.dev/reference/streams#the-seven-actions)をサポートしています。もしアプリケーションが他の属性をサポートする必要が出てきたら、`event.detail.render` 関数をオーバーライドしましょう。
+デフォルトでは、Turbo ストリームは [`action` 属性に 9 つの値](https://turbo.hotwired.dev/reference/streams#the-seven-actions)をサポートしています。もしアプリケーションが他の属性をサポートする必要が出てきたら、`event.detail.render` 関数をオーバーライドしましょう。
 
 例えば、9つのアクションに加えて `<turbo-stream>` 要素に `[action="alert"]` あるいは `[action="log"]` をサポートするよう拡張したい場合、`turbo:before-stream-render` リスナーにカスタムした振る舞いを宣言できます。
 
