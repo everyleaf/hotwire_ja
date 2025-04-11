@@ -29,17 +29,20 @@ export default function (eleventyConfig) {
     });
   });
 
-  eleventyConfig.addCollection('turbo_handbook', collectionApi => {
-    return collectionApi.getFilteredByTag('turbo_handbook').sort((a, b) => {
-      return a.data.order - b.data.order;
-    });
-  })
+  const navigations = [
+    'turbo_handbook',
+    'turbo_reference',
+    'stimulus_handbook',
+    'stimulus_reference',
+  ];
 
-  eleventyConfig.addCollection('turbo_reference', collectionApi => {
-    return collectionApi.getFilteredByTag('turbo_reference').sort((a, b) => {
-      return a.data.order - b.data.order;
+  navigations.forEach((nav) => {
+    eleventyConfig.addCollection(nav, collectionApi => {
+      return collectionApi.getFilteredByTag(nav).sort((a, b) => {
+        return a.data.order - b.data.order;
+      });
     });
-  })
+  });
 
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(syntaxHighlight);

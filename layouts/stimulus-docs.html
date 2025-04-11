@@ -1,0 +1,15 @@
+---
+layout: base.html
+title: Hotwire
+---
+      <header class="docs__index grid__custom-item">
+        {% include 'stimulus-navigation.html' %}
+      </header>
+
+      <section id="content" class="docs__content grid__custom-item">
+        {{ content }}
+      </section>
+
+      <footer class="docs__footer grid__item grid__item--start-4 grid__item--span-8">
+        {% include 'footer.html' %}
+      </footer>
