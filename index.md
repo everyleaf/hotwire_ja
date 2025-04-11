@@ -29,13 +29,7 @@ layout: "base.html"
   <section>
     <h2>Stimulus</h2>
     <div class="description">
-      <details>
-        Turboは通常、従来ならJavaScriptが必要だったインタラクティブな動作の少なくとも80%を担ってくれますが、それでも少しだけカスタムコードが必要になる場面はあります。そんなときに役立つのがStimulusです。Stimulusは、HTMLを中心としたアプローチで状態管理やサーバーとの連携を簡単に実現します。
-        <summary>
-        原文
-        </summary>
-        While Turbo usually takes care of at least 80% of the interactivity that traditionally would have required JavaScript, there are still cases where a dash of custom code is required. Stimulus makes this easy with a HTML-centric approach to state and wiring.
-      </details>
+      Turboは通常、従来ならJavaScriptが必要だったインタラクティブな動作の少なくとも80%を担ってくれますが、それでも少しだけカスタムコードが必要になる場面はあります。そんなときに役立つのがStimulusです。Stimulusは、HTMLを中心としたアプローチで状態管理やサーバーとの連携を簡単に実現します。
     </div>
     <ul>
       <li> <a href="/stimulus/handbook/introduction/">Handbook</a> </li>
