@@ -18,7 +18,7 @@ layout: "base.html"
   <section>
     <h2>Turbo</h2>
     <div class="description">
-      Hotwireの中心となるのがTurboです。Turboは、ページの切り替えやフォームの送信を高速化し、複雑なページをコンポーネントに分割し、WebSocketを使って部分的なページ更新をストリーミングするための一連の、それぞれを補完しあう技術です。しかも、一切JavaScriptを書く必要がありません。
+      Hotwire の中心となるのが Turbo です。Turbo は、ページの切り替えやフォームの送信を高速化し、複雑なページをコンポーネントに分割し、WebSocket を使って部分的なページ更新をストリーミングするための一連の、それぞれを補完しあう技術です。しかも、一切 JavaScript を書く必要がありません。
     </div>
     <ul>
       <li> <a href="/turbo/handbook/introduction/">Handbook</a> </li>
