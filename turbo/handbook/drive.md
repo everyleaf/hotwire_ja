@@ -181,18 +181,18 @@ Restoration visits cannot be canceled and do not fire `turbo:before-visit`. Turb
 
 ドキュメント全体に対して `turbo:before-render` イベントリスナーを追加し、 `event.detail.render` プロパティを上書きすることで、アプリケーションの描画処理をカスタマイズできます。
 
-例えば、[morphdom]で、リクエストを投げたドキュメントの `<body>` 要素を、レスポンスのドキュメントにある `<body>` 要素にマージできます。
+例えば、[idiomorph]または[morphdom]で、リクエストを投げたドキュメントの `<body>` 要素を、レスポンスのドキュメントにある `<body>` 要素にマージできます。
 
 ```javascript
-import morphdom from "morphdom"
+import { Idiomorph } from "idiomorph"
 
 addEventListener("turbo:before-render", (event) => {
   event.detail.render = (currentElement, newElement) => {
-    morphdom(currentElement, newElement)
+    Idiomorph.morph(currentElement, newElement)
   }
 })
 ```
-
+[idiomorph]: https://github.com/bigskysoftware/idiomorph
 [morphdom]: https://github.com/patrick-steele-idem/morphdom
 
 <details>
@@ -202,14 +202,14 @@ addEventListener("turbo:before-render", (event) => {
 
 Applications can customize the rendering process by adding a document-wide `turbo:before-render` event listener and overriding the `event.detail.render` property.
 
-For example, you could merge the response document's `<body>` element into the requesting document's `<body>` element with [morphdom](https://github.com/patrick-steele-idem/morphdom):
++For example, you could merge the response document's `<body>` element into the requesting document's `<body>` element with [idiomorph](https://github.com/bigskysoftware/idiomorph) or [morphdom](https://github.com/patrick-steele-idem/morphdom):
 
 ```javascript
-import morphdom from "morphdom"
+import { Idiomorph } from "idiomorph"
 
 addEventListener("turbo:before-render", (event) => {
   event.detail.render = (currentElement, newElement) => {
-    morphdom(currentElement, newElement)
+    Idiomorph.morph(currentElement, newElement)
   }
 })
 ```
@@ -305,9 +305,7 @@ document.addEventListener("turbo:before-fetch-request", async (event) => {
 <a href="/articles/54" data-turbo-method="delete">記事を削除する</a>
 ```
 
-リンクは隠されたformに変換され、DOM内の `a` 要素の次の位置に配置されます。これは、リンクは別のフォームの中には配置できないということです。フォームをネストすることはできないからです。
-
-アクセシビリティの観点からも、 GET 以外のリクエストには実際のフォームとボタンを使うのが望ましいでしょう。
+アクセシビリティの観点から、 GET 以外のリクエストには実際のフォームとボタンを使うのが望ましいでしょう。
 
 <details>
 <summary>原文</summary>
@@ -320,36 +318,34 @@ By default, link clicks send a `GET` request to your server. But you can change 
 <a href="/articles/54" data-turbo-method="delete">Delete the article</a>
 ```
 
-The link will get converted into a hidden form next to the `a` element in the DOM. This means that the link can't appear inside another form, as you can't have nested forms.
-
-You should also consider that for accessibility reasons, it's better to use actual forms and buttons for anything that's not a GET.
+You should consider that for accessibility reasons, it's better to use actual forms and buttons for anything that's not a GET.
 
 </details>
 
 ## アクセス前に確認ダイアログを表示する
 
-リンクに `data-turbo-confirm` 属性を付けると、アクセス前に確認ダイアログが表示できます。
+リンクに `data-turbo-confirm`と`data-turbo-method`両方の属性を付けると、アクセス前に確認ダイアログが表示できます。
 
 ```html
 <a href="/articles" data-turbo-confirm="このページから離れますか？">記事に戻る</a>
 <a href="/articles/54" data-turbo-method="delete" data-turbo-confirm="本当に記事を削除しますか？">記事を削除する</a>
 ```
 
-確認時に呼ぶメソッドは `Turbo.setConfirmMethod` を使って、変更できます。確認時に呼ぶメソッドのデフォルトは、ブラウザに組み込まれている `confirm` です。
+確認時に呼ぶメソッドは `Turbo.config.forms.confirm = confirmMethod` を使って、変更できます。確認時に呼ぶメソッドのデフォルトは、ブラウザに組み込まれている `confirm` です。
 
 <details>
 <summary>原文</summary>
 
 ## Requiring Confirmation for a Visit
 
-Decorate links with `data-turbo-confirm`, and confirmation will be required for a visit to proceed.
+Decorate links with both `data-turbo-confirm` and `data-turbo-method`, and confirmation will be required for a visit to proceed.
 
 ```html
-<a href="/articles" data-turbo-confirm="Do you want to leave this page?">Back to articles</a>
+<a href="/articles" data-turbo-method="get" data-turbo-confirm="Do you want to leave this page?">Back to articles</a>
 <a href="/articles/54" data-turbo-method="delete" data-turbo-confirm="Are you sure you want to delete the article?">Delete the article</a>
 ```
 
-Use `Turbo.setConfirmMethod` to change the method that gets called for confirmation. The default is the browser's built in `confirm`.
+Use `Turbo.config.forms.confirm = confirmMethod` to change the method that gets called for confirmation. The default is the browser's built in `confirm`.
 
 </details>
 
@@ -361,13 +357,13 @@ Use `Turbo.setConfirmMethod` to change the method that gets called for confirmat
 <a href="/" data-turbo="false">無効化</a>
 
 <form action="/messages" method="post" data-turbo="false">
-  ...
+  <!-- … -->
 </form>
 
 <div data-turbo="false">
   <a href="/">無効化</a>
   <form action="/messages" method="post">
-    ...
+   <!-- … -->
   </form>
 </div>
 ```
@@ -403,12 +399,12 @@ Turbo Drive can be disabled on a per-element basis by annotating the element or 
 ```html
 <a href="/" data-turbo="false">Disabled</a>
 <form action="/messages" method="post" data-turbo="false">
-  ...
+  <!-- … -->
 </form>
 <div data-turbo="false">
   <a href="/">Disabled</a>
   <form action="/messages" method="post">
-    ...
+    <!-- … -->
   </form>
 </div>
 ```
@@ -559,7 +555,7 @@ In tandem with the progress bar, Turbo Drive will also toggle the [`[aria-busy]`
 
 ```html
 <head>
-  ...
+  <!-- … -->
   <link rel="stylesheet" href="/application-258e88d.css" data-turbo-track="reload">
   <script src="/application-cbd3cd4.js" data-turbo-track="reload"></script>
 </head>
@@ -576,11 +572,52 @@ To accomplish this, just annotate those asset elements with `data-turbo-track="r
 
 ```html
 <head>
-  ...
+  <!-- … -->
   <link rel="stylesheet" href="/application-258e88d.css" data-turbo-track="reload">
   <script src="/application-cbd3cd4.js" data-turbo-track="reload"></script>
 </head>
 ```
+
+</details>
+
+## 変更時のアセットの削除
+
+前述した通り、Turbo ドライブは `<head>` 要素のコンテントをマージします。
+ページが他のページにはないCSSスタイルシートのような外部アセットに依存している場合、ページから離れるときにそれらの外部アセットを削除すると便利です。
+
+`<link>` 要素または `<style>` 要素を`[data-turbo-track="dynamic"]`で描画すると、遷移時のレスポンスにその要素がない場合に動的に削除するようTurbo ドライブに指示します。
+また、スタイルにのみ影響する変更を展開する際、全ページのリロードを避けるために[`[data-turbo-track="reload"]`](#reload-when-assets-change) 属性を補完する役割を担います。
+
+```html
+<head>
+  <!-- … -->
+  <link rel="stylesheet" href="/page-specific-styles-258e88d.css" data-turbo-track="dynamic">
+  <style data-turbo-track="dynamic">
+    .page-specific-styles { /* … */ }
+  </style>
+</head>
+```
+
+<details>
+<summary>原文</summary>
+
+## Removing Assets When They Change
+
+As we saw above, Turbo Drive merges the contents of the `<head>` elements. When a page depends on external assets like CSS stylesheets that other pages do not, it can be useful to remove them when navigating away from the page.
+
+Rendering a `<link>` or `<style>` element with `[data-turbo-track="dynamic"]` instructs Turbo Drive to dynamically remove the element when it is absent from a navigation's response, and can serve a complementary role to the [`[data-turbo-track="reload"]`](#reload-when-assets-change) attribute to avoid triggering a full page reload when deploying changes that only affect styles.
+
+```html
+<head>
+  <!-- … -->
+  <link rel="stylesheet" href="/page-specific-styles-258e88d.css" data-turbo-track="dynamic">
+  <style data-turbo-track="dynamic">
+    .page-specific-styles { /* … */ }
+  </style>
+</head>
+```
+
+Note that rendering `<script>` elements with `[data-turbo-track="dynamic"]` might have unintended side-effects. When `<script>` disconnected from the document, the JavaScript context doesn't change, nor is the element's already evaluated JavaScript code unloaded or changed in any way.
 
 </details>
 
@@ -591,7 +628,7 @@ To accomplish this, just annotate those asset elements with `data-turbo-track="r
 
 ```html
 <head>
-  ...
+  <!-- … -->
   <meta name="turbo-visit-control" content="reload">
 </head>
 ```
@@ -607,7 +644,7 @@ You can ensure visits to a certain page will always trigger a full reload by inc
 
 ```html
 <head>
-  ...
+  <!-- … -->
   <meta name="turbo-visit-control" content="reload">
 </head>
 ```
@@ -618,8 +655,7 @@ This setting may be useful as a workaround for third-party JavaScript libraries 
 
 ## ルートロケーションの設定
 
-
-デフォルトでは、Turbo ドライブは同じオリジンでのURLのみをロード対象とします。つまり、同じプロトコル、ドメイン名、ポートが現在のドキュメントと同一のURLのみということです。他のすべてのURLはフォールバックされて、ページのフル・リロードが走ります。
+Turbo ドライブは同じオリジンでのURLのみをロード対象とします。つまり、同じプロトコル、ドメイン名、ポートが現在のドキュメントと同一のURLのみということです。他のすべてのURLはフォールバックされて、ページのフル・リロードが走ります。
 
 場合によっては、同一オリジン上のパスで、Turbo ドライブの範囲を限定したいこともあるでしょう。 Turbo ドライブのあるアプリケーションが `/app` の path にあり、Turbo ドライブでないヘルプページが `/help` にある場合、アプリからヘルプページへのリンクには Turbo ドライブを使うべきではありません。
 
@@ -628,7 +664,7 @@ This setting may be useful as a workaround for third-party JavaScript libraries 
 
 ```html
 <head>
-  ...
+  <!-- … -->
   <meta name="turbo-root" content="/app">
 </head>
 ```
@@ -638,7 +674,7 @@ This setting may be useful as a workaround for third-party JavaScript libraries 
 
 ## Setting a Root Location
 
-By default, Turbo Drive only loads URLs with the same origin—i.e. the same protocol, domain name, and port—as the current document. A visit to any other URL falls back to a full page load.
+Turbo Drive only loads URLs with the same origin—i.e. the same protocol, domain name, and port—as the current document. A visit to any other URL falls back to a full page load.
 
 In some cases, you may want to further scope Turbo Drive to a path on the same origin. For example, if your Turbo Drive application lives at `/app`, and the non-Turbo Drive help site lives at `/help`, links from the app to the help site shouldn’t use Turbo Drive.
 
@@ -646,7 +682,7 @@ Include a `<meta name="turbo-root">` element in your pages’ `<head>` to scope 
 
 ```html
 <head>
-  ...
+  <!-- … -->
   <meta name="turbo-root" content="/app">
 </head>
 ```
@@ -677,7 +713,7 @@ addEventListener("turbo:submit-start", ({ target }) => {
 ```
 
 [events]: https://turbo.hotwired.dev/reference/events
-[バブリング]: https://developer.mozilla.org/ja/docs/Learn/JavaScript/Building_blocks/Events#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E3%83%90%E3%83%96%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3%E3%83%AA%E3%83%B3%E3%82%B0
+[バブリング]: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_bubbling
 [要素]: https://developer.mozilla.org/ja/docs/Web/API/HTMLFormElement/elements
 [disabled]: https://developer.mozilla.org/ja/docs/Web/HTML/Attributes/disabled
 [submitter]: https://developer.mozilla.org/ja/docs/Web/API/SubmitEvent/submitter
@@ -713,7 +749,7 @@ addEventListener("turbo:submit-start", ({ target }) => {
 ```
 
 [events]: /reference/events
-[bubble up]: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_bubbling_and_capture
+[bubble up]: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_bubbling
 [elements]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements
 [disabled]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled
 [submitter]: https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter
@@ -725,7 +761,7 @@ addEventListener("turbo:submit-start", ({ target }) => {
 
 フォームの送信によるステートフルなリクエストの後、Turbo ドライブはサーバーに [HTTP 303 リダイレクト・レスポンス](https://en.wikipedia.org/wiki/HTTP_303) を期待します。このレスポンスに続いて、ドライブは、レスポンスを利用してページのリロードなしのナビゲートと更新を行います。
 
-このルールの例外は、レスポンスが 4xx あるいは 5xx のステータスコードで描画された場合です。この場合、 `422 Unprocessable Entity` の応答がサーバーから帰ってきた時はフォームバリデーションエラーが描画され、 `500 Internal Server Error` の時は "Something Went Wrong" の壊れたサーバー状態が描画されます。
+このルールの例外は、レスポンスが 4xx あるいは 5xx のステータスコードで描画された場合です。この場合、 `422 Unprocessable Content` の応答がサーバーから帰ってきた時はフォームバリデーションエラーが描画され、 `500 Internal Server Error` の時は "Something Went Wrong" の壊れたサーバー状態が描画されます。
 
 
 Turbo が POST リクエストに通常の200ステータスの応答を許さないのは、POST リクエストは、ブラウザが POST アクセスにリロードが走った際に、"フォームを再送信しますか?"のダイアログを出す振る舞いを、組み込みで持っているからです。Turbo はこれを再現できません。代わりに Turobo は、フォームのアクションを変えることはせず、描画しようとするフォーム送信の現在のURLに止まります。なぜなら、リロードは存在しないアクションURLへも GET リクエストを発行してしまうからです。
@@ -739,7 +775,7 @@ Turbo が POST リクエストに通常の200ステータスの応答を許さ�
 
 After a stateful request from a form submission, Turbo Drive expects the server to return an [HTTP 303 redirect response](https://en.wikipedia.org/wiki/HTTP_303), which it will then follow and use to navigate and update the page without reloading.
 
-The exception to this rule is when the response is rendered with either a 4xx or 5xx status code. This allows form validation errors to be rendered by having the server respond with `422 Unprocessable Entity` and a broken server to display a "Something Went Wrong" screen on a `500 Internal Server Error`.
+The exception to this rule is when the response is rendered with either a 4xx or 5xx status code. This allows form validation errors to be rendered by having the server respond with `422 Unprocessable Content` and a broken server to display a "Something Went Wrong" screen on a `500 Internal Server Error`.
 
 The reason Turbo doesn't allow regular rendering on 200's from POST requests is that browsers have built-in behavior for dealing with reloads on POST visits where they present a "Are you sure you want to submit this form again?" dialogue that Turbo can't replicate. Instead, Turbo will stay on the current URL upon a form submission that tries to render, rather than change it to the form action, since a reload would then issue a GET against that action URL, which may not even exist.
 
@@ -782,9 +818,28 @@ HTML要素、あるいは、その祖先に `data-turbo-prefetch="false"` をつ
   <body>
     <a href="/articles">記事</a> <!-- このリンク先はプリフェッチされます -->
     <a href="/about" data-turbo-prefetch="false">概要</a> <!-- このリンク先はプリフェッチされません -->
-    <div data-turbo-prefetch="false"`>
+    <div data-turbo-prefetch="false">
       <!-- このdiv内のリンクはプリフェッチされません -->
     </div>
+  </body>
+</html>
+```
+
+また、`data-turbo-prefetch="true"`を指定することで、親の動作を完全に無効化して子の動作を1つずつ許可することもできます。
+
+```html
+<html>
+  <body data-turbo-prefetch="false">
+    <nav id="header" data-turbo-prefetch="true">
+      <a href="/articles">記事</a> <!-- このリンク先はプリフェッチされます -->
+      <a href="/about">概要</a> <!-- 上記と同様 -->
+    </nav>
+    <div id="body">
+      <!-- このdiv内のリンクはプリフェッチされません -->
+    </div>
+    <footer id="footer" data-turbo-prefetch="true">
+      <!-- このフッター内のリンク先はプリフェッチされます -->
+    </footer>
   </body>
 </html>
 ```
@@ -834,9 +889,28 @@ You can disable the behavior on a per-element basis by annotating the element or
   <body>
     <a href="/articles">Articles</a> <!-- This link is prefetched -->
     <a href="/about" data-turbo-prefetch="false">About</a> <!-- Not prefetched -->
-    <div data-turbo-prefetch="false"`>
+    <div data-turbo-prefetch="false">
       <!-- Links inside this div will not be prefetched -->
     </div>
+  </body>
+</html>
+```
+
+You can also disable completely the behavior on a parent and allowing on its childs one by one with `data-turbo-prefetch="true"`.
+
+```html
+<html>
+  <body data-turbo-prefetch="false">
+    <nav id="header" data-turbo-prefetch="true">
+      <a href="/articles">Articles</a> <!-- This link is prefetched -->
+      <a href="/about">About</a> <!-- This one as well -->
+    </nav>
+    <div id="body">
+      <!-- Links inside this div will not be prefetched -->
+    </div>
+    <footer id="footer" data-turbo-prefetch="true">
+      <!-- Links inside this footer will be prefetched -->
+    </footer>
   </body>
 </html>
 ```
@@ -880,26 +954,6 @@ function hasSlowInternet() {
 
 また、[フレームの事前読み込み]や[フレームの遅延読み込み]を使ったページでも、プリロードはうまく噛み合います。ページの構造をプリロードし、興味があるコンテンツを読み込んでいる間、ユーザーに意味のある読み込み状態を示すことができるからです。
 
-<br><br>
-
-プリロードされた `<a>` 要素は [turbo:before-fetch-request] と [turbo:before-fetch-response] イベントをディスパッチすることに注意してください。`turbo:before-fetch-request` イベントがプリロードにより発生したのかそれとも他のメカニズムにより発生したのかの区別は、リクエストの `X-Sec-Purpose` ヘッダーに `"prefetch"`がセットされているかどうかで確認できます（`X-Sec-Purpose` ヘッダーの値は `event.detail.fetchOptions.headers["X-Sec-Purpose"]` プロパティから取得できます）。
-
-```js
-addEventListener("turbo:before-fetch-request", (event) => {
-  if (event.detail.fetchOptions.headers["X-Sec-Purpose"] === "prefetch") {
-    // 追加のプリロード設定を行う
-  } else {
-    // 何かを行う
-  }
-})
-```
-
-[フレームの事前読み込み]: /hotwire_ja/turbo/reference/frames#フレームの事前読み込み
-[フレームの遅延読み込み]: /hotwire_ja/turbo/reference/frames#フレームの遅延読み込み
-[data-turbo-preload]: /hotwire_ja/turbo/reference/attributes#data-attributes
-[turbo:before-fetch-request]: /hotwire_ja/turbo/reference/events#turbo%3Abefore-fetch-request
-[turbo:before-fetch-response]: /hotwire_ja/turbo/reference/events#turbo%3Abefore-fetch-response
-
 <details>
 <summary>原文</summary>
 
@@ -922,7 +976,124 @@ won't have any effect on links that:
 * have an ancestor with the `[data-turbo-prefetch="false"]` attribute
 
 It also dovetails nicely with pages that leverage [Eager-Loading Frames](/reference/frames#eager-loaded-frame) or [Lazy-Loading Frames](/reference/frames#lazy-loaded-frame). As you can preload the structure of the page and show the user a meaningful loading state while the interesting content loads.
+</details>
+
+## 無視されるパス
+
+パスやURLの最終階層に`.`が含まれてるパスは拡張子`.htm`、 `.html`、 `.xhtml`、`.php`で終わらない限り Turbo では処理されません。Turbo は対象の拡張子以外をターゲットにしたフォームやリンクを無視します。URLの末尾に`/`を追加することで、一番手取り早くこれらのパスをターゲットにすることができます。
+
+無視されるフォームの例です。
+
+```html
+<form action="/messages.67" method="post">
+  <!-- 無視される -->
+</form>
+
+<form action="/messages.php.1" method="post" data-turbo="true">
+  <!-- これも無視される -->
+</form>
+
+<form action="/messages.json" method="post" data-turbo="true">
+  <!-- これも無視される -->
+</form>
+```
+
+以下のようなフォームは扱われます。
+
+```html
+<form action="/messages/67" method="post">
+  <!-- 扱われる -->
+</form>
+
+<form action="/messages.67/action" method="post">
+  <!-- これも扱われる -->
+</form>
+
+<form action="/messages.php" method="post" data-turbo="true">
+  <!-- これも扱われる -->
+</form>
+
+<form action="/messages.json/" method="post" data-turbo="true">
+  <!-- これも扱われる -->
+</form>
+
+<form action="/messages.json/123" method="post" data-turbo="true">
+  <!-- これも扱われる -->
+</form>
+```
+
+`data-turbo`メソッド（`data-turbo="true"`を含む）を設定しても、パスが無視されるような`.`を持っている場合、そのパスを上書きしたり強制的に処理させたりはしません。
+
+<details>
+<summary>原文</summary>
+
+## Ignored Paths
+
+Paths with a `.` in the last level of a path/URL will not be handled by Turbo unless they end in a file extension `.htm`, `.html`, `.xhtml`, or `.php`. Turbo will ignore forms and links that target these paths. The quickest way to get Turbo to target these paths is to add a `/` at the end of the URL. Examples of forms that would be ignored:
+
+```html
+<form action="/messages.67" method="post">
+  <!-- ignored -->
+</form>
+
+<form action="/messages.php.1" method="post" data-turbo="true">
+  <!-- also ignored -->
+</form>
+
+<form action="/messages.json" method="post" data-turbo="true">
+  <!-- also ignored -->
+</form>
+```
+
+The following forms would be handled:
+
+```html
+<form action="/messages/67" method="post">
+  <!-- handled -->
+</form>
+
+<form action="/messages.67/action" method="post">
+  <!-- also handled -->
+</form>
+
+<form action="/messages.php" method="post" data-turbo="true">
+  <!-- also handled -->
+</form>
+
+<form action="/messages.json/" method="post" data-turbo="true">
+  <!-- also handled -->
+</form>
+
+<form action="/messages.json/123" method="post" data-turbo="true">
+  <!-- also handled -->
+</form>
+```
+
+Setting any `data-turbo` methods (including `data-turbo="true"`) will not override or force Turbo to handle a path if it has a `.` that causes it to be ignored.
+</details>
+
 <br><br>
+
+プリロードされた `<a>` 要素は [turbo:before-fetch-request] と [turbo:before-fetch-response] イベントをディスパッチすることに注意してください。`turbo:before-fetch-request` イベントがプリロードにより発生したのかそれとも他のメカニズムにより発生したのかの区別は、リクエストの `X-Sec-Purpose` ヘッダーに `"prefetch"`がセットされているかどうかで確認できます（`X-Sec-Purpose` ヘッダーの値は `event.detail.fetchOptions.headers["X-Sec-Purpose"]` プロパティから取得できます）。
+
+```js
+addEventListener("turbo:before-fetch-request", (event) => {
+  if (event.detail.fetchOptions.headers["X-Sec-Purpose"] === "prefetch") {
+    // 追加のプリロード設定を行う
+  } else {
+    // 何かを行う
+  }
+})
+```
+
+[フレームの事前読み込み]: /hotwire_ja/turbo/reference/frames#フレームの事前読み込み
+[フレームの遅延読み込み]: /hotwire_ja/turbo/reference/frames#フレームの遅延読み込み
+[data-turbo-preload]: /hotwire_ja/turbo/reference/attributes#data-attributes
+[turbo:before-fetch-request]: /hotwire_ja/turbo/reference/events#turbo%3Abefore-fetch-request
+[turbo:before-fetch-response]: /hotwire_ja/turbo/reference/events#turbo%3Abefore-fetch-response
+
+<details>
+<summary>原文</summary>
 
 Note that preloaded `<a>` elements will dispatch [turbo:before-fetch-request](/reference/events) and [turbo:before-fetch-response](/reference/events) events. To distinguish a preloading `turbo:before-fetch-request` initiated event from an event initiated by another mechanism, check whether the request's `X-Sec-Purpose` header (read from the `event.detail.fetchOptions.headers["X-Sec-Purpose"]` property) is set to `"prefetch"`:
 
