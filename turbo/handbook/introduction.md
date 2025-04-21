@@ -4,7 +4,7 @@ description: "
 Hotwire ドキュメント（有志翻訳版）です。 Handbookでは豊富なコード例を挙げてHotwireの挙動を説明します。
 Turboは、クライアントサイドのJavaScriptフレームワークを使用することなく、高速でモダンなウェブアプリケーションを作成するためのいくつかの技術を提供します。"
 order: 1
-commit: "074b32a"
+commit: "aa10dcf"
 ---
 
 # はじめに
