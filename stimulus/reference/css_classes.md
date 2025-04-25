@@ -264,5 +264,5 @@ In HTML, write CSS class attributes in kebab-case:
       data-search-no-results-class="search--empty">
 ```
 
-When constructing CSS class attributes, follow the conventions for identifiers as described in [Controllers: Naming Conventions](controllers#naming-conventions).
+When constructing CSS class attributes, follow the conventions for identifiers as described in [Controllers: Naming Conventions](https://stimulus.hotwired.dev/reference/css-classes#naming-conventions).
 </details>
