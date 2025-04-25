@@ -132,7 +132,7 @@ export default class extends Controller {
 </div>
 ```
 
-識別子は要素とコントローラの間のリンクの役割を果たします。 この場合、識別子`hello`はStimulusにコントローラクラスのインスタンスを`hello_controller.js`に作成するよう指示します。 コントローラの自動ロードの仕組みについては、<a href="/stimulus/handbook/instaling">インストールガイド</a>を参照してください。
+識別子は要素とコントローラの間のリンクの役割を果たします。 この場合、識別子`hello`はStimulusにコントローラクラスのインスタンスを`hello_controller.js`に作成するよう指示します。 コントローラの自動ロードの仕組みについては、<a href="/stimulus/handbook/installing/">インストールガイド</a>を参照してください。
 
 <details>
     <summary>原文</summary>
