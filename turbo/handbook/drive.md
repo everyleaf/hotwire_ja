@@ -825,7 +825,7 @@ HTML要素、あるいは、その祖先に `data-turbo-prefetch="false"` をつ
 </html>
 ```
 
-また、`data-turbo-prefetch="true"`を指定することで、親の動作を完全に無効化して子の動作を1つずつ許可することもできます。
+また、`data-turbo-prefetch="true"`を指定することで、親要素のプリフェッチを無効にし、子要素のプリフェッチを1つずつ許可することもできます。
 
 ```html
 <html>
@@ -879,7 +879,7 @@ Prefetching links is enabled by default since Turbo v8, but you can disable it b
 
 To avoid prefetching links that the user is briefly hovering, Turbo waits 100ms after the user hovers over the link before prefetching it. But you may want to disable the prefetching behavior on certain links leading to pages with expensive rendering.
 
-You can disable the behavior on a per-element basis by annotating the element or any of its ancestors with `data-turbo-prefetch="false"`.
+You can disable prefetching on a per-element basis by annotating the element or any of its ancestors with `data-turbo-prefetch="false"`.
 
 ```html
 <html>
@@ -896,7 +896,7 @@ You can disable the behavior on a per-element basis by annotating the element or
 </html>
 ```
 
-You can also disable completely the behavior on a parent and allowing on its childs one by one with `data-turbo-prefetch="true"`.
+You can disable prefetching on a parent element and allow its children elements to prefetch one by one with `data-turbo-prefetch="true"`.
 
 ```html
 <html>
@@ -915,7 +915,7 @@ You can also disable completely the behavior on a parent and allowing on its chi
 </html>
 ```
 
-You can also disable the behaviour programatically by intercepting the `turbo:before-prefetch` event and calling `event.preventDefault()`.
+You can also disable prefetching programatically by intercepting the `turbo:before-prefetch` event and calling `event.preventDefault()`.
 
 ```javascript
 document.addEventListener("turbo:before-prefetch", (event) => {
