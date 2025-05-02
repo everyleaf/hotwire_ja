@@ -713,7 +713,7 @@ addEventListener("turbo:submit-start", ({ target }) => {
 ```
 
 [events]: https://turbo.hotwired.dev/reference/events
-[バブリング]: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_bubbling
+[バブリング]: https://developer.mozilla.org/ja/docs/Learn_web_development/Core/Scripting/Event_bubbling
 [要素]: https://developer.mozilla.org/ja/docs/Web/API/HTMLFormElement/elements
 [disabled]: https://developer.mozilla.org/ja/docs/Web/HTML/Attributes/disabled
 [submitter]: https://developer.mozilla.org/ja/docs/Web/API/SubmitEvent/submitter
@@ -749,7 +749,7 @@ addEventListener("turbo:submit-start", ({ target }) => {
 ```
 
 [events]: /reference/events
-[bubble up]: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#event_bubbling
+[bubble up]: https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling
 [elements]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements
 [disabled]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled
 [submitter]: https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter
