@@ -598,6 +598,8 @@ To accomplish this, just annotate those asset elements with `data-turbo-track="r
 </head>
 ```
 
+`[data-turbo-track="dynamic"]` を付与した `<script>` 要素を描画すると、意図しない副作用が発生する場合があります。なぜなら、`<script>` 要素がドキュメントから切り離されても、JavaScript のコンテキストは変わらず、既に評価されたコードはアンロードも変更もされないためです。
+
 <details>
 <summary>原文</summary>
 
