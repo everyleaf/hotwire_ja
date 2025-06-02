@@ -70,6 +70,8 @@ class TranslationPr
 #{diff}
 ~~~
 
+#{diff_url}
+
 #{DIFF_END}
 
 DESCRIPTION
@@ -88,6 +90,13 @@ DESCRIPTION
     else
       generate_description(diff)
     end
+  end
+
+  def diff_url
+    base_url = "https://github.com/hotwired/turbo-site/compare/"
+    compared_commits =
+      "#{translated_file.front_matter[:commit]}..#{source_latest_commit}"
+    base_url + compared_commits
   end
 
   def find_existed_pr
