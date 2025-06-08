@@ -11,7 +11,10 @@ order: 6
 時折コントローラーは外部リソースの状態を取得しなければならない場合があります。 ここでの外部とは、DOMやStimulusの一部ではないものを指します。 例えば、HTTPリクエストを発行し、リクエストの状態の変化に応じて応答する必要があるかもしれません。 あるいは、タイマーを開始し、コントローラがdisconnectした時にタイマーを停止する必要があるかもしれません。 この章では、こういったケースに対応するための方法を説明します。
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+# Working With External Resources
+
 In the last chapter we learned how to load and persist a controller’s internal state using values.
 
 Sometimes our controllers need to track the state of external resources, where by external we mean anything that isn’t in the DOM or a part of Stimulus. For example, we may need to issue an HTTP request and respond as the request’s state changes. Or we may want to start a timer and then stop it when the controller is no longer connected. In this chapter we’ll see how to do both of those things.
@@ -67,7 +70,10 @@ export default class extends Controller {
 ブラウザの開発者コンソールでネットワークタブを開き、ページをリロードします。 最初のページロードを表すリクエストと、それに続く`messages.html`へのリクエストが表示されましたね。
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+## Asynchronously Loading HTML
+
 Let’s learn how to populate parts of a page asynchronously by loading and inserting remote fragments of HTML. We use this technique in Basecamp to keep our initial page loads fast, and to keep our views free of user-specific content so they can be cached more effectively.
 
 We’ll build a general-purpose content loader controller which populates its element with HTML fetched from the server. Then we’ll use it to load a list of unread messages like you’d see in an email inbox.
@@ -162,7 +168,9 @@ connect() {
 
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+## Refreshing Automatically With a Timer
 
 Let’s improve our controller by changing it to periodically refresh the inbox so it’s always up-to-date.
 
@@ -283,7 +291,10 @@ export default class extends Controller {
 ```
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+## Releasing Tracked Resources
+
 We start our timer when the controller connects, but we never stop it. That means if our controller’s element were to disappear, the controller would continue to issue HTTP requests in the background.
 
 We can fix this issue by modifying our startRefreshing() method to keep a reference to the timer:
@@ -394,8 +405,9 @@ load({ params: { url } }) {
 ```
 
 <details>
-    <summary>原文</summary/>
-If we wanted to make the loader work with multiple different sources, we could do it using action parameters. Take this HTML:
+    <summary>原文</summary>
+
+## Using action parameters
 
 ```html
 <div data-controller="content-loader">
@@ -436,7 +448,10 @@ We could even destruct the params to just get the URL parameter:
 次に、独自のアプリケーションにStimulus をインストールして設定する方法を説明します。
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+## Wrap-Up and Next Steps
+
 In this chapter we’ve seen how to acquire and release external resources using Stimulus lifecycle callbacks.
 
 Next we’ll see how to install and configure Stimulus in your own application.
