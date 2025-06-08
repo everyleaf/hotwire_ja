@@ -38,7 +38,7 @@ We wanted Basecamp to feel like that too. As though we had followed the herd and
 This desire led us to a two-punch solution: Turbo and Stimulus.
 </details>
 
-## Turboは高く、Stimulusは低く
+### Turboは高く、Stimulusは低く
 
 新しい控えめなJavaScriptフレームワークであるStimulusの説明に入る前に、Turboの命題をおさらいしておきましょう。
 
@@ -71,7 +71,7 @@ Prior to Stimulus, Basecamp used a smattering of different styles and patterns t
 While it was easy to add new code like this, it wasn’t a comprehensive solution, and we had too many in-house styles and patterns coexisting. That made it hard to reuse code, and it made it hard for new developers to learn a consistent approach.
 </details>
 
-## Stimulusの3つのコアコンセプト
+### Stimulusの3つのコアコンセプト
 
 Stimulusは、これらのパターンの良いところをまとめあげ、コントローラー、アクション、ターゲットという3つの主要な概念だけを中心とした、控えめで小さなフレームワークです。
 
@@ -114,7 +114,7 @@ Stimulus is concerned with manipulating this existing HTML document. Sometimes t
 There are cases where you’d want Stimulus to create new DOM elements, and you’re definitely free to do that. We might even add some sugar to make it easier in the future. But it’s the minority use case. The focus is on manipulating, not creating elements.
 </details>
 
-## Stimulusと主流のJavaScriptフレームワークとの違い
+### Stimulusと主流のJavaScriptフレームワークとの違い
 
 そのため、Stimulusは現代のJavaScriptフレームワークの大半とは大きく異なっています。 ほとんどすべてのフレームワークは、ある種のテンプレート言語を介してJSONをDOM要素に変換することに重点を置いています。 これらのフレームワークの多くは、空のページを作成し、そのページをJSONを元にしたテンプレートレンダリングによって作成された要素のみで埋めるために使用します。
 
@@ -135,7 +135,7 @@ It really is a remarkably different paradigm. One that I’m sure many veteran J
 If, on the other hand, you have nagging sense that what you’re working on does not warrant the intense complexity and application separation such contemporary techniques imply, then you’re likely to find refuge in our approach.
 </details>
 
-## Stimulusと関連するアイデアは、自然に抽出されたもの
+### Stimulusと関連するアイデアは、自然に抽出されたもの
 
 Basecampでは、このアーキテクチャをBasecampのいくつかのバージョンや他のアプリケーションで長年使ってきました。 GitHubも同様のアプローチで大きな効果を上げています。 これは、 「モダンな」 Webアプリケーションがどのようなものであるかについての主流の考え方に対する有効な代替案であるだけでなく、信じられないほど説得力のあるものです。
 
