@@ -9,7 +9,9 @@ order: 7
 アプリケーションにStimulusをインストールするには、JavaScriptのバンドルに`@hotwired/stimulus` npm パッケージを追加します。あるいはバンドラーを利用してない場合は、`<script type="module">`タグを使ってstimulus.js をインポートしてください。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+# Installing Stimulus in Your Application
 
 To install Stimulus in your application, add the @hotwired/stimulus npm package to your JavaScript bundle. Or, import stimulus.js in a `<script type="module">` tag.
 </details>
@@ -18,13 +20,7 @@ To install Stimulus in your application, add the @hotwired/stimulus npm package 
 
 Stimulus for Railsをimport-mapsと一緒に使用している場合、何もせずとも自動的に`app/javascript/controllers`からすべてのコントローラファイルを読み込むようになります。
 
-<details>
-    <summary>原文</summary>
-
-If you’re using Stimulus for Rails together with an import map, the integration will automatically load all controller files from app/javascript/controllers.
-</details>
-
-## コントローラのファイル名と識別子の対応
+### コントローラのファイル名と識別子の対応
 
 コントローラファイルの名前は`[identifier]_controller.js`とします。`identifier`は、HTML内の各コントローラの data-controllerの値に設定する識別子に対応します。
 
@@ -41,8 +37,15 @@ Stimulus for Railsでは、ファイル名の複数の単語をアンダース�
 | users/list_item_controller.js | users--list-item |
 | local-time-controller.js | local-time |
 
+
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Using Stimulus for Rails
+
+If you’re using Stimulus for Rails together with an import map, the integration will automatically load all controller files from app/javascript/controllers.
+
+### Controller Filenames Map to Identifiers
 
 Name your controller files [identifier]_controller.js, where identifier corresponds to each controller’s data-controller identifier in your HTML.
 
@@ -74,7 +77,9 @@ Stimulus.load(definitionsFromContext(context))
 ```
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Using Webpack Helpers
 
 If you’re using Webpack as your JavaScript bundler, you can use the `@hotwired/stimulus-webpack-helpers` package to get the same form of autoloading behavior as Stimulus for Rails. First add the package, then use it like this:
 
@@ -107,7 +112,9 @@ Stimulus.register("clipboard", ClipboardController)
 esbuildのようなビルダーでstimulus-railsを使用している場合、`stimulus:manifest:update` Rakeタスクと`./bin/rails generate stimulus [controller] generator`を使用して、`app/javascript/controllers/index.js`にあるコントローラのインデックスファイルを自動的に更新することができます。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Using Other Build Systems
 
 Stimulus works with other build systems too, but without support for controller autoloading. Instead, you must explicitly load and register controller files with your application instance:
 
@@ -157,7 +164,9 @@ If you’re using stimulus-rails with a builder like esbuild, you can use the st
 ```
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Using Without a Build System
 
 If you prefer not to use a build system, you can load Stimulus in a `<script type="module">` tag:
 
@@ -211,7 +220,9 @@ window.Stimulus = Application.start(document.documentElement, customSchema);
 ```
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Overriding Attribute Defaults
 
 In case Stimulus data-* attributes conflict with another library in your project, they can be overridden when creating the Stimulus Application.
 
@@ -254,7 +265,9 @@ Stimulus.handleError = (error, message, detail) => {
 ```
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Error handling
 
 All calls from Stimulus to your application’s code are wrapped in a try ... catch block.
 
@@ -279,7 +292,9 @@ Stimulus.handleError = (error, message, detail) => {
 Stimulusアプリケーションを`window.Stimulus`に割り当てている場合、`Stimulus.debug = true`でコンソールからデバッグモードをオンにすることができます。 このフラグはソースコードでアプリケーションインスタンスを作成するときにも設定できます。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Debugging
 
 If you’ve assigned your Stimulus application to window.Stimulus, you can turn on debugging mode from the console with Stimulus.debug = true. You can also set this flag when you’re configuring your application instance in the source code.
 </details>
@@ -289,7 +304,9 @@ If you’ve assigned your Stimulus application to window.Stimulus, you can turn 
 Stimulusは、すべてのエバーグリーンブラウザ(デスクトップおよびモバイル)をサポートしています。 また、Stimulus 3+はInternet Explorer 11をサポートしていません（しかし、その場合`@stimulus/polyfills`とStimulus 2を使用することができます）。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Browser Support
 
 Stimulus supports all evergreen, self-updating desktop and mobile browsers out of the box. Stimulus 3+ does not support Internet Explorer 11 (but you can use Stimulus 2 with the @stimulus/polyfills for that).
 </details>
