@@ -11,7 +11,10 @@ order: 5
 一方でStimulus は異なるアプローチをとります。 StimulusアプリケーションのステートはDOM内の属性として存在し、コントローラ自体はほとんどステートを持ちません。 このアプローチにより、初期状態のドキュメント、Ajaxリクエスト、Turbo visit、あるいは別のJavaScriptライブラリなど、どこからでも HTML を扱うことができ、明示的な初期化ステップなしに、関連するコントローラが自動的に起動させることができます。
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+# Managing State
+
 Most contemporary frameworks encourage you to keep state in JavaScript at all times. They treat the DOM as a write-only rendering target, reconciled by client-side templates consuming JSON from the server.
 
 Stimulus takes a different approach. A Stimulus application’s state lives as attributes in the DOM; controllers themselves are largely stateless. This approach makes it possible to work with HTML from anywhere—the initial document, an Ajax request, a Turbo visit, or even another JavaScript library—and have associated controllers spring to life automatically without any explicit initialization step.
@@ -92,7 +95,8 @@ export default class extends Controller {
 
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
 ## Building a Slideshow
 
 In the last chapter, we learned how a Stimulus controller can maintain simple state in the document by adding a class name to an element. But what do we do when we need to store a value, not just a simple flag?
@@ -164,8 +168,6 @@ We initialize the controller by showing the first slide, and the next() and prev
 > Reload the page and confirm that the Next button advances to the next slide.
 </details>
 
-
-
 ## Reading Initial State from the DOM
 
 コントローラが、`this.index`プロパティで、その状態（現在選択されているスライド）をどのように追跡しているかに注目してください。
@@ -190,7 +192,9 @@ initialize() {
 これでやりたいことは実現できるかもしれませんが、これではまだ幾分扱いにくく感じます。 インデックスをインクリメントして結果をDOMに永続化することができなかったり、属性名を考えたりする必要があります。
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+## Reading Initial State from the DOM
 
 Notice how our controller tracks its state—the currently selected slide—in the this.index property.
 
@@ -250,7 +254,10 @@ export default class extends Controller {
 
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+### Using Values
+
 Stimulus controllers support typed value properties which automatically map to data attributes. When we add a value definition to the top of our controller class:
 
 ```javascript
@@ -322,7 +329,8 @@ export default class extends Controller {
 
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
 Similar to targets, you define values in a Stimulus controller by describing them in a static object property called values. In this case, we’ve defined a single numeric value called index. You can read more about value definitions in the reference documentation.
 
 Now let’s update initialize() and the other methods in the controller to use this.indexValue instead of this.index. Here’s how the controller should look when we’re done:
@@ -399,7 +407,10 @@ export default class extends Controller {
 Stimulusは初期化時および`data-slideshow-index-value`属性の変更に応じて`indexValueChanged()`メソッドを呼び出します。 Webインスペクタで属性をいじれば、コントローラがそれに応答してスライドを変更します。 ぜひ試してみてください！
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+## Change Callbacks
+
 Our revised controller improves on the original version, but the repeated calls to this.showCurrentSlide() stand out. We have to manually update the state of the document when the controller initializes and after every place where we update this.indexValue.
 
 We can define a Stimulus value change callback to clean up the repetition and specify how the controller should respond whenever the index value changes.
@@ -453,7 +464,10 @@ static values = { index: Number, effect: { type: String, default: "kenburns" } }
 ```
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+### Setting Defaults
+
 It’s also possible to set a default values as part of the static definition. This is done like so:
 
 ```javascript
@@ -477,7 +491,10 @@ That would start the index at 2, if no data-slideshow-index-value attribute was 
 
 
 <details>
-    <summary>原文</summary/>
+<summary>原文</summary>
+
+## Wrap-Up and Next Steps
+
 In this chapter we’ve seen how to use the values to load and persist the current index of a slideshow controller.
 
 From a usability perspective, our controller is incomplete. The Previous button appears to do nothing when you are looking at the first slide. Internally, indexValue decrements from 0 to -1. Could we make the value wrap around to the last slide index instead? (There’s a similar problem with the Next button.)
