@@ -81,10 +81,11 @@ export default class extends Controller {
 >
 > これらのメソッドはStimulusのライフサイクルコールバックメソッドで、コントローラがドキュメントに入ったり出たりするときに、関連する状態をセットアップしたりテールダウンしたりするのに便利です。
 >
-> | mathod | Stimulusによって呼び出されるタイミング... |
+> | メソッド         | Stimulusによって呼び出されるタイミング...   |
+> |--------------|------------------------------|
 > | initialize() | コントローラが最初にインスタンス化されたとき(一度だけ) |
-> | connect() | コントローラが DOM に接続されたとき(何度でも) |
-> | disconnect() | コントローラが DOM から切断されたとき(何度でも) |
+> | connect()    | コントローラが DOM に接続されたとき(何度でも)   |
+> | disconnect() | コントローラが DOM から切断されたとき(何度でも)  | 
 
 ページを再読み込みし、Next ボタンが次のスライドに進むことを確認します。
 
@@ -214,7 +215,7 @@ This might get the job done, but it’s clunky, requires us to make a decision a
 </details>
 
 
-## Valuesを使う
+### Valuesを使う
 
 Stimulusコントローラはデータ属性に自動的にマッピングされる型付き値プロパティをサポートしています。 コントローラクラスの先頭に`values`の定義を追加します：
 
@@ -437,7 +438,7 @@ Reload the page and confirm the slideshow behavior is the same.
 Stimulus calls the indexValueChanged() method at initialization and in response to any change to the data-slideshow-index-value attribute. You can even fiddle with the attribute in the web inspector and the controller will change slides in response. Go ahead—try it out!
 </details>
 
-## デフォルト値を指定する
+### デフォルト値を指定する
 
 `static values`の行を少し変更すればデフォルト値を設定することも可能です。 デフォルト値の指定は次のように行います：
 
