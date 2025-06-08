@@ -15,7 +15,10 @@ order: 4
 一般的にプログレッシブ・エンハンスメントと呼ばれるこの弾力的なアプローチは、基本的な機能をHTMLとCSSで実装し、その基本的なエクスペリエンスに対する段階的なアップグレードをCSSとJavaScriptでレイヤー化します。 そして基礎となるテクノロジーがブラウザでサポートされるようになったときにそのアップグレードを段階的に提供するのです。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+# Designing For Resilience
+
 Although the clipboard API is well-supported in current browsers, we might still expect to have a small number of people with older browsers using our application.
 
 We should also expect people to have problems accessing our application from time to time. For example, intermittent network connectivity or CDN availability could prevent some or all of our JavaScript from loading.
@@ -81,7 +84,10 @@ connect() {
 これでPINフィールドを段階的に強化することができました。 コピーボタンの初期状態は非表示で、JavaScriptがクリップボードAPIのサポートを検出したときだけ表示されるようになります。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Progressively Enhancing the PIN Field
+
 Let’s look at how we can progressively enhance our PIN field so that the Copy button is invisible unless it’s supported by the browser. That way we can avoid showing someone a button that doesn’t work.
 
 We’ll start by hiding the Copy button in CSS. Then we’ll feature-test support for the Clipboard API in our Stimulus controller. If the API is supported, we’ll add a class name to the controller element to reveal the button.
@@ -143,7 +149,10 @@ We have progressively enhanced the PIN field: its Copy button’s baseline state
 次は Stimulus コントローラでどのように状態を管理するかについて学びましょう。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Wrap-Up and Next Steps
+
 In this chapter we gently modified our clipboard controller to be resilient against older browsers and degraded network conditions.
 
 Next, we’ll learn about how Stimulus controllers manage state.
