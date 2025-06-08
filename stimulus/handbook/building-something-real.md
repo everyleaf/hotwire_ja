@@ -9,7 +9,9 @@ order: 3
 <a href="/stimulus/handbook/hello-stimulus/">Hello, Stimulus</a>の章で、はじめてコントローラを実装し、 Stimulus が HTML と JavaScript をどのように接続するかを学びました。 次は、Basecamp で使われているコントローラを再現して、実際のアプリケーションで使えるものを見てみましょう。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+# Building Something Real
 
 We’ve implemented our first controller and learned how Stimulus connects HTML to JavaScript. Now let’s take a look at something we can use in a real application by recreating a controller from Basecamp.
 </details>
@@ -25,7 +27,10 @@ BasecampのUIには、以下のようなボタンがよく見られます：
 ウェブプラットフォームには<a href="https://www.w3.org/TR/clipboard-apis/" target="_blank">システムのクリップボードにアクセスするAPI</a>がありますが、それを行うHTML要素はありません。「クリップボードにコピー」ボタンを実装するには、JavaScriptを使う必要があります。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Wrapping the DOM Clipboard API
+
 Scattered throughout Basecamp’s UI are buttons like these:
 
 Screenshot showing a text field with an email address inside and a ”Copy to clipboard“ button to the right
@@ -48,7 +53,10 @@ The web platform has an API for accessing the system clipboard, but there’s no
 ```
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Implementing a Copy Button
+
 Let’s say we have an app which allows us to grant someone else access by generating a PIN for them. It would be convenient if we could display that generated PIN alongside a button to copy it to the clipboard for easy sharing.
 
 Open public/index.html and replace the contents of `<body>` with a rough sketch of the button:
@@ -82,7 +90,10 @@ export default class extends Controller {
 ```
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Setting Up the Controller
+
 Next, create src/controllers/clipboard_controller.js and add an empty method copy():
 
 ```javascript
@@ -134,7 +145,10 @@ export default class extends Controller {
 
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Defining the Target
+
 We’ll need a reference to the text field so we can select its contents before invoking the clipboard API. Add data-clipboard-target="source" to the text field:
 
 ```html
@@ -151,7 +165,7 @@ export default class extends Controller {
 }
 ```
 
-> ## What’s With That static targets Line?
+> ### What’s With That static targets Line?
 >
 > When Stimulus loads your controller class, it looks for target name strings in a static array called targets. For each target name in the array, Stimulus adds three new properties to your controller. Here, our "source" target name becomes the following properties:
 >
@@ -201,7 +215,10 @@ copy() {
 ページを際読み込みし、コピーボタンをクリックしましょう。 次にテキストエディタに戻り、ペーストします。 PINコードの「1234」が表示されるはずです。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Connecting the Action
+
 Now we’re ready to hook up the Copy button.
 
 We want a click on the button to invoke the copy() method in our controller, so we’ll add data-action="clipboard#copy":
@@ -259,7 +276,10 @@ Load the page in your browser and click the Copy button. Then switch back to you
 ページをリロードし、両方のボタンが機能することを確認しましょう。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Stimulus Controllers are Reusable
+
 So far we’ve seen what happens when there’s one instance of a controller on the page at a time.
 
 It’s not unusual to have multiple instances of a controller on the page simultaneously. For example, we might want to display a list of PINs, each with its own Copy button.
@@ -308,7 +328,10 @@ PIN: <textarea data-clipboard-target="source" readonly>3737</textarea>
 ```
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Actions and Targets Can Go on Any Kind of Element
+
 Now let’s add one more PIN field. This time we’ll use a Copy link instead of a button:
 
 ```html
@@ -342,7 +365,10 @@ PIN: <textarea data-clipboard-target="source" readonly>3737</textarea>
 次は、コントローラの設計を少し変更するだけで、より堅牢な実装ができることを見てみましょう。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Wrap-Up and Next Steps
+
 In this chapter we looked at a real-life example of wrapping a browser API in a Stimulus controller. We saw how multiple instances of the controller can appear on the page at once, and we explored how actions and targets keep your HTML and JavaScript loosely coupled.
 
 Now let’s see how small changes to the controller’s design can lead us to a more robust implementation.
