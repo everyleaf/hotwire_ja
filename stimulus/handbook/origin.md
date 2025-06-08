@@ -22,7 +22,10 @@ order: 0
 
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+# The Origin of Stimulus
+
 We write a lot of JavaScript at Basecamp, but we don’t use it to create “JavaScript applications” in the contemporary sense. All our applications have server-side rendered HTML at their core, then add sprinkles of JavaScript to make them sparkle.
 
 This is the way of the majestic monolith. Basecamp runs across half a dozen platforms, including native mobile apps, with a single set of controllers, views, and models created using Ruby on Rails. Having a single, shared interface that can be updated in a single place is key to being able to perform with a small team, despite the many platforms.
@@ -55,7 +58,10 @@ Stimulus以前は、Basecampは様々なスタイルやパターンを使って�
 このように新しいコードを追加するのは簡単でしたが、包括的な解決策にはならず、社内にはあまりにも多くのスタイルやパターンが共存していました。 そのためコードを再利用することが難しく、新しい開発者が一貫したアプローチを学ぶことも難しかったのです。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+### Turbo up high, Stimulus down low
+
 Before I get to Stimulus, our new modest JavaScript framework, allow me to recap the proposition of Turbo.
 
 Turbo descends from an approach called pjax, developed at GitHub. The basic concept remains the same. The reason full-page refreshes often feel slow is not so much because the browser has to process a bunch of HTML sent from a server. Browsers are really good and really fast at that. And in most cases, the fact that an HTML payload tends to be larger than a JSON payload doesn’t matter either (especially with gzipping). No, the reason is that CSS and JavaScript has to be reinitialized and reapplied to the page again. Regardless of whether the files themselves are cached. This can be pretty slow if you have a fair amount of CSS and JavaScript.
@@ -93,7 +99,10 @@ Stimulusは、こうして作られた既存のHTML文書を操作すること�
 時にはStimulusに新しいDOM要素を作成させたい場合もあるでしょう。 将来的には、それを簡単にするための方法も追加するかもしれません。 しかし、それはあまり多くない使用例です。 私たちは要素を作成するのではなく、操作することに重点を置いています。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+### The three core concepts in Stimulus
+
 Stimulus rolls up the best of those patterns into a modest, small framework revolving around just three main concepts: Controllers, actions, and targets.
 
 It’s designed to read as a progressive enhancement when you look at the HTML it’s addressing. Such that you can look at a single template and know which behavior is acting upon it. Here’s an example:
@@ -125,7 +134,10 @@ Stimulusはまた、ステートの扱いに関しても他のフレームワー
 その一方で、あなたが今取り組んでいることが、そのような現代的なテクニックが意味するような強烈な複雑さやアプリケーションの分離を正当化するものではないと強く感じているのであれば、私たちのアプローチに救いを見出すことができるでしょう。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+### How Stimulus differs from mainstream JavaScript frameworks
+
 This makes Stimulus very different from the majority of contemporary JavaScript frameworks. Almost all are focused on turning JSON into DOM elements via a template language of some sort. Many use these frameworks to birth an empty page, which is then filled exclusively with elements created through this JSON-to-template rendering.
 
 Stimulus also differs on the question of state. Most frameworks have ways of maintaining state within JavaScript objects, and then render HTML based on that state. Stimulus is the exact opposite. State is stored in the HTML, so that controllers can be discarded between page changes, but still reinitialize as they were when the cached HTML appears again.
@@ -154,7 +166,10 @@ Basecampでも、必要に応じて、いくつかの重たいアプローチを
 David Heinemeier Hansson
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+### Stimulus and related ideas were extracted from the wild
+
 At Basecamp we’ve used this architecture across several different versions of Basecamp and other applications for years. GitHub has used a similar approach to great effect. This is not only a valid alternative to the mainstream understanding of what a “modern” web application looks like, it’s an incredibly compelling one.
 
 In fact, it feels like the same kind of secret sauce we had at Basecamp when we developed Ruby on Rails. The sense that contemporary mainstream approaches are needlessly convoluted, and that we can do more, faster, with far less.
