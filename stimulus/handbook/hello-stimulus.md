@@ -9,7 +9,10 @@ order: 2
 Stimulus がどのように機能するかを学ぶ最良の方法は、簡単なコントローラを作ることです。この章ではその方法を紹介します。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+# Hello, Stimulus
+
 The best way to learn how Stimulus works is to build a simple controller. This chapter will show you how.
 </details>
 
@@ -35,8 +38,10 @@ $ yarn start
 (`stimulus-starter`プロジェクトは依存関係の管理にYarnパッケージ・マネージャーを使用しているので、最初にYarnパッケージ・マネージャーがインストールされていることを確認してください)
 
 <details>
-    <summary>原文</summary>
-Prerequisites
+<summary>原文</summary>
+
+## Prerequisites
+
 To follow along, you’ll need a running copy of the stimulus-starter project, which is a preconfigured blank slate for exploring Stimulus.
 
 We recommend remixing stimulus-starter on Glitch so you can work entirely in your browser without installing anything:
@@ -75,7 +80,10 @@ Then visit http://localhost:9000/ in your browser.
 ブラウザでページをリロードすると、テキストフィールドとボタンが表示されるはずです。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## It All Starts With HTML
+
 Let’s begin with a simple exercise using a text field and a button. When you click the button, we’ll display the value of the text field in the console.
 
 Every Stimulus project starts with HTML. Open public/index.html and add the following markup just after the opening <body> tag:
@@ -106,7 +114,10 @@ export default class extends Controller {
 ```
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Controllers Bring HTML to Life
+
 At its core, Stimulus’s purpose is to automatically connect DOM elements to JavaScript objects. Those objects are called controllers.
 
 Let’s create our first controller by extending the framework’s built-in Controller class. Create a new file named hello_controller.js in the src/controllers/ folder. Then place the following code inside:
@@ -135,7 +146,10 @@ export default class extends Controller {
 識別子は要素とコントローラの間のリンクの役割を果たします。 この場合、識別子`hello`はStimulusにコントローラクラスのインスタンスを`hello_controller.js`に作成するよう指示します。 コントローラの自動ロードの仕組みについては、<a href="/stimulus/handbook/installing/">インストールガイド</a>を参照してください。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Identifiers Link Controllers With the DOM
+
 Next, we need to tell Stimulus how this controller should be connected to our HTML. We do this by placing an identifier in the data-controller attribute on our `div`:
 
 ```html
@@ -170,7 +184,10 @@ export default class extends Controller {
 ページを再度読み込み、開発者コンソールを開いてください。「Hello, Stimulus！」と表示され、その後に `<div>` が表示されるはずです。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Is This Thing On?
+
 Reload the page in your browser and you’ll see that nothing has changed. How do we know whether our controller is working or not?
 
 One way is to put a log statement in the connect() method, which Stimulus calls each time a controller is connected to the document.
@@ -230,7 +247,10 @@ export default class extends Controller {
 ブラウザでページを読み込み、開発者コンソールを開いてください。Greet」ボタンをクリックすると、ログメッセージが表示されるはずです。
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Actions Respond to DOM Events
+
 Now let’s see how to change the code so our log message appears when we click the “Greet” button instead.
 
 Start by renaming connect() to greet():
@@ -257,7 +277,7 @@ To connect our action method to the button’s click event, open public/index.ht
 </div>
 ```
 
-> ﹟Action Descriptors Explained
+> ### Action Descriptors Explained
 >
 > The data-action value click->hello#greet is called an action descriptor. This particular descriptor says:
 >
@@ -305,7 +325,9 @@ export default class extends Controller {
 次にブラウザでページをリロードし、開発者コンソールを開きます。 入力フィールドにあなたの名前を入力し、「Greet」ボタンをクリックしてください。 Hello world！
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Targets Map Important Elements To Controller Properties
 
 We’ll finish the exercise by changing our action to say hello to whatever name we’ve typed in the text field.
 
@@ -366,7 +388,10 @@ export default class extends Controller {
 ```
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Controllers Simplify Refactoring
+
 We’ve seen that Stimulus controllers are instances of JavaScript classes whose methods can act as event handlers.
 
 That means we have an arsenal of standard refactoring techniques at our disposal. For example, we can clean up our greet() method by extracting a name getter:
@@ -398,7 +423,10 @@ export default class extends Controller {
 
 
 <details>
-    <summary>原文</summary>
+<summary>原文</summary>
+
+## Wrap-Up and Next Steps
+
 Congratulations—you’ve just written your first Stimulus controller!
 
 We’ve covered the framework’s most important concepts: controllers, actions, and targets. In the next chapter, we’ll see how to put those together to build a real-life controller taken right from Basecamp.
