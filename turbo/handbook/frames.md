@@ -2,7 +2,7 @@
 title: "Turboフレームを分解する"
 description: "Turbo Framesはページを独立したコンテキストに分解し、それらを遅延ロードできるようにし、インタラクションの範囲を制限します。"
 order: 4
-commit: "0b2c287"
+commit: "aa10dcf"
 ---
 
 # Turboフレームを分解する
@@ -63,7 +63,7 @@ Turbo フレームは、事前に定義されたページの一部分をリク�
 
 # Decompose with Turbo Frames
 
-Turbo Frames allow predefined parts of a page to be updated on request. Any links and forms inside a frame are captured, and the frame contents automatically updated after receiving a response. Regardless of whether the server provides a full document, or just a fragment containing an updated version of the requested frame, only that particular frame will be extracted from the response to replace the existing content.
+Turbo Frames allow predefined parts of a page to be updated on request. Any links and forms inside a frame are captured, and the frame contents automatically update after receiving a response. Regardless of whether the server provides a full document, or just a fragment containing an updated version of the requested frame, only that particular frame will be extracted from the response to replace the existing content.
 
 Frames are created by wrapping a segment of the page in a `<turbo-frame>` element. Each element must have a unique ID, which is used to match the content being replaced when requesting new pages from the server. A single page can have multiple frames, each establishing their own context:
 
@@ -233,14 +233,14 @@ After navigation finishes, a Frame will set the `[complete]` attribute on the
 
 ## フレームの遅延読み込み
 
-ページが最初に読み込まれたときに見えていないフレームは、`loading="lazy"` をマークしておくことで、フレームが見えるようになるまで読み込みを遅延させることができます。`loading="lazy"` は `img` タグの `lazy=true` 属性のように動作します。`loading="lazy"` はフレームが `summary`/`detail` ペアやモーダル、または最初は非表示でその後表示されるものの中にあるときに、読み込みを遅延させる最適な方法です。
+ページが最初に読み込まれたときに見えていないフレームは、`loading="lazy"` をマークしておくことで、フレームが見えるようになるまで読み込みを遅延させることができます。`loading="lazy"` は `img` タグの `loading="lazy"` 属性のように動作します。`loading="lazy"` はフレームが `summary`/`detail` ペアやモーダル、または最初は非表示でその後表示されるものの中にあるときに、読み込みを遅延させる最適な方法です。
 
 <details>
 <summary>原文</summary>
 
 ## Lazy-Loading Frames
 
-Frames that aren't visible when the page is first loaded can be marked with `loading="lazy"` such that they don't start loading until they become visible. This works exactly like the `lazy=true` attribute on `img`. It's a great way to delay loading of frames that sit inside `summary`/`detail` pairs or modals or anything else that starts out hidden and is then revealed.
+Frames that aren't visible when the page is first loaded can be marked with `loading="lazy"` such that they don't start loading until they become visible. This works exactly like the `loading="lazy"` attribute on `img`. It's a great way to delay loading of frames that sit inside `summary`/`detail` pairs or modals or anything else that starts out hidden and is then revealed.
 </details>
 
 ## フレームの読み込みにおけるキャッシュの利点
