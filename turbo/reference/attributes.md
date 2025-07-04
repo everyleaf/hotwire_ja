@@ -17,6 +17,7 @@ commit: "a44374e"
 * `data-turbo-track="reload"`はHTML要素を追跡し、それが変わったときに全ページをリロードします。通常、[`script`や`CSS`のリンクを最新の状態に保つために][]使われます。
 * `data-turbo-frame`は、ナビゲートするための Turbo フレームを識別します。詳細は、[フレームのドキュメント][]を参照してください。
 * `data-turbo-preload`は、Turbo ドライブに次のページのコンテンツをプリフェッチさせます。
+* `data-turbo-prefetch="false"`は、要素にマウスホバーしたときのプリフェッチを無効にします。
 * `data-turbo-action`は、[Visit][]アクションをカスタマイズします。有効な値は、`replace`あるいは`advance`のいずれかです。 Turbo フレームと一緒に使うことで、[フレームのナビゲーションをページアクセスに昇格][]できます。
 * `data-turbo-permanent`は、[ページ・ロード間で要素を永続化します][]。その要素の`id`属性はユニークでないといけません。[モーフィングによるページ更新][]から要素を除外したい場合も、`data-turbo-permanent`を使います。
 * `data-turbo-temporary`は、ドキュメントがキャッシュされる前に要素を削除します。これにより、`data-turbo-temporary`がある要素をキャッシュから復元しません。
