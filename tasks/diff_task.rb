@@ -3,7 +3,7 @@ require "tempfile"
 
 require_relative "source_file"
 require_relative "translated_file"
-require_relative "translation_pr"
+require_relative "translation_issue"
 
 class DiffTask
   include Rake::DSL
@@ -27,11 +27,11 @@ class DiffTask
           source_latest_commit, diff_content = diff(source_file, translated_file)
           next if diff_content.nil? || diff_content.empty?
 
-          translation_pr = TranslationPr.new(translation_repository_path,
-                                             translated_file,
-                                             diff_content,
-                                             source_latest_commit)
-          translation_pr.create_or_update
+          translation_issue = TranslationIssue.new(translation_repository_path,
+                                                   translated_file,
+                                                   diff_content,
+                                                   source_latest_commit)
+          translation_issue.create_or_update
         end
       end
     end
