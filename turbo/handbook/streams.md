@@ -264,8 +264,6 @@ def destroy
 end
 ```
 
-By default, Turbo doesn't add the `text/vnd.turbo-stream.html` MIME type when submitting links, or forms with a method type of `GET`. To use Turbo Streams responses with `GET` requests in an application you can instruct Turbo to include the MIME type by adding a `data-turbo-stream` attribute to a link or form.
-
 デフォルトでは、Turbo は リンク、あるいは `GET` メソッドで送信されるフォームのサブミット時に `text/vnd.turbo-stream.html` に MIME タイプは付与しません。アプリケーション内で Turbo ストリームのレスポンスを `GET` メソッドのリクエストに使用したい時は、対象のリンクやフォームに `data-turbo-stream` 属性を追加します。この属性によって、Turbo は MIME タイプを含めるようになります。
 
 <details>
