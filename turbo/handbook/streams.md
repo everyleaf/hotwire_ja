@@ -110,6 +110,8 @@ WebSocket、SSE やフォーム送信の応答としての 1 つのストリー�
 <details>
 <summary>原文</summary>
 
+## Stream Messages and Actions
+
 A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` elements. The stream message below demonstrates the eight possible stream actions:
 
 ```html
@@ -225,6 +227,8 @@ Also, any `<turbo-stream>` element that's inserted into the page (e.g. through f
 <details>
 <summary>原文</summary>
 
+## Actions With Multiple Targets
+
 Actions can be applied against multiple targets using the `targets` attribute with a CSS query selector, instead of the regular `target` attribute that uses a dom ID reference. Examples:
 ```html
 <turbo-stream action="remove" targets=".old_records">
@@ -268,6 +272,8 @@ end
 
 <details>
 <summary>原文</summary>
+
+## Streaming From HTTP Responses
 
 Turbo knows to automatically attach `<turbo-stream>` elements when they arrive in response to `<form>` submissions that declare a [MIME type][] of `text/vnd.turbo-stream.html`. When submitting a `<form>` element whose [method][] attribute is set to `POST`, `PUT`, `PATCH`, or `DELETE`, Turbo injects `text/vnd.turbo-stream.html` into the set of response formats in the request's [Accept][] header. When responding to requests containing that value in its [Accept][] header, servers can tailor their responses to deal with Turbo Streams, HTTP redirects, or other types of clients that don't support streams (such as native applications).
 In a Rails controller, this would look like:
@@ -351,6 +357,8 @@ Content-Type: text/vnd.turbo-stream.html; charset=utf-8
 <details>
 <summary>原文</summary>
 
+## Reusing Server-Side Templates
+
 The key to Turbo Streams is the ability to reuse your existing server-side templates to perform live, partial page changes. The HTML template used to render each message in a list of such on the first page load is the same template that'll be used to add one new message to the list dynamically later. This is at the essence of the HTML-over-the-wire approach: You don't need to serialize the new message as JSON, receive it in JavaScript, render a client-side template. It's just the standard server-side templates reused.
 Another example from how this would look in Rails:
 ```erb
@@ -406,6 +414,8 @@ Turbo ストリームを利用せずに、相互作用的なデザインを始�
 <details>
 <summary>原文</summary>
 
+## Progressively Enhance When Necessary
+
 It's good practice to start your interaction design without Turbo Streams. Make the entire application work as it would if Turbo Streams were not available, then layer them on as a level-up. This means you won't come to rely on the updates for flows that need to work in native applications or elsewhere without them.
 The same is especially true for WebSocket updates. On poor connections, or if there are server issues, your WebSocket may well get disconnected. If the application is designed to work without it, it'll be more resilient.
 
@@ -422,6 +432,8 @@ Turbo ストリームの重要な利点は、続けて起こる全ての更新�
 
 <details>
 <summary>原文</summary>
+
+## But What About Running JavaScript?
 
 Turbo Streams consciously restricts you to nine actions: append, prepend, (insert) before, (insert) after, replace, update, remove, morph, and refresh. If you want to trigger additional behavior when these actions are carried out, you should attach behavior using <a href="https://stimulus.hotwired.dev">Stimulus</a> controllers. This restriction allows Turbo Streams to focus on the essential task of delivering HTML over the wire, leaving additional logic to live in dedicated JavaScript files.
 
@@ -465,6 +477,8 @@ StreamActions.log = function () {
 ```
 <details>
 <summary>原文</summary>
+
+## Custom Actions
 
 By default, Turbo Streams supports [eight values for its `action` attribute](https://turbo.hotwired.dev/reference/streams#the-eight-actions). If your application needs to support other behaviors, you can override the `event.detail.render` function.
 
@@ -528,6 +542,8 @@ Mercure は、サーバーアプリケーションに対して便利な方法を
 
 <details>
 <summary>原文</summary>
+
+## Integration with Server-Side Frameworks
 
 Of all the techniques that are included with Turbo, it's with Turbo Streams you'll see the biggest advantage from close integration with your backend framework. As part of the official Hotwire suite, we've created a reference implementation for what such an integration can look like in the <a href="https://github.com/hotwired/turbo-rails">turbo-rails gem</a>. This gem relies on the built-in support for both WebSockets and asynchronous rendering present in Rails through the Action Cable and Active Job frameworks, respectively.
 Using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/concerns/turbo/broadcastable.rb">Broadcastable</a> concern mixed into Active Record, you can trigger WebSocket updates directly from your domain model. And using the <a href="https://github.com/hotwired/turbo-rails/blob/main/app/models/turbo/streams/tag_builder.rb">Turbo::Streams::TagBuilder</a>, you can render `<turbo-stream>` elements in inline controller responses or dedicated templates, invoking the eight actions with associated rendering through a simple DSL.
