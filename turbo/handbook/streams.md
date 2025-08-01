@@ -2,7 +2,7 @@
 title: "Turbo ストリームを利用してみよう"
 description: "Turbo ストリームは、WebSocketやSSEを利用して、またはフォームの送信に応答して、HTMLと一連のCRUDのようなアクションを使用してページの変更を配信します。"
 order: 5
-commit: "14aafc8"
+commit: "79760f0"
 ---
 
 # Turbo ストリームを利用してみよう
@@ -24,7 +24,7 @@ They can be used to surgically update the DOM after a user action such as removi
 
 ## メッセージとアクションの配信
 
-一つの Turbo ストリームメッセージは、`<turbo-stream>` 要素から構成される HTML の一部です。そのストリームメッセージは、下記の9つの実行可能なストリームアクションを示します。
+一つの Turbo ストリームメッセージは、`<turbo-stream>` 要素から構成される HTML の一部です。そのストリームメッセージは、下記の8つの実行可能なストリームアクションを示します。
 
 ```html
 <turbo-stream action="append" target="messages">
@@ -110,7 +110,7 @@ WebSocket、SSE やフォーム送信の応答としての 1 つのストリー�
 <details>
 <summary>原文</summary>
 
-A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` elements. The stream message below demonstrates the nine possible stream actions:
+A Turbo Streams message is a fragment of HTML consisting of `<turbo-stream>` elements. The stream message below demonstrates the eight possible stream actions:
 
 ```html
 <turbo-stream action="append" target="messages">
@@ -432,9 +432,9 @@ Embracing these constraints will keep you from turning individual responses into
 
 ## カスタム・アクション
 
-デフォルトでは、Turbo ストリームは [`action` 属性に 9 つの値](https://turbo.hotwired.dev/reference/streams#the-seven-actions)をサポートしています。もしアプリケーションが他の属性をサポートする必要が出てきたら、`event.detail.render` 関数をオーバーライドしましょう。
+デフォルトでは、Turbo ストリームは [`action` 属性に 8 つの値](https://turbo.hotwired.dev/reference/streams#the-eight-actions)をサポートしています。もしアプリケーションが他の属性をサポートする必要が出てきたら、`event.detail.render` 関数をオーバーライドしましょう。
 
-例えば、9 つのアクションに加えて `<turbo-stream>` 要素に `[action="alert"]` あるいは `[action="log"]` をサポートするよう拡張したい場合、`turbo:before-stream-render` リスナーにカスタムした振る舞いを宣言できます。
+例えば、デフォルトのアクションに加えて `<turbo-stream>` 要素に `[action="alert"]` あるいは `[action="log"]` をサポートするよう拡張したい場合、`turbo:before-stream-render` リスナーにカスタムした振る舞いを宣言できます。
 
 
 ```javascript
@@ -468,9 +468,9 @@ StreamActions.log = function () {
 <details>
 <summary>原文</summary>
 
-By default, Turbo Streams support [nine values for its `action` attribute](https://turbo.hotwired.dev/reference/streams#the-seven-actions). If your application needs to support other behaviors, you can override the `event.detail.render` function.
+By default, Turbo Streams supports [eight values for its `action` attribute](https://turbo.hotwired.dev/reference/streams#the-eight-actions). If your application needs to support other behaviors, you can override the `event.detail.render` function.
 
-For example, if you'd like to expand upon the nine actions to support `<turbo-stream>` elements with `[action="alert"]` or `[action="log"]`, you could declare a `turbo:before-stream-render` listener to provide custom behavior:
+For example, if you'd like to expand upon the default actions to support `<turbo-stream>` elements with `[action="alert"]` or `[action="log"]`, you could declare a `turbo:before-stream-render` listener to provide custom behavior:
 
 ```javascript
 addEventListener("turbo:before-stream-render", ((event) => {
