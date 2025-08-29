@@ -246,6 +246,7 @@ Actions can be applied against multiple targets using the `targets` attribute wi
 
 
 </details>
+
 ## HTTP レスポンスからのストリーミング
 
 Turbo は、[MIME type](https://developer.mozilla.org/ja/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) を `text/vnd.turbo-stream.html` と宣言した `<form>` 送信に対する応答に自動的に `<turbo-stream>` 要素を付与します。
