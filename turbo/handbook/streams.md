@@ -297,6 +297,7 @@ By default, Turbo doesn't add the `text/vnd.turbo-stream.html` MIME type when su
 [Accept]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
 
 </details>
+
 ## サーバーサイドテンプレートの再利用
 
 Turbo ストリームの秘訣は、ページの一部の動的な変更を実現するのに既存のサーバーサイドテンプレートを再利用できることです。
