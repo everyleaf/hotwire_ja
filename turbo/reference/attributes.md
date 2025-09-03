@@ -17,6 +17,7 @@ commit: "a44374e"
 * `data-turbo-track="reload"`はHTML要素を追跡し、それが変わったときに全ページをリロードします。通常、[`script`や`CSS`のリンクを最新の状態に保つために][]使われます。
 * `data-turbo-frame`は、ナビゲートするための Turbo フレームを識別します。詳細は、[フレームのドキュメント][]を参照してください。
 * `data-turbo-preload`は、Turbo ドライブに次のページのコンテンツをプリフェッチさせます。
+* `data-turbo-prefetch="false"`は、要素にマウスホバーしたときのプリフェッチを無効にします。
 * `data-turbo-action`は、[Visit][]アクションをカスタマイズします。有効な値は、`replace`あるいは`advance`のいずれかです。 Turbo フレームと一緒に使うことで、[フレームのナビゲーションをページアクセスに昇格][]できます。
 * `data-turbo-permanent`は、[ページ・ロード間で要素を永続化します][]。その要素の`id`属性はユニークでないといけません。[モーフィングによるページ更新][]から要素を除外したい場合も、`data-turbo-permanent`を使います。
 * `data-turbo-temporary`は、ドキュメントがキャッシュされる前に要素を削除します。これにより、`data-turbo-temporary`がある要素をキャッシュから復元しません。
@@ -45,6 +46,7 @@ The following data attributes can be applied to elements to customize Turbo's be
 * `data-turbo-track="reload"` tracks the element's HTML and performs a full page reload when it changes. Typically used to [keep `script` and CSS `link` elements up-to-date](/handbook/drive#reloading-when-assets-change).
 * `data-turbo-frame` identifies the Turbo Frame to navigate. Refer to the [Frames documentation](/reference/frames) for further details.
 * `data-turbo-preload` signals to [Drive](/handbook/drive#preload-links-into-the-cache) to pre-fetch the next page's content
+* `data-turbo-prefetch="false"` [disables prefetching links](handbook/drive#prefetching-links-on-hover) when the element is hovered.
 * `data-turbo-action` customizes the [Visit](/handbook/drive#page-navigation-basics) action. Valid values are `replace` or `advance`. Can also be used with Turbo Frames to [promote frame navigations to page visits](/handbook/frames#promoting-a-frame-navigation-to-a-page-visit).
 * `data-turbo-permanent` [persists the element between page loads](/handbook/building#persisting-elements-across-page-loads). The element must have a unique `id` attribute. It also serves to exclude elements from being morphed when using [page refreshes with morphing](/handbook/page_refreshes.html)
 * `data-turbo-temporary` removes the element before the document is cached, preventing it from reappearing when restored.
