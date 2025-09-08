@@ -4,7 +4,7 @@ title: "属性とメタタグ"
 description: |
   「Turbo リファレンス: Hotwire ドキュメント（有志翻訳版）」における属性とメタタグに関するリファレンスページです。
   ここではデータ属性によるTurboの挙動をカスタマイズする方法や、キャッシュ／ナビゲーション挙動に影響を与えるメタタグの利用方法を説明します。
-commit: "a44374e"
+commit: "79760f0"
 ---
 
 # 属性とメタタグ
@@ -13,11 +13,12 @@ commit: "a44374e"
 
 次のデータ属性を要素に対して利用することで、Turbo の挙動をカスタマイズできます。
 
-* `data-turbo="false"`は、リンクやフォーム、その子孫要素に対しても Turbo ドライブを無効にします。Turbo ドライブを有効にしたい場合は、`data-turbo="true"`を使います。Turbo ドライブを無効にする場合、振る舞いの違いに注意してください。ブラウザではリンクをクリックした時の振る舞いが通常通りになるだけですが、[native adapters][]ではアプリが終了するかもしれません。
-* `data-turbo-track="reload"`はHTML要素を追跡し、それが変わったときに全ページをリロードします。通常、[`script`や`CSS`のリンクを最新の状態に保つために][]使われます。
+* `data-turbo="false"`は、リンクやフォーム、その子孫要素に対しても Turbo ドライブを無効にします。Turbo ドライブを有効にしたい場合は、`data-turbo="true"`を使います。Turbo ドライブを無効にする場合、振る舞いの違いに注意してください。ブラウザではリンクをクリックした時の振る舞いが通常通りになるだけですが、[native adapters][]ではアプリが終了するかもしれません。また、Turbo が[無視するパス][]として扱っている URL については、`data-turbo="true"`を付けても Turbo ドライブを有効にはできません。
+* `data-turbo-track="reload"`はHTML要素を追跡し、それが変わったときに全ページをリロードします。通常、[`script`や`CSS`のリンクを最新の状態に保つため][]に使われます。
+* `data-turbo-track="dynamic"` は、要素のHTMLを監視し、HTMLレスポンスに含まれていなければその要素を削除します。主に、ナビゲーション中に[`style`や`link`要素を削除するため][]に使われます。
 * `data-turbo-frame`は、ナビゲートするための Turbo フレームを識別します。詳細は、[フレームのドキュメント][]を参照してください。
 * `data-turbo-preload`は、Turbo ドライブに次のページのコンテンツをプリフェッチさせます。
-* `data-turbo-prefetch="false"`は、要素にマウスホバーしたときのプリフェッチを無効にします。
+* `data-turbo-prefetch="false"`は、要素にマウスホバーしたときの[リンクのプリフェッチを無効][]にします。
 * `data-turbo-action`は、[Visit][]アクションをカスタマイズします。有効な値は、`replace`あるいは`advance`のいずれかです。 Turbo フレームと一緒に使うことで、[フレームのナビゲーションをページアクセスに昇格][]できます。
 * `data-turbo-permanent`は、[ページ・ロード間で要素を永続化します][]。その要素の`id`属性はユニークでないといけません。[モーフィングによるページ更新][]から要素を除外したい場合も、`data-turbo-permanent`を使います。
 * `data-turbo-temporary`は、ドキュメントがキャッシュされる前に要素を削除します。これにより、`data-turbo-temporary`がある要素をキャッシュから復元しません。
@@ -26,10 +27,14 @@ commit: "a44374e"
 * `data-turbo-stream`により、リンクまたはフォームが Turbo ストリームのレスポンスを受け付けられます。Turbo は、`GET`でないメソッドによるフォーム送信に対して、[自動的にストリーム・レスポンスを要求します][]。`data-turbo-stream`により、`GET`リクエストに対しても Turbo ストリームを使えます。
 * `data-turbo-confirm`は、指定された値で確認ダイアログを表示します。`data-turbo-method`を持つ`form`要素またはリンクで使えます。
 * `data-turbo-submits-with`により、フォーム送信時に表示するテキストを指定できます。この属性は、`input`要素または`button`要素で使えます。フォーム送信中に、要素のテキストは`data-turbo-submits-with`の値を表示します。送信後は、元のテキストに戻ります。操作の進行中に「保存中...」のようなメッセージを表示すれば、ユーザーにフィードバックを与えられるので便利です。
+* `download`属性が付いたリンクは、ファイルをダウンロードするためのものでページ遷移ではないため、Turbo の処理から除外されます。
 
 [native adapters]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/native/
-[`script`や`CSS`のリンクを最新の状態に保つために]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アセット変更時のリロード
+[無視するパス]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive#無視されるパス
+[`script`や`CSS`のリンクを最新の状態に保つため]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#アセット変更時のリロード
+[`style`や`link`要素を削除するため]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#変更時のアセットの削除
 [フレームのドキュメント]: https://everyleaf.github.io/hotwire_ja/turbo/reference/frames
+[リンクのプリフェッチを無効]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ホバーでリンク先のプリフェッチ
 [Visit]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ページ・ナビゲーションの基本
 [フレームのナビゲーションをページアクセスに昇格]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/frames/#フレームのナビゲーションをページアクセスに昇格させる
 [ページ・ロード間で要素を永続化します]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#ページのロードにまたがって要素を永続化する
@@ -42,8 +47,9 @@ commit: "a44374e"
 
 The following data attributes can be applied to elements to customize Turbo's behaviour.
 
-* `data-turbo="false"` disables Turbo Drive on links and forms including descendants. To reenable when an ancestor has opted out, use `data-turbo="true"`. Be careful: when  Turbo  Drive is disabled, browsers treat link clicks as normal, but [native adapters](/handbook/native) may exit the app.
+`data-turbo="false"` disables Turbo Drive on links and forms including descendants. To reenable when an ancestor has opted out, use `data-turbo="true"`. Be careful: when Turbo Drive is disabled, browsers treat link clicks as normal, but [native adapters](/handbook/native) may exit the app. Note that if Turbo [ignores a path](/handbook/drive#ignored-paths), then setting `data-turbo="true"` will not force/override it to enable.
 * `data-turbo-track="reload"` tracks the element's HTML and performs a full page reload when it changes. Typically used to [keep `script` and CSS `link` elements up-to-date](/handbook/drive#reloading-when-assets-change).
+* `data-turbo-track="dynamic"` tracks the element's HTML and removes the element when it is absent from an HTML response. Typically used to [remove `style` and `link` elements](/handbook/drive#removing-assets-when-they-change) during navigation.
 * `data-turbo-frame` identifies the Turbo Frame to navigate. Refer to the [Frames documentation](/reference/frames) for further details.
 * `data-turbo-preload` signals to [Drive](/handbook/drive#preload-links-into-the-cache) to pre-fetch the next page's content
 * `data-turbo-prefetch="false"` [disables prefetching links](handbook/drive#prefetching-links-on-hover) when the element is hovered.
@@ -55,6 +61,7 @@ The following data attributes can be applied to elements to customize Turbo's be
 * `data-turbo-stream` specifies that a link or form can accept a Turbo Streams response. Turbo [automatically requests stream responses](/handbook/streams#streaming-from-http-responses) for form submissions with non-`GET` methods; `data-turbo-stream` allows Turbo Streams to be used with `GET` requests as well.
 * `data-turbo-confirm` presents a confirm dialog with the given value. Can be used on `form` elements or links with `data-turbo-method`.
 * `data-turbo-submits-with` specifies text to display when submitting a form. Can be used on `input` or `button` elements. While the form is submitting the text of the element will show the value of `data-turbo-submits-with`. After the submission, the original text will be restored. Useful for giving user feedback by showing a message like "Saving..." while an operation is in progress.
+* `download` opts out of Turbo since the link is for downloading files and not navigation.
 </details>
 
 ## 自動的に追加される属性 
@@ -65,6 +72,11 @@ The following data attributes can be applied to elements to customize Turbo's be
 * `data-turbo-preview`は、Visit 中に[プレビュー][]を表示しているときに、`html`要素に追加されます。
 * `data-turbo-visit-direction`は、Visit 中に`html`要素に追加されます。この属性の値には、`forward`、`back`、`none`のいずれかが入ります。これらは、Visitの方向を表しています。
 * `aria-busy`は、ページ遷移中、`html`要素と`turbo-frame`要素に追加されます。
+* `aria-busy`は、処理中であることを示すために次の要素に追加されます。
+  * ページ遷移中には`html`要素
+  * フォーム送信中には`form`要素
+  * フレーム内で遷移またはフォーム送信が行われているときには`turbo-frame`要素
+* `busy`は、フレーム内でページ遷移やフォーム送信が行われている間、`turbo-frame`要素に付与されます。
 
 [プレビュー]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#previewが表示しているかどうかの検出
 
@@ -76,7 +88,11 @@ The following attributes are automatically added by Turbo and are useful to dete
 * `disabled` is added to the form submitter while the form request is in progress, to prevent repeat submissions.
 * `data-turbo-preview` is added to the `html` element when displaying a [preview](/handbook/building#detecting-when-a-preview-is-visible) during a Visit.
 * `data-turbo-visit-direction` is added to the `html` element during a visit, with a value of `forward` or `back` or `none`, to indicate its direction.
-* `aria-busy` is added to `html` and `turbo-frame` elements when a navigation is in progress.
+* `aria-busy` is added to:
+  * the `html` element when a visit is in progress
+  * the `form` element when a submission is in progress.
+  * the `turbo-frame` element when a visit or form submission is in progress within the frame.
+* `busy` is added to the `turbo-frame` element when a navigation or form submission is in progress within the frame.
 </details>
 
 ## メタタグ
@@ -89,12 +105,14 @@ The following attributes are automatically added by Turbo and are useful to dete
 * `<meta name="view-transition" content="same-origin">`により、[View Transition API][]をサポートしているブラウザでビュートランジションが動きます。
 * `<meta name="turbo-refresh-method" content="morph">`で、[モーフィングによるページ更新][]が使えます。
 * `<meta name="turbo-refresh-scroll" content="preserve">`で、[ページ更新時にスクロールの位置を保存][]します。
+* `<meta name="turbo-prefetch" content="false">`を指定すると、マウスホバーしたときの[リンクのプリフェッチを無効][]にします。
 
 [キャッシュのオプトアウト]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/building/#キャッシュのオプトアウト
 [Turbo ドライブを適用するルートロケーションを設定]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ルートロケーションの設定
 [View Transition API]: https://caniuse.com/view-transitions
 [モーフィングによるページ更新]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/page_refreshes
 [ページ更新時にスクロールの位置を保存]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/page_refreshes
+[リンクのプリフェッチを無効]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#ホバーでリンク先のプリフェッチ
 
 <details>
 <summary>原文</summary>
@@ -107,4 +125,5 @@ The following `meta` elements, added to the `head`, can be used to customize cac
 * `<meta name="view-transition" content="same-origin">` to trigger view transitions on browsers that support the [View Transition API](https://caniuse.com/view-transitions).
 * `<meta name="turbo-refresh-method" content="morph">` will configure [page refreshes with morphing](/handbook/page_refreshes.html).
 * `<meta name="turbo-refresh-scroll" content="preserve">` will enable [scroll preservation during page refreshes](/handbook/page_refreshes.html).
+* `<meta name="turbo-prefetch" content="false">` will disable [prefetching links on hover](/handbook/drive#prefetching-links-on-hover).
 </details>
