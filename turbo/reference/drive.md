@@ -154,7 +154,8 @@ Turns Turbo Drive off by default. You must now opt-in to Turbo Drive on a per-li
 
 ## `FetchRequest`
 
-Turbo は HTTP リクエストの実行中に以下のプロパティを持つ `FetchRequest` オブジェクトを参照する様々な[イベント](https://everyleaf.github.io/hotwire_ja/turbo/reference/events)を発火します：
+Turbo は HTTP リクエストの実行中に、さまざまな[イベント](https://everyleaf.github.io/hotwire_ja/turbo/reference/events)を発火します。
+これらのイベントでは、次のプロパティを持つ `FetchRequest` オブジェクトを参照します。
 
 | Property          | Type                                                                              | Description
 |-------------------|-----------------------------------------------------------------------------------|------------
@@ -198,8 +199,8 @@ Turbo dispatches a variety of [events while making HTTP requests](https://turbo.
 </details>
 
 ## `FetchResponse`
-
-Turbo は HTTP リクエストの実行中に以下のプロパティを持つ `FetchResponse` オブジェクトを参照する様々な[イベント](https://everyleaf.github.io/hotwire_ja/turbo/reference/events)を発火します：
+Turbo は HTTP リクエストの実行中に、さまざまな[イベント](https://everyleaf.github.io/hotwire_ja/turbo/reference/events)を発火します。
+これらのイベントでは、次のプロパティを持つ `FetchResponse` オブジェクトを参照します。
 
 | Property          | Type               | Description
 |-------------------|--------------------|------------
@@ -257,7 +258,8 @@ Turbo dispatches a variety of [events while making HTTP requests](https://turbo.
 ## `FormSubmission`
 
 <!-- TODO: reference/events を最新版に更新後、URLの参照先を events#フォーム に変更 -->
-Turboは、`FormSubmission`オブジェクトを参照するフォーム送信時に、以下のプロパティを持つ様々な[イベント](https://everyleaf.github.io/hotwire_ja/turbo/reference/events)を送信します：
+Turbo は HTTP リクエストの実行中に、さまざまな[イベント](https://everyleaf.github.io/hotwire_ja/turbo/reference/events)を発火します。
+これらのイベントでは、次のプロパティを持つ `FormSubmission` オブジェクトを参照します。
 
 | Property          | Type                                                                             | Description
 |-------------------|----------------------------------------------------------------------------------|------------
