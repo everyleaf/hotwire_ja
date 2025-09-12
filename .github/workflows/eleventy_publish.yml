@@ -2,7 +2,8 @@ name: Eleventy Publish
 on:
   push:
     branches:
-      - main
+      - '**'
+      - '!dependabot/**'
   workflow_dispatch:
     inputs:
       confirmation:
@@ -15,34 +16,24 @@ jobs:
     env:
       ARTIFACT_PATH: '_site/'
       ARTIFACT_NAME: 'github-pages'
-
     steps:
       - uses: actions/checkout@v5
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
           node-version: latest
-      - run: npm ci
-      - run: npm run build
-      - name: Archive artifact
-        shell: sh
-        if: runner.os == 'Linux'
-        run: |
-          export -p
-          tar \
-            --dereference --hard-dereference \
-            --directory "$ARTIFACT_PATH" \
-            -cvf "$RUNNER_TEMP/artifact.tar" \
-            --exclude=.git \
-            --exclude=.github \
-            .
+      - name: Install dependencies
+        run: npm ci
+      - name: Build site
+        run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.ARTIFACT_PATH }}
-          if-no-files-found: error
+          path: _site/
   deploy:
+    if: >-
+      github.event_name == 'push' &&
+      (github.ref_name == 'main' || github.repository != 'everyleaf/hotwire_ja')
     needs: build
     permissions:
       pages: write
