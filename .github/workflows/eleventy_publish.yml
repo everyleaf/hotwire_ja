@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: latest
       - run: npm ci
-      - run: npm run publish
+      - run: npm run build
       - name: Archive artifact
         shell: sh
         if: runner.os == 'Linux'
