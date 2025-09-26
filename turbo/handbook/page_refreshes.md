@@ -32,7 +32,7 @@ commit: "aa10dcf"
   </head>
   ```
 
-  取りうる値は `morph` か `replace`（デフォルト）です。`morph` を指定すると、ページのリフレッシュが起こった際、`<body>` を置き換えるかわりに、Turboは変更のあったDOMを更新し、その他の部分はそのままにします。このアプローチによって、画面の状態が保持されるため、体感は向上します。
+  取りうる値は `morph` か `replace`（デフォルト）です。`morph` を指定すると、ページのリフレッシュが起こった際、`<body>` の中身を置き換えるかわりに、Turboは変更のあったDOMを更新し、その他の部分はそのままにします。このアプローチによって、画面の状態が保持されるため、体感は向上します。
 
   内部的には、 Turboはすばらしい [idiomorph library](https://github.com/bigskysoftware/idiomorph) を使っています。
 
@@ -48,7 +48,7 @@ commit: "aa10dcf"
   </head>
   ```
 
-  The possible values are `morph` or `replace` (the default). When it is `morph,` when a page refresh happens, instead of replacing the page's `<body>,` Turbo will only update the DOM elements that have changed, keeping the rest untouched. This approach delivers better sensations because it keeps the screen state.
+  The possible values are `morph` or `replace` (the default). When it is `morph,` when a page refresh happens, instead of replacing the page's `<body>`contents, Turbo will only update the DOM elements that have changed, keeping the rest untouched. This approach delivers better sensations because it keeps the screen state.
 
   Under the hood, Turbo uses the fantastic [idiomorph library](https://github.com/bigskysoftware/idiomorph).
 
@@ -104,8 +104,7 @@ Sometimes, you want to ignore certain elements while morphing. For example, you 
  ページリフレッシュ時、画面の中でモーフィングを使ってリロードする範囲を、 [turbo フレーム](/turbo/handbook/frames/) を使って定義できます。定義のためには、そのフレームに `refresh="morph"` でフラグを立てておく必要があります。
 
 ```html
-<turbo-frame id="my-frame" refresh="morph">
-  ...
+<turbo-frame id="my-frame" refresh="morph" src="/my_frame">
 </turbo-frame>
 ```
 
@@ -117,8 +116,7 @@ Sometimes, you want to ignore certain elements while morphing. For example, you 
 You can use [turbo frames](https://turbo.hotwired.dev/handbook/frames) to define regions in your screen that will get reloaded using morphing when a page refresh happens. To do so, you must flag those frames with `refresh="morph"`.
 
 ```html
-<turbo-frame id="my-frame" refresh="morph">
-  ...
+<turbo-frame id="my-frame" refresh="morph" src="/my_frame">
 </turbo-frame>
 ```
 
