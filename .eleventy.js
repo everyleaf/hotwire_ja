@@ -5,6 +5,10 @@ import markdownItToc from "markdown-it-toc-done-right";
 import markdownIt from "markdown-it";
 
 export default function (eleventyConfig) {
+  const processEnv = {
+    isPreview: process.env.ELEVENTY_PREVIEW,
+  }
+  eleventyConfig.addGlobalData('env', processEnv);
   eleventyConfig.setLibrary("md", markdownIt({
     html: true,
     linkify: true,

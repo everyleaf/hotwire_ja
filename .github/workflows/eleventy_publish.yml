@@ -25,6 +25,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build site
+        env:
+          ELEVENTY_PREVIEW: ${{ github.repository != 'everyleaf/hotwire_ja' }}
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
