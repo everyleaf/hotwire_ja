@@ -173,6 +173,8 @@ Turbo は HTTP リクエストの実行中に、さまざまな[イベント](ht
 [Headers]: https://developer.mozilla.org/ja/docs/Web/API/Request/headers
 [HTMLFormElement.enctype]: https://developer.mozilla.org/ja/docs/Web/API/HTMLFormElement/enctype
 
+<br>
+
 <details>
 <summary>原文</summary>
 
@@ -224,6 +226,8 @@ Turbo は HTTP リクエストの実行中に、さまざまな[イベント](ht
 [Response.status]: https://developer.mozilla.org/ja/docs/Web/API/Response/status
 [Response.text()]: https://developer.mozilla.org/ja/docs/Web/API/Response/text
 [Content-Type]: https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Content-Type
+
+<br>
 
 <details>
 <summary>原文</summary>
@@ -281,6 +285,8 @@ Turbo は HTTP リクエストの実行中に、さまざまな[イベント](ht
 [HTMLButtonElement]: https://developer.mozilla.org/ja/docs/Web/API/HTMLButtonElement
 [HTMLInputElement]: https://developer.mozilla.org/ja/docs/Web/API/HTMLInputElement
 [Request]: https://developer.mozilla.org/ja/docs/Web/API/Request
+
+<br>
 
 <details>
 <summary>原文</summary>
