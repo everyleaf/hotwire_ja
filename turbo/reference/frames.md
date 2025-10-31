@@ -365,9 +365,9 @@ loaded content to update the original frame.
 All `<turbo-frame>` elements can be controlled in JavaScript environments
 through instances of the `FrameElement` class.
 
-* `FrameElement.src` controls the pathname or URL to be loaded. Setting the `src` 
-   property will immediately navigate the element. When `FrameElement.loaded` is 
-   set to `"lazy"`, changes to the `src` property will defer navigation until the 
+* `FrameElement.src` controls the pathname or URL to be loaded. Setting the `src`
+   property will immediately navigate the element. When `FrameElement.loaded` is
+   set to `"lazy"`, changes to the `src` property will defer navigation until the
    element is visible in the viewport.
 
 * `FrameElement.disabled` is a boolean property that controls whether or not the
