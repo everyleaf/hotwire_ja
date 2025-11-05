@@ -137,7 +137,11 @@ Fires immediately after a visit starts. Access the requested location with `even
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-cache`
+
+Turbo が現在のページをキャッシュに保存する前に発火します。
+
+`turbo:before-cache` イベントには、`event.detail` プロパティは含まれません。
 
 <details>
 <summary>原文</summary>
