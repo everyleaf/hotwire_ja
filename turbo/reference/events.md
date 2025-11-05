@@ -154,7 +154,20 @@ Instances of `turbo:before-cache` events do not have an `event.detail` property.
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-render`
+
+ページの描画前に発火します。新しい `<body>` 要素は `event.detail.newBody` から取得できます。描画は `event.detail.resume` を使って停止および再開ができます（詳細は [描画の一時停止][] を参照してください）。Turbo ドライブがレスポンスを描画する方法は、`event.detail.render` 関数を上書きしてカスタマイズできます（詳細は [描画処理をカスタマイズする][] を参照してください）。
+
+| `event.detail` プロパティ  | 型                               | 説明
+|---------------------------|---------------------------------|-----------------------------------------------------
+| `renderMethod`            | `"replace" \| "morph"`          | 新しいコンテンツを描画するときに使われる方式
+| `newBody`                 | [HTMLBodyElement][]             | 現在の `<body>` 要素を置き換える新しい `<body>` 要素
+| `resume`                  | `(value?: any) => void`         | [描画の一時停止][] 時に呼び出す関数
+| `render`                  | `(currentBody, newBody) => void`| [描画処理をカスタマイズする][] 用に既存の描画処理をカスタマイズする関数
+
+[HTMLBodyElement]: https://developer.mozilla.org/ja/docs/Web/API/HTMLBodyElement
+[描画の一時停止]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive#描画の一時停止
+[描画処理をカスタマイズする]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive#描画処理をカスタマイズする
 
 <details>
 <summary>原文</summary>
