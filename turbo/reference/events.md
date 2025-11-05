@@ -63,7 +63,7 @@ Turbo が有効になったリンクをクリックしたときに発火しま�
 | `event.detail` プロパティ   | 型                | 説明
 |---------------------------|-------------------|------------
 | `url`                     | `string`          | リクエストされたURI
-| `originalEvent`           | [`MouseEvent`][]    | 元の [`click`] イベント
+| `originalEvent`           | [`MouseEvent`][]  | 元の [`click`] イベント
 
 [`event.target`]: https://developer.mozilla.org/en-US/docs/Web/API/Event/target
 [`MouseEvent`]: https://developer.mozilla.org/ja/docs/Web/API/MouseEvent
