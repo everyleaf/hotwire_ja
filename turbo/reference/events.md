@@ -110,7 +110,16 @@ Fires before visiting a location, except when navigating by history. Access the 
 
 </details>
 
-TODO: 翻訳
+### `turbo:visit`
+
+ページ遷移が開始された直後に発火します。`event.detail.url` でリクエストされたロケーションを、`event.detail.action` でページ遷移のアクションを取得できます。
+
+| `event.detail` property   | 型                                    | 説明
+|---------------------------|---------------------------------------|------------
+| `url`                     | `string`                              | リクエストされたロケーション
+| `action`                  | `"advance" \| "replace" \| "restore"` | ページ遷移の[アクション][]
+
+[Action]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive#ページ・ナビゲーションの基本
 
 <details>
 <summary>原文</summary>
