@@ -87,7 +87,15 @@ Fires when you click a Turbo-enabled link. The clicked element is the [event.tar
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-visit`
+
+あるロケーションへアクセスする前に発火します（ブラウザの履歴からのアクセスする場合を除きます）。`event.detail.url` でリクエストされたロケーションを取得できます。このイベントをキャンセルすると、ナビゲーションが中止されます。
+
+あるロケーションに移動する前に発火します（ただし、履歴操作によるナビゲーション時は除きます）。`event.detail.url` からリクエスト先のロケーションを取得できます。このイベントをキャンセルすると、ナビゲーションが行われなくなります。
+
+| `event.detail` property   | 型                | 説明
+|---------------------------|-------------------|------------
+| `url`                     | `string`          | リクエストされたロケーション
 
 <details>
 <summary>原文</summary>
