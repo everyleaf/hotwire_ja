@@ -186,9 +186,18 @@ Fires before rendering the page. Access the new `<body>` element with `event.det
 [HTMLBodyElement]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement
 [preview]: /handbook/building#understanding-caching
 
+TODO: The above link isn't used so I will make a PR fat toward the upstream.
+
 </details>
 
-TODO: 翻訳
+### `turbo:render`
+
+Turbo がページを描画した後に発火します。キャッシュされたロケーションへの遷移時に、このイベントは 2 回発火します。
+1 回目はキャッシュ版の描画後、2 回目は最新のコンテンツを描画後に発火します。
+
+| `event.detail` プロパティ   | 型                        | 説明
+|---------------------------|---------------------------|------------
+| `renderMethod`            | `"replace" \| "morph"`    | 新しいコンテンツを描画する際に使用された方式
 
 <details>
 <summary>原文</summary>
