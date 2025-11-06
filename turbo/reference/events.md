@@ -358,7 +358,15 @@ Turbo Drive emits events during submission, redirection, and submission failure.
 
 </details>
 
-TODO: 翻訳
+### `turbo:submit-start`
+
+フォームの送信中に発火します。`event.detail.formSubmission` で [FormSubmission][] オブジェクトにアクセスできます。
+バリデーションエラーなどで送信を中止したい場合は、`event.detail.formSubmission.stop()` を呼び出します。
+jQuery を使用している場合は、`event.originalEvent.detail.formSubmission.stop()` を使用してください。
+
+| `event.detail` プロパティ  | 型                                      | 説明
+|---------------------------|-------------------------------------------|------------
+| `formSubmission`          | [FormSubmission][]                        | <form> 要素の送信情報
 
 <details>
 <summary>原文</summary>
