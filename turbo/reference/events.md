@@ -60,7 +60,7 @@ Turbo Drive emits events that allow you to track the navigation life cycle and r
 Turbo が有効になったリンクをクリックしたときに発火します。クリックされた要素が、[`event.target`][] になります。
 リクエスト先は、`event.detail.url` で取得できます。このイベントをキャンセルすると、クリックはブラウザに普通のナビゲーションとしてそのまま渡されます。
 
-| `event.detail` プロパティ   | 型                | 説明
+| `event.detail` プロパティ  | 型                | 説明
 |---------------------------|-------------------|------------
 | `url`                     | `string`          | リクエストされたURI
 | `originalEvent`           | [`MouseEvent`][]  | 元の [`click`] イベント
@@ -93,7 +93,7 @@ Fires when you click a Turbo-enabled link. The clicked element is the [event.tar
 
 あるロケーションに移動する前に発火します（ただし、履歴操作によるナビゲーション時は除きます）。`event.detail.url` からリクエスト先のロケーションを取得できます。このイベントをキャンセルすると、ナビゲーションが行われなくなります。
 
-| `event.detail` property   | 型                | 説明
+| `event.detail` プロパティ  | 型                | 説明
 |---------------------------|-------------------|------------
 | `url`                     | `string`          | リクエストされたロケーション
 
@@ -114,7 +114,7 @@ Fires before visiting a location, except when navigating by history. Access the 
 
 ページ遷移が開始された直後に発火します。`event.detail.url` でリクエストされたロケーションを、`event.detail.action` でページ遷移のアクションを取得できます。
 
-| `event.detail` property   | 型                                    | 説明
+| `event.detail` プロパティ  | 型                                    | 説明
 |---------------------------|---------------------------------------|------------
 | `url`                     | `string`                              | リクエストされたロケーション
 | `action`                  | `"advance" \| "replace" \| "restore"` | ページ遷移の[アクション][]
@@ -195,7 +195,7 @@ TODO: The above link isn't used so I will make a PR fat toward the upstream.
 Turbo がページを描画した後に発火します。キャッシュされたロケーションへの遷移時に、このイベントは 2 回発火します。
 1 回目はキャッシュ版の描画後、2 回目は最新のコンテンツを描画後に発火します。
 
-| `event.detail` プロパティ   | 型                        | 説明
+| `event.detail` プロパティ  | 型                        | 説明
 |---------------------------|---------------------------|------------
 | `renderMethod`            | `"replace" \| "morph"`    | 新しいコンテンツを描画する際に使用された方式
 
