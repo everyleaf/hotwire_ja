@@ -300,7 +300,14 @@ Fires before Turbo morphs an element. The [event.target][] references the origin
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-morph-attribute`
+
+Turbo が要素の属性をモーフィングする前に発火します。[event.target][] は、ドキュメントに接続されたまま残る元の要素を参照します。event.preventDefault() を呼び出すことで、このイベントをキャンセルし、モーフィングをスキップして元の属性を保持できます。
+
+| `event.detail` プロパティ  | 型                      | 説明
+|---------------------------|---------------------------|------------
+| `attributeName`           | `string`                  | 変更される属性の名前
+| `mutationType`            | `"update" \| "remove"`    | 属性がどのように変更されるか（更新または削除）
 
 <details>
 <summary>原文</summary>
