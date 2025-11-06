@@ -258,7 +258,7 @@ Turbo Drive emits events while morphing the page's content.
 
 Turbo がページをモーフィングして更新した後に発火します。
 
-| `event.detail` property   | Type        | Description
+| `event.detail` プロパティ  | 型        | 説明
 |---------------------------|-------------|------------
 | `currentElement`          | [Element][] | モーフィング後も接続されたまま残る元の [Element][]（通常は `document.body`）
 | `newElement`              | [Element][] | 新しい属性や子要素を持ち、モーフィング後には接続されていない [Element][]
@@ -283,7 +283,7 @@ Fires after Turbo morphs the page.
 
 Turbo が要素をモーフィングする前に発火します。 [event.target][] は、ドキュメントに接続されたまま残る元の要素を参照します。`event.preventDefault()` を呼び出すことで、このイベントをキャンセルし、モーフィングをスキップして元の要素・属性・子要素を保持できます。
 
-| `event.detail` property   | Type          | Description
+| `event.detail` プロパティ   | 型          | 説明
 |---------------------------|---------------|------------
 | `newElement`              | [Element][]   | 新しい属性や子要素を持ち、モーフィング後には接続されていない [Element][]
 
