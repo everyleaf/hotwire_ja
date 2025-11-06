@@ -368,6 +368,8 @@ jQuery を使用している場合は、`event.originalEvent.detail.formSubmissi
 |---------------------------|-------------------------------------------|------------
 | `formSubmission`          | [FormSubmission][]                        | <form> 要素の送信情報
 
+[FormSubmission]: https://everyleaf.github.io/hotwire_ja/turbo/reference/drive/#formsubmission
+
 <details>
 <summary>原文</summary>
 
