@@ -241,7 +241,9 @@ Fires once after the initial page load, and again after every Turbo visit.
 
 </details>
 
-TODO: 翻訳
+## Page Refreshes
+
+Turbo ドライブは、ページのコンテンツをモーフィングして更新している間にイベントを発火します。
 
 <details>
 <summary>原文</summary>
