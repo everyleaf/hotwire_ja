@@ -344,7 +344,10 @@ Fires after Turbo morphs an element. The [event.target][] references the morphed
 
 </details>
 
-TODO: 翻訳
+## Forms
+
+Turbo ドライブは、フォームの送信、リダイレクト、および送信エラーの発生時にイベントを発火します。
+以下のイベントは、フォーム送信中に `<form>` 要素上で発火します。
 
 <details>
 <summary>原文</summary>
