@@ -323,7 +323,13 @@ Fires before Turbo morphs an element's attributes. The [event.target][] referenc
 
 </details>
 
-TODO: 翻訳
+### `turbo:morph-element`
+
+Turbo が要素をモーフィングした後に発火します。[event.target][] は、モーフィング後もドキュメントに接続されたまま残る要素を参照します。
+
+| `event.detail` property   | Type          | Description
+|---------------------------|---------------|------------
+| `newElement`              | [Element][]   | 新しい属性や子要素を持ち、モーフィング後には接続されていない [Element][]
 
 <details>
 <summary>原文</summary>
@@ -335,8 +341,6 @@ Fires after Turbo morphs an element. The [event.target][] references the morphed
 | `event.detail` property   | Type          | Description
 |---------------------------|---------------|------------
 | `newElement`              | [Element][]   | the [Element][] with the new attributes and children that is not connected after the morph
-
-[Element]: https://developer.mozilla.org/en-US/docs/Web/API/Element
 
 </details>
 
