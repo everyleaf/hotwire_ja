@@ -279,7 +279,13 @@ Fires after Turbo morphs the page.
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-morph-element`
+
+Turbo が要素をモーフィングする前に発火します。 [event.target][] は、ドキュメントに接続されたまま残る元の要素を参照します。`event.preventDefault()` を呼び出すことで、このイベントをキャンセルし、モーフィングをスキップして元の要素・属性・子要素を保持できます。
+
+| `event.detail` property   | Type          | Description
+|---------------------------|---------------|------------
+| `newElement`              | [Element][]   | 新しい属性や子要素を持ち、モーフィング後には接続されていない [Element][]
 
 <details>
 <summary>原文</summary>
