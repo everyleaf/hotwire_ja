@@ -212,7 +212,17 @@ Fires after Turbo renders the page. This event fires twice during an application
 
 </details>
 
-TODO: 翻訳
+### `turbo:load`
+
+初回のページ読み込み後と、すべての Turbo ページ遷移後に 1 回ずつ発火します。
+
+| `event.detail` プロパティ  | 型      　| 説明
+|---------------------------|-----------|------------
+| `url`                     | `string`  | リクエストされたロケーション
+| `timing.visitStart`       | `number`  | ページ遷移の開始時刻（タイムスタンプ）
+| `timing.requestStart`     | `number`  | 次のページへの HTTP リクエスト開始時刻（タイムスタンプ）
+| `timing.requestEnd`       | `number`  | 次のページへの HTTP リクエスト終了時刻（タイムスタンプ）
+| `timing.visitEnd`         | `number`  | ページ遷移の終了時刻（タイムスタンプ）
 
 <details>
 <summary>原文</summary>
