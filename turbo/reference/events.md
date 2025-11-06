@@ -254,7 +254,16 @@ Turbo Drive emits events while morphing the page's content.
 
 </details>
 
-TODO: 翻訳
+### `turbo:morph`
+
+Turbo がページをモーフィングして更新した後に発火します。
+
+| `event.detail` property   | Type        | Description
+|---------------------------|-------------|------------
+| `currentElement`          | [Element][] | モーフィング後も接続されたまま残る元の [Element][]（通常は `document.body`）
+| `newElement`              | [Element][] | 新しい属性や子要素を持ち、モーフィング後には接続されていない [Element][]
+
+[Element]: https://developer.mozilla.org/ja/docs/Web/API/Element
 
 <details>
 <summary>原文</summary>
