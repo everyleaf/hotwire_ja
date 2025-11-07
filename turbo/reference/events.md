@@ -416,7 +416,10 @@ Fires after the form submission-initiated network request completes. Access the 
 
 </details>
 
-TODO: 翻訳
+## Frames
+
+Turbo フレームは、ナビゲーションのライフサイクル中にイベントを発火します。
+以下のイベントは、`<turbo-frame>` 要素上で発火します。
 
 <details>
 <summary>原文</summary>
