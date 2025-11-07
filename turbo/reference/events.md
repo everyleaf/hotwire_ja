@@ -477,7 +477,11 @@ Fires right after a `<turbo-frame>` element renders its view. The specific `<tur
 
 </details>
 
-TODO: 翻訳
+### `turbo:frame-load`
+
+`<turbo-frame>` 要素のナビゲーションが完了し、読み込みが終了したときに発火します（`turbo:frame-render` の後に発火します）。対象となる `<turbo-frame>` 要素は [event.target][] です。
+
+`turbo:frame-load` イベントには、`event.detail` プロパティは含まれません。
 
 <details>
 <summary>原文</summary>
