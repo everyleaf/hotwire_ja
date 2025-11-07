@@ -523,7 +523,9 @@ Fires when the response to a `<turbo-frame>` element request does not contain a 
 
 </details>
 
-TODO: 翻訳
+## Streams
+
+Turbo ストリームは、そのライフサイクル中にイベントを発火します。以下のイベントは、`<turbo-stream>` 要素上で発火します。
 
 <details>
 <summary>原文</summary>
