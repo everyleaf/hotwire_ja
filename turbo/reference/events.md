@@ -563,7 +563,14 @@ Fires before rendering a Turbo Stream page update. Access the new `<turbo-stream
 
 </details>
 
-TODO: 翻訳
+## HTTP Requests
+
+Turbo は、HTTP 経由でコンテンツを取得するときにイベントを発火します。
+リクエストの発生元によって、イベントが発火する要素は異なります。
+
+- ナビゲーション中の `<turbo-frame>`
+- 送信中の `<form>`
+- ページ全体の Turbo アクセス中の `<html>` 要素
 
 <details>
 <summary>原文</summary>
