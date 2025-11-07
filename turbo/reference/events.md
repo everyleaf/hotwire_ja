@@ -383,7 +383,19 @@ Fires during a form submission. Access the [FormSubmission][] object with `event
 
 </details>
 
-TODO: 翻訳
+### `turbo:submit-end`
+
+フォーム送信によって開始されたネットワークリクエストが完了した後に発火します。
+`event.detail.formSubmission` で [FormSubmission][] オブジェクトにアクセスでき、`event.detail` 内の各プロパティを参照できます。
+
+| `event.detail` プロパティ  | 型                             | 説明
+|---------------------------|----------------------------------|------------
+| `formSubmission`          | [FormSubmission][]               | `<form>` 要素の送信情報
+| `success`                 | `boolean`                        | リクエストが成功したかを示す `boolean`
+| `fetchResponse`           | [FetchResponse][] \| `undefined` | レスポンスが受信された場合に存在します（`success: false` でも含まれる）。リクエストがレスポンスを受け取る前に失敗した場合は `undefined` になります。
+| `error`                   | [Error][] \| `undefined`         | 実際のフェッチエラー（例：ネットワーク障害）が発生した場合にのみ設定します。それ以外の場合は、`undefined` です。
+
+[Error]: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Errors
 
 <details>
 <summary>原文</summary>
