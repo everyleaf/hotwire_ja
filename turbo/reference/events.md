@@ -586,7 +586,20 @@ initiated the request, the events could fire on:
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-fetch-request`
+
+Turbo がネットワークリクエスト（ページの取得、フォームの送信、リンクのプリロードなど）を実行する前に発火します。`event.detail.url` でリクエスト先のロケーションに、`event.detail.fetchOptions` で Fetch API のオプションオブジェクトにアクセスできます。このイベントは、リクエストを発生させた要素（`<turbo-frame>` または `<form>`）上で発火し、[event.target][] からその要素にアクセスできます。`event.detail.resume` を使用して、リクエストを一時停止または再開できます（[リクエストの一時停止][] を参照）。
+
+| `event.detail` プロパティ  | 型                              | 説明
+|---------------------------|-----------------------------------|------------
+| `fetchOptions`            | [RequestInit][]                   | [Request][] を構築するために使用されるオプション
+| `url`                     | [URL][]                           | リクエスト先のロケーション
+| `resume`                  | `(value?: any) => void` callback  | [リクエストの一時停止][] 時に呼び出されます
+
+[RequestInit]: https://developer.mozilla.org/ja/docs/Web/API/Request/Request#options
+[Request]: https://developer.mozilla.org/ja/docs/Web/API/Request/Request
+[URL]: https://developer.mozilla.org/ja/docs/Web/API/URL
+[リクエストの一時停止]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive/#リクエストの一時停止
 
 <details>
 <summary>原文</summary>
