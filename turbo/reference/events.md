@@ -430,7 +430,16 @@ Turbo Frames emit events during their navigation life cycle. The following event
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-frame-render`
+
+`<turbo-frame>` 要素を描画する前に発火します。`event.detail.newFrame` で新しい `<turbo-frame>` 要素にアクセスできます。`event.detail.resume` を使うことで、描画を一時停止および再開できます（詳細は [描画の一時停止][] を参照）。
+Turbo ドライブがレスポンスを描画する方法は、`event.detail.render` 関数を上書きしてカスタマイズできます（詳細は [描画処理をカスタマイズする][] を参照）。
+
+| `event.detail` プロパティ  | 型                              | 説明
+|---------------------------|-----------------------------------|------------
+| `newFrame`                | `FrameElement`                    | 現在の `<turbo-frame>` 要素を置き換える新しい `<turbo-frame>` 要素
+| `resume`                  | `(value?: any) => void`           | [描画の一時停止][] 時に呼び出す関数
+| `render`                  | `(currentFrame, newFrame) => void`| [描画処理をカスタマイズする][] 用に既存の描画処理をカスタマイズする関数
 
 <details>
 <summary>原文</summary>
