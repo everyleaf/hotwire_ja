@@ -327,7 +327,7 @@ Fires before Turbo morphs an element's attributes. The [event.target][] referenc
 
 Turbo が要素をモーフィングした後に発火します。[event.target][] は、モーフィング後もドキュメントに接続されたまま残る要素を参照します。
 
-| `event.detail` property   | Type          | Description
+| `event.detail` プロパティ  | 型          | 説明
 |---------------------------|---------------|------------
 | `newElement`              | [Element][]   | 新しい属性や子要素を持ち、モーフィング後には接続されていない [Element][]
 
