@@ -659,7 +659,17 @@ Fires before Turbo prefetches a link. The link is the `event.target`. Cancel thi
 
 </details>
 
-TODO: 翻訳
+### `turbo:fetch-request-error`
+
+フォームまたはフレームによる Fetch リクエストがネットワークエラーで失敗したときに発火します。このイベントは、リクエストを発生させた要素（`<turbo-frame>` または `<form>`）上で発火し、[event.target][] からその要素にアクセスできます。このイベントはキャンセル可能です。
+
+| `event.detail` プロパティ  | 型              | 説明
+|---------------------------|-------------------|------------
+| `request`                 | [FetchRequest][]  | 失敗した HTTP リクエスト
+| `error`                   | [Error][]         | 失敗の原因を示すエラー情報
+
+[Error]: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Errors
+[FetchRequest]: https://everyleaf.github.io/hotwire_ja/turbo/reference/drive/#fetchrequest
 
 <details>
 <summary>原文</summary>
