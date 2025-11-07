@@ -456,7 +456,13 @@ Fires before rendering the `<turbo-frame>` element. Access the new `<turbo-frame
 
 </details>
 
-TODO: 翻訳
+### `turbo:frame-render`
+
+`<turbo-frame>` 要素が画面を描画した直後に発火します。対象となる `<turbo-frame>` 要素は [event.target][] です。`event.detail.fetchResponse` プロパティで [FetchResponse][] オブジェクトにアクセスできます。
+
+| `event.detail` プロパティ  | 型                              | 説明
+|---------------------------|-----------------------------------|------------
+| `fetchResponse`           | [FetchResponse][]                 | HTTP リクエストのレスポンス
 
 <details>
 <summary>原文</summary>
