@@ -494,7 +494,17 @@ Instances of `turbo:frame-load` events do not have an `event.detail` property.
 
 </details>
 
-TODO: 翻訳
+### `turbo:frame-missing`
+
+`<turbo-frame>` 要素へのリクエストに対するレスポンス内に、対応する `<turbo-frame>` 要素が含まれていない場合に発火します。デフォルトでは、Turbo はフレーム内に情報メッセージを表示し、例外をスローします。このイベントをキャンセルすることで、この挙動を上書きできます。`event.detail.response` で `Response` インスタンスにアクセスでき、`event.detail.visit(location, visitOptions)` を呼び出すことでページ全体の遷移を実行できます（`VisitOptions` については [Turbo.visit][] を参照）。
+
+| `event.detail` プロパティ  | 型                                                                  | 説明
+|---------------------------|-----------------------------------------------------------------------|------------
+| `response`                | [Response][]                                                          | `<turbo-frame>` 要素によって開始されたリクエストの HTTP
+| `visit`                   | `async (location: string \| URL, visitOptions: VisitOptions) => void` | ページ全体のナビゲーションを実行するための便利な関数
+
+[Response]: https://developer.mozilla.org/ja/docs/Web/API/Response
+[Turbo.visit]: https://everyleaf.github.io/hotwire_ja/turbo/reference/drive/#turbo.visit
 
 <details>
 <summary>原文</summary>
