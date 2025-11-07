@@ -646,7 +646,9 @@ Fires after the network request completes. Access the fetch options object with 
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-prefetch`
+
+Turbo がリンクをプリフェッチする前に発火します。対象のリンク要素は [event.target][] です。このイベントをキャンセルすると、プリフェッチを防止できます。
 
 <details>
 <summary>原文</summary>
