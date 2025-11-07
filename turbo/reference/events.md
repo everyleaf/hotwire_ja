@@ -536,7 +536,16 @@ Turbo Streams emit events during their life cycle. The following events fire on 
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-stream-render`
+
+Turbo ストリームによるページ更新を描画する前に発火します。`event.detail.newStream` で新しい `<turbo-stream>` 要素にアクセスできます。`event.detail.render` 関数を上書きすることで、この要素の動作をカスタマイズできます（詳細は [カスタム・アクション][] を参照）。
+
+| `event.detail` プロパティ  | 型                              | 説明
+|---------------------------|-----------------------------------|------------
+| `newStream`               | `StreamElement`                   | 実行されるアクション用の新しい `<turbo-stream>` 要素
+| `render`                  | `async (currentElement) => void`  | [カスタム・アクション][] を定義するために上書き用の関数
+
+[カスタム・アクション]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/streams/#カスタム・アクション
 
 <details>
 <summary>原文</summary>
