@@ -621,7 +621,15 @@ Fires before Turbo issues a network request (to fetch a page, submit a form, pre
 
 </details>
 
-TODO: 翻訳
+### `turbo:before-fetch-response`
+
+ネットワークリクエストが完了した後に発火します。`event.detail` から Fetch のオプション情報にアクセスできます。このイベントは、リクエストを発生させた要素（`<turbo-frame>` または `<form>`）上で発火し、[event.target][] からその要素にアクセスできます。
+
+| `event.detail` プロパティ   | 型                      | 説明
+|---------------------------|---------------------------|------------
+| `fetchResponse`           | [FetchResponse][]         | HTTP リクエストのレスポンス
+
+[FetchResponse]: https://everyleaf.github.io/hotwire_ja/turbo/reference/drive/#fetchresponse
 
 <details>
 <summary>原文</summary>
