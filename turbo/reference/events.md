@@ -188,8 +188,6 @@ Fires before rendering the page. Access the new `<body>` element with `event.det
 [HTMLBodyElement]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement
 [preview]: /handbook/building#understanding-caching
 
-TODO: The above link isn't used so I will make a PR toward the upstream.
-
 </details>
 
 ### `turbo:render`
