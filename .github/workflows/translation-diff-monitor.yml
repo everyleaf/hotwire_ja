@@ -9,8 +9,8 @@ jobs:
     env:
       TURBO_SITE_REPOSITORY: ${{ github.workspace }}/turbo-site
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
         with:
           repository: hotwired/turbo-site
           path: turbo-site
