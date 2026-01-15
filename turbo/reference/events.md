@@ -158,7 +158,7 @@ Instances of `turbo:before-cache` events do not have an `event.detail` property.
 
 ### `turbo:before-render`
 
-ページの描画前に発火します。新しい `<body>` 要素は `event.detail.newBody` から取得できます。描画は `event.detail.resume` を使って停止および再開ができます（詳細は [描画の一時停止][] を参照）。さらに、Turbo ドライブがレスポンスを描画する方法は、`event.detail.render` 関数を上書きしてカスタマイズできます（詳細は [描画処理をカスタマイズする][] を参照）。
+ページの描画前に発火します。新しい `<body>` 要素は `event.detail.newBody` から取得できます。描画は `event.detail.resume` を使って停止および再開ができます（詳細は [描画の一時停止][] を参照）。さらに関数を上書きすることで、Turbo ドライブのレスポンス描画処理をカスタマイズできます（詳細は [描画処理をカスタマイズする][] を参照）。
 
 | `event.detail` プロパティ  | 型                               | 説明
 |---------------------------|---------------------------------|-----------------------------------------------------
@@ -433,7 +433,7 @@ Turbo Frames emit events during their navigation life cycle. The following event
 ### `turbo:before-frame-render`
 
 `<turbo-frame>` 要素を描画する前に発火します。`event.detail.newFrame` で新しい `<turbo-frame>` 要素にアクセスできます。`event.detail.resume` を使うことで、描画を一時停止および再開できます（詳細は [描画の一時停止][] を参照）。
-Turbo ドライブがレスポンスを描画する方法は、`event.detail.render` 関数を上書きしてカスタマイズできます（詳細は [描画処理をカスタマイズする][] を参照）。
+さらに関数を上書きすることで、Turbo ドライブのレスポンス描画処理をカスタマイズできます（詳細は [描画処理をカスタマイズする][] を参照）。
 
 | `event.detail` プロパティ  | 型                              | 説明
 |---------------------------|-----------------------------------|------------
