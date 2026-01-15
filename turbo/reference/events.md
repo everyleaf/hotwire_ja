@@ -386,7 +386,7 @@ Fires during a form submission. Access the [FormSubmission][] object with `event
 ### `turbo:submit-end`
 
 フォーム送信によって開始されたネットワークリクエストが完了した後に発火します。
-`event.detail.formSubmission` で [FormSubmission][] オブジェクトにアクセスでき、`event.detail` 内の各プロパティを参照できます。
+`event.detail.formSubmission` で [FormSubmission][] オブジェクトにアクセスでき、その他のプロパティは `event.detail` からアクセスできます。
 
 | `event.detail` プロパティ  | 型                             | 説明
 |---------------------------|----------------------------------|------------
