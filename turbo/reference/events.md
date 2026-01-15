@@ -114,7 +114,7 @@ Fires before visiting a location, except when navigating by history. Access the 
 
 ### `turbo:visit`
 
-ページ遷移が開始された直後に発火します。`event.detail.url` でリクエストされたロケーションと `event.detail.action` でページ遷移のアクションを取得できます。
+ページ遷移が開始された直後に発火します。`event.detail.url` と `event.detail.action` から、それぞれリクエストされたローケーションとページ遷移時のアクションを取得できます。
 
 | `event.detail` プロパティ  | 型                                    | 説明
 |---------------------------|---------------------------------------|------------
