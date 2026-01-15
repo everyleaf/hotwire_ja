@@ -165,7 +165,7 @@ Instances of `turbo:before-cache` events do not have an `event.detail` property.
 | `renderMethod`            | `"replace" \| "morph"`          | 新しいコンテンツを描画するときに使われる方式
 | `newBody`                 | [HTMLBodyElement][]             | 現在の `<body>` 要素を置き換える新しい `<body>` 要素
 | `resume`                  | `(value?: any) => void`         | [描画の一時停止][] 時に呼び出す関数
-| `render`                  | `(currentBody, newBody) => void`| [描画処理をカスタマイズする][] 用に既存の描画処理をカスタマイズする関数
+| `render`                  | `(currentBody, newBody) => void`| 既存の [描画処理をカスタマイズする][] ための関数
 
 [HTMLBodyElement]: https://developer.mozilla.org/ja/docs/Web/API/HTMLBodyElement
 [描画の一時停止]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/drive#描画の一時停止
@@ -439,7 +439,7 @@ Turbo ドライブがレスポンスを描画する方法は、`event.detail.ren
 |---------------------------|-----------------------------------|------------
 | `newFrame`                | `FrameElement`                    | 現在の `<turbo-frame>` 要素を置き換える新しい `<turbo-frame>` 要素
 | `resume`                  | `(value?: any) => void`           | [描画の一時停止][] 時に呼び出す関数
-| `render`                  | `(currentFrame, newFrame) => void`| [描画処理をカスタマイズする][] 用に既存の描画処理をカスタマイズする関数
+| `render`                  | `(currentFrame, newFrame) => void`| 既存の[描画処理をカスタマイズする][]ための関数
 
 <details>
 <summary>原文</summary>
@@ -543,7 +543,7 @@ Turbo ストリームによるページ更新を描画する前に発火しま�
 | `event.detail` プロパティ  | 型                              | 説明
 |---------------------------|-----------------------------------|------------
 | `newStream`               | `StreamElement`                   | 実行されるアクション用の新しい `<turbo-stream>` 要素
-| `render`                  | `async (currentElement) => void`  | [カスタム・アクション][] を定義するために上書き用の関数
+| `render`                  | `async (currentElement) => void`  | [カスタム・アクション][] を定義するための関数
 
 [カスタム・アクション]: https://everyleaf.github.io/hotwire_ja/turbo/handbook/streams/#カスタム・アクション
 
