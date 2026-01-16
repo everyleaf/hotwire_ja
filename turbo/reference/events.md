@@ -214,7 +214,7 @@ Fires after Turbo renders the page. This event fires twice during an application
 
 ### `turbo:load`
 
-初回のページ読み込み後と、すべての Turbo ページ遷移後に 1 回ずつ発火します。
+初回のページ読み込み後と、すべての Turbo によるページ遷移後に 1 回ずつ発火します。
 
 | `event.detail` プロパティ  | 型        | 説明
 |---------------------------|-----------|------------
@@ -570,7 +570,7 @@ Turbo は、HTTP 経由でコンテンツを取得するときにイベントを
 
 - ナビゲーション中の `<turbo-frame>`
 - 送信中の `<form>`
-- ページ全体の Turbo ビジット中の `<html>` 要素
+- Turbo によるページ遷移中の `<html>` 要素
 
 <details>
 <summary>原文</summary>
