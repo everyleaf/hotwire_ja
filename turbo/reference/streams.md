@@ -99,7 +99,7 @@ target の dom_id で指定された要素を置き換えます。
 <details>
 <summary>原文</summary>
 
-### Replace 
+### Replace
 
 Replaces the element designated by the target dom id.
 
