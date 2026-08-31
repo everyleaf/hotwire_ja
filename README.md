@@ -18,6 +18,19 @@
 4. ローカルで表示確認していただきたいです。projectのTOPディレクトリにて `npm run serve` を実行していただくと、ローカル環境で静的サイトが構築されます。
 5. PRを作成する際は該当issueへのリンクと、着手した原文のコミットハッシュをdescriptionに記載の上、レビューに出してください
 
+### プレビュー
+1. フォーク先のGitHub Pagesを有効にします。
+  - https://github.com/${YOUR_GITHUB_ACCOUNT}/hotwire_ja/settings/pages を開きます。
+  - 「Source」を「GitHub Actions」に変更します。
+2. フォークの全てのブランチから GitHub Pages を公開できるようにします。
+  - https://github.com/${YOUR_GITHUB_ACCOUNT}/hotwire_ja/settings/environments を開きます。
+  - 「Deployment branches and tags」のルールを変更します。
+    - 「Edit」ボタンを押して編集します。
+    - 「Name pattern」を「main」から「*」に変更します。
+
+この変更で、次のURLで変更をプレビューできます。
+- https://${YOUR_GITHUB_ACCOUNT}.github.io/hotwire_ja/
+
 ## 気にしていただきたいこと
 - 文中のリンク先について
   - handbook、及びリファレンス内へのリンク
